@@ -7,6 +7,7 @@
 //
 
 #import "SGHomeViewController.h"
+#import "SGHistoryViewController.h"
 #import "GPUImage.h"
 
 @interface SGHomeViewController ()
@@ -41,19 +42,10 @@
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
         self.userID = user.uid;
-        self.ref = [[FIRDatabase database] reference];
+
         self.storageRef = [[FIRStorage storage] reference];
         [hud hideAnimated:false];
     }];
-}
-
--(void)launchHitoryViewController{
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"customcamera" bundle:[NSBundle mainBundle]];
-//    SmartGelHistoryViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"SmartGelHistoryViewController"];
-//    controller.ref = self.ref;
-//    controller.storageRef = self.storageRef;
-//    controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//    [self presentViewController:controller animated:YES completion:nil];
 }
 
 -(void)launchSettingParameterViewController{
@@ -212,7 +204,7 @@
     }
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Hitory" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self launchHitoryViewController];
+        [self performSegueWithIdentifier:@"gotoHistory" sender:self];
     }]];
     
     //    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Setting Paramters" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -285,15 +277,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"gotoHistory"]) {
+        SGHistoryViewController *vc = [segue destinationViewController];
+        vc.storageRef = self.storageRef;
+        vc.ref = self.ref;
+    }
 }
-*/
 
 @end
