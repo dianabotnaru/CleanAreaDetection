@@ -7,25 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
+		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
+		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
+		8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C41F7CA4790025B804 /* QuartzCore.framework */; };
+		8D80B2C71F7CA5A70025B804 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C61F7CA5A70025B804 /* Foundation.framework */; };
+		8D80B2C91F7CAB040025B804 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2C81F7CAB040025B804 /* GoogleService-Info.plist */; };
+		8D80B2CB1F7CF3890025B804 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2CA1F7CF3890025B804 /* test.jpg */; };
+		8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */; };
 		8DA331F31F7C8F3C0066148E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F21F7C8F3C0066148E /* main.m */; };
 		8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F51F7C8F3C0066148E /* AppDelegate.m */; };
-		8DA331F91F7C8F3C0066148E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F81F7C8F3C0066148E /* ViewController.m */; };
 		8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FA1F7C8F3C0066148E /* Main.storyboard */; };
 		8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FD1F7C8F3C0066148E /* Assets.xcassets */; };
 		8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */; };
+		8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3320C1F7C90430066148E /* SGHomeViewController.m */; };
+		8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA332111F7C92880066148E /* DirtyExtractor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.release.xcconfig"; sourceTree = "<group>"; };
+		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
+		8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EstimateImageModel.m; path = model/EstimateImageModel.m; sourceTree = "<group>"; };
+		8D80B2C21F7CA4700025B804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8D80B2C41F7CA4790025B804 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8D80B2C61F7CA5A70025B804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8D80B2C81F7CAB040025B804 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D80B2CA1F7CF3890025B804 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
+		8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHistoryViewController.h; sourceTree = "<group>"; };
+		8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHistoryViewController.m; sourceTree = "<group>"; };
 		8DA331EE1F7C8F3C0066148E /* SmartGel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartGel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DA331F21F7C8F3C0066148E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8DA331F41F7C8F3C0066148E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8DA331F51F7C8F3C0066148E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8DA331F71F7C8F3C0066148E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8DA331F81F7C8F3C0066148E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8DA331FB1F7C8F3C0066148E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8DA331FD1F7C8F3C0066148E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DA332001F7C8F3C0066148E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DA332021F7C8F3C0066148E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DA3320B1F7C90430066148E /* SGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGHomeViewController.h; path = controller/SGHomeViewController.h; sourceTree = "<group>"; };
+		8DA3320C1F7C90430066148E /* SGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGHomeViewController.m; path = controller/SGHomeViewController.m; sourceTree = "<group>"; };
+		8DA332101F7C92880066148E /* DirtyExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirtyExtractor.h; path = shared/engine/DirtyExtractor.h; sourceTree = "<group>"; };
+		8DA332111F7C92880066148E /* DirtyExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirtyExtractor.m; path = shared/engine/DirtyExtractor.m; sourceTree = "<group>"; };
+		C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.debug.xcconfig"; sourceTree = "<group>"; };
+		D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartGel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +56,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D80B2C71F7CA5A70025B804 /* Foundation.framework in Frameworks */,
+				8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */,
+				8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */,
+				4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25C1DD01098F0E65234675B7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */,
+				6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		502FE1017807AF3D1749DA47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D80B2C61F7CA5A70025B804 /* Foundation.framework */,
+				8D80B2C41F7CA4790025B804 /* QuartzCore.framework */,
+				8D80B2C21F7CA4700025B804 /* AVFoundation.framework */,
+				D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8DA331E51F7C8F3C0066148E = {
 			isa = PBXGroup;
 			children = (
 				8DA331F01F7C8F3C0066148E /* SmartGel */,
 				8DA331EF1F7C8F3C0066148E /* Products */,
+				25C1DD01098F0E65234675B7 /* Pods */,
+				502FE1017807AF3D1749DA47 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +107,14 @@
 		8DA331F01F7C8F3C0066148E /* SmartGel */ = {
 			isa = PBXGroup;
 			children = (
+				8D80B2CA1F7CF3890025B804 /* test.jpg */,
+				8D80B2C81F7CAB040025B804 /* GoogleService-Info.plist */,
+				8DA3320E1F7C92440066148E /* shared */,
+				8DA3320A1F7C8FD30066148E /* view */,
+				8DA332091F7C8FC90066148E /* model */,
+				8DA332081F7C8FC00066148E /* controller */,
 				8DA331F41F7C8F3C0066148E /* AppDelegate.h */,
 				8DA331F51F7C8F3C0066148E /* AppDelegate.m */,
-				8DA331F71F7C8F3C0066148E /* ViewController.h */,
-				8DA331F81F7C8F3C0066148E /* ViewController.m */,
 				8DA331FA1F7C8F3C0066148E /* Main.storyboard */,
 				8DA331FD1F7C8F3C0066148E /* Assets.xcassets */,
 				8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */,
@@ -79,6 +132,50 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8DA332081F7C8FC00066148E /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				8DA3320B1F7C90430066148E /* SGHomeViewController.h */,
+				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
+				8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */,
+				8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		8DA332091F7C8FC90066148E /* model */ = {
+			isa = PBXGroup;
+			children = (
+				8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */,
+				8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		8DA3320A1F7C8FD30066148E /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		8DA3320E1F7C92440066148E /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				8DA3320F1F7C92590066148E /* engine */,
+			);
+			name = shared;
+			sourceTree = "<group>";
+		};
+		8DA3320F1F7C92590066148E /* engine */ = {
+			isa = PBXGroup;
+			children = (
+				8DA332101F7C92880066148E /* DirtyExtractor.h */,
+				8DA332111F7C92880066148E /* DirtyExtractor.m */,
+			);
+			name = engine;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DA332051F7C8F3C0066148E /* Build configuration list for PBXNativeTarget "SmartGel" */;
 			buildPhases = (
+				D4F1E978D708261555316906 /* [CP] Check Pods Manifest.lock */,
 				8DA331EA1F7C8F3C0066148E /* Sources */,
 				8DA331EB1F7C8F3C0066148E /* Frameworks */,
 				8DA331EC1F7C8F3C0066148E /* Resources */,
+				DC569FAB8E8D0CECF603B729 /* [CP] Embed Pods Frameworks */,
+				CDBCBC14BA6A676F96420757 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -138,6 +238,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */,
+				8D80B2CB1F7CF3890025B804 /* test.jpg in Resources */,
+				8D80B2C91F7CAB040025B804 /* GoogleService-Info.plist in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */,
 			);
@@ -145,14 +247,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CDBCBC14BA6A676F96420757 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel-resources.sh",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
+				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4F1E978D708261555316906 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartGel-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC569FAB8E8D0CECF603B729 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8DA331EA1F7C8F3C0066148E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DA331F91F7C8F3C0066148E /* ViewController.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
+				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
+				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
+				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
+				8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,22 +435,24 @@
 		};
 		8DA332061F7C8F3C0066148E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SmartGel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.SmartGel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		8DA332071F7C8F3C0066148E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SmartGel/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.SmartGel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -311,6 +476,7 @@
 				8DA332071F7C8F3C0066148E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

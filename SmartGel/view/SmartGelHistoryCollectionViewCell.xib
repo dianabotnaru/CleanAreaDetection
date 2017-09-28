@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SmartGelHistoryCollectionViewCell" reuseIdentifier="SmartGelHistoryCollectionViewCell" id="gTV-IL-0wX" customClass="SmartGelHistoryCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="141" height="256"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="141" height="256"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Q1B-fH-NqC">
+                        <rect key="frame" x="0.0" y="0.0" width="141" height="196"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tou-ip-JgE">
+                        <rect key="frame" x="0.0" y="196" width="141" height="60"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimated Value: -.-" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3F-1F-JTq">
+                                <rect key="frame" x="5" y="5" width="133" height="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14-09-2017 23:58:00" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3y-98-9hp">
+                                <rect key="frame" x="5" y="23" width="133" height="14.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" red="0.69803921568627447" green="0.70588235294117641" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No. 98 building F23 Taxian Street" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nc-Ke-a4J">
+                                <rect key="frame" x="5" y="39.5" width="133" height="14.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" red="0.69803921568627447" green="0.70588235294117641" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="l3y-98-9hp" firstAttribute="leading" secondItem="Tou-ip-JgE" secondAttribute="leading" constant="5" id="10C-IQ-8iR"/>
+                            <constraint firstItem="C3F-1F-JTq" firstAttribute="leading" secondItem="Tou-ip-JgE" secondAttribute="leading" constant="5" id="5uc-bb-NaP"/>
+                            <constraint firstAttribute="trailing" secondItem="0Nc-Ke-a4J" secondAttribute="trailing" constant="3" id="XK2-7h-OG3"/>
+                            <constraint firstAttribute="height" constant="60" id="ahM-Rk-iNf"/>
+                            <constraint firstItem="C3F-1F-JTq" firstAttribute="top" secondItem="Tou-ip-JgE" secondAttribute="top" constant="5" id="fBW-xl-SPs"/>
+                            <constraint firstItem="0Nc-Ke-a4J" firstAttribute="leading" secondItem="Tou-ip-JgE" secondAttribute="leading" constant="5" id="h4i-W4-iDi"/>
+                            <constraint firstItem="l3y-98-9hp" firstAttribute="top" secondItem="C3F-1F-JTq" secondAttribute="bottom" constant="2" id="jYe-9H-7Tv"/>
+                            <constraint firstItem="0Nc-Ke-a4J" firstAttribute="top" secondItem="l3y-98-9hp" secondAttribute="bottom" constant="2" id="sYu-c2-zMd"/>
+                            <constraint firstAttribute="trailing" secondItem="l3y-98-9hp" secondAttribute="trailing" constant="3" id="uOb-49-FT3"/>
+                            <constraint firstAttribute="trailing" secondItem="C3F-1F-JTq" secondAttribute="trailing" constant="3" id="vCv-Sh-zSw"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Q1B-fH-NqC" secondAttribute="trailing" id="23R-Gv-gh4"/>
+                <constraint firstItem="Tou-ip-JgE" firstAttribute="top" secondItem="Q1B-fH-NqC" secondAttribute="bottom" id="S2g-4Q-ydd"/>
+                <constraint firstItem="Q1B-fH-NqC" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Y8O-Ci-Ix0"/>
+                <constraint firstItem="Tou-ip-JgE" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hMf-bA-kXh"/>
+                <constraint firstItem="Q1B-fH-NqC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ntN-dE-LfV"/>
+                <constraint firstAttribute="trailing" secondItem="Tou-ip-JgE" secondAttribute="trailing" id="oaU-lv-2ZH"/>
+                <constraint firstAttribute="bottom" secondItem="Tou-ip-JgE" secondAttribute="bottom" id="pv4-mN-q3D"/>
+            </constraints>
+            <size key="customSize" width="144" height="238"/>
+            <connections>
+                <outlet property="dateLabel" destination="l3y-98-9hp" id="1rl-aZ-Fkl"/>
+                <outlet property="locationLabel" destination="0Nc-Ke-a4J" id="bJ7-mb-kbN"/>
+                <outlet property="takenImageView" destination="Q1B-fH-NqC" id="qHs-fI-Kd1"/>
+                <outlet property="valueLabel" destination="C3F-1F-JTq" id="WcD-HX-Ydp"/>
+            </connections>
+            <point key="canvasLocation" x="19.5" y="364"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="test.jpg" width="3120" height="4160"/>
+    </resources>
+</document>
