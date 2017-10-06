@@ -142,7 +142,9 @@
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
         [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
     }
+    [self.locationManager startMonitoringSignificantLocationChanges];
     [self.locationManager startUpdatingLocation];
 }
 
@@ -164,11 +166,12 @@
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
-    [self.locationManager stopUpdatingLocation];
+    [self showAlertdialog:@"Error" message:@"Failed to Get Your Location"];
 }
 
-- (IBAction)showUIActionSheet{
+- (IBAction)showActionSheet{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         
@@ -211,6 +214,12 @@
     //        [self launchSettingParameterViewController];
     //    }]];
     
+    CGRect rect = CGRectMake(50, 50 , 0, 0);
+//    rect.origin.x = self.view.bounds.size.width / 2;
+//    rect.origin.y = self.view.bounds.size.height / 2;
+    
+    actionSheet.popoverPresentationController.sourceView = self.view;
+    actionSheet.popoverPresentationController.sourceRect = rect;
     [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
@@ -256,25 +265,25 @@
 
 -(void)launchPhotoPickerController{
     
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
     
-    UIImage *image = [UIImage imageNamed:@"test.jpg"];
-    if(!self.notificationLabel.isHidden)
-        [self.notificationLabel setHidden:YES];
-    [self hideDirtyArea];
-    isSavedImage = false;
-    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-    [(GPUImageGammaFilter *)filter setGamma:1.7];
-    UIImage *quickFilteredImage = [filter imageByFilteringImage:image];
-    [self getEstimagtedValue:quickFilteredImage];
-    
-    [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.takenImageView setImage:image];
-    [self setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    if(!self.notificationLabel.isHidden)
+//        [self.notificationLabel setHidden:YES];
+//    [self hideDirtyArea];
+//    isSavedImage = false;
+////    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+////    [(GPUImageGammaFilter *)filter setGamma:1.7];
+//    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
+//    [self getEstimagtedValue:quickFilteredImage];
+//    
+//    [self.dateLabel setText:[self getCurrentTimeString]];
+//    [self.takenImageView setImage:quickFilteredImage];
+//    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 #pragma mark - Navigation

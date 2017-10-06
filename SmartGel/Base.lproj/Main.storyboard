@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,8 +29,10 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emM-ow-Xav">
-                                        <rect key="frame" x="16" y="59" width="351" height="0.0"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emM-ow-Xav">
+                                        <rect key="frame" x="16" y="59" width="351" height="20.5"/>
+                                        <string key="text">Amsterdam, North Holland, 1091
+</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.69803921570000005" green="0.70588235290000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -75,9 +76,11 @@
                                 <constraints>
                                     <constraint firstItem="f3Q-ZR-bNC" firstAttribute="centerY" secondItem="b2m-nP-ZNq" secondAttribute="centerY" id="4wj-ji-YZA"/>
                                     <constraint firstAttribute="bottom" secondItem="0ne-iK-goy" secondAttribute="bottom" id="A2X-xR-lbJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="f3Q-ZR-bNC" secondAttribute="trailing" constant="16.5" id="Jle-bk-PYp"/>
                                     <constraint firstItem="0ne-iK-goy" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="SPg-eO-CZT"/>
                                     <constraint firstAttribute="trailing" secondItem="0ne-iK-goy" secondAttribute="trailing" id="Zks-NR-RYm"/>
                                     <constraint firstItem="f3Q-ZR-bNC" firstAttribute="centerX" secondItem="b2m-nP-ZNq" secondAttribute="centerX" id="erh-x0-7Jk"/>
+                                    <constraint firstItem="f3Q-ZR-bNC" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" constant="16" id="iju-Al-CgO"/>
                                     <constraint firstItem="0ne-iK-goy" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="x91-DI-7mq"/>
                                 </constraints>
                             </view>
@@ -94,10 +97,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SmartGel" id="fhA-l4-6lB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="7fN-HE-20q">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="7fN-HE-20q">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="showUIActionSheet" destination="BYZ-38-t0r" id="C02-2E-TEB"/>
+                                <action selector="showActionSheet" destination="BYZ-38-t0r" id="0do-M6-2r7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
