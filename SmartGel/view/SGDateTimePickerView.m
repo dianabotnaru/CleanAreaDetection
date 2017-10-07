@@ -35,7 +35,6 @@
     self.datePicker.minimumDate = [self getDateFromString:dateString];
 }
 
-
 - (NSDate *)getDateFromString:(NSString*)dateString{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-yyyy HH:mm"];

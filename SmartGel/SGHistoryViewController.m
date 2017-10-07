@@ -40,6 +40,7 @@
     NSString *userID = [FIRAuth auth].currentUser.uid;
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[_ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        [self.hud hideAnimated:false];
         for(snapshot in snapshot.children){
             EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] init];
             estimageImageModel.dirtyValue = [snapshot.value[@"value"] floatValue];
@@ -51,10 +52,9 @@
         }
         self.historyFilterArray = self.historyArray;
         [self.smartGelHistoryCollectionView reloadData];
-        [self.hud hideAnimated:false];
     } withCancelBlock:^(NSError * _Nonnull error) {
-        NSLog(@"%@", error.localizedDescription);
         [self.hud hideAnimated:false];
+        [self showAlertdialog:@"Error" message:error.localizedDescription];
     }];
 }
 

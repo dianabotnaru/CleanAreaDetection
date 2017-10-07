@@ -41,10 +41,13 @@
 -(void)loginFireBase{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-        self.userID = user.uid;
-
-        self.storageRef = [[FIRStorage storage] reference];
         [hud hideAnimated:false];
+        if(error==nil){
+            self.userID = user.uid;
+            self.storageRef = [[FIRStorage storage] reference];
+        }else{
+            [self showAlertdialog:@"Error" message:error.localizedDescription];
+        }
     }];
 }
 
@@ -199,15 +202,18 @@
     }else{
         [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Clean Area" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             if(self.estimateImage.image == nil){
-                [self showAlertdialog:nil message:@"Please take a photo"];
-            }else{
+             }else{
                 [self showDirtyArea];
             }
         }]];
     }
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Hitory" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self performSegueWithIdentifier:@"gotoHistory" sender:self];
+        if(self.storageRef!=nil){
+            [self performSegueWithIdentifier:@"gotoHistory" sender:self];
+        }else{
+            [self showAlertdialog:@"Error" message:@"Failed to connect to server. Please check internet connection!"];
+        }
     }]];
     
     //    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Setting Paramters" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -215,9 +221,6 @@
     //    }]];
     
     CGRect rect = CGRectMake(50, 50 , 0, 0);
-//    rect.origin.x = self.view.bounds.size.width / 2;
-//    rect.origin.y = self.view.bounds.size.height / 2;
-    
     actionSheet.popoverPresentationController.sourceView = self.view;
     actionSheet.popoverPresentationController.sourceRect = rect;
     [self presentViewController:actionSheet animated:YES completion:nil];
