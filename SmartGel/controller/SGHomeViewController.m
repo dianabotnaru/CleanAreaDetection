@@ -196,18 +196,6 @@
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Save Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }]];
     
-    if(isShowDirtyArea){
-        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Hide Clean Area" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self hideDirtyArea];
-        }]];
-    }else{
-        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Clean Area" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            if(self.estimateImage.image == nil){
-             }else{
-                [self showDirtyArea];
-            }
-        }]];
-    }
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Hitory" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if(self.storageRef!=nil){
@@ -267,6 +255,17 @@
     return jsonString;
 }
 
+-(IBAction)showHideCleanArea{
+    if(isShowDirtyArea){
+        [self hideDirtyArea];
+    }else{
+        if(self.estimateImage.image == nil)
+            [self showAlertdialog:nil message:@"Please take a photo."];
+        else
+            [self showDirtyArea];
+    }
+}
+
 -(IBAction)launchPhotoPickerController{
     
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -288,6 +287,10 @@
 //    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
 //    [self dismissViewControllerAnimated:YES completion:nil];
 
+}
+
+-(void)gotoHistory{
+    
 }
 
 #pragma mark - Navigation

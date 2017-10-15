@@ -51,14 +51,30 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Nh-JIh">
+                                                <rect key="frame" x="239" y="433" width="120" height="30"/>
+                                                <color key="backgroundColor" red="0.94901960780000005" green="0.47843137250000001" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="cOa-Kx-bEU"/>
+                                                </constraints>
+                                                <state key="normal" title="Clean Area">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="showHideCleanArea" destination="BYZ-38-t0r" eventType="touchUpInside" id="eWG-oP-OmC"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="f3Q-ZR-bNC" firstAttribute="centerX" secondItem="b2m-nP-ZNq" secondAttribute="centerX" id="8fA-PB-bCh"/>
+                                            <constraint firstAttribute="trailing" secondItem="MGE-Nh-JIh" secondAttribute="trailing" constant="16" id="Cf9-Kn-5ll"/>
                                             <constraint firstItem="f3Q-ZR-bNC" firstAttribute="top" secondItem="M1e-FX-kfH" secondAttribute="bottom" constant="10" id="DXF-AJ-bDB"/>
                                             <constraint firstItem="0ne-iK-goy" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="JAf-qB-pp7"/>
+                                            <constraint firstAttribute="bottom" secondItem="MGE-Nh-JIh" secondAttribute="bottom" constant="20" id="V1W-5L-H8Y"/>
                                             <constraint firstItem="M1e-FX-kfH" firstAttribute="centerX" secondItem="b2m-nP-ZNq" secondAttribute="centerX" id="b3u-IU-uIF"/>
                                             <constraint firstAttribute="bottom" secondItem="0ne-iK-goy" secondAttribute="bottom" id="cPx-Gm-dQ8"/>
+                                            <constraint firstItem="MGE-Nh-JIh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b2m-nP-ZNq" secondAttribute="leading" constant="20" symbolic="YES" id="eaE-Nd-WaA"/>
                                             <constraint firstAttribute="trailing" secondItem="0ne-iK-goy" secondAttribute="trailing" id="fpr-mv-cqr"/>
                                             <constraint firstItem="M1e-FX-kfH" firstAttribute="centerY" secondItem="b2m-nP-ZNq" secondAttribute="centerY" id="itb-BJ-Sdg"/>
                                             <constraint firstItem="0ne-iK-goy" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="mYd-QL-fEB"/>
