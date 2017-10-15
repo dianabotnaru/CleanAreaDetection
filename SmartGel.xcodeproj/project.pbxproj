@@ -27,6 +27,9 @@
 		8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */; };
 		8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3320C1F7C90430066148E /* SGHomeViewController.m */; };
 		8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA332111F7C92880066148E /* DirtyExtractor.m */; };
+		8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */; };
+		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
+		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,12 @@
 		8DA3320C1F7C90430066148E /* SGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGHomeViewController.m; path = controller/SGHomeViewController.m; sourceTree = "<group>"; };
 		8DA332101F7C92880066148E /* DirtyExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirtyExtractor.h; path = shared/engine/DirtyExtractor.h; sourceTree = "<group>"; };
 		8DA332111F7C92880066148E /* DirtyExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirtyExtractor.m; path = shared/engine/DirtyExtractor.m; sourceTree = "<group>"; };
+		8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGMenuTableViewCell.h; path = view/SGMenuTableViewCell.h; sourceTree = "<group>"; };
+		8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGMenuTableViewCell.m; path = view/SGMenuTableViewCell.m; sourceTree = "<group>"; };
+		8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGMenuTableViewCell.xib; path = view/SGMenuTableViewCell.xib; sourceTree = "<group>"; };
+		8DB0978F1F933A380053C203 /* SGMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGMenuViewController.h; path = controller/SGMenuViewController.h; sourceTree = "<group>"; };
+		8DB097901F933A380053C203 /* SGMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGMenuViewController.m; path = controller/SGMenuViewController.m; sourceTree = "<group>"; };
+		8DB097931F93456A0053C203 /* SGConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGConstant.h; sourceTree = "<group>"; };
 		C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.debug.xcconfig"; sourceTree = "<group>"; };
 		D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartGel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -121,6 +130,7 @@
 			children = (
 				8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */,
 				8D80B2CA1F7CF3890025B804 /* test.jpg */,
+				8DB097921F9345210053C203 /* Constant */,
 				8DA3320E1F7C92440066148E /* shared */,
 				8DA3320A1F7C8FD30066148E /* view */,
 				8DA332091F7C8FC90066148E /* model */,
@@ -151,6 +161,8 @@
 				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
 				8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */,
 				8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */,
+				8DB0978F1F933A380053C203 /* SGMenuViewController.h */,
+				8DB097901F933A380053C203 /* SGMenuViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -174,6 +186,9 @@
 				8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */,
 				8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */,
 				8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */,
+				8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */,
+				8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */,
+				8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -193,6 +208,14 @@
 				8DA332111F7C92880066148E /* DirtyExtractor.m */,
 			);
 			name = engine;
+			sourceTree = "<group>";
+		};
+		8DB097921F9345210053C203 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				8DB097931F93456A0053C203 /* SGConstant.h */,
+			);
+			name = Constant;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +287,7 @@
 				8D80B2CB1F7CF3890025B804 /* test.jpg in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */,
+				8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */,
 				8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +358,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */,
+				8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */,
+				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,

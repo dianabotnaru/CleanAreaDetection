@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -20,24 +20,24 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TM SMART GEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmh-f6-3zt">
-                                <rect key="frame" x="85.5" y="288.5" width="204" height="33.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <rect key="frame" x="242.5" y="443.5" width="283" height="47"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJH-b5-hNN">
-                                <rect key="frame" x="30" y="332" width="315" height="3"/>
+                                <rect key="frame" x="34" y="510.5" width="700" height="3"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sa0-mo-ttn">
-                                        <rect key="frame" x="0.0" y="0.0" width="104" height="3"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="231" height="3"/>
                                         <color key="backgroundColor" red="0.9882352941176471" green="0.68627450980392157" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhk-xl-ecj">
-                                        <rect key="frame" x="104" y="0.0" width="104" height="3"/>
+                                        <rect key="frame" x="231" y="0.0" width="231" height="3"/>
                                         <color key="backgroundColor" red="0.27843137254901962" green="0.3411764705882353" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
@@ -55,13 +55,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PERSULPHATE TECHNOLOGIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWr-kW-43G">
-                                <rect key="frame" x="177.5" y="621.5" width="167.5" height="13.5"/>
+                                <rect key="frame" x="566.5" y="978.5" width="167.5" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ur1-ix-9qa">
-                                <rect key="frame" x="135" y="623" width="34" height="10"/>
+                                <rect key="frame" x="524" y="980" width="34" height="10"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s0E-BF-nW1">
                                         <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
@@ -110,7 +110,7 @@
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="eWr-kW-43G" secondAttribute="bottom" constant="32" id="WVa-UI-jnt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eWr-kW-43G" secondAttribute="trailing" constant="14" id="XZ5-wU-G4D"/>
                             <constraint firstItem="pJH-b5-hNN" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="14" id="aTR-cp-g87"/>
-                            <constraint firstItem="pJH-b5-hNN" firstAttribute="top" secondItem="Nmh-f6-3zt" secondAttribute="bottom" constant="10" id="hK3-vt-lLL"/>
+                            <constraint firstItem="pJH-b5-hNN" firstAttribute="top" secondItem="Nmh-f6-3zt" secondAttribute="bottom" constant="20" id="hK3-vt-lLL"/>
                             <constraint firstItem="pJH-b5-hNN" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sCZ-xC-9f2"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Ur1-ix-9qa" secondAttribute="bottom" constant="34" id="vCO-el-SlU"/>
                         </constraints>

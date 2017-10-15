@@ -6,6 +6,7 @@ target 'SmartGel' do
   # use_frameworks!
 
   # Pods for SmartGel
+pod 'RESideMenu', '~> 4.0.7'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'Firebase/Core'
 pod 'Firebase/Database'	

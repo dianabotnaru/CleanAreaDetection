@@ -172,6 +172,17 @@
     [self showAlertdialog:@"Error" message:@"Failed to Get Your Location"];
 }
 
+-(IBAction)savePhoto{
+    if(self.estimateImage.image == nil){
+        [self showAlertdialog:nil message:@"Please take a photo."];
+    }else{
+        if(isSavedImage)
+            [self showAlertdialog:nil message:@"You have already saved this Image."];
+        else
+            [self saveResultImage];
+    }
+}
+
 - (IBAction)showActionSheet{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -185,14 +196,6 @@
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Save Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if(self.estimateImage.image == nil){
-            [self showAlertdialog:nil message:@"Please take a photo."];
-        }else{
-            if(isSavedImage)
-                [self showAlertdialog:nil message:@"You have already saved this Image."];
-            else
-                [self saveResultImage];
-        }
     }]];
     
     if(isShowDirtyArea){

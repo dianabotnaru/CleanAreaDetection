@@ -12,13 +12,13 @@
 #import "Firebase.h"
 #import "EstimateImageModel.h"
 #import "DirtyExtractor.h"
+#import "RESideMenu.h"
 
 @interface SGHomeViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
     MBProgressHUD *hud;
 }
-
 
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;

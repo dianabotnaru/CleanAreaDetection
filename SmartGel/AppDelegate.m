@@ -8,8 +8,11 @@
 
 #import "AppDelegate.h"
 #import "Firebase.h"
+#import "SGHomeViewController.h"
+#import "SGMenuViewController.h"
+#import "SGConstant.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <RESideMenuDelegate>
 
 @end
 
@@ -19,6 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [FIRApp configure];
+    [self initNavigationbar];
+    [self initMenuViewController];
     return YES;
 }
 
@@ -47,6 +52,42 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)initMenuViewController{
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    SGHomeViewController *ORfeedviewcontroller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ORfeedviewcontroller];
+    SGMenuViewController *ORmenuviewcontroller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGMenuViewController"];
+    SGMenuViewController *rightMenuViewController = [[SGMenuViewController alloc] init];
+    
+    RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
+                                                                    leftMenuViewController:ORmenuviewcontroller
+                                                                   rightMenuViewController:rightMenuViewController];
+    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
+    sideMenuViewController.delegate = self;
+    sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
+    sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
+    sideMenuViewController.contentViewShadowOpacity = 0.6;
+    sideMenuViewController.contentViewShadowRadius = 12;
+    sideMenuViewController.contentViewShadowEnabled = YES;
+    self.window.rootViewController = sideMenuViewController;
+    self.window.backgroundColor = SGColorBlack;
+    [self.window makeKeyAndVisible];
+}
+
+-(void)initNavigationbar{
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:SGColorBlack];
+    [[UINavigationBar appearance] setTitleTextAttributes:
+    @{NSForegroundColorAttributeName:[UIColor whiteColor],
+      NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:18]}];
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+
+}
+
 
 
 @end
