@@ -21,4 +21,8 @@
     // Configure the view for the selected state
 }
 
+- (void)setLabels:(NSString *)name{
+    self.nameLabel.text = name;
+}
+
 @end

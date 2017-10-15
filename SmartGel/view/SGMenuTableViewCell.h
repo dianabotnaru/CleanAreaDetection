@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SGMenuTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
+- (void)setLabels:(NSString *)name;
 @end

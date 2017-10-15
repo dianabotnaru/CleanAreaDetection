@@ -35,4 +35,7 @@
 @property (strong, nonatomic) EstimateImageModel *estimateImage;
 @property (strong, nonatomic) NSString *userID;
 
+@property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
+@property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
+
 @end

@@ -257,35 +257,41 @@
 
 -(IBAction)showHideCleanArea{
     if(isShowDirtyArea){
+        [self.notificationLabel setHidden:NO];
+        [self.takePhotoButton setHidden:NO];
+        [self.showCleanAreaButton setTitle:@"Show Clean Area" forState:UIControlStateNormal];
         [self hideDirtyArea];
     }else{
-        if(self.estimateImage.image == nil)
+        if(self.estimateImage.image == nil){
             [self showAlertdialog:nil message:@"Please take a photo."];
-        else
+        }
+        else{
+            [self.notificationLabel setHidden:YES];
+            [self.takePhotoButton setHidden:YES];
+            [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
             [self showDirtyArea];
+        }
     }
 }
 
 -(IBAction)launchPhotoPickerController{
+//
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
     
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+    [self hideDirtyArea];
+    isSavedImage = false;
+//    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+//    [(GPUImageGammaFilter *)filter setGamma:1.7];
+    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
+    [self getEstimagtedValue:quickFilteredImage];
     
-//    if(!self.notificationLabel.isHidden)
-//        [self.notificationLabel setHidden:YES];
-//    [self hideDirtyArea];
-//    isSavedImage = false;
-////    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-////    [(GPUImageGammaFilter *)filter setGamma:1.7];
-//    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
-//    [self getEstimagtedValue:quickFilteredImage];
-//    
-//    [self.dateLabel setText:[self getCurrentTimeString]];
-//    [self.takenImageView setImage:quickFilteredImage];
-//    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.dateLabel setText:[self getCurrentTimeString]];
+    [self.takenImageView setImage:quickFilteredImage];
+    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 

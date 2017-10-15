@@ -30,6 +30,7 @@
 		8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */; };
 		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
 		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
+		8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,8 @@
 		8DB0978F1F933A380053C203 /* SGMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGMenuViewController.h; path = controller/SGMenuViewController.h; sourceTree = "<group>"; };
 		8DB097901F933A380053C203 /* SGMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGMenuViewController.m; path = controller/SGMenuViewController.m; sourceTree = "<group>"; };
 		8DB097931F93456A0053C203 /* SGConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGConstant.h; sourceTree = "<group>"; };
+		8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGWebViewController.h; path = controller/SGWebViewController.h; sourceTree = "<group>"; };
+		8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGWebViewController.m; path = controller/SGWebViewController.m; sourceTree = "<group>"; };
 		C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.debug.xcconfig"; sourceTree = "<group>"; };
 		D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartGel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -163,6 +166,8 @@
 				8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */,
 				8DB0978F1F933A380053C203 /* SGMenuViewController.h */,
 				8DB097901F933A380053C203 /* SGMenuViewController.m */,
+				8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */,
+				8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 			files = (
 				8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */,
 				8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */,
+				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
 				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
