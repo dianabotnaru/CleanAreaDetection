@@ -188,11 +188,9 @@
     
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self launchPhotoPickerController];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Save Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -269,7 +267,7 @@
     return jsonString;
 }
 
--(void)launchPhotoPickerController{
+-(IBAction)launchPhotoPickerController{
     
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
