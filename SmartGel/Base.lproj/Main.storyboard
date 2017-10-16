@@ -57,10 +57,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGE-Nh-JIh">
-                                                <rect key="frame" x="219" y="427" width="140" height="36"/>
+                                                <rect key="frame" x="199" y="427" width="160" height="36"/>
                                                 <color key="backgroundColor" red="0.94901960780000005" green="0.47843137250000001" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="cOa-Kx-bEU"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="cOa-Kx-bEU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <state key="normal" title="Show Clean Area">
@@ -243,7 +243,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-MW-1iV">
-                                        <rect key="frame" x="0.0" y="5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="2" width="375" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vd5-wc-o45">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -287,7 +287,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lT-pp-C0g">
-                                        <rect key="frame" x="0.0" y="51" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="48" width="375" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3R3-WZ-dEQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -328,7 +328,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="SmartGelHistoryCollectionViewCell" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i13-5U-BrN">
-                                        <rect key="frame" x="12" y="105" width="351" height="486"/>
+                                        <rect key="frame" x="12" y="102" width="351" height="489"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="2" id="r9l-SX-r3m">
                                             <size key="itemSize" width="131" height="334"/>
@@ -353,7 +353,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Bcr-MW-1iV" secondAttribute="trailing" id="ITm-2C-YYX"/>
                                     <constraint firstItem="8lT-pp-C0g" firstAttribute="top" secondItem="Bcr-MW-1iV" secondAttribute="bottom" constant="2" id="h8G-ul-KB4"/>
                                     <constraint firstItem="8lT-pp-C0g" firstAttribute="leading" secondItem="g8x-dq-otO" secondAttribute="leading" id="hTw-EP-XLn"/>
-                                    <constraint firstItem="Bcr-MW-1iV" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="top" constant="5" id="jMb-hz-ZSt"/>
+                                    <constraint firstItem="Bcr-MW-1iV" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="top" constant="2" id="jMb-hz-ZSt"/>
                                     <constraint firstItem="Bcr-MW-1iV" firstAttribute="leading" secondItem="g8x-dq-otO" secondAttribute="leading" id="lrY-Je-vn2"/>
                                 </constraints>
                             </view>
