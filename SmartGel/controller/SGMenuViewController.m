@@ -37,17 +37,19 @@
     static NSString *cellID=@"SGMenuTableViewCell";
     SGMenuTableViewCell *cell=(SGMenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     if(indexPath.row == 0){
-        [cell setLabels:@"Estimate a Picture"];
+        [cell setLabels:@"Estimate Clean Area"];
     }else if(indexPath.row ==1){
         [cell setLabels:@"History"];
     }else if(indexPath.row == 2){
+        [cell setLabels:@"Settings"];
+    }else if(indexPath.row == 3){
         [cell setLabels:@"About SmartGel"];
     }
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,6 +71,11 @@
                                                          animated:YES];
             break;
         case 2:
+            self.sgHomeViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHomeViewController]
+                                                         animated:YES];
+            break;
+        case 3:
             self.sgWebViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGWebViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgWebViewController]
                                                          animated:YES];

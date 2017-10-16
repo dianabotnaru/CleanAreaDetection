@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 @interface SGWebViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end

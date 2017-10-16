@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RESideMenu.h"
+#import "Firebase.h"
 
 @interface SGMenuViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITableView *menuTableView;

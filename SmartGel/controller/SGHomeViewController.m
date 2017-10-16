@@ -9,6 +9,8 @@
 #import "SGHomeViewController.h"
 #import "SGHistoryViewController.h"
 #import "GPUImage.h"
+#import "SGConstant.h"
+#import "AppDelegate.h"
 
 @interface SGHomeViewController ()
 
@@ -25,7 +27,9 @@
     [self initLocationManager];
     [self.dateLabel setText:[self getCurrentTimeString]];
     
-    self.ref = [[FIRDatabase database] reference];
+    self.appDelegate.ref = [[FIRDatabase database] reference];
+    
+//    self.ref = [[FIRDatabase database] reference];
     
     self.estimateImage = [[EstimateImageModel alloc] init];
     [self loginFireBase];
@@ -44,7 +48,8 @@
         [hud hideAnimated:false];
         if(error==nil){
             self.userID = user.uid;
-            self.storageRef = [[FIRStorage storage] reference];
+            self.appDelegate.ref = [[FIRDatabase database] reference];
+            self.appDelegate.storageRef = [[FIRStorage storage] reference];
         }else{
             [self showAlertdialog:@"Error" message:error.localizedDescription];
         }
@@ -178,8 +183,19 @@
     }else{
         if(isSavedImage)
             [self showAlertdialog:nil message:@"You have already saved this Image."];
-        else
-            [self saveResultImage];
+        else{
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
+                                                                           message:@"Are you sure want to upload image?"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [self saveResultImage];
+            }]];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            }]];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }
 }
 
@@ -198,7 +214,7 @@
     
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Hitory" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if(self.storageRef!=nil){
+        if(self.appDelegate.storageRef!=nil){
             [self performSegueWithIdentifier:@"gotoHistory" sender:self];
         }else{
             [self showAlertdialog:@"Error" message:@"Failed to connect to server. Please check internet connection!"];
@@ -218,7 +234,7 @@
 - (void)saveResultImage{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"Uploading image...";
-    FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.userID,self.estimateImage.date]];
+    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.userID,self.estimateImage.date]];
     NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
     [riversRef putData:imageData
               metadata:nil
@@ -236,7 +252,7 @@
                                            @"location": self.estimateImage.location,
                                            @"dirtyarea": self.estimateImage.dirtyArea};
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
-                    [self.ref updateChildValues:childUpdates];
+                    [self.appDelegate.ref updateChildValues:childUpdates];
                 }
             }];
 }
@@ -275,38 +291,24 @@
 }
 
 -(IBAction)launchPhotoPickerController{
+
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
+    
+//    [self hideDirtyArea];
+//    isSavedImage = false;
+////    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+////    [(GPUImageGammaFilter *)filter setGamma:1.7];
+//    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
+//    [self getEstimagtedValue:quickFilteredImage];
 //
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
-    
-    [self hideDirtyArea];
-    isSavedImage = false;
-//    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-//    [(GPUImageGammaFilter *)filter setGamma:1.7];
-    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
-    [self getEstimagtedValue:quickFilteredImage];
-    
-    [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.takenImageView setImage:quickFilteredImage];
-    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-    [self dismissViewControllerAnimated:YES completion:nil];
-
-}
-
--(void)gotoHistory{
-    
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"gotoHistory"]) {
-        SGHistoryViewController *vc = [segue destinationViewController];
-        vc.storageRef = self.storageRef;
-        vc.ref = self.ref;
-    }
+//    [self.dateLabel setText:[self getCurrentTimeString]];
+//    [self.takenImageView setImage:quickFilteredImage];
+//    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//
 }
 
 @end

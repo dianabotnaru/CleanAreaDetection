@@ -88,6 +88,20 @@
 
 }
 
+-(void)setFireDataBaseRef:(FIRDatabaseReference*)ref{
+    self.ref = ref;
+}
 
+-(FIRDatabaseReference*)getFireDataBaseRef{
+    return self.ref;
+}
+
+-(void)setFireStorageRef:(FIRStorageReference*)storageRef{
+    self.storageRef = storageRef;
+}
+
+-(FIRStorageReference*)getFireStorageRef{
+    return self.storageRef;
+}
 
 @end

@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Firebase.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRStorageReference *storageRef;
 
+-(void)setFireDataBaseRef:(FIRDatabaseReference*)ref;
+-(FIRDatabaseReference*)getFireDataBaseRef;
+-(void)setFireStorageRef:(FIRStorageReference*)storageRef;
+-(FIRStorageReference*)getFireStorageRef;
 
 @end
 

@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "SGBaseViewController.h"
+
 #import "MBProgressHUD.h"
 #import "Firebase.h"
 #import "EstimateImageModel.h"
 #import "DirtyExtractor.h"
 #import "RESideMenu.h"
 
-@interface SGHomeViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
+@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
     MBProgressHUD *hud;
@@ -30,8 +32,6 @@
 
 @property (nonatomic, strong) DirtyExtractor *engine;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRStorageReference *storageRef;
 @property (strong, nonatomic) EstimateImageModel *estimateImage;
 @property (strong, nonatomic) NSString *userID;
 

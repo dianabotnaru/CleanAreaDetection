@@ -12,8 +12,9 @@
 #import "EstimateImageModel.h"
 #import "DirtyExtractor.h"
 #import "SGDateTimePickerView.h"
+#import "SGBaseViewController.h"
 
-@interface SGHistoryViewController : UIViewController{
+@interface SGHistoryViewController : SGBaseViewController{
     bool isShowDirtyArea;
     bool isShowDetailView;
     bool isFromButtonTapped;
@@ -27,8 +28,6 @@
 @property (strong, nonatomic) NSMutableArray *historyArray;
 @property (strong, nonatomic) NSMutableArray *historyFilterArray;
 
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRStorageReference *storageRef;
 @property (strong, nonatomic) MBProgressHUD *hud;
 
 @property (strong, nonatomic) IBOutlet UIView *historyView;

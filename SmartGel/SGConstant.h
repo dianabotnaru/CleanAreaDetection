@@ -5,6 +5,7 @@
 //  Created by jordi on 15/10/2017.
 //  Copyright © 2017 AFCO. All rights reserved.
 //
+#import "AppDelegate.h"
 
 #ifndef SGConstant_h
 #define SGConstant_h
@@ -17,5 +18,7 @@ alpha:1.0]
 
 #define SGColorBlack UIColorFromRGB(0x262D36)
 #define SGColorDarkGray UIColorFromRGB(0x323A45)
+
+#define _SGAppDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
 #endif /* SGConstant_h */

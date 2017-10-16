@@ -39,8 +39,8 @@
     self.historyFilterArray = [NSMutableArray array];
     NSString *userID = [FIRAuth auth].currentUser.uid;
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[_ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        [self.hud hideAnimated:false];
+    [[self.appDelegate.ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        [self.hud hideAnimated:YES];
         for(snapshot in snapshot.children){
             EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] init];
             estimageImageModel.dirtyValue = [snapshot.value[@"value"] floatValue];
@@ -53,7 +53,7 @@
         self.historyFilterArray = self.historyArray;
         [self.smartGelHistoryCollectionView reloadData];
     } withCancelBlock:^(NSError * _Nonnull error) {
-        [self.hud hideAnimated:false];
+        [self.hud hideAnimated:YES];
         [self showAlertdialog:@"Error" message:error.localizedDescription];
     }];
 }
@@ -146,11 +146,11 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSString *userID = [FIRAuth auth].currentUser.uid;
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        FIRStorageReference *desertRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.selectedImageModel.date]];
+        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.selectedImageModel.date]];
         [desertRef deleteWithCompletion:^(NSError *error){
             [self.hud hideAnimated:false];
             if (error == nil) {
-                [[[self.ref child:userID] child:self.selectedImageModel.date] removeValue];
+                [[[self.appDelegate.ref child:userID] child:self.selectedImageModel.date] removeValue];
                 [self getHistoryArray];
                 [self hideDetailView];
             } else {
