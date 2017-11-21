@@ -278,8 +278,8 @@
 				TargetAttributes = {
 					8DA331ED1F7C8F3C0066148E = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 759G8E96X9;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = L34GFT5E8L;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -531,16 +531,16 @@
 			baseConfigurationReference = C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 759G8E96X9;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.afco.smartgel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e5f9ac31-6771-428b-a953-bc40b8e172ce";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc_smartgel;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -550,16 +550,16 @@
 			baseConfigurationReference = 6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 759G8E96X9;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.afco.smartgel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e5f9ac31-6771-428b-a953-bc40b8e172ce";
-				PROVISIONING_PROFILE_SPECIFIER = adhoc_smartgel;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>724506460695-qo7uuboirdbstmfsioh2g0dt3rrbt0t4.apps.googleusercontent.com</string>
+	<string>724506460695-g640a23hc2h1689e8qdm12lab3gmp7ag.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.724506460695-qo7uuboirdbstmfsioh2g0dt3rrbt0t4</string>
+	<string>com.googleusercontent.apps.724506460695-g640a23hc2h1689e8qdm12lab3gmp7ag</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDqBIOsQcB8q6oHOktbQ36qkbwHUBWbB7Y</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.afco.smartgel</string>
+	<string>com.afco.sg.smartgel</string>
 	<key>PROJECT_ID</key>
 	<string>smartgel-6cd51</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:724506460695:ios:486a3cff5d8b767a</string>
+	<string>1:724506460695:ios:284393d2760922c5</string>
 	<key>DATABASE_URL</key>
 	<string>https://smartgel-6cd51.firebaseio.com</string>
 </dict>
