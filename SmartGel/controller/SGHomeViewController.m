@@ -37,6 +37,11 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.gridView addGridViews:5 withColCount:5];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -292,23 +297,23 @@
 
 -(IBAction)launchPhotoPickerController{
 
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
     
-//    [self hideDirtyArea];
-//    isSavedImage = false;
-////    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-////    [(GPUImageGammaFilter *)filter setGamma:1.7];
-//    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
-//    [self getEstimagtedValue:quickFilteredImage];
-//
-//    [self.dateLabel setText:[self getCurrentTimeString]];
-//    [self.takenImageView setImage:quickFilteredImage];
-//    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//
+    [self hideDirtyArea];
+    isSavedImage = false;
+//    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+//    [(GPUImageGammaFilter *)filter setGamma:1.7];
+    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
+    [self getEstimagtedValue:quickFilteredImage];
+
+    [self.dateLabel setText:[self getCurrentTimeString]];
+    [self.takenImageView setImage:quickFilteredImage];
+    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 @end

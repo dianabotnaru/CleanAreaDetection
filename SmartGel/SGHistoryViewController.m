@@ -38,6 +38,11 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.gridView addGridViews:5 withColCount:5];
+}
+
 -(void)getHistoryArray{
     self.historyArray = [NSMutableArray array];
     self.historyFilterArray = [NSMutableArray array];
@@ -398,6 +403,8 @@
     [self.engine importImage:image];
     [self.engine extract];
 }
+
+
 /*
 #pragma mark - Navigation
 

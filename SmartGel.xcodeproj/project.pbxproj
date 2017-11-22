@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
 		8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5071FC510B200D6C070 /* smartgel-tests.json */; };
+		8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D24C5101FC5AC0F00D6C070 /* SGGridView.m */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
@@ -40,6 +41,8 @@
 /* Begin PBXFileReference section */
 		6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.release.xcconfig"; sourceTree = "<group>"; };
 		8D24C5071FC510B200D6C070 /* smartgel-tests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "smartgel-tests.json"; path = "resource/smartgel-tests.json"; sourceTree = "<group>"; };
+		8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGGridView.h; sourceTree = "<group>"; };
+		8D24C5101FC5AC0F00D6C070 /* SGGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGridView.m; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
 		8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EstimateImageModel.m; path = model/EstimateImageModel.m; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */,
 				8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */,
 				8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */,
+				8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */,
+				8D24C5101FC5AC0F00D6C070 /* SGGridView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 			files = (
 				8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */,
 				8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */,
+				8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */,
 				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
 				8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */,
 				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
