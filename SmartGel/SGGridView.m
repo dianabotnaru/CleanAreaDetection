@@ -40,4 +40,25 @@
         [self addSubview:paintView];
     }
 }
+
+-(CGRect)getContainsFrame:(CGPoint)point
+            withRowCount :(int)rowCount
+            withColCount :(int)colCount{
+    CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    UIImage *testImage = [UIImage imageNamed:@"test.jpg"];
+    int width = testImage.size.width/rowCount;
+    int height = testImage.size.height/colCount;
+    
+    int frameWidth = self.frame.size.width/rowCount;
+    int frameHeight = self.frame.size.height/colCount;
+    
+    for(int i = 0;i<rowCount;i++)
+        for(int j = 0;j<colCount;j++){
+        rect = CGRectMake(frameWidth*i,frameHeight*j,frameWidth,frameHeight);
+        if(CGRectContainsPoint(rect, point)){
+            return CGRectMake(width*i,height*j,width,height);
+        }
+    }
+    return rect;
+}
 @end

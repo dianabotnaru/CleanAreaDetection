@@ -11,5 +11,8 @@
 #define GRID_WIDTH 1
 @interface SGGridView : UIView
 - (void)addGridViews:(int)rowCount withColCount:(int)colCount;
+-(CGRect)getContainsFrame:(CGPoint)point
+            withRowCount :(int)rowCount
+            withColCount :(int)colCount;
 
 @end

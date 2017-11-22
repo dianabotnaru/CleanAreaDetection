@@ -316,4 +316,20 @@
 
 }
 
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch1 = [touches anyObject];
+    CGPoint touchLocation = [touch1 locationInView:self.gridView];
+    CGRect rect = [self.gridView getContainsFrame:touchLocation withRowCount:5 withColCount:5];
+    UIImage *croppedImage = [self croppIngimageByImageName:self.takenImageView.image toRect:rect];
+    self.takenImageView.image = croppedImage;
+}
+
+- (UIImage *)croppIngimageByImageName:(UIImage *)imageToCrop toRect:(CGRect)rect
+{
+    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    return cropped;
+}
 @end

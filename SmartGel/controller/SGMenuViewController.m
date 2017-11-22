@@ -16,7 +16,6 @@
 @property (strong, nonatomic) SGHomeViewController *sgHomeViewController;
 @property (strong, nonatomic) SGHistoryViewController *sgHistoryViewController;
 @property (strong, nonatomic) SGWebViewController *sgWebViewController;
-
 @end
 
 @implementation SGMenuViewController
