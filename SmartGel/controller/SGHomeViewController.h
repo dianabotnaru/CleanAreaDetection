@@ -20,6 +20,8 @@
 @interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
+    bool isShowPartArea;
+
     MBProgressHUD *hud;
 }
 
@@ -32,6 +34,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @property (strong, nonatomic) UIImage *takenImage;
+@property (strong, nonatomic) UIImage *croppedImage;
 
 @property (nonatomic, strong) DirtyExtractor *engine;
 @property (strong, nonatomic) CLLocationManager *locationManager;

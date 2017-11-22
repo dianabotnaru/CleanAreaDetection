@@ -20,21 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initData];
+    [self.dateLabel setText:[self getCurrentTimeString]];
+    [self loginFireBase];
+    // Do any additional setup after loading the view.
+}
+
+- (void)initData{
     self.engine = [[DirtyExtractor alloc] init];
     isShowDirtyArea = false;
     isSavedImage = false;
-    
-    [self initLocationManager];
-    [self.dateLabel setText:[self getCurrentTimeString]];
-    
-    self.appDelegate.ref = [[FIRDatabase database] reference];
-    
-//    self.ref = [[FIRDatabase database] reference];
-    
+    isShowPartArea = false;
     self.estimateImage = [[EstimateImageModel alloc] init];
-    [self loginFireBase];
-
-    // Do any additional setup after loading the view.
+    [self initLocationManager];
+    self.appDelegate.ref = [[FIRDatabase database] reference];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -217,7 +216,6 @@
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Save Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }]];
     
-    
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Hitory" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         if(self.appDelegate.storageRef!=nil){
             [self performSegueWithIdentifier:@"gotoHistory" sender:self];
@@ -306,23 +304,27 @@
     isSavedImage = false;
 //    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
 //    [(GPUImageGammaFilter *)filter setGamma:1.7];
-    UIImage *quickFilteredImage = [UIImage imageNamed:@"test.jpg"];
-    [self getEstimagtedValue:quickFilteredImage];
+    self.takenImage = [UIImage imageNamed:@"test.jpg"];
+    [self getEstimagtedValue:self.takenImage];
 
     [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.takenImageView setImage:quickFilteredImage];
-    [self setImageDataModel:quickFilteredImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+    [self.takenImageView setImage:self.takenImage];
+    [self setImageDataModel:self.takenImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
     [self dismissViewControllerAnimated:YES completion:nil];
-
 }
 
-
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch1 = [touches anyObject];
-    CGPoint touchLocation = [touch1 locationInView:self.gridView];
-    CGRect rect = [self.gridView getContainsFrame:touchLocation withRowCount:5 withColCount:5];
-    UIImage *croppedImage = [self croppIngimageByImageName:self.takenImageView.image toRect:rect];
-    self.takenImageView.image = croppedImage;
+    if(!isShowPartArea){
+        isShowPartArea = true;
+        UITouch *touch1 = [touches anyObject];
+        CGPoint touchLocation = [touch1 locationInView:self.gridView];
+        CGRect rect = [self.gridView getContainsFrame:touchLocation withRowCount:5 withColCount:5];
+        self.croppedImage = [self croppIngimageByImageName:self.takenImageView.image toRect:rect];
+        self.takenImageView.image = self.croppedImage;
+    }else{
+        isShowPartArea = false;
+        self.takenImageView.image = self.takenImage;
+    }
 }
 
 - (UIImage *)croppIngimageByImageName:(UIImage *)imageToCrop toRect:(CGRect)rect
