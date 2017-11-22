@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -393,6 +393,26 @@
                                             <action selector="showHideDirtyArea" destination="T8D-db-dfv" eventType="touchUpInside" id="Qrg-kL-ss5"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wif-dO-g0R">
+                                        <rect key="frame" x="263" y="427" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.2790815814" green="0.36459518870000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="016-xa-J6y"/>
+                                            <constraint firstAttribute="height" constant="40" id="fiB-f1-XB8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="U">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="showDirtyAreaWithUpdatedModule" destination="T8D-db-dfv" eventType="touchUpInside" id="Ksk-dA-3ls"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwq-2b-dwP">
                                         <rect key="frame" x="0.0" y="483" width="375" height="120"/>
                                         <subviews>
@@ -482,11 +502,33 @@
                                             <constraint firstAttribute="height" constant="120" id="q8c-rW-rtj"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raG-Ey-TcP">
+                                        <rect key="frame" x="207" y="427" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.82745098039999998" green="0.3921568627" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="bZf-QF-ffF"/>
+                                            <constraint firstAttribute="height" constant="40" id="bam-Wt-oRw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="H">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="hideDirtAreaWithUpdatedModule" destination="T8D-db-dfv" eventType="touchUpInside" id="t9B-Tn-mP9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="pwq-2b-dwP" firstAttribute="leading" secondItem="FAt-Vp-ne3" secondAttribute="leading" id="0WU-mS-0oT"/>
+                                    <constraint firstItem="wif-dO-g0R" firstAttribute="leading" secondItem="raG-Ey-TcP" secondAttribute="trailing" constant="16" id="1sx-fb-NpX"/>
                                     <constraint firstAttribute="trailing" secondItem="1t3-Aj-LGH" secondAttribute="trailing" id="58u-9V-S7f"/>
+                                    <constraint firstItem="L4X-i9-eKz" firstAttribute="leading" secondItem="wif-dO-g0R" secondAttribute="trailing" constant="16" id="6oq-ve-uOy"/>
                                     <constraint firstItem="1t3-Aj-LGH" firstAttribute="leading" secondItem="FAt-Vp-ne3" secondAttribute="leading" id="LfT-mK-jSM"/>
                                     <constraint firstAttribute="bottom" secondItem="pwq-2b-dwP" secondAttribute="bottom" id="SKY-yj-uJ1"/>
                                     <constraint firstAttribute="trailing" secondItem="GZU-EK-tCp" secondAttribute="trailing" id="Scq-5u-Nbq"/>
@@ -494,7 +536,9 @@
                                     <constraint firstItem="pwq-2b-dwP" firstAttribute="top" secondItem="L4X-i9-eKz" secondAttribute="bottom" constant="16" id="Y44-tk-OsK"/>
                                     <constraint firstAttribute="trailing" secondItem="pwq-2b-dwP" secondAttribute="trailing" id="b1J-Sg-wkF"/>
                                     <constraint firstItem="pwq-2b-dwP" firstAttribute="top" secondItem="GZU-EK-tCp" secondAttribute="bottom" id="dcR-fT-yqg"/>
+                                    <constraint firstItem="pwq-2b-dwP" firstAttribute="top" secondItem="raG-Ey-TcP" secondAttribute="bottom" constant="16" id="e4a-wV-MGK"/>
                                     <constraint firstItem="pwq-2b-dwP" firstAttribute="top" secondItem="1t3-Aj-LGH" secondAttribute="bottom" id="hrG-Ew-poc"/>
+                                    <constraint firstItem="pwq-2b-dwP" firstAttribute="top" secondItem="wif-dO-g0R" secondAttribute="bottom" constant="16" id="jiT-5d-PCS"/>
                                     <constraint firstItem="GZU-EK-tCp" firstAttribute="leading" secondItem="FAt-Vp-ne3" secondAttribute="leading" id="sQ4-Y1-SIy"/>
                                     <constraint firstAttribute="trailing" secondItem="L4X-i9-eKz" secondAttribute="trailing" constant="16" id="sga-dF-l7n"/>
                                     <constraint firstItem="1t3-Aj-LGH" firstAttribute="top" secondItem="FAt-Vp-ne3" secondAttribute="top" id="tzV-0B-urZ"/>

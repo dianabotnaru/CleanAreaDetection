@@ -13,6 +13,7 @@
 #import "DirtyExtractor.h"
 #import "SGDateTimePickerView.h"
 #import "SGBaseViewController.h"
+#import "DirtyExtractor.h"
 
 @interface SGHistoryViewController : SGBaseViewController{
     bool isShowDirtyArea;
@@ -23,6 +24,7 @@
     NSDate *toDate;
     NSArray *dirtyStateArray;
 }
+@property (nonatomic, strong) DirtyExtractor *engine;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *smartGelHistoryCollectionView;
 @property (strong, nonatomic) NSMutableArray *historyArray;

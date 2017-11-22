@@ -32,6 +32,7 @@
     dirtyStateArray = [NSArray array];
     
 //    [self getHistoryArray];
+
     [self getTestResults];
 
     // Do any additional setup after loading the view.
@@ -85,6 +86,25 @@
     SmartGelHistoryCollectionViewCell *cell = (SmartGelHistoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
     [cell setEstimateData:estimateImageModel];
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+
+//    if(estimateImageModel.image!=nil)
+//        cell.takenImageView.image = estimateImageModel.image;
+//    else{
+//        [cell.takenImageView sd_setImageWithURL:[NSURL URLWithString:estimateImageModel.imageUrl]
+//                               placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
+//                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                                          if (error) {
+//                                          } else {
+//                                              cell.takenImageView.image = image;
+//                                              estimateImageModel.image = image;
+//                                              [self.historyFilterArray replaceObjectAtIndex:indexPath.row withObject:estimateImageModel];
+//                                          }
+//                                      }];
+//
+//    }
+
     return cell;
 }
 
@@ -183,14 +203,18 @@
     return values;
 }
 
--(void)drawView:(int)index{
+-(void)drawView:(int)index:(bool)isUpdate{
     int y = index/AREA_DIVIDE_NUMBER;
     int x = (AREA_DIVIDE_NUMBER-1) - index%AREA_DIVIDE_NUMBER;
     float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
     UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
     if([[dirtyStateArray objectAtIndex:index] boolValue]){
-        [paintView setBackgroundColor:[UIColor redColor]];
+        if(isUpdate)
+            [paintView setBackgroundColor:[UIColor blueColor]];
+        else
+            [paintView setBackgroundColor:[UIColor redColor]];
+
         [paintView setAlpha:0.7];
         [self.takenImageView addSubview:paintView];
     }
@@ -212,7 +236,7 @@
         dirtyStateArray = [NSArray array];
         dirtyStateArray = [self getDirtyAreaArray];
         for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++)
-            [self drawView:i];
+            [self drawView:i:false];
         [self.hud hideAnimated:false];
     });
 }
@@ -338,13 +362,42 @@
 
     for(int i =0 ; i<keys.count;i++){
         NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:i]];
-        EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithDict:imageDict];
+        EstimateImageModel *estimageImageModel = [[EstimateImageModel alloc] initWithDict:imageDict];
         [self.historyArray addObject:estimageImageModel];
     }
     self.historyFilterArray = self.historyArray;
     [self.smartGelHistoryCollectionView reloadData];
 }
 
+- (IBAction)showDirtyAreaWithUpdatedModule{
+
+    if(self.takenImageView.image){
+        [self initEngine:self.takenImageView.image];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.engine.areaDirtyState options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        self.selectedImageModel.dirtyArea = jsonString;
+        
+        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            dirtyStateArray = [NSArray array];
+            dirtyStateArray = [self getDirtyAreaArray];
+            for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++)
+                [self drawView:i:true];
+            [self.hud hideAnimated:false];
+        });
+    }
+}
+
+- (IBAction)hideDirtAreaWithUpdatedModule{
+    [self hideDirtyArea];
+}
+
+-(void)initEngine:(UIImage *)image{
+    self.engine = [[DirtyExtractor alloc] init];
+    [self.engine reset];
+    [self.engine importImage:image];
+    [self.engine extract];
+}
 /*
 #pragma mark - Navigation
 
