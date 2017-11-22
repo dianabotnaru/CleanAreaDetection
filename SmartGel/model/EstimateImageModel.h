@@ -18,4 +18,8 @@
 @property (strong, nonatomic) NSString *date;
 @property (strong, nonatomic) NSString *dirtyArea;
 
+@property (nonatomic,strong) NSDictionary *data;
+
+-(instancetype)initWithDict:(NSDictionary *)dict;
+
 @end

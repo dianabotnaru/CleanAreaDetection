@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
+		8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5071FC510B200D6C070 /* smartgel-tests.json */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.release.xcconfig"; sourceTree = "<group>"; };
+		8D24C5071FC510B200D6C070 /* smartgel-tests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "smartgel-tests.json"; path = "resource/smartgel-tests.json"; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
 		8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EstimateImageModel.m; path = model/EstimateImageModel.m; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 		8DDC4FD91F944E9D00C92EEB /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				8D24C5071FC510B200D6C070 /* smartgel-tests.json */,
 				8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */,
 			);
 			name = resource;
@@ -306,6 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */,
 				8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */,
 				8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */,
 				8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */,
@@ -535,7 +539,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -554,7 +558,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";

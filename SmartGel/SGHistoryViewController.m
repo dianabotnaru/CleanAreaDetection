@@ -23,7 +23,6 @@
     self.trashButton.enabled = NO;
     [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
     self.selectedImageModel = [[EstimateImageModel alloc] init];
-    [self getHistoryArray];
     [self hideDirtyArea];
     [self initDateTimePickerView];
     fromDate = [self setMinDate];
@@ -31,6 +30,10 @@
     toDate = [self getLocalTime:[NSDate date]];
     [self.toLabel setText:[self getDateString:toDate]];
     dirtyStateArray = [NSArray array];
+    
+//    [self getHistoryArray];
+    [self getTestResults];
+
     // Do any additional setup after loading the view.
 }
 
@@ -314,6 +317,32 @@
     NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
     NSDate *dateInLocalTimezone = [date dateByAddingTimeInterval:timeZoneSeconds];
     return dateInLocalTimezone;
+}
+
+//todo remove- harded code
+- (void)getTestResults{
+    
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
+    NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"\n Result = %@",stringContent);
+    NSData *objectData = [stringContent dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *jsonError = nil;
+    NSDictionary *imageArrayDict = [NSJSONSerialization JSONObjectWithData:objectData
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&jsonError];
+    NSArray* keys=[imageArrayDict allKeys];
+
+    NSLog(@"\n jsonError = %@",jsonError.description);
+    self.historyArray = [NSMutableArray array];
+    self.historyFilterArray = [NSMutableArray array];
+
+    for(int i =0 ; i<keys.count;i++){
+        NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:i]];
+        EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithDict:imageDict];
+        [self.historyArray addObject:estimageImageModel];
+    }
+    self.historyFilterArray = self.historyArray;
+    [self.smartGelHistoryCollectionView reloadData];
 }
 
 /*
