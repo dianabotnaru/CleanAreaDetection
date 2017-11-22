@@ -23,8 +23,9 @@
     self.dateLabel.text = estimateImageData.date;
     self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", estimateImageData.dirtyValue];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:estimateImageData.imageUrl]
-                 placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]];
-    
+                           placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
+                                    options:SDWebImageRefreshCached];
+
 }
 
 @end

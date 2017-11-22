@@ -82,6 +82,8 @@
     SmartGelHistoryCollectionViewCell *cell = (SmartGelHistoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
     [cell setEstimateData:estimateImageModel];
+    cell.layer.shouldRasterize = YES;
+    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     return cell;
 }
 
