@@ -121,6 +121,9 @@
 
 -(void)showDirtyArea{
     isShowDirtyArea = true;
+    [self.notificationLabel setHidden:YES];
+    [self.takePhotoButton setHidden:YES];
+    [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         if(isShowPartArea)
@@ -133,6 +136,9 @@
 
 -(void)hideDirtyArea{
     isShowDirtyArea = false;
+    [self.notificationLabel setHidden:NO];
+    [self.takePhotoButton setHidden:NO];
+    [self.showCleanAreaButton setTitle:@"Show Clean Area" forState:UIControlStateNormal];
     [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
 }
 
@@ -217,22 +223,13 @@
 }
 
 -(IBAction)showHideCleanArea{
-    if(isShowDirtyArea){
-        [self.notificationLabel setHidden:NO];
-        [self.takePhotoButton setHidden:NO];
-        [self.showCleanAreaButton setTitle:@"Show Clean Area" forState:UIControlStateNormal];
-        [self hideDirtyArea];
-    }else{
-        if(self.estimateImage.image == nil){
-            [self showAlertdialog:nil message:@"Please take a photo."];
-        }
-        else{
-            [self.notificationLabel setHidden:YES];
-            [self.takePhotoButton setHidden:YES];
-            [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
-            [self showDirtyArea];
-        }
+    if(self.estimateImage.image == nil){
+        [self showAlertdialog:nil message:@"Please take a photo."];
     }
+    if(isShowDirtyArea)
+        [self hideDirtyArea];
+    else
+        [self showDirtyArea];
 }
 
 -(IBAction)launchPhotoPickerController{
@@ -288,7 +285,6 @@
 /// remove-harded code/////////////////
 
 - (NSString *) getImageUrl{
-    
     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
     NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSLog(@"\n Result = %@",stringContent);
@@ -298,7 +294,6 @@
                                                                    options:NSJSONReadingMutableContainers
                                                                      error:&jsonError];
     NSArray* keys=[imageArrayDict allKeys];
-    
     NSLog(@"\n jsonError = %@",jsonError.description);
     NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:14]];
     return  [imageDict objectForKey :@"image"];
