@@ -10,12 +10,12 @@
 		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
 		8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5071FC510B200D6C070 /* smartgel-tests.json */; };
 		8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D24C5101FC5AC0F00D6C070 /* SGGridView.m */; };
+		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
 		8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C41F7CA4790025B804 /* QuartzCore.framework */; };
 		8D80B2C71F7CA5A70025B804 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C61F7CA5A70025B804 /* Foundation.framework */; };
-		8D80B2CB1F7CF3890025B804 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2CA1F7CF3890025B804 /* test.jpg */; };
 		8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */; };
 		8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2D01F7CFE810025B804 /* SGDateTimePickerView.m */; };
 		8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D11F7CFE810025B804 /* SGDateTimePickerView.xib */; };
@@ -43,13 +43,13 @@
 		8D24C5071FC510B200D6C070 /* smartgel-tests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "smartgel-tests.json"; path = "resource/smartgel-tests.json"; sourceTree = "<group>"; };
 		8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGGridView.h; sourceTree = "<group>"; };
 		8D24C5101FC5AC0F00D6C070 /* SGGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGridView.m; sourceTree = "<group>"; };
+		8D24C5121FC5E3D600D6C070 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
 		8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EstimateImageModel.m; path = model/EstimateImageModel.m; sourceTree = "<group>"; };
 		8D80B2C21F7CA4700025B804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8D80B2C41F7CA4790025B804 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D80B2C61F7CA5A70025B804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		8D80B2CA1F7CF3890025B804 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHistoryViewController.h; sourceTree = "<group>"; };
 		8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHistoryViewController.m; sourceTree = "<group>"; };
 		8D80B2CF1F7CFE810025B804 /* SGDateTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGDateTimePickerView.h; path = view/SGDateTimePickerView.h; sourceTree = "<group>"; };
@@ -146,7 +146,6 @@
 			children = (
 				8DDC4FD91F944E9D00C92EEB /* resource */,
 				8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */,
-				8D80B2CA1F7CF3890025B804 /* test.jpg */,
 				8DB097921F9345210053C203 /* Constant */,
 				8DA3320E1F7C92440066148E /* shared */,
 				8DA3320A1F7C8FD30066148E /* view */,
@@ -246,6 +245,7 @@
 		8DDC4FD91F944E9D00C92EEB /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				8D24C5121FC5E3D600D6C070 /* test.png */,
 				8D24C5071FC510B200D6C070 /* smartgel-tests.json */,
 				8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */,
 			);
@@ -320,11 +320,11 @@
 				8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
 				8D80B2D81F7CFE810025B804 /* SGFilterView.xib in Resources */,
-				8D80B2CB1F7CF3890025B804 /* test.jpg in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */,
 				8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */,
 				8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */,
+				8D24C5131FC5E3D600D6C070 /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -41,13 +41,13 @@
     }
 }
 
--(CGRect)getContainsFrame:(CGPoint)point
+-(CGRect)getContainsFrame:(UIImage *)takenImage
+                withPoint: (CGPoint)point
             withRowCount :(int)rowCount
             withColCount :(int)colCount{
     CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    UIImage *testImage = [UIImage imageNamed:@"test.jpg"];
-    int width = testImage.size.width/rowCount;
-    int height = testImage.size.height/colCount;
+    int width = takenImage.size.height/rowCount;
+    int height = takenImage.size.width/colCount;
     
     int frameWidth = self.frame.size.width/rowCount;
     int frameHeight = self.frame.size.height/colCount;
@@ -56,7 +56,7 @@
         for(int j = 0;j<colCount;j++){
         rect = CGRectMake(frameWidth*i,frameHeight*j,frameWidth,frameHeight);
         if(CGRectContainsPoint(rect, point)){
-            return CGRectMake(width*i,height*j,width,height);
+            return CGRectMake(width*j,height*(colCount-i-1),width,height);
         }
     }
     return rect;

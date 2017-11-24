@@ -31,7 +31,6 @@
     isShowDirtyArea = false;
     isSavedImage = false;
     isShowPartArea = false;
-    self.estimateImage = [[EstimateImageModel alloc] init];
     [self initLocationManager];
     self.appDelegate.ref = [[FIRDatabase database] reference];
 }
@@ -77,8 +76,7 @@
     [(GPUImageGammaFilter *)filter setGamma:1.7];
     UIImage *quickFilteredImage = [filter imageByFilteringImage:image];
     [self getEstimagtedValue:quickFilteredImage];
-    
-    [self.dateLabel setText:[self getCurrentTimeString]];
+                                 [self.dateLabel setText:[self getCurrentTimeString]];
     [self.takenImageView setImage:image];
     [self setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -206,7 +204,6 @@
 - (IBAction)showActionSheet{
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }]];
     
@@ -300,17 +297,26 @@
 //    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    [self presentViewController:imagePickerController animated:NO completion:nil];
     
-    [self hideDirtyArea];
-    isSavedImage = false;
-//    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-//    [(GPUImageGammaFilter *)filter setGamma:1.7];
-    self.takenImage = [UIImage imageNamed:@"test.jpg"];
-    [self getEstimagtedValue:self.takenImage];
 
-    [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.takenImageView setImage:self.takenImage];
-    [self setImageDataModel:self.takenImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSString* imageURL = [self getImageUrl];
+
+    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                              if(error==nil){
+                                  [self hideDirtyArea];
+                                  isSavedImage = false;
+                                  GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+                                  [(GPUImageGammaFilter *)filter setGamma:2.0];
+//                                  self.takenImage = [filter imageByFilteringImage:image];
+//                                  self.takenImage = [UIImage imageNamed:@"test.png"];
+                                  self.takenImage = image;
+                                  [self getEstimagtedValue:self.takenImage];
+                                  [self.dateLabel setText:[self getCurrentTimeString]];
+                                  [self.takenImageView setImage:self.takenImage];
+                                  [self setImageDataModel:self.takenImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+                                  [self dismissViewControllerAnimated:YES completion:nil];
+                              }
+                          }];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -318,12 +324,13 @@
         isShowPartArea = true;
         UITouch *touch1 = [touches anyObject];
         CGPoint touchLocation = [touch1 locationInView:self.gridView];
-        CGRect rect = [self.gridView getContainsFrame:touchLocation withRowCount:5 withColCount:5];
-        self.croppedImage = [self croppIngimageByImageName:self.takenImageView.image toRect:rect];
+        CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
+        self.croppedImage = [self croppIngimageByImageName:self.takenImage toRect:rect];
         self.takenImageView.image = self.croppedImage;
     }else{
         isShowPartArea = false;
         self.takenImageView.image = self.takenImage;
+        [self getEstimagtedValue:self.takenImage];
     }
 }
 
@@ -332,6 +339,26 @@
     CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
-    return cropped;
+    UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    return image;
+}
+
+/// remove-harded code/////////////////
+
+- (NSString *) getImageUrl{
+    
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
+    NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"\n Result = %@",stringContent);
+    NSData *objectData = [stringContent dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *jsonError = nil;
+    NSDictionary *imageArrayDict = [NSJSONSerialization JSONObjectWithData:objectData
+                                                                   options:NSJSONReadingMutableContainers
+                                                                     error:&jsonError];
+    NSArray* keys=[imageArrayDict allKeys];
+    
+    NSLog(@"\n jsonError = %@",jsonError.description);
+    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:4]];
+    return  [imageDict objectForKey :@"image"];
 }
 @end

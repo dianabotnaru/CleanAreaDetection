@@ -16,6 +16,7 @@
 #import "DirtyExtractor.h"
 #import "RESideMenu.h"
 #import "SGGridView.h"
+#import "UIImageView+WebCache.h"
 
 @interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     bool isShowDirtyArea;
@@ -37,6 +38,8 @@
 @property (strong, nonatomic) UIImage *croppedImage;
 
 @property (nonatomic, strong) DirtyExtractor *engine;
+@property (nonatomic, strong) DirtyExtractor *partyEngine;
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) EstimateImageModel *estimateImage;
 @property (strong, nonatomic) NSString *userID;
