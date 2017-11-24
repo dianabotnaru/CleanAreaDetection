@@ -21,5 +21,7 @@
 @property (nonatomic,strong) NSDictionary *data;
 
 -(instancetype)initWithDict:(NSDictionary *)dict;
+-(void)getDirtyAreaJsonString:(NSMutableArray *)array;
+- (NSArray *) getDirtyAreaArray;
 
 @end

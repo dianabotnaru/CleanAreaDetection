@@ -60,6 +60,33 @@
     }];
 }
 
+
+- (void)saveResultImage{
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"Uploading image...";
+    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.userID,self.estimateImage.date]];
+    NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
+    [riversRef putData:imageData
+              metadata:nil
+            completion:^(FIRStorageMetadata *metadata,NSError *error) {
+                [hud hideAnimated:false];
+                if (error != nil) {
+                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+                } else {
+                    isSavedImage = true;
+                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
+                    NSString *key = self.userID;
+                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.dirtyValue],
+                                           @"image": metadata.downloadURL.absoluteString,
+                                           @"date": self.estimateImage.date,
+                                           @"location": self.estimateImage.location,
+                                           @"dirtyarea": self.estimateImage.dirtyArea};
+                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
+                    [self.appDelegate.ref updateChildValues:childUpdates];
+                }
+            }];
+}
+
 -(void)launchSettingParameterViewController{
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"customcamera" bundle:[NSBundle mainBundle]];
 //    SGParameterSettingViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"SGParameterSettingViewController"];
@@ -76,7 +103,7 @@
     GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
     [(GPUImageGammaFilter *)filter setGamma:1.7];
     UIImage *quickFilteredImage = [filter imageByFilteringImage:image];
-    [self getEstimagtedValue:quickFilteredImage];
+    [self getEstimagtedValue:self.engine withImage:quickFilteredImage];
                                  [self.dateLabel setText:[self getCurrentTimeString]];
     [self.takenImageView setImage:image];
     [self setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
@@ -91,7 +118,7 @@
     self.estimateImage.dirtyValue = vaule;
     self.estimateImage.date = dateString;
     self.estimateImage.location = currentLocation;
-    self.estimateImage.dirtyArea = [self getDirtyStateJsonString];
+    [self.estimateImage getDirtyAreaJsonString:self.engine.areaDirtyState];
 }
 
 -(IBAction)backButtonPressed{
@@ -102,8 +129,12 @@
     isShowDirtyArea = true;
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++)
-            [self drawView:i];
+        for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
+            if(isShowPartArea)
+                [self drawView:i withDirtyArray:self.partyEngine.areaDirtyState];
+            else
+                [self drawView:i withDirtyArray:self.engine.areaDirtyState];
+        }
         [hud hideAnimated:false];
     });
 }
@@ -113,25 +144,21 @@
     [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
 }
 
--(void)getEstimagtedValue:(UIImage *)image{
-    [self.engine reset];
-    [self.engine importImage:image];
-    [self.engine extract];
-    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
-    [self setImageDataModel:self.takenImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+-(void)getEstimagtedValue:(DirtyExtractor*)engine withImage: (UIImage *)image{
+    [engine reset];
+    [engine importImage:image];
+    [engine extract];
+    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", engine.dirtyValue]];
+    [self setImageDataModel:image withEstimatedValue:engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
 }
 
--(void)drawView:(int)index{
-    
+-(void)drawView:(int)index withDirtyArray:(NSMutableArray*)dirtyState{
     int y = index/AREA_DIVIDE_NUMBER;
     int x = (AREA_DIVIDE_NUMBER-1) - index%AREA_DIVIDE_NUMBER;
-    
     float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
-    
     UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-    
-    if([[self.engine.areaDirtyState objectAtIndex:index] boolValue]){
+    if([[dirtyState objectAtIndex:index] boolValue]){
         [paintView setBackgroundColor:[UIColor redColor]];
         [paintView setAlpha:0.5];
         [self.takenImageView addSubview:paintView];
@@ -203,76 +230,6 @@
     }
 }
 
-- (IBAction)showActionSheet{
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }]];
-    
-    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }]];
-    
-    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Save Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }]];
-    
-    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Show Hitory" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        if(self.appDelegate.storageRef!=nil){
-            [self performSegueWithIdentifier:@"gotoHistory" sender:self];
-        }else{
-            [self showAlertdialog:@"Error" message:@"Failed to connect to server. Please check internet connection!"];
-        }
-    }]];
-    
-    //    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Setting Paramters" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    //        [self launchSettingParameterViewController];
-    //    }]];
-    
-    CGRect rect = CGRectMake(50, 50 , 0, 0);
-    actionSheet.popoverPresentationController.sourceView = self.view;
-    actionSheet.popoverPresentationController.sourceRect = rect;
-    [self presentViewController:actionSheet animated:YES completion:nil];
-}
-
-- (void)saveResultImage{
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.label.text = @"Uploading image...";
-    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.userID,self.estimateImage.date]];
-    NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
-    [riversRef putData:imageData
-              metadata:nil
-            completion:^(FIRStorageMetadata *metadata,NSError *error) {
-                [hud hideAnimated:false];
-                if (error != nil) {
-                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
-                } else {
-                    isSavedImage = true;
-                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSString *key = self.userID;
-                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.dirtyValue],
-                                           @"image": metadata.downloadURL.absoluteString,
-                                           @"date": self.estimateImage.date,
-                                           @"location": self.estimateImage.location,
-                                           @"dirtyarea": self.estimateImage.dirtyArea};
-                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
-                    [self.appDelegate.ref updateChildValues:childUpdates];
-                }
-            }];
-}
-
--(void)showAlertdialog:(NSString*)title message:(NSString*)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
--(NSString *)getDirtyStateJsonString{
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.engine.areaDirtyState options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return jsonString;
-}
-
 -(IBAction)showHideCleanArea{
     if(isShowDirtyArea){
         [self.notificationLabel setHidden:NO];
@@ -298,21 +255,19 @@
 //    imagePickerController.delegate = self;
 //    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    [self presentViewController:imagePickerController animated:NO completion:nil];
-    
 
     NSString* imageURL = [self getImageUrl];
-
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                               if(error==nil){
                                   [self hideDirtyArea];
                                   isSavedImage = false;
-                                  GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-                                  [(GPUImageGammaFilter *)filter setGamma:2.0];
+//                                  GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+//                                  [(GPUImageGammaFilter *)filter setGamma:2.0];
 //                                  self.takenImage = [filter imageByFilteringImage:image];
 //                                  self.takenImage = [UIImage imageNamed:@"test.png"];
                                   self.takenImage = image;
-                                  [self getEstimagtedValue:self.takenImage];
+                                  [self getEstimagtedValue:self.engine withImage:self.takenImage];
                                   [self.dateLabel setText:[self getCurrentTimeString]];
                                   [self.takenImageView setImage:self.takenImage];
                                   [self dismissViewControllerAnimated:YES completion:nil];
@@ -328,12 +283,11 @@
         CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
         self.croppedImage = [self croppIngimageByImageName:self.takenImage toRect:rect];
         self.takenImageView.image = self.croppedImage;
-        [self getEstimagtedValue:self.croppedImage];
+        [self getEstimagtedValue:self.partyEngine withImage:self.croppedImage];
 
     }else{
         isShowPartArea = false;
         self.takenImageView.image = self.takenImage;
-        [self getEstimagtedValue:self.takenImage];
     }
 }
 
@@ -361,7 +315,7 @@
     NSArray* keys=[imageArrayDict allKeys];
     
     NSLog(@"\n jsonError = %@",jsonError.description);
-    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:4]];
+    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:14]];
     return  [imageDict objectForKey :@"image"];
 }
 @end

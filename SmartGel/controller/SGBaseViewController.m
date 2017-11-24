@@ -26,6 +26,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)showAlertdialog:(NSString*)title message:(NSString*)message{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 /*
 #pragma mark - Navigation
 

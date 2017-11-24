@@ -22,4 +22,17 @@
     return self;
 }
 
+-(void)getDirtyAreaJsonString:(NSMutableArray *)array{
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    self.dirtyArea = jsonString;
+}
+
+- (NSArray *)getDirtyAreaArray{
+    NSData* data = [self.dirtyArea dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
+    return values;
+}
+
+
 @end
