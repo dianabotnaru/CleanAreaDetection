@@ -42,5 +42,5 @@ typedef struct
 - (UIImage *)   exportImage;
 
 - (void)        extract;
-
+-(instancetype)initWithImage:(UIImage *)image;
 @end

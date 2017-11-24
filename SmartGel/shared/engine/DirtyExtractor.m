@@ -26,6 +26,16 @@
     return self;
 }
 
+-(instancetype)initWithImage:(UIImage *)image{
+    self = [super init];
+    if(self){
+        [self reset];
+        [self importImage:image];
+        [self extract];
+    }
+    return self;
+}
+
 - (void) dealloc
 {
     [self reset];

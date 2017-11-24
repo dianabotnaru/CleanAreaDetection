@@ -103,7 +103,7 @@
     GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
     [(GPUImageGammaFilter *)filter setGamma:1.7];
     UIImage *quickFilteredImage = [filter imageByFilteringImage:image];
-    [self getEstimagtedValue:self.engine withImage:quickFilteredImage];
+//    [self getEstimagtedValue:self.engine withImage:quickFilteredImage];
                                  [self.dateLabel setText:[self getCurrentTimeString]];
     [self.takenImageView setImage:image];
     [self setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
@@ -129,12 +129,10 @@
     isShowDirtyArea = true;
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-            if(isShowPartArea)
-                [self drawView:i withDirtyArray:self.partyEngine.areaDirtyState];
-            else
-                [self drawView:i withDirtyArray:self.engine.areaDirtyState];
-        }
+        if(isShowPartArea)
+            [self drawView :self.partyEngine.areaDirtyState];
+        else
+            [self drawView : self.engine.areaDirtyState];
         [hud hideAnimated:false];
     });
 }
@@ -144,24 +142,26 @@
     [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
 }
 
--(void)getEstimagtedValue:(DirtyExtractor*)engine withImage: (UIImage *)image{
-    [engine reset];
-    [engine importImage:image];
-    [engine extract];
-    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", engine.dirtyValue]];
-    [self setImageDataModel:image withEstimatedValue:engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-}
+//-(void)getEstimagtedValue:(DirtyExtractor*)engine withImage: (UIImage *)image{
+//    [engine reset];
+//    [engine importImage:image];
+//    [engine extract];
+//    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", engine.dirtyValue]];
+//    [self setImageDataModel:image withEstimatedValue:engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+//}
 
--(void)drawView:(int)index withDirtyArray:(NSMutableArray*)dirtyState{
-    int y = index/AREA_DIVIDE_NUMBER;
-    int x = (AREA_DIVIDE_NUMBER-1) - index%AREA_DIVIDE_NUMBER;
-    float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
-    float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
-    UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-    if([[dirtyState objectAtIndex:index] boolValue]){
-        [paintView setBackgroundColor:[UIColor redColor]];
-        [paintView setAlpha:0.5];
-        [self.takenImageView addSubview:paintView];
+-(void)drawView:(NSMutableArray*)dirtyState{
+    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
+        int y = i/AREA_DIVIDE_NUMBER;
+        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
+        float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
+        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
+        if([[dirtyState objectAtIndex:i] boolValue]){
+            [paintView setBackgroundColor:[UIColor redColor]];
+            [paintView setAlpha:0.5];
+            [self.takenImageView addSubview:paintView];
+        }
     }
 }
 
@@ -267,15 +267,20 @@
 //                                  self.takenImage = [filter imageByFilteringImage:image];
 //                                  self.takenImage = [UIImage imageNamed:@"test.png"];
                                   self.takenImage = image;
-                                  [self getEstimagtedValue:self.engine withImage:self.takenImage];
+//                                  [self getEstimagtedValue:self.engine withImage:self.takenImage];
                                   [self.dateLabel setText:[self getCurrentTimeString]];
                                   [self.takenImageView setImage:self.takenImage];
+                                  
+                                  self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
+                                  [self setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+                                  [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
                                   [self dismissViewControllerAnimated:YES completion:nil];
                               }
                           }];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self hideDirtyArea];
     if(!isShowPartArea){
         isShowPartArea = true;
         UITouch *touch1 = [touches anyObject];
@@ -283,8 +288,8 @@
         CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
         self.croppedImage = [self croppIngimageByImageName:self.takenImage toRect:rect];
         self.takenImageView.image = self.croppedImage;
-        [self getEstimagtedValue:self.partyEngine withImage:self.croppedImage];
-
+        self.partyEngine = [[DirtyExtractor alloc] initWithImage:self.croppedImage];
+        [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.partyEngine.dirtyValue]];
     }else{
         isShowPartArea = false;
         self.takenImageView.image = self.takenImage;
