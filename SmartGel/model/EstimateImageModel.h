@@ -21,7 +21,11 @@
 @property (nonatomic,strong) NSDictionary *data;
 
 -(instancetype)initWithDict:(NSDictionary *)dict;
--(void)getDirtyAreaJsonString:(NSMutableArray *)array;
+- (void)setImageDataModel:(UIImage*)image
+       withEstimatedValue:(float)vaule
+                 withDate:(NSString*)dateString
+             withLocation:(NSString*)currentLocation
+           withDirtyArray:(NSMutableArray *)array;
 - (NSArray *) getDirtyAreaArray;
 
 @end

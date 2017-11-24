@@ -22,10 +22,22 @@
     return self;
 }
 
--(void)getDirtyAreaJsonString:(NSMutableArray *)array{
+- (void)setImageDataModel:(UIImage*)image
+       withEstimatedValue:(float)vaule
+                 withDate:(NSString*)dateString
+             withLocation:(NSString*)currentLocation
+           withDirtyArray:(NSMutableArray *)array{
+    self.image = image;
+    self.dirtyValue = vaule;
+    self.date = dateString;
+    self.location = currentLocation;
+    self.dirtyArea = [self setDirtyAreaJsonString:array];
+}
+
+-(NSString *)setDirtyAreaJsonString:(NSMutableArray *)array{
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    self.dirtyArea = jsonString;
+    return jsonString;
 }
 
 - (NSArray *)getDirtyAreaArray{

@@ -26,6 +26,16 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.gridView addGridViews:5 withColCount:5];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (void)initData{
     self.engine = [[DirtyExtractor alloc] init];
     isShowDirtyArea = false;
@@ -36,14 +46,19 @@
     self.appDelegate.ref = [[FIRDatabase database] reference];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [self.gridView addGridViews:5 withColCount:5];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)initDataUiWithImage:(UIImage *)image{
+    isSavedImage = false;
+    self.takenImage = image;
+    self.engine = [[DirtyExtractor alloc] initWithImage:image];
+    
+    if(!self.notificationLabel.isHidden)
+        [self.notificationLabel setHidden:YES];
+    [self hideDirtyArea];
+    [self.takenImageView setImage:self.takenImage];
+    [self.dateLabel setText:[self getCurrentTimeString]];
+    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
+    
+    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withDirtyArray:self.engine.areaDirtyState];
 }
 
 -(void)loginFireBase{
@@ -96,29 +111,8 @@
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-    if(!self.notificationLabel.isHidden)
-        [self.notificationLabel setHidden:YES];
-    [self hideDirtyArea];
-    isSavedImage = false;
-    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-    [(GPUImageGammaFilter *)filter setGamma:1.7];
-    UIImage *quickFilteredImage = [filter imageByFilteringImage:image];
-//    [self getEstimagtedValue:self.engine withImage:quickFilteredImage];
-                                 [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.takenImageView setImage:image];
-    [self setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
+    [self initDataUiWithImage:image];
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)setImageDataModel:(UIImage*)image
-       withEstimatedValue:(float)vaule
-                 withDate:(NSString*)dateString
-             withLocation:(NSString*)currentLocation{
-    self.estimateImage.image = image;
-    self.estimateImage.dirtyValue = vaule;
-    self.estimateImage.date = dateString;
-    self.estimateImage.location = currentLocation;
-    [self.estimateImage getDirtyAreaJsonString:self.engine.areaDirtyState];
 }
 
 -(IBAction)backButtonPressed{
@@ -141,14 +135,6 @@
     isShowDirtyArea = false;
     [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
 }
-
-//-(void)getEstimagtedValue:(DirtyExtractor*)engine withImage: (UIImage *)image{
-//    [engine reset];
-//    [engine importImage:image];
-//    [engine extract];
-//    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", engine.dirtyValue]];
-//    [self setImageDataModel:image withEstimatedValue:engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-//}
 
 -(void)drawView:(NSMutableArray*)dirtyState{
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
@@ -260,20 +246,7 @@
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                               if(error==nil){
-                                  [self hideDirtyArea];
-                                  isSavedImage = false;
-//                                  GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-//                                  [(GPUImageGammaFilter *)filter setGamma:2.0];
-//                                  self.takenImage = [filter imageByFilteringImage:image];
-//                                  self.takenImage = [UIImage imageNamed:@"test.png"];
-                                  self.takenImage = image;
-//                                  [self getEstimagtedValue:self.engine withImage:self.takenImage];
-                                  [self.dateLabel setText:[self getCurrentTimeString]];
-                                  [self.takenImageView setImage:self.takenImage];
-                                  
-                                  self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
-                                  [self setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
-                                  [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
+                                  [self initDataUiWithImage:image];
                                   [self dismissViewControllerAnimated:YES completion:nil];
                               }
                           }];
@@ -302,6 +275,13 @@
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    return image;
+}
+
+- (UIImage *)gpuImageFilter:(UIImage *)image{
+    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+    [(GPUImageGammaFilter *)filter setGamma:2.0];
+    image = [filter imageByFilteringImage:image];
     return image;
 }
 
