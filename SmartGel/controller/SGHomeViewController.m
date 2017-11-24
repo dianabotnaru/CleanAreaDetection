@@ -31,6 +31,7 @@
     isShowDirtyArea = false;
     isSavedImage = false;
     isShowPartArea = false;
+    self.estimateImage = [[EstimateImageModel alloc] init];
     [self initLocationManager];
     self.appDelegate.ref = [[FIRDatabase database] reference];
 }
@@ -117,6 +118,7 @@
     [self.engine importImage:image];
     [self.engine extract];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
+    [self setImageDataModel:self.takenImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
 }
 
 -(void)drawView:(int)index{
@@ -313,7 +315,6 @@
                                   [self getEstimagtedValue:self.takenImage];
                                   [self.dateLabel setText:[self getCurrentTimeString]];
                                   [self.takenImageView setImage:self.takenImage];
-                                  [self setImageDataModel:self.takenImage withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text];
                                   [self dismissViewControllerAnimated:YES completion:nil];
                               }
                           }];
@@ -327,6 +328,8 @@
         CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
         self.croppedImage = [self croppIngimageByImageName:self.takenImage toRect:rect];
         self.takenImageView.image = self.croppedImage;
+        [self getEstimagtedValue:self.croppedImage];
+
     }else{
         isShowPartArea = false;
         self.takenImageView.image = self.takenImage;
