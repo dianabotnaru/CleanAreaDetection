@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
-		8D199ED31FCC37C500704CE2 /* SGSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED21FCC37C500704CE2 /* SGSettingViewController.m */; };
+		8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */; };
 		8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5071FC510B200D6C070 /* smartgel-tests.json */; };
 		8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D24C5101FC5AC0F00D6C070 /* SGGridView.m */; };
 		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
@@ -41,8 +41,8 @@
 
 /* Begin PBXFileReference section */
 		6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.release.xcconfig"; sourceTree = "<group>"; };
-		8D199ED11FCC37C500704CE2 /* SGSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGSettingViewController.h; path = controller/SGSettingViewController.h; sourceTree = "<group>"; };
-		8D199ED21FCC37C500704CE2 /* SGSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSettingViewController.m; path = controller/SGSettingViewController.m; sourceTree = "<group>"; };
+		8D199ED41FCC4AB300704CE2 /* SGSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGSettingViewController.h; path = controller/SGSettingViewController.h; sourceTree = "<group>"; };
+		8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSettingViewController.m; path = controller/SGSettingViewController.m; sourceTree = "<group>"; };
 		8D24C5071FC510B200D6C070 /* smartgel-tests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "smartgel-tests.json"; path = "resource/smartgel-tests.json"; sourceTree = "<group>"; };
 		8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGGridView.h; sourceTree = "<group>"; };
 		8D24C5101FC5AC0F00D6C070 /* SGGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGridView.m; sourceTree = "<group>"; };
@@ -188,8 +188,8 @@
 				8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */,
 				8DDC4FD61F9445A400C92EEB /* SGBaseViewController.h */,
 				8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */,
-				8D199ED11FCC37C500704CE2 /* SGSettingViewController.h */,
-				8D199ED21FCC37C500704CE2 /* SGSettingViewController.m */,
+				8D199ED41FCC4AB300704CE2 /* SGSettingViewController.h */,
+				8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 				8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */,
 				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
 				8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */,
-				8D199ED31FCC37C500704CE2 /* SGSettingViewController.m in Sources */,
+				8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */,
 				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,

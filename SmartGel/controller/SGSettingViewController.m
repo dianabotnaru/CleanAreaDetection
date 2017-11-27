@@ -7,14 +7,50 @@
 //
 
 #import "SGSettingViewController.h"
+#import "SGConstant.h"
+
+@interface SGSettingViewController ()
+
+@end
 
 @implementation SGSettingViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *colorOffset = [defaults objectForKey:@"coloroffset"];
+    if(colorOffset == nil){
+        [self.sliderView setValue:SGDefaultColorOffset];
+    }else{
+        float sliderValue = [colorOffset floatValue];
+        [self.sliderView setValue:sliderValue];
+    }
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)sliderValueChange{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSString stringWithFormat:@"%f",_sliderView.value] forKey:@"coloroffset"];
+}
+
+-(IBAction)setDefaultValue{
+    [self.sliderView setValue:SGDefaultColorOffset];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSString stringWithFormat:@"%f",self.sliderView.value] forKey:@"coloroffset"];
+}
+
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 */
 

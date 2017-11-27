@@ -30,6 +30,7 @@ typedef struct
     
     int         m_nPinkCount;
     int         m_nBlueCount;
+    int         m_colorOffset;
 }
 @property (nonatomic, strong)   NSMutableArray  *areaDirtyState;
 
@@ -43,4 +44,6 @@ typedef struct
 
 - (void)        extract;
 -(instancetype)initWithImage:(UIImage *)image;
+-(void)setColorOffset:(int)colorOffset;
+
 @end

@@ -39,6 +39,8 @@
 
 - (void)initData{
     self.engine = [[DirtyExtractor alloc] init];
+    
+    
     isShowDirtyArea = false;
     isSavedImage = false;
     isShowPartArea = false;
@@ -51,6 +53,8 @@
     isSavedImage = false;
     self.takenImage = [self gpuImageFilter:image];
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
+    
+
     
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
@@ -75,7 +79,6 @@
         }
     }];
 }
-
 
 - (void)saveResultImage{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -109,7 +112,6 @@
 //    controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 //    [self presentViewController:controller animated:YES completion:nil];
 }
-
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
     [self initDataUiWithImage:image];

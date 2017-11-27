@@ -7,6 +7,7 @@
 //
 
 #import "DirtyExtractor.h"
+#import "SGConstant.h"
 
 #define NO_DIRTY_PIXEL          0x0
 #define PINK_DIRTY_PIXEL        0xFF00FFFF
@@ -14,7 +15,6 @@
 
 #define PIXEL_STEP              3
 #define AREA_DIRTY_RATE      0.95
-#define YELLOW_COLOR_OFFSET  6
 
 #define MAX_DIRTY_VALUE         10.0f
 
@@ -31,6 +31,13 @@
 -(instancetype)initWithImage:(UIImage *)image{
     self = [super init];
     if(self){
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *colorOffset = [defaults objectForKey:@"coloroffset"];
+        if(colorOffset == nil){
+            m_colorOffset = SGDefaultColorOffset;
+        }else{
+            m_colorOffset = [colorOffset intValue];
+        }
         [self reset];
         [self importImage:image];
         [self extract];
@@ -220,7 +227,7 @@
     BOOL isPinkSerial = pinkValue > greenValue;
     if (isPinkSerial)
     {
-        if(pinkValue>(yellowValue-YELLOW_COLOR_OFFSET))
+        if(pinkValue>(yellowValue-m_colorOffset))
             return PINK_DIRTY_PIXEL;
         else
             return NO_DIRTY_PIXEL;
@@ -239,6 +246,10 @@
     long g = (long)e1->g-0;
     long b = (long)e1->b-128;
     return sqrt((((512+rmean)*r*r)>>8) + 4*g*g + (((767-rmean)*b*b)>>8));
+}
+
+-(void)setColorOffset:(int)colorOffset{
+    m_colorOffset = colorOffset;
 }
 
 

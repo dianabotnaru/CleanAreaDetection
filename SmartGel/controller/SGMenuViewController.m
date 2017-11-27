@@ -11,11 +11,14 @@
 #import "SGHomeViewController.h"
 #import "SGHistoryViewController.h"
 #import "SGWebViewController.h"
+#import "SGSettingViewController.h"
 
 @interface SGMenuViewController ()
 @property (strong, nonatomic) SGHomeViewController *sgHomeViewController;
 @property (strong, nonatomic) SGHistoryViewController *sgHistoryViewController;
 @property (strong, nonatomic) SGWebViewController *sgWebViewController;
+@property (strong, nonatomic) SGSettingViewController *sgSettingViewController;
+
 @end
 
 @implementation SGMenuViewController
@@ -70,8 +73,8 @@
                                                          animated:YES];
             break;
         case 2:
-            self.sgHomeViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHomeViewController]
+            self.sgSettingViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGSettingViewController"];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgSettingViewController]
                                                          animated:YES];
             break;
         case 3:

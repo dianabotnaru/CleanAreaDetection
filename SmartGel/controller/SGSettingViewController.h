@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SGBaseViewController.h"
 
-@interface SGSettingViewController : SGBaseViewController
-
+@interface SGSettingViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UISlider *sliderView;
 @end
