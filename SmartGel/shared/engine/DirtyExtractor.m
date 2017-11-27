@@ -13,7 +13,9 @@
 #define BLUE_DIRTY_PIXEL        0x00FFFFFF
 
 #define PIXEL_STEP              3
-#define AREA_DIRTY_RATE      0.8
+#define AREA_DIRTY_RATE      0.95
+#define YELLOW_COLOR_OFFSET  6
+
 #define MAX_DIRTY_VALUE         10.0f
 
 #define MIN_LOCAL_AREA_PERCENT  0.01f
@@ -218,7 +220,7 @@
     BOOL isPinkSerial = pinkValue > greenValue;
     if (isPinkSerial)
     {
-        if(pinkValue>(yellowValue-12))
+        if(pinkValue>(yellowValue-YELLOW_COLOR_OFFSET))
             return PINK_DIRTY_PIXEL;
         else
             return NO_DIRTY_PIXEL;
