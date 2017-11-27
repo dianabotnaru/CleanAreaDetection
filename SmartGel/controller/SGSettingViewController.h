@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SGBaseViewController.h"
 
-@interface SGSettingViewController : UIView
+@interface SGSettingViewController : SGBaseViewController
 
 @end

@@ -22,7 +22,7 @@
     bool isShowDirtyArea;
     bool isSavedImage;
     bool isShowPartArea;
-
+    int currentIndex;
     MBProgressHUD *hud;
 }
 
@@ -46,5 +46,9 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
+
+/////Todo remove harded-code////////////////////
+@property (strong, nonatomic) IBOutlet UILabel *indexLabel;
+
 
 @end

@@ -36,13 +36,13 @@
     static NSString *cellID=@"SGMenuTableViewCell";
     SGMenuTableViewCell *cell=(SGMenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     if(indexPath.row == 0){
-        [cell setLabels:@"Estimate Clean Area"];
+        [cell setLabels:@"Home"];
     }else if(indexPath.row ==1){
         [cell setLabels:@"History"];
     }else if(indexPath.row == 2){
         [cell setLabels:@"Settings"];
     }else if(indexPath.row == 3){
-        [cell setLabels:@"About SmartGel"];
+        [cell setLabels:@"About"];
     }
     return cell;
 }

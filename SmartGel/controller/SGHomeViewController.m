@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    currentIndex = 0;
     [self initData];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self loginFireBase];
@@ -48,8 +49,8 @@
 
 -(void)initDataUiWithImage:(UIImage *)image{
     isSavedImage = false;
-    self.takenImage = image;
-    self.engine = [[DirtyExtractor alloc] initWithImage:image];
+    self.takenImage = [self gpuImageFilter:image];
+    self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
     
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
@@ -126,6 +127,8 @@
     [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
+//        [self drawView : self.engine.areaDirtyState];
+//        [self drawView:[self getDirtyState:currentIndex]];
         if(isShowPartArea)
             [self drawView :self.partyEngine.areaDirtyState];
         else
@@ -185,7 +188,7 @@
     [self.locationManager stopUpdatingLocation];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
-     {
+    {
          if(placemarks && placemarks.count > 0)
          {
              CLPlacemark *placemark= [placemarks objectAtIndex:0];
@@ -225,6 +228,7 @@
 -(IBAction)showHideCleanArea{
     if(self.estimateImage.image == nil){
         [self showAlertdialog:nil message:@"Please take a photo."];
+        return;
     }
     if(isShowDirtyArea)
         [self hideDirtyArea];
@@ -239,10 +243,11 @@
 //    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-    NSString* imageURL = [self getImageUrl];
+    NSString* imageURL = [self getImageUrl:13];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                               if(error==nil){
+                                  self.indexLabel.text = [NSString stringWithFormat:@"%d",currentIndex];
                                   [self initDataUiWithImage:image];
                                   [self dismissViewControllerAnimated:YES completion:nil];
                               }
@@ -284,7 +289,7 @@
 
 /// remove-harded code/////////////////
 
-- (NSString *) getImageUrl{
+- (NSString *) getImageUrl:(int)index{
     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
     NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     NSLog(@"\n Result = %@",stringContent);
@@ -295,7 +300,69 @@
                                                                      error:&jsonError];
     NSArray* keys=[imageArrayDict allKeys];
     NSLog(@"\n jsonError = %@",jsonError.description);
-    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:14]];
+    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:index]];
     return  [imageDict objectForKey :@"image"];
 }
+
+- (NSMutableArray *) getDirtyState:(int)index{
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
+    NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"\n Result = %@",stringContent);
+    NSData *objectData = [stringContent dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *jsonError = nil;
+    NSDictionary *imageArrayDict = [NSJSONSerialization JSONObjectWithData:objectData
+                                                                   options:NSJSONReadingMutableContainers
+                                                                     error:&jsonError];
+    NSArray* keys=[imageArrayDict allKeys];
+    NSLog(@"\n jsonError = %@",jsonError.description);
+    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:index]];
+    NSString *dirtyAreaString = [imageDict objectForKey :@"dirtyarea"];
+    return  [self getDirtyAreaArray:dirtyAreaString];
+}
+
+- (NSMutableArray *)getDirtyAreaArray :(NSString *)diryAreaString{
+    NSData* data = [diryAreaString dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
+    return values;
+}
+
+
+
+-(IBAction)plusSelectImage{
+    [self initData];
+
+    currentIndex++;
+    if(currentIndex>25)
+        currentIndex = 25;
+    NSString* imageURL = [self getImageUrl:currentIndex];
+    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                      if(error==nil){
+                                          self.indexLabel.text = [NSString stringWithFormat:@"%d",currentIndex];
+
+                                          [self initDataUiWithImage:image];
+                                          [self dismissViewControllerAnimated:YES completion:nil];
+                                      }
+                                  }];
+
+}
+
+-(IBAction)minuseSelectImage{
+    [self initData];
+
+    currentIndex--;
+    if(currentIndex<0)
+        currentIndex = 0;
+    NSString* imageURL = [self getImageUrl:currentIndex];
+    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                      if(error==nil){
+                                          self.indexLabel.text = [NSString stringWithFormat:@"%d",currentIndex];
+
+                                          [self initDataUiWithImage:image];
+                                          [self dismissViewControllerAnimated:YES completion:nil];
+                                      }
+                                  }];
+}
+
 @end
