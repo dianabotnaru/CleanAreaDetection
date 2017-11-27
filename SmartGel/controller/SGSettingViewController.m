@@ -25,6 +25,7 @@
         float sliderValue = [colorOffset floatValue];
         [self.sliderView setValue:sliderValue];
     }
+    self.valueLabel.text = [NSString stringWithFormat:@"Offset : %.0f",self.sliderView.value];
     // Do any additional setup after loading the view.
 }
 
@@ -35,13 +36,15 @@
 
 -(IBAction)sliderValueChange{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSString stringWithFormat:@"%f",_sliderView.value] forKey:@"coloroffset"];
+    [defaults setObject:[NSString stringWithFormat:@"%.0f",_sliderView.value] forKey:@"coloroffset"];
+    self.valueLabel.text = [NSString stringWithFormat:@"Offset : %.0f",self.sliderView.value];
 }
 
 -(IBAction)setDefaultValue{
     [self.sliderView setValue:SGDefaultColorOffset];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSString stringWithFormat:@"%f",self.sliderView.value] forKey:@"coloroffset"];
+    [defaults setObject:[NSString stringWithFormat:@"%.0f",self.sliderView.value] forKey:@"coloroffset"];
+    self.valueLabel.text = [NSString stringWithFormat:@"Offset : %.0f",self.sliderView.value];
 }
 
 /*

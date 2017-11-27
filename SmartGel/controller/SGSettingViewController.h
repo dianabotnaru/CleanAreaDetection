@@ -10,4 +10,6 @@
 
 @interface SGSettingViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UISlider *sliderView;
+@property (strong, nonatomic) IBOutlet UILabel *valueLabel;
+
 @end

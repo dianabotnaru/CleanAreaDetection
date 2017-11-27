@@ -20,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    currentIndex = 0;
     [self initData];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self loginFireBase];
@@ -39,8 +38,6 @@
 
 - (void)initData{
     self.engine = [[DirtyExtractor alloc] init];
-    
-    
     isShowDirtyArea = false;
     isSavedImage = false;
     isShowPartArea = false;
@@ -54,12 +51,10 @@
     self.takenImage = [self gpuImageFilter:image];
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
     
-
-    
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
     [self hideDirtyArea];
-    [self.takenImageView setImage:self.takenImage];
+    [self.takenImageView setImage:image];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
     
@@ -104,13 +99,6 @@
                     [self.appDelegate.ref updateChildValues:childUpdates];
                 }
             }];
-}
-
--(void)launchSettingParameterViewController{
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"customcamera" bundle:[NSBundle mainBundle]];
-//    SGParameterSettingViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"SGParameterSettingViewController"];
-//    controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
@@ -249,7 +237,6 @@
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                               if(error==nil){
-                                  self.indexLabel.text = [NSString stringWithFormat:@"%d",currentIndex];
                                   [self initDataUiWithImage:image];
                                   [self dismissViewControllerAnimated:YES completion:nil];
                               }
@@ -326,45 +313,6 @@
     NSData* data = [diryAreaString dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
     return values;
-}
-
-
-
--(IBAction)plusSelectImage{
-    [self initData];
-
-    currentIndex++;
-    if(currentIndex>25)
-        currentIndex = 25;
-    NSString* imageURL = [self getImageUrl:currentIndex];
-    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                      if(error==nil){
-                                          self.indexLabel.text = [NSString stringWithFormat:@"%d",currentIndex];
-
-                                          [self initDataUiWithImage:image];
-                                          [self dismissViewControllerAnimated:YES completion:nil];
-                                      }
-                                  }];
-
-}
-
--(IBAction)minuseSelectImage{
-    [self initData];
-
-    currentIndex--;
-    if(currentIndex<0)
-        currentIndex = 0;
-    NSString* imageURL = [self getImageUrl:currentIndex];
-    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                      if(error==nil){
-                                          self.indexLabel.text = [NSString stringWithFormat:@"%d",currentIndex];
-
-                                          [self initDataUiWithImage:image];
-                                          [self dismissViewControllerAnimated:YES completion:nil];
-                                      }
-                                  }];
 }
 
 @end
