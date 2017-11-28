@@ -8,6 +8,7 @@
 
 #import "DirtyExtractor.h"
 #import "SGConstant.h"
+#import "GPUImage.h"
 
 #define NO_DIRTY_PIXEL          0x0
 #define PINK_DIRTY_PIXEL        0xFF00FFFF
@@ -39,7 +40,7 @@
             m_colorOffset = [colorOffset intValue];
         }
         [self reset];
-        [self importImage:image];
+        [self importImage:[self gpuImageFilter:image]];
         [self extract];
     }
     return self;
@@ -252,5 +253,10 @@
     m_colorOffset = colorOffset;
 }
 
-
+- (UIImage *)gpuImageFilter:(UIImage *)image{
+    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
+    [(GPUImageGammaFilter *)filter setGamma:2.0];
+    image = [filter imageByFilteringImage:image];
+    return image;
+}
 @end

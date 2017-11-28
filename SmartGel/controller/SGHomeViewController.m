@@ -8,7 +8,6 @@
 
 #import "SGHomeViewController.h"
 #import "SGHistoryViewController.h"
-#import "GPUImage.h"
 #import "SGConstant.h"
 #import "AppDelegate.h"
 
@@ -48,9 +47,8 @@
 
 -(void)initDataUiWithImage:(UIImage *)image{
     isSavedImage = false;
-    self.takenImage = [self gpuImageFilter:image];
+    self.takenImage = image;
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
-    
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
     [self hideDirtyArea];
@@ -117,8 +115,6 @@
     [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-//        [self drawView : self.engine.areaDirtyState];
-//        [self drawView:[self getDirtyState:currentIndex]];
         if(isShowPartArea)
             [self drawView :self.partyEngine.areaDirtyState];
         else
@@ -244,10 +240,15 @@
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch1 = [touches anyObject];
+    CGPoint location = [touch1 locationInView:self.view];
+    if(!CGRectContainsPoint(self.gridView.frame, location))
+        return ;
+    if(self.takenImage==nil)
+        return;
     [self hideDirtyArea];
     if(!isShowPartArea){
         isShowPartArea = true;
-        UITouch *touch1 = [touches anyObject];
         CGPoint touchLocation = [touch1 locationInView:self.gridView];
         CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
         self.croppedImage = [self croppIngimageByImageName:self.takenImage toRect:rect];
@@ -266,13 +267,6 @@
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
-    return image;
-}
-
-- (UIImage *)gpuImageFilter:(UIImage *)image{
-    GPUImageGammaFilter *filter = [[GPUImageGammaFilter alloc] init];
-    [(GPUImageGammaFilter *)filter setGamma:2.0];
-    image = [filter imageByFilteringImage:image];
     return image;
 }
 
