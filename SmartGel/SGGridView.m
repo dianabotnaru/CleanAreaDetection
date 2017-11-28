@@ -7,6 +7,7 @@
 //
 
 #import "SGGridView.h"
+#import "SGConstant.h"
 
 @implementation SGGridView
 
@@ -27,7 +28,8 @@
             paintView=[[UIView alloc]initWithFrame:CGRectMake(width*i-GRID_WIDTH,0,GRID_WIDTH,self.frame.size.height)];
         else
             paintView=[[UIView alloc]initWithFrame:CGRectMake(width*i,0,GRID_WIDTH,self.frame.size.height)];
-        [paintView setBackgroundColor:[UIColor blueColor]];
+        [paintView setBackgroundColor:SGColorDarkGray];
+        [paintView setAlpha:0.5];
         [self addSubview:paintView];
     }
     for(int j = 0;j<=colCount;j++){
@@ -36,7 +38,8 @@
             paintView=[[UIView alloc]initWithFrame:CGRectMake(0,height*j-GRID_WIDTH,self.frame.size.width,GRID_WIDTH)];
         else
             paintView=[[UIView alloc]initWithFrame:CGRectMake(0,height*j,self.frame.size.width,GRID_WIDTH)];
-        [paintView setBackgroundColor:[UIColor blueColor]];
+        [paintView setBackgroundColor:SGColorDarkGray];
+        [paintView setAlpha:0.5];
         [self addSubview:paintView];
     }
 }
