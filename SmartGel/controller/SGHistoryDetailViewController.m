@@ -34,6 +34,53 @@
                                     options:SDWebImageProgressiveDownload];
 }
 
+-(IBAction)showHideDirtyArea{
+    if(isShowDirtyArea)
+        [self hideDirtyArea];
+    else
+        [self showDirtyArea];
+}
+
+-(void)showDirtyArea{
+    isShowDirtyArea = true;
+    [self.showDirtyAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self drawView :[self getDirtyAreaArray]];
+        [self.hud hideAnimated:false];
+    });
+}
+
+-(void)drawView:(NSMutableArray*)dirtyState{
+    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
+        int y = i/AREA_DIVIDE_NUMBER;
+        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
+        float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
+        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
+        if([[dirtyState objectAtIndex:i] boolValue]){
+            [paintView setBackgroundColor:[UIColor redColor]];
+            [paintView setAlpha:0.5];
+            [self.takenImageView addSubview:paintView];
+        }
+    }
+}
+
+- (NSMutableArray *)getDirtyAreaArray{
+    NSData* data = [self.selectedEstimateImageModel.dirtyArea dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
+    return values;
+}
+
+-(void)hideDirtyArea{
+    isShowDirtyArea = false;
+    [self.showDirtyAreaButton setTitle:@"Show Clean Area" forState:UIControlStateNormal];
+    [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+}
+
+
+
+
 -(IBAction)backButtonClicked:(id)sender{
     [self.navigationController popViewControllerAnimated: YES];
 }
@@ -60,15 +107,5 @@
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
