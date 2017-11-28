@@ -9,6 +9,7 @@
 #import "SGHistoryViewController.h"
 #import "UIImageView+WebCache.h"
 #import "SmartGelHistoryCollectionViewCell.h"
+#import "SGHistoryDetailViewController.h"
 
 @interface SGHistoryViewController () <SGDateTimePickerViewDelegate>
 
@@ -93,29 +94,16 @@
     [cell setEstimateData:estimateImageModel];
     cell.layer.shouldRasterize = YES;
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-
-//    if(estimateImageModel.image!=nil)
-//        cell.takenImageView.image = estimateImageModel.image;
-//    else{
-//        [cell.takenImageView sd_setImageWithURL:[NSURL URLWithString:estimateImageModel.imageUrl]
-//                               placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
-//                                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                                          if (error) {
-//                                          } else {
-//                                              cell.takenImageView.image = image;
-//                                              estimateImageModel.image = image;
-//                                              [self.historyFilterArray replaceObjectAtIndex:indexPath.row withObject:estimateImageModel];
-//                                          }
-//                                      }];
-//
-//    }
-
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
-    [self showDetailView:self.selectedImageModel];
+    SGHistoryDetailViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
+    detailViewController.selectedEstimateImageModel = self.selectedImageModel;
+    [self.navigationController pushViewController:detailViewController animated:YES];
+
+//    [self showDetailView:self.selectedImageModel];
 }
 
 -(IBAction)backButtonPressed{
@@ -158,41 +146,41 @@
     [self hideDirtyArea];
 }
 
--(IBAction)rightButtonAction{
-    if(isShowDetailView)
-        [self removeImage];
-}
+//-(IBAction)rightButtonAction{
+//    if(isShowDetailView)
+//        [self removeImage];
+//}
 
 -(IBAction)detailImageTapped{
     [self hideDetailView];
 }
 
-- (void)removeImage{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:@"Are you sure to delete this image?"
-                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSString *userID = [FIRAuth auth].currentUser.uid;
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.selectedImageModel.date]];
-        [desertRef deleteWithCompletion:^(NSError *error){
-            [self.hud hideAnimated:false];
-            if (error == nil) {
-                [[[self.appDelegate.ref child:userID] child:self.selectedImageModel.date] removeValue];
-                [self getHistoryArray];
-                [self hideDetailView];
-            } else {
-                [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
-            }
-        }];
-        
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }]];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
+//- (void)removeImage{
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+//                                                                   message:@"Are you sure to delete this image?"
+//                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
+//    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//        NSString *userID = [FIRAuth auth].currentUser.uid;
+//        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.selectedImageModel.date]];
+//        [desertRef deleteWithCompletion:^(NSError *error){
+//            [self.hud hideAnimated:false];
+//            if (error == nil) {
+//                [[[self.appDelegate.ref child:userID] child:self.selectedImageModel.date] removeValue];
+//                [self getHistoryArray];
+//                [self hideDetailView];
+//            } else {
+//                [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
+//            }
+//        }];
+//
+//    }]];
+//
+//    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//    }]];
+//
+//    [self presentViewController:alert animated:YES completion:nil];
+//}
 
 -(void)showAlertdialog:(NSString*)title message:(NSString*)message{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
