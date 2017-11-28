@@ -18,9 +18,16 @@
     [super viewDidLoad];
     isShowDirtyArea = false;
     isShowDirtyAreaUpdatedParameter = false;
+    isShowPartArea = false;
     [self initUI];
     // Do any additional setup after loading the view.
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.gridView addGridViews:5 withColCount:5];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -37,6 +44,7 @@
                                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                               if (error) {
                                               } else {
+                                                  self.selectedEstimateImageModel.image = image;
                                                   self.takenImageView.image = image;
                                                   self.engine = [[DirtyExtractor alloc] initWithImage:image];
                                               }
@@ -129,9 +137,43 @@
         }else{
             isShowDirtyAreaUpdatedParameter = false;
             [self hideDirtyArea];
-
         }
     }
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch1 = [touches anyObject];
+    CGPoint location = [touch1 locationInView:self.view];
+    if(!CGRectContainsPoint(self.gridView.frame, location))
+        return ;
+    if(self.selectedEstimateImageModel.image==nil)
+        return;
+    [self hideDirtyArea];
+    if(!isShowPartArea){
+        isShowPartArea = true;
+        CGPoint touchLocation = [touch1 locationInView:self.gridView];
+        CGRect rect = [self.gridView getContainsFrame:self.selectedEstimateImageModel.image withPoint:touchLocation withRowCount:5 withColCount:5];
+        UIImage *croppedImage = [self croppIngimageByImageName:self.selectedEstimateImageModel.image toRect:rect];
+        [self initUiWithImage:croppedImage];
+    }else{
+        isShowPartArea = false;
+        [self initUiWithImage:self.selectedEstimateImageModel.image];
+    }
+}
+
+-(void)initUiWithImage:(UIImage *)image{
+    self.takenImageView.image = image;
+//    self.engine = [[DirtyExtractor alloc] initWithImage:image];
+//    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
+}
+
+- (UIImage *)croppIngimageByImageName:(UIImage *)imageToCrop toRect:(CGRect)rect
+{
+    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    return image;
 }
 
 

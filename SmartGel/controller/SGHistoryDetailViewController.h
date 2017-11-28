@@ -19,7 +19,7 @@
 @interface SGHistoryDetailViewController : SGBaseViewController{
     bool isShowDirtyArea;
     bool isShowDirtyAreaUpdatedParameter;
-
+    bool isShowPartArea;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
