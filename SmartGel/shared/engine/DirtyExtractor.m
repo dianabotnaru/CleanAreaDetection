@@ -15,7 +15,7 @@
 #define BLUE_DIRTY_PIXEL        0x00FFFFFF
 
 #define PIXEL_STEP              3
-#define AREA_DIRTY_RATE      0.95
+#define AREA_DIRTY_RATE      0.8
 
 #define MAX_DIRTY_VALUE         10.0f
 
@@ -40,7 +40,9 @@
             m_colorOffset = [colorOffset intValue];
         }
         [self reset];
-        [self importImage:[self gpuImageFilter:image]];
+//        [self importImage:[self gpuImageFilter:image]];
+        [self importImage:image];
+
         [self extract];
     }
     return self;
