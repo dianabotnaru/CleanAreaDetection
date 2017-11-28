@@ -19,18 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    isShowDetailView = false;
-    self.trashButton.tintColor = [UIColor clearColor];
-    self.trashButton.enabled = NO;
     [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
-    self.selectedImageModel = [[EstimateImageModel alloc] init];
-    [self hideDirtyArea];
     [self initDateTimePickerView];
     fromDate = [self setMinDate];
     [self.fromLabel setText:[self getDateString:fromDate]];
     toDate = [self getLocalTime:[NSDate date]];
     [self.toLabel setText:[self getDateString:toDate]];
-    dirtyStateArray = [NSArray array];
     
 //    [self getHistoryArray];
 
@@ -41,7 +35,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.gridView addGridViews:5 withColCount:5];
 }
 
 -(void)getHistoryArray{
@@ -98,147 +91,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
+    EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
     SGHistoryDetailViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
-    detailViewController.selectedEstimateImageModel = self.selectedImageModel;
+    detailViewController.selectedEstimateImageModel = estimateImageModel;
     [self.navigationController pushViewController:detailViewController animated:YES];
-
-//    [self showDetailView:self.selectedImageModel];
-}
-
--(IBAction)backButtonPressed{
-    if(isShowDetailView)
-        [self hideDetailView];
-    else
-        [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)showDetailView :(EstimateImageModel *)estimateImageData{
-    isShowDetailView = true;
-    [UIView transitionWithView:self.detailView
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        self.detailView.hidden = NO;
-                        self.trashButton.tintColor = [UIColor whiteColor];
-                        self.trashButton.enabled = YES;
-                    }
-                    completion:NULL];
-    
-    self.locationLabel.text = estimateImageData.location;
-    self.dateLabel.text = estimateImageData.date;
-    self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.2f", estimateImageData.dirtyValue];
-    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:estimateImageData.imageUrl]
-                           placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]];
-}
-
--(void)hideDetailView{
-    isShowDetailView = false;
-    [UIView transitionWithView:self.detailView
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        self.detailView.hidden = YES;
-                        self.trashButton.tintColor = [UIColor clearColor];
-                        self.trashButton.enabled = NO;
-                    }
-                    completion:NULL];
-    [self hideDirtyArea];
-}
-
-//-(IBAction)rightButtonAction{
-//    if(isShowDetailView)
-//        [self removeImage];
-//}
-
--(IBAction)detailImageTapped{
-    [self hideDetailView];
-}
-
-//- (void)removeImage{
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-//                                                                   message:@"Are you sure to delete this image?"
-//                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-//    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//        NSString *userID = [FIRAuth auth].currentUser.uid;
-//        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.selectedImageModel.date]];
-//        [desertRef deleteWithCompletion:^(NSError *error){
-//            [self.hud hideAnimated:false];
-//            if (error == nil) {
-//                [[[self.appDelegate.ref child:userID] child:self.selectedImageModel.date] removeValue];
-//                [self getHistoryArray];
-//                [self hideDetailView];
-//            } else {
-//                [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
-//            }
-//        }];
-//
-//    }]];
-//
-//    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//    }]];
-//
-//    [self presentViewController:alert animated:YES completion:nil];
-//}
-
--(void)showAlertdialog:(NSString*)title message:(NSString*)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (NSArray *)getDirtyAreaArray{
-    NSData* data = [self.selectedImageModel.dirtyArea dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
-    return values;
-}
-
--(void)drawView:(int)index:(bool)isUpdate{
-    int y = index/AREA_DIVIDE_NUMBER;
-    int x = (AREA_DIVIDE_NUMBER-1) - index%AREA_DIVIDE_NUMBER;
-    float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
-    float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
-    UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-    if([[dirtyStateArray objectAtIndex:index] boolValue]){
-        if(isUpdate)
-            [paintView setBackgroundColor:[UIColor blueColor]];
-        else
-            [paintView setBackgroundColor:[UIColor redColor]];
-
-        [paintView setAlpha:0.7];
-        [self.takenImageView addSubview:paintView];
-    }
-}
-
--(IBAction)showHideDirtyArea{
-    if(isShowDirtyArea)
-        [self hideDirtyArea];
-    else
-        [self showDirtyArea];
-}
-
--(void)showDirtyArea{
-    isShowDirtyArea = true;
-    [self.showDirtyAreaButton setBackgroundColor:[UIColor colorWithRed:0.0f/255.0f green:128.0f/255.0f blue:210.0f/255.0f alpha:1.0]];
-    [self.showDirtyAreaButton setTitle:@"H" forState:UIControlStateNormal];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        dirtyStateArray = [NSArray array];
-        dirtyStateArray = [self getDirtyAreaArray];
-        for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++)
-            [self drawView:i:false];
-        [self.hud hideAnimated:false];
-    });
-}
-
--(void)hideDirtyArea{
-    isShowDirtyArea = false;
-    [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    [self.showDirtyAreaButton setBackgroundColor:[UIColor colorWithRed:185.0f/255.0f green:74.0f/255.0f blue:72.0f/255.0f alpha:1.0]];
-    [self.showDirtyAreaButton setTitle:@"S" forState:UIControlStateNormal];
 }
 
 -(IBAction)fromButtonTapped{
@@ -256,7 +112,6 @@
 }
 
 /////////////////////////// Add DateTimePicker View/////////////////////////////////////////////////////////////
-
 - (void)initDateTimePickerView{
     sgDateTimePickerView = [[[NSBundle mainBundle] loadNibNamed:@"SGDateTimePickerView" owner:nil options:nil] lastObject];
     sgDateTimePickerView.frame = CGRectMake(5, [[[UIApplication sharedApplication] delegate] window].frame.size.height-305, [[[UIApplication sharedApplication] delegate] window].frame.size.width-10,300);
@@ -360,36 +215,6 @@
     }
     self.historyFilterArray = self.historyArray;
     [self.smartGelHistoryCollectionView reloadData];
-}
-
-- (IBAction)showDirtyAreaWithUpdatedModule{
-
-    if(self.takenImageView.image){
-        [self initEngine:self.takenImageView.image];
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.engine.areaDirtyState options:NSJSONWritingPrettyPrinted error:nil];
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        self.selectedImageModel.dirtyArea = jsonString;
-        
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            dirtyStateArray = [NSArray array];
-            dirtyStateArray = [self getDirtyAreaArray];
-            for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++)
-                [self drawView:i:true];
-            [self.hud hideAnimated:false];
-        });
-    }
-}
-
-- (IBAction)hideDirtAreaWithUpdatedModule{
-    [self hideDirtyArea];
-}
-
--(void)initEngine:(UIImage *)image{
-    self.engine = [[DirtyExtractor alloc] init];
-    [self.engine reset];
-    [self.engine importImage:image];
-    [self.engine extract];
 }
 
 

@@ -68,7 +68,7 @@
 
 - (NSMutableArray *)getDirtyAreaArray{
     NSData* data = [self.selectedEstimateImageModel.dirtyArea dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
+    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     return values;
 }
 
@@ -77,9 +77,6 @@
     [self.showDirtyAreaButton setTitle:@"Show Clean Area" forState:UIControlStateNormal];
     [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
 }
-
-
-
 
 -(IBAction)backButtonClicked:(id)sender{
     [self.navigationController popViewControllerAnimated: YES];
