@@ -28,7 +28,6 @@
     [self.gridView addGridViews:5 withColCount:5];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -49,7 +48,6 @@
                                                   self.engine = [[DirtyExtractor alloc] initWithImage:image];
                                               }
                                           }];
-
 }
 
 -(IBAction)showHideDirtyArea{
@@ -64,7 +62,10 @@
     [self.showDirtyAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self drawView :[self getDirtyAreaArray]];
+        if(!isShowPartArea)
+            [self drawView :[self getDirtyAreaArray]];
+        else
+            [self drawView :self.partyEngine.areaDirtyState];
         [self.hud hideAnimated:false];
     });
 }
@@ -154,18 +155,15 @@
         CGPoint touchLocation = [touch1 locationInView:self.gridView];
         CGRect rect = [self.gridView getContainsFrame:self.selectedEstimateImageModel.image withPoint:touchLocation withRowCount:5 withColCount:5];
         UIImage *croppedImage = [self croppIngimageByImageName:self.selectedEstimateImageModel.image toRect:rect];
-        [self initUiWithImage:croppedImage];
+        self.takenImageView.image = croppedImage;
+        self.partyEngine = [[DirtyExtractor alloc] initWithImage:croppedImage withColoroffset:self.selectedEstimateImageModel.coloroffset];
+        self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.partyEngine.dirtyValue];
     }else{
         isShowPartArea = false;
-        [self initUiWithImage:self.selectedEstimateImageModel.image];
+        self.takenImageView.image = self.selectedEstimateImageModel.image;
     }
 }
 
--(void)initUiWithImage:(UIImage *)image{
-    self.takenImageView.image = image;
-//    self.engine = [[DirtyExtractor alloc] initWithImage:image];
-//    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
-}
 
 - (UIImage *)croppIngimageByImageName:(UIImage *)imageToCrop toRect:(CGRect)rect
 {
@@ -175,6 +173,4 @@
     UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
     return image;
 }
-
-
 @end

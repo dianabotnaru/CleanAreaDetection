@@ -45,6 +45,6 @@ typedef struct
 
 - (void)        extract;
 -(instancetype)initWithImage:(UIImage *)image;
--(void)setColorOffset:(int)colorOffset;
+-(instancetype)initWithImage:(UIImage *)image withColoroffset:(int)coloroffset;
 
 @end

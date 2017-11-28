@@ -33,5 +33,6 @@
 @property (strong, nonatomic) EstimateImageModel *selectedEstimateImageModel;
 
 @property (nonatomic, strong) DirtyExtractor *engine;
+@property (nonatomic, strong) DirtyExtractor *partyEngine;
 
 @end

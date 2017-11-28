@@ -42,11 +42,23 @@
         [self reset];
 //        [self importImage:[self gpuImageFilter:image]];
         [self importImage:image];
-
         [self extract];
     }
     return self;
 }
+
+-(instancetype)initWithImage:(UIImage *)image withColoroffset:(int)coloroffset{
+    self = [super init];
+    if(self){
+        self.m_colorOffset = coloroffset;
+        [self reset];
+        //        [self importImage:[self gpuImageFilter:image]];
+        [self importImage:image];
+        [self extract];
+    }
+    return self;
+}
+
 
 - (void) dealloc
 {
