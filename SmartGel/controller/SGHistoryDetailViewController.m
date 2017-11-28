@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isShowDirtyArea = false;
+    isShowDirtyAreaUpdatedParameter = false;
     [self initUI];
     // Do any additional setup after loading the view.
 }
@@ -30,8 +32,16 @@
     self.dateLabel.text = self.selectedEstimateImageModel.date;
     self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.selectedEstimateImageModel.dirtyValue];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedEstimateImageModel.imageUrl]
-                           placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
-                                    options:SDWebImageProgressiveDownload];
+                                    placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
+                                    options:SDWebImageProgressiveDownload
+                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                              if (error) {
+                                              } else {
+                                                  self.takenImageView.image = image;
+                                                  self.engine = [[DirtyExtractor alloc] initWithImage:image];
+                                              }
+                                          }];
+
 }
 
 -(IBAction)showHideDirtyArea{
@@ -104,5 +114,25 @@
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+////harded code to test/////////////////////////////////////
+-(IBAction)showDetailViewWithUpdatedParameter{
+    if(self.takenImageView.image!=nil){
+        if(!isShowDirtyAreaUpdatedParameter){
+            isShowDirtyAreaUpdatedParameter = true;
+            [self.showDirtyAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
+            self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self drawView :self.engine.areaDirtyState];
+                [self.hud hideAnimated:false];
+            });
+        }else{
+            isShowDirtyAreaUpdatedParameter = false;
+            [self hideDirtyArea];
+
+        }
+    }
+}
+
 
 @end

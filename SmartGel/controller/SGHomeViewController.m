@@ -92,7 +92,9 @@
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"date": self.estimateImage.date,
                                            @"location": self.estimateImage.location,
-                                           @"dirtyarea": self.estimateImage.dirtyArea};
+                                           @"dirtyarea": self.estimateImage.dirtyArea,
+                                           @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
+                                           };
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
                     [self.appDelegate.ref updateChildValues:childUpdates];
                 }
@@ -223,18 +225,18 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-//    NSString* imageURL = [self getImageUrl:15];
-//    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-//                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                              if(error==nil){
-//                                  [self initDataUiWithImage:image];
-//                              }
-//                          }];
+    NSString* imageURL = [self getImageUrl:15];
+    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                              if(error==nil){
+                                  [self initDataUiWithImage:image];
+                              }
+                          }];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

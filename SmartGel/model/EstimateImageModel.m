@@ -18,9 +18,24 @@
         self.location = [dict objectForKey :@"location"];
         self.imageUrl = [dict objectForKey :@"image"];
         self.dirtyArea = [dict objectForKey :@"dirtyarea"];
+        self.coloroffset = [[dict objectForKey :@"coloroffset"] intValue];
     }
     return self;
 }
+
+-(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot{
+    self = [super init];
+    if(self){
+        self.dirtyValue = [snapshot.value[@"value"] floatValue];
+        self.date = snapshot.value[@"date"];
+        self.location = snapshot.value[@"location"];
+        self.imageUrl = snapshot.value[@"image"];
+        self.dirtyArea = snapshot.value[@"dirtyarea"];
+        self.coloroffset = [snapshot.value[@"coloroffset"] intValue];
+    }
+    return self;
+}
+
 
 - (void)setImageDataModel:(UIImage*)image
        withEstimatedValue:(float)vaule

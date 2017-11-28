@@ -18,6 +18,8 @@
 
 @interface SGHistoryDetailViewController : SGBaseViewController{
     bool isShowDirtyArea;
+    bool isShowDirtyAreaUpdatedParameter;
+
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
@@ -29,5 +31,7 @@
 
 @property (strong, nonatomic) MBProgressHUD *hud;
 @property (strong, nonatomic) EstimateImageModel *selectedEstimateImageModel;
+
+@property (nonatomic, strong) DirtyExtractor *engine;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Firebase.h"
 
 @interface EstimateImageModel : NSObject
 
@@ -18,9 +19,13 @@
 @property (strong, nonatomic) NSString *date;
 @property (strong, nonatomic) NSString *dirtyArea;
 
+@property (assign) int coloroffset;
+
 @property (nonatomic,strong) NSDictionary *data;
 
 -(instancetype)initWithDict:(NSDictionary *)dict;
+-(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;
+
 - (void)setImageDataModel:(UIImage*)image
        withEstimatedValue:(float)vaule
                  withDate:(NSString*)dateString

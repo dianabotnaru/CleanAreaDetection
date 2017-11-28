@@ -243,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1073" y="124"/>
+            <point key="canvasLocation" x="1072.8" y="123.68815592203899"/>
         </scene>
         <!--Work History-->
         <scene sceneID="mXt-QA-9Vz">
@@ -271,6 +271,20 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="483"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVd-pN-wme">
+                                                <rect key="frame" x="147" y="427" width="36" height="36"/>
+                                                <color key="backgroundColor" red="0.2790815814" green="0.36459518870000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="FbE-Q1-YFc"/>
+                                                    <constraint firstAttribute="width" constant="36" id="abW-Rh-LEp"/>
+                                                </constraints>
+                                                <state key="normal" title="U">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="showDetailViewWithUpdatedParameter" destination="GMM-Lk-rxl" eventType="touchUpInside" id="3GI-U0-Avi"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UoU-fQ-oIo">
                                                 <rect key="frame" x="199" y="427" width="160" height="36"/>
                                                 <color key="backgroundColor" red="0.94901960780000005" green="0.47843137250000001" blue="0.20784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -296,7 +310,9 @@
                                             <constraint firstAttribute="trailing" secondItem="UoU-fQ-oIo" secondAttribute="trailing" constant="16" id="OuO-qI-yXw"/>
                                             <constraint firstItem="ZWk-gu-8EF" firstAttribute="leading" secondItem="9P0-uT-QpI" secondAttribute="leading" id="Qdi-7E-VQa"/>
                                             <constraint firstAttribute="bottom" secondItem="ZWk-gu-8EF" secondAttribute="bottom" id="X3b-tL-Zsw"/>
+                                            <constraint firstItem="UoU-fQ-oIo" firstAttribute="leading" secondItem="AVd-pN-wme" secondAttribute="trailing" constant="16" id="czA-Rm-gHn"/>
                                             <constraint firstItem="1i3-CK-I30" firstAttribute="top" secondItem="9P0-uT-QpI" secondAttribute="top" id="jnu-YE-K1i"/>
+                                            <constraint firstItem="AVd-pN-wme" firstAttribute="bottom" secondItem="UoU-fQ-oIo" secondAttribute="bottom" id="lFs-vF-U34"/>
                                             <constraint firstAttribute="trailing" secondItem="1i3-CK-I30" secondAttribute="trailing" id="ocr-mm-bnO"/>
                                             <constraint firstItem="UoU-fQ-oIo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9P0-uT-QpI" secondAttribute="leading" constant="20" symbolic="YES" id="rDV-ao-yU4"/>
                                         </constraints>

@@ -26,9 +26,9 @@
     toDate = [self getLocalTime:[NSDate date]];
     [self.toLabel setText:[self getDateString:toDate]];
     
-//    [self getHistoryArray];
+    [self getHistoryArray];
 
-    [self getTestResults];
+//    [self getTestResults];
 
     // Do any additional setup after loading the view.
 }
@@ -45,12 +45,7 @@
     [[self.appDelegate.ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         [self.hud hideAnimated:YES];
         for(snapshot in snapshot.children){
-            EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] init];
-            estimageImageModel.dirtyValue = [snapshot.value[@"value"] floatValue];
-            estimageImageModel.date = snapshot.value[@"date"];
-            estimageImageModel.location = snapshot.value[@"location"];
-            estimageImageModel.imageUrl = snapshot.value[@"image"];
-            estimageImageModel.dirtyArea = snapshot.value[@"dirtyarea"];
+            EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
             [self.historyArray addObject:estimageImageModel];
         }
         self.historyFilterArray = self.historyArray;
