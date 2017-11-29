@@ -123,6 +123,9 @@
             } else {
                 [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
             }
+            if(self.delegate!=nil){
+                [self.delegate onDeletedImage];
+            }
             [self backButtonClicked:nil];
         }];
     }]];

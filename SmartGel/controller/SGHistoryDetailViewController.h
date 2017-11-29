@@ -16,11 +16,18 @@
 #import "SGConstant.h"
 #import "DirtyExtractor.h"
 
+@protocol SGHistoryDetailViewControllerDelegate <NSObject>
+@required
+- (void)onDeletedImage;
+@end
+
 @interface SGHistoryDetailViewController : SGBaseViewController{
     bool isShowDirtyArea;
     bool isShowDirtyAreaUpdatedParameter;
     bool isShowPartArea;
 }
+
+@property (weak, nonatomic) id<SGHistoryDetailViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
 @property (strong, nonatomic) IBOutlet SGGridView *gridView;

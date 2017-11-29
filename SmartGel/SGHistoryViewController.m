@@ -11,7 +11,7 @@
 #import "SmartGelHistoryCollectionViewCell.h"
 #import "SGHistoryDetailViewController.h"
 
-@interface SGHistoryViewController () <SGDateTimePickerViewDelegate>
+@interface SGHistoryViewController () <SGDateTimePickerViewDelegate,SGHistoryDetailViewControllerDelegate>
 
 @end
 
@@ -34,6 +34,10 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 
+}
+
+- (void)onDeletedImage{
+    [self getHistoryArray];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -92,6 +96,7 @@
     EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
     SGHistoryDetailViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
     detailViewController.selectedEstimateImageModel = estimateImageModel;
+    detailViewController.delegate = self;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
