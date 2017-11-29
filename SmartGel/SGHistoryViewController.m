@@ -25,12 +25,15 @@
     [self.fromLabel setText:[self getDateString:fromDate]];
     toDate = [self getLocalTime:[NSDate date]];
     [self.toLabel setText:[self getDateString:toDate]];
-    
-    [self getHistoryArray];
-
-//    [self getTestResults];
-
     // Do any additional setup after loading the view.
+    [self getHistoryArray];
+    //    [self getTestResults];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated{

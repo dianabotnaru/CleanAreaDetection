@@ -19,8 +19,11 @@
     isShowDirtyArea = false;
     isShowDirtyAreaUpdatedParameter = false;
     isShowPartArea = false;
-    [self initUI];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self initUI];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -37,6 +40,7 @@
     self.locationLabel.text = self.selectedEstimateImageModel.location;
     self.dateLabel.text = self.selectedEstimateImageModel.date;
     self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.selectedEstimateImageModel.dirtyValue];
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedEstimateImageModel.imageUrl]
                                     placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
                                     options:SDWebImageProgressiveDownload
@@ -45,7 +49,10 @@
                                               } else {
                                                   self.selectedEstimateImageModel.image = image;
                                                   self.takenImageView.image = image;
-                                                  self.engine = [[DirtyExtractor alloc] initWithImage:image];
+                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                      self.engine = [[DirtyExtractor alloc] initWithImage:image];
+                                                      [self.hud hideAnimated:YES];
+                                                  });
                                               }
                                           }];
 }
