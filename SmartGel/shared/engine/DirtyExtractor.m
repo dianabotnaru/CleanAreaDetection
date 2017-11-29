@@ -9,6 +9,7 @@
 #import "DirtyExtractor.h"
 #import "SGConstant.h"
 #import "GPUImage.h"
+#include <math.h>
 
 #define NO_DIRTY_PIXEL          0x0
 #define PINK_DIRTY_PIXEL        0xFF00FFFF
@@ -20,6 +21,9 @@
 #define MAX_DIRTY_VALUE         10.0f
 
 #define MIN_LOCAL_AREA_PERCENT  0.01f
+
+#define PINK_COLOR_OFFSET  25.0f
+
 
 @implementation DirtyExtractor
 
@@ -233,12 +237,11 @@
     UInt8 minValue = 0x4F;
     if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
         return NO_DIRTY_PIXEL;
-    
+
     int yellowValue = rgba->r + rgba->g;
     int greenValue = rgba->g + rgba->b;
     int pinkValue = rgba->r + rgba->b;
-    
-    
+
     BOOL isPinkSerial = pinkValue > greenValue;
     if (isPinkSerial)
     {
@@ -246,6 +249,12 @@
             return PINK_DIRTY_PIXEL;
         else
             return NO_DIRTY_PIXEL;
+//        float distance = [self getDistanceWithPinkColor:rgba];
+//        if(distance<PINK_COLOR_OFFSET)
+//            return PINK_DIRTY_PIXEL;
+//        else
+//            return NO_DIRTY_PIXEL;
+
     }
     else //means green serial
     {
@@ -253,14 +262,115 @@
     }
 }
 
+- (XYZ)getXYZfromRGB : (RGBA *)rgbColor{
+    
+    float red = (float)rgbColor->r/255;
+    float green = (float)rgbColor->g/255;
+    float blue = (float)rgbColor->b/255;
+    
+    // adjusting values
+    if(red>0.04045){
+        red = (red+0.055)/1.055;
+        red = pow(red,2.4);
+    }
+    else{
+        red = red/12.92;
+    }
+    if(green>0.04045){
+        green = (green+0.055)/1.055;
+        green = pow(green,2.4);
+    }
+    else{
+        green = green/12.92;
+    }
+    if(blue>0.04045){
+        blue = (blue+0.055)/1.055;
+        blue = pow(blue,2.4);
+    }
+    else{
+        blue = blue/12.92;
+    }
 
-- (double) ColourDistance:(RGBA*) e1
-{
-    long rmean = ( (long)e1->r + (long)255 ) / 2;
-    long r = (long)e1->r - 255;
-    long g = (long)e1->g-0;
-    long b = (long)e1->b-128;
-    return sqrt((((512+rmean)*r*r)>>8) + 4*g*g + (((767-rmean)*b*b)>>8));
+    red *= 100;
+    green *= 100;
+    blue *= 100;
+    
+    XYZ xyzColor;
+    // applying the matrix
+    xyzColor.x = red * 0.4124 + green * 0.3576 + blue * 0.1805;
+    xyzColor.y = red * 0.2126 + green * 0.7152 + blue * 0.0722;
+    xyzColor.z = red * 0.0193 + green * 0.1192 + blue * 0.9505;
+    return xyzColor;
+}
+
+-(LAB)getLABfromXYZ: (XYZ)xyzColor{
+    float $_x = xyzColor.x/95.047;
+    float $_y = xyzColor.y/100;
+    float $_z = xyzColor.z/108.883;
+    
+    // adjusting the values
+    if($_x>0.008856){
+        $_x = pow($_x,(float)1/3);
+    }
+    else{
+        $_x = 7.787*$_x + 16/116;
+    }
+    if($_y>0.008856){
+        $_y = pow($_y,(float)1/3);
+    }
+    else{
+        $_y = (7.787*$_y) + (16/116);
+    }
+    if($_z>0.008856){
+        $_z = pow($_z,(float)1/3);
+    }
+    else{
+        $_z = 7.787*$_z + 16/116;
+    }
+    LAB labColor;
+    labColor.l= 116*$_y -16;
+    labColor.a= 500*($_x-$_y);
+    labColor.b= 200*($_y-$_z);
+    return labColor;
+}
+
+-(float)getDistanceWithPinkColor:(RGBA *)rgba{
+    RGBA pinkRgb;
+    
+    pinkRgb.r = 255;
+    pinkRgb.g = 105;
+    pinkRgb.b = 180;
+    
+    XYZ xyzPink = [self getXYZfromRGB:&pinkRgb];
+    XYZ xyz1 = [self getXYZfromRGB:rgba];
+    LAB labPink = [self getLABfromXYZ:xyzPink];
+    LAB lab1 = [self getLABfromXYZ:xyz1];
+    
+    float l = labPink.l - lab1.l;
+    float a = labPink.a - lab1.a;
+    float b = labPink.b - lab1.b;
+
+//    float distance = sqrt((l*l)+(a*a)+(b*b));
+    float distance = [self getDeltaE:labPink:lab1];
+    return distance;
+}
+
+-(float)getDeltaE:(LAB)labl:(LAB)lab2{
+    float deltaL = labl.l - lab2.l;
+    float deltaA = labl.a - lab2.a;
+    float deltaB = labl.b - lab2.b;
+    float c1 = sqrt(labl.a * labl.a + labl.b * labl.b);
+    float c2 = sqrt(lab2.a * lab2.a + lab2.b * lab2.b);
+    float deltaC = c1 - c2;
+    float deltaH = deltaA * deltaA + deltaB * deltaB - deltaC * deltaC;
+    deltaH = deltaH < 0 ? 0 : sqrt(deltaH);
+    float sc = 1.0 + 0.045 * c1;
+    float sh = 1.0 + 0.015 * c1;
+    float deltaLKlsl = (float)deltaL / (1.0);
+    float deltaCkcsc = (float)deltaC / (sc);
+    float deltaHkhsh = (float)deltaH / (sh);
+    float i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
+    return i < 0 ? 0 : sqrt(i);
 }
 
 - (UIImage *)gpuImageFilter:(UIImage *)image{

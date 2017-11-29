@@ -18,6 +18,20 @@ typedef struct
     UInt8 r;
 }RGBA;
 
+typedef struct
+{
+    float x;
+    float y;
+    float z;
+}XYZ;
+
+typedef struct
+{
+    float l;
+    float a;
+    float b;
+}LAB;
+
 @interface DirtyExtractor : NSObject
 {
     UInt32 *    m_pInBuffer;
