@@ -34,7 +34,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2m-nP-ZNq">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="483"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0ne-iK-goy">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0ne-iK-goy">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="483"/>
                                                 <color key="backgroundColor" red="0.1960784314" green="0.2274509804" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
@@ -263,7 +263,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9P0-uT-QpI">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="483"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZWk-gu-8EF">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZWk-gu-8EF">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="483"/>
                                                 <color key="backgroundColor" red="0.1960784314" green="0.2274509804" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
