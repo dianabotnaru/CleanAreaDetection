@@ -52,6 +52,9 @@
     int width = takenImage.size.height/rowCount;
     int height = takenImage.size.width/colCount;
     
+//    int width = takenImage.size.width/rowCount;
+//    int height = takenImage.size.height/colCount;
+
     int frameWidth = self.frame.size.width/rowCount;
     int frameHeight = self.frame.size.height/colCount;
     
@@ -60,6 +63,7 @@
         rect = CGRectMake(frameWidth*i,frameHeight*j,frameWidth,frameHeight);
         if(CGRectContainsPoint(rect, point)){
             return CGRectMake(width*j,height*(colCount-i-1),width,height);
+//            return CGRectMake(width*i,height*j,width,height);
         }
     }
     return rect;

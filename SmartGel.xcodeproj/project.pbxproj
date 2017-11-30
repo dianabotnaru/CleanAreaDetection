@@ -14,6 +14,7 @@
 		8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D24C5101FC5AC0F00D6C070 /* SGGridView.m */; };
 		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
+		8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
 		8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C41F7CA4790025B804 /* QuartzCore.framework */; };
@@ -51,6 +52,8 @@
 		8D24C5101FC5AC0F00D6C070 /* SGGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGridView.m; sourceTree = "<group>"; };
 		8D24C5121FC5E3D600D6C070 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPictureEditViewController.h; path = controller/SGPictureEditViewController.h; sourceTree = "<group>"; };
+		8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGPictureEditViewController.m; path = controller/SGPictureEditViewController.m; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
 		8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EstimateImageModel.m; path = model/EstimateImageModel.m; sourceTree = "<group>"; };
 		8D80B2C21F7CA4700025B804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -195,6 +198,8 @@
 				8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */,
 				8D199ED71FCD56E200704CE2 /* SGHistoryDetailViewController.h */,
 				8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */,
+				8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */,
+				8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -415,6 +420,7 @@
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
+				8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
 				8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */,
 				8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */,

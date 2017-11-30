@@ -10,6 +10,7 @@
 #import "SGHistoryViewController.h"
 #import "SGConstant.h"
 #import "AppDelegate.h"
+#import "SGPictureEditViewController.h"
 
 @interface SGHomeViewController ()
 
@@ -27,7 +28,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.gridView addGridViews:5 withColCount:5];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,10 +53,46 @@
         [self.notificationLabel setHidden:YES];
     [self hideDirtyArea];
     [self.takenImageView setImage:image];
+    [self drawGridView:image];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
     
     [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withDirtyArray:self.engine.areaDirtyState];
+}
+
+-(void)drawGridView:(UIImage *)image{
+    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    
+    self.gridView = [[SGGridView alloc] initWithFrame:[self calculateClientRectOfImageInUIImageView:self.takenImageView]];
+    [self.gridView addGridViews:5 withColCount:5];
+    [self.gridContentView addSubview:self.gridView];
+}
+
+-(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView *)imgView
+{
+    CGSize imgViewSize=imgView.frame.size;                  // Size of UIImageView
+    CGSize imgSize=imgView.image.size;                      // Size of the image, currently displayed
+    
+    CGFloat scaleW = imgViewSize.width / imgSize.width;
+    CGFloat scaleH = imgViewSize.height / imgSize.height;
+    CGFloat aspect=fmin(scaleW, scaleH);
+    
+    CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
+    
+    // Note: the above is the same as :
+    // CGRect imageRect=CGRectMake(0,0,imgSize.width*=aspect,imgSize.height*=aspect) I just like this notation better
+    
+    // Center image
+    
+    imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
+    imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
+    
+    // Add imageView offset
+    
+    imageRect.origin.x+=imgView.frame.origin.x;
+    imageRect.origin.y+=imgView.frame.origin.y;
+    
+    return imageRect;
 }
 
 -(void)loginFireBase{
@@ -195,21 +231,22 @@
     if(self.estimateImage.image == nil){
         [self showAlertdialog:nil message:@"Please take a photo."];
     }else{
-        if(isSavedImage)
-            [self showAlertdialog:nil message:@"You have already saved this Image."];
-        else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
-                                                                           message:@"Are you sure want to upload image?"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                [self saveResultImage];
-            }]];
-            
-            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            }]];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-        }
+        [self launchPictureEditViewController];
+//        if(isSavedImage)
+//            [self showAlertdialog:nil message:@"You have already saved this Image."];
+//        else{
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
+//                                                                           message:@"Are you sure want to upload image?"
+//                                                                    preferredStyle:UIAlertControllerStyleAlert];
+//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//                [self saveResultImage];
+//            }]];
+//
+//            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+//            }]];
+//
+//            [self presentViewController:alert animated:YES completion:nil];
+//        }
     }
 }
 
@@ -230,7 +267,7 @@
 //    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-    NSString* imageURL = [self getImageUrl:15];
+    NSString* imageURL = [self getImageUrl:3];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                               if(error==nil){
@@ -270,7 +307,12 @@
     return image;
 }
 
-/// remove-harded code/////////////////
+-(void)launchPictureEditViewController{
+    SGPictureEditViewController *pictureViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGPictureEditViewController"];
+    [self.navigationController pushViewController:pictureViewController animated:YES];
+}
+
+/////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 
 - (NSString *) getImageUrl:(int)index{
     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
