@@ -16,12 +16,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.takenImageView.image = self.takenImage;
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)backButtonClicked:(id)sender{
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 /*

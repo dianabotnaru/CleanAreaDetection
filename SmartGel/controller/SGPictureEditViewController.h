@@ -10,4 +10,7 @@
 
 @interface SGPictureEditViewController : UIViewController
 
+@property (strong, nonatomic) UIImage *takenImage;
+@property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
+
 @end

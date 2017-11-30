@@ -309,6 +309,7 @@
 
 -(void)launchPictureEditViewController{
     SGPictureEditViewController *pictureViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGPictureEditViewController"];
+    pictureViewController.takenImage = self.takenImage;
     [self.navigationController pushViewController:pictureViewController animated:YES];
 }
 
