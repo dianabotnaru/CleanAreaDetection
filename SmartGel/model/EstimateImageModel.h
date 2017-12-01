@@ -17,7 +17,7 @@
 @property (assign) float dirtyValue;
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *date;
-@property (strong, nonatomic) NSString *dirtyArea;
+@property (strong, nonatomic) NSString *cleanArea;
 
 @property (assign) int coloroffset;
 
@@ -30,7 +30,7 @@
        withEstimatedValue:(float)vaule
                  withDate:(NSString*)dateString
              withLocation:(NSString*)currentLocation
-           withDirtyArray:(NSMutableArray *)array;
-- (NSArray *) getDirtyAreaArray;
+           withCleanArray:(NSMutableArray *)array;
+- (NSArray *) getCleanAreaArray;
 
 @end

@@ -93,7 +93,7 @@
 }
 
 - (NSMutableArray *)getDirtyAreaArray{
-    NSData* data = [self.selectedEstimateImageModel.dirtyArea dataUsingEncoding:NSUTF8StringEncoding];
+    NSData* data = [self.selectedEstimateImageModel.cleanArea dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     return values;
 }

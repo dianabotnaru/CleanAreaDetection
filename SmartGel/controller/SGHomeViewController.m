@@ -57,7 +57,7 @@
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
     
-    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withDirtyArray:self.engine.areaDirtyState];
+    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaDirtyState];
 }
 
 -(void)drawGridView:(UIImage *)image{
@@ -128,7 +128,7 @@
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"date": self.estimateImage.date,
                                            @"location": self.estimateImage.location,
-                                           @"dirtyarea": self.estimateImage.dirtyArea,
+                                           @"cleanarea": self.estimateImage.cleanArea,
                                            @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
                                            };
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
