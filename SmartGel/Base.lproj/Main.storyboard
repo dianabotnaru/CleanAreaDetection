@@ -264,7 +264,7 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nB2-2O-f47" customClass="ACEDrawingView">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="872"/>
                                 <subviews>
-                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="FrF-UD-1bz">
+                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="FrF-UD-1bz">
                                         <rect key="frame" x="362" y="827" width="388" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="FEN-Vc-Rws"/>

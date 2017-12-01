@@ -18,6 +18,7 @@
     [super viewDidLoad];
     [self.takenImageView setImage:self.takenImage];
     self.aceDrawingView.delegate = self;
+    self.aceDrawingView.lineAlpha = 0.5;
     // Do any additional setup after loading the view.
 }
 
