@@ -19,6 +19,7 @@ alpha:1.0]
 #define SGColorBlack UIColorFromRGB(0x262D36)
 #define SGColorDarkGray UIColorFromRGB(0x323A45)
 #define SGDefaultColorOffset 5
+#define SGGridCount 5
 
 #define _SGAppDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 

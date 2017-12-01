@@ -18,6 +18,9 @@
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *date;
 @property (strong, nonatomic) NSString *cleanArea;
+@property (strong, nonatomic) NSString *dirtyArea;
+@property (strong, nonatomic) NSString *nonGelArea;
+
 
 @property (assign) int coloroffset;
 

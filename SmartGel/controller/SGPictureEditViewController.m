@@ -34,7 +34,7 @@
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     
     self.gridView = [[SGGridView alloc] initWithFrame:[self calculateClientRectOfImageInUIImageView:self.takenImageView]];
-    [self.gridView addGridViews:5 withColCount:5];
+    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
 }
 
@@ -64,6 +64,8 @@
     
     return imageRect;
 }
+
+
 
 
 
