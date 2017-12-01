@@ -173,11 +173,22 @@
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
-        float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
-        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-        if([[dirtyState objectAtIndex:i] boolValue]){
+        
+        CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
+        
+//        float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
+//        float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
+        
+        float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
+        float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
+
+        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
+        if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
+            [paintView setAlpha:0.5];
+            [self.takenImageView addSubview:paintView];
+        }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
+            [paintView setBackgroundColor:[UIColor blueColor]];
             [paintView setAlpha:0.5];
             [self.takenImageView addSubview:paintView];
         }

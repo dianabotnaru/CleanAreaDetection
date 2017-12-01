@@ -29,6 +29,13 @@
     [self.navigationController popViewControllerAnimated: YES];
 }
 
+-(IBAction)widthButtonClicked{
+    if(self.widthSlider.isHidden)
+        [self.widthSlider setHidden:NO];
+    else
+        [self.widthSlider setHidden:YES];
+}
+
 /*
 #pragma mark - Navigation
 
