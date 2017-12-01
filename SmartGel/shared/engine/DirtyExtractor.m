@@ -71,8 +71,7 @@
 
 - (void) reset
 {
-    _dirtyValue = 0.0f;
-    _localDirtyValue = 0.0f;
+    _cleanValue = 0.0f;
     
     m_imageWidth = 0;
     m_imageHeight = 0;
@@ -80,7 +79,7 @@
     m_nPinkCount = 0;
     m_nBlueCount = 0;
     
-    _areaDirtyState = [[NSMutableArray alloc] init];
+    _areaCleanState = [[NSMutableArray alloc] init];
     
     if (m_pInBuffer)
     {
@@ -158,11 +157,11 @@
                 m_pOutBuffer[index] = PINK_DIRTY_PIXEL;
             }
         }
-        [_areaDirtyState addObject:@(YES)];
+        [_areaCleanState addObject:@(YES)];
         return true;
     }
     else{
-        [_areaDirtyState addObject:@(NO)];
+        [_areaCleanState addObject:@(NO)];
         return false;
     }
 }
@@ -215,7 +214,7 @@
 }
 
 - (void) calculateDirtyValue{
-    _dirtyValue =  10*(float)m_nBlueCount / (float)(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);
+    _cleanValue =  10*(float)m_nBlueCount / (float)(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);
 }
 
 - (UIImage *) exportImage

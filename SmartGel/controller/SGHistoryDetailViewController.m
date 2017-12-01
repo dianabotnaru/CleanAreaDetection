@@ -72,7 +72,7 @@
         if(!isShowPartArea)
             [self drawView :[self getDirtyAreaArray]];
         else
-            [self drawView :self.partyEngine.areaDirtyState];
+            [self drawView :self.partyEngine.areaCleanState];
         [self.hud hideAnimated:false];
     });
 }
@@ -142,7 +142,7 @@
             [self.showDirtyAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
             self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self drawView :self.engine.areaDirtyState];
+                [self drawView :self.engine.areaCleanState];
                 [self.hud hideAnimated:false];
             });
         }else{
@@ -167,7 +167,7 @@
         UIImage *croppedImage = [self croppIngimageByImageName:self.selectedEstimateImageModel.image toRect:rect];
         self.takenImageView.image = croppedImage;
         self.partyEngine = [[DirtyExtractor alloc] initWithImage:croppedImage withColoroffset:self.selectedEstimateImageModel.coloroffset];
-        self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.partyEngine.dirtyValue];
+        self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.partyEngine.cleanValue];
     }else{
         isShowPartArea = false;
         self.takenImageView.image = self.selectedEstimateImageModel.image;

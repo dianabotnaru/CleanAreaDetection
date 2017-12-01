@@ -55,9 +55,9 @@
     [self.takenImageView setImage:image];
 //    [self drawGridView:image];
     [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
+    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     
-    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.dirtyValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaDirtyState];
+    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState];
 }
 
 -(void)drawGridView:(UIImage *)image{
@@ -154,9 +154,9 @@
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         if(isShowPartArea)
-            [self drawView :self.partyEngine.areaDirtyState];
+            [self drawView :self.partyEngine.areaCleanState];
         else
-            [self drawView : self.engine.areaDirtyState];
+            [self drawView : self.engine.areaCleanState];
         [hud hideAnimated:false];
     });
 }
@@ -291,7 +291,7 @@
         self.croppedImage = [self croppIngimageByImageName:self.takenImage toRect:rect];
         self.takenImageView.image = self.croppedImage;
         self.partyEngine = [[DirtyExtractor alloc] initWithImage:self.croppedImage];
-        [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.partyEngine.dirtyValue]];
+        [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.partyEngine.cleanValue]];
     }else{
         isShowPartArea = false;
         self.takenImageView.image = self.takenImage;

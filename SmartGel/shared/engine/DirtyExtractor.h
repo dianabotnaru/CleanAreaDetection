@@ -45,10 +45,9 @@ typedef struct
     int         m_nPinkCount;
     int         m_nBlueCount;
 }
-@property (nonatomic, strong)   NSMutableArray  *areaDirtyState;
+@property (nonatomic, strong)   NSMutableArray  *areaCleanState;
 
-@property (nonatomic, assign, readonly)   float   dirtyValue;
-@property (nonatomic, assign, readonly)   float   localDirtyValue;
+@property (nonatomic, assign, readonly)   float   cleanValue;
 
 @property (nonatomic, assign)   int   m_colorOffset;
 
