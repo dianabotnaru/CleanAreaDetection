@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.takenImageView.image = self.takenImage;
+    [self.takenImageView setImage:self.takenImage];
     // Do any additional setup after loading the view.
 }
 

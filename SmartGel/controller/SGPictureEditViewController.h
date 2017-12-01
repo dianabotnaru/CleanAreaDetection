@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ACEDrawingView.h>
 
 @interface SGPictureEditViewController : UIViewController
 
 @property (strong, nonatomic) UIImage *takenImage;
+@property (strong, nonatomic) IBOutlet ACEDrawingView *aceDrawingView;
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
 
 @end

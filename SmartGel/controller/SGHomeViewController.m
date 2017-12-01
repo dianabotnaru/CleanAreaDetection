@@ -53,7 +53,7 @@
         [self.notificationLabel setHidden:YES];
     [self hideDirtyArea];
     [self.takenImageView setImage:image];
-    [self drawGridView:image];
+//    [self drawGridView:image];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.dirtyValue]];
     
