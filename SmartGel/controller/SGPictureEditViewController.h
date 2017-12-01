@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <ACEDrawingView.h>
+#import "SGGridView.h"
 
 @interface SGPictureEditViewController : UIViewController
 
 @property (strong, nonatomic) UIImage *takenImage;
-@property (strong, nonatomic) IBOutlet ACEDrawingView *aceDrawingView;
-@property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
-@property (strong, nonatomic) IBOutlet UISlider *widthSlider;
+@property (strong, nonatomic) IBOutlet UIView *gridContentView;
+@property (strong, nonatomic) SGGridView *gridView;
 
-@property (nonatomic, strong) IBOutlet UIButton *undoButton;
-@property (nonatomic, strong) IBOutlet UIButton *redoButton;
+@property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
+
 
 @end

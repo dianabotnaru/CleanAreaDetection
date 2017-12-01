@@ -17,8 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.takenImageView setImage:self.takenImage];
-    self.aceDrawingView.delegate = self;
-    self.aceDrawingView.lineAlpha = 0.5;
+    [self drawGridView:self.takenImage];
     // Do any additional setup after loading the view.
 }
 
@@ -31,49 +30,44 @@
     [self.navigationController popViewControllerAnimated: YES];
 }
 
--(IBAction)widthButtonClicked{
-    if(self.widthSlider.isHidden)
-        [self.widthSlider setHidden:NO];
-    else
-        [self.widthSlider setHidden:YES];
+-(void)drawGridView:(UIImage *)image{
+    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    
+    self.gridView = [[SGGridView alloc] initWithFrame:[self calculateClientRectOfImageInUIImageView:self.takenImageView]];
+    [self.gridView addGridViews:5 withColCount:5];
+    [self.gridContentView addSubview:self.gridView];
 }
 
-- (void)updateButtonStatus
+-(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView *)imgView
 {
-    self.undoButton.enabled = [self.aceDrawingView canUndo];
-    self.redoButton.enabled = [self.aceDrawingView canRedo];
+    CGSize imgViewSize=imgView.frame.size;                  // Size of UIImageView
+    CGSize imgSize=imgView.image.size;                      // Size of the image, currently displayed
+    
+    CGFloat scaleW = imgViewSize.width / imgSize.width;
+    CGFloat scaleH = imgViewSize.height / imgSize.height;
+    CGFloat aspect=fmin(scaleW, scaleH);
+    
+    CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
+    
+    // Note: the above is the same as :
+    // CGRect imageRect=CGRectMake(0,0,imgSize.width*=aspect,imgSize.height*=aspect) I just like this notation better
+    
+    // Center image
+    
+    imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
+    imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
+    
+    // Add imageView offset
+    
+    imageRect.origin.x+=imgView.frame.origin.x;
+    imageRect.origin.y+=imgView.frame.origin.y;
+    
+    return imageRect;
 }
 
-- (IBAction)undo:(id)sender
-{
-    [self.aceDrawingView undoLatestStep];
-    [self updateButtonStatus];
-}
-
-- (IBAction)redo:(id)sender
-{
-    [self.aceDrawingView redoLatestStep];
-    [self updateButtonStatus];
-}
-
-- (IBAction)clear:(id)sender
-{
-    [self.aceDrawingView clear];
-    [self updateButtonStatus];
-}
-
-- (IBAction)widthChange:(UISlider *)sender
-{
-    self.aceDrawingView.lineWidth = sender.value;
-}
 
 
-#pragma mark - ACEDrawing View Delegate
 
-- (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingTool>)tool;
-{
-    [self updateButtonStatus];
-}
 
 
 /*

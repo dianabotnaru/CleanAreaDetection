@@ -29,7 +29,6 @@
         else
             paintView=[[UIView alloc]initWithFrame:CGRectMake(width*i,0,GRID_WIDTH,self.frame.size.height)];
         [paintView setBackgroundColor:SGColorDarkGray];
-        [paintView setAlpha:0.5];
         [self addSubview:paintView];
     }
     for(int j = 0;j<=colCount;j++){
@@ -39,7 +38,6 @@
         else
             paintView=[[UIView alloc]initWithFrame:CGRectMake(0,height*j,self.frame.size.width,GRID_WIDTH)];
         [paintView setBackgroundColor:SGColorDarkGray];
-        [paintView setAlpha:0.5];
         [self addSubview:paintView];
     }
 }

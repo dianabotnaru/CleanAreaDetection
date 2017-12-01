@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -258,59 +257,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYb-dE-5hN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYb-dE-5hN">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="872"/>
                             </imageView>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nB2-2O-f47" customClass="ACEDrawingView">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nB2-2O-f47">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="872"/>
-                                <subviews>
-                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="FrF-UD-1bz">
-                                        <rect key="frame" x="362" y="827" width="388" height="31"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="FEN-Vc-Rws"/>
-                                        </constraints>
-                                        <connections>
-                                            <action selector="widthChange:" destination="FIQ-WK-zEP" eventType="valueChanged" id="OEE-7J-zCH"/>
-                                        </connections>
-                                    </slider>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="FrF-UD-1bz" firstAttribute="width" secondItem="nB2-2O-f47" secondAttribute="width" multiplier="0.5" id="3Rt-Ub-DwK"/>
-                                    <constraint firstAttribute="trailing" secondItem="FrF-UD-1bz" secondAttribute="trailing" constant="20" id="4IM-Ec-hPy"/>
-                                    <constraint firstAttribute="bottom" secondItem="FrF-UD-1bz" secondAttribute="bottom" constant="15" id="wge-wZ-eSS"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tz-WX-99j">
                                 <rect key="frame" x="0.0" y="872" width="768" height="88"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XrM-pU-E22">
-                                        <rect key="frame" x="693" y="25.5" width="55" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Select">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRI-KU-Nz9">
-                                        <rect key="frame" x="20" y="26.5" width="47" height="35"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" title="Undo">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="undo:" destination="FIQ-WK-zEP" eventType="touchUpInside" id="0CD-Nl-kiW"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U40-PE-uBD">
-                                        <rect key="frame" x="87" y="26.5" width="44" height="35"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" title="Redo">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="redo:" destination="FIQ-WK-zEP" eventType="touchUpInside" id="Kbt-70-KdQ"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate Value:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlc-aS-7FN">
                                         <rect key="frame" x="317.5" y="24" width="133.5" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -323,43 +279,13 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRy-hG-3du">
-                                        <rect key="frame" x="151" y="26" width="47" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Clear">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="clear:" destination="FIQ-WK-zEP" eventType="touchUpInside" id="5AI-MJ-Wfd"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tH3-7u-etU">
-                                        <rect key="frame" x="620" y="26" width="53" height="36"/>
-                                        <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="20"/>
-                                        <state key="normal" title="Width">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="widthButtonClicked" destination="FIQ-WK-zEP" eventType="touchUpInside" id="BGU-YQ-nZ8"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="U40-PE-uBD" firstAttribute="centerY" secondItem="2tz-WX-99j" secondAttribute="centerY" id="5A6-Jm-NGc"/>
                                     <constraint firstAttribute="height" constant="88" id="6Kf-Gb-MIY"/>
                                     <constraint firstItem="hlc-aS-7FN" firstAttribute="centerX" secondItem="2tz-WX-99j" secondAttribute="centerX" id="A8O-Ce-f83"/>
-                                    <constraint firstItem="XrM-pU-E22" firstAttribute="leading" secondItem="tH3-7u-etU" secondAttribute="trailing" constant="20" id="C5d-r9-Ay7"/>
-                                    <constraint firstItem="NRI-KU-Nz9" firstAttribute="leading" secondItem="2tz-WX-99j" secondAttribute="leading" constant="20" id="C9k-hv-dCD"/>
-                                    <constraint firstItem="fRy-hG-3du" firstAttribute="centerY" secondItem="2tz-WX-99j" secondAttribute="centerY" id="ImF-El-LOq"/>
-                                    <constraint firstItem="XrM-pU-E22" firstAttribute="centerY" secondItem="2tz-WX-99j" secondAttribute="centerY" id="J3S-wZ-96S"/>
                                     <constraint firstItem="hlc-aS-7FN" firstAttribute="top" secondItem="2tz-WX-99j" secondAttribute="top" constant="24" id="LQ5-OB-Jzq"/>
-                                    <constraint firstItem="U40-PE-uBD" firstAttribute="leading" secondItem="NRI-KU-Nz9" secondAttribute="trailing" constant="20" id="NDD-DM-goc"/>
-                                    <constraint firstItem="tH3-7u-etU" firstAttribute="centerY" secondItem="2tz-WX-99j" secondAttribute="centerY" id="NHQ-I2-UGt"/>
-                                    <constraint firstAttribute="trailing" secondItem="XrM-pU-E22" secondAttribute="trailing" constant="20" id="NYb-G3-uQL"/>
-                                    <constraint firstItem="fRy-hG-3du" firstAttribute="leading" secondItem="U40-PE-uBD" secondAttribute="trailing" constant="20" id="Prm-FI-MaN"/>
                                     <constraint firstItem="yVz-EU-kzl" firstAttribute="centerX" secondItem="2tz-WX-99j" secondAttribute="centerX" id="QEK-gN-Hx6"/>
-                                    <constraint firstItem="NRI-KU-Nz9" firstAttribute="centerY" secondItem="2tz-WX-99j" secondAttribute="centerY" id="iDN-fd-rlL"/>
                                     <constraint firstItem="yVz-EU-kzl" firstAttribute="top" secondItem="hlc-aS-7FN" secondAttribute="bottom" constant="8" id="q70-Sk-dv9"/>
                                 </constraints>
                             </view>
@@ -390,11 +316,8 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="aceDrawingView" destination="nB2-2O-f47" id="ujN-nN-RrA"/>
-                        <outlet property="redoButton" destination="U40-PE-uBD" id="6nQ-li-Npi"/>
+                        <outlet property="gridContentView" destination="nB2-2O-f47" id="BSb-Wq-Nn9"/>
                         <outlet property="takenImageView" destination="vYb-dE-5hN" id="5I8-9z-Bmz"/>
-                        <outlet property="undoButton" destination="NRI-KU-Nz9" id="s0Z-eK-HZd"/>
-                        <outlet property="widthSlider" destination="FrF-UD-1bz" id="uqQ-vt-l1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWw-fs-92t" sceneMemberID="firstResponder"/>
