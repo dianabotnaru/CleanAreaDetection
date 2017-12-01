@@ -15,5 +15,6 @@ pod 'Firebase/Storage'
 pod 'Firebase/DynamicLinks'	
 pod 'GPUImage', '~> 0.1.4'
 pod 'SDWebImage', '~> 4.0'
+pod 'ACEDrawingView'
 
 end
