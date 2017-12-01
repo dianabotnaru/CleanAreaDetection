@@ -118,18 +118,19 @@
     [self smoothBufferByAverage];
     for(int x = 0; x<AREA_DIVIDE_NUMBER;x++){
         for(int y = 0; y<AREA_DIVIDE_NUMBER;y++){
-            if([self areaFiltering:x withYPoint:y])
+            if([self areaFiltering:x withYPoint:y] == IS_CLEAN)
                 m_nBlueCount++;
         }
     }
     [self calculateDirtyValue];
 }
 
-- (bool)areaFiltering :(int)xPoint withYPoint:(int)yPoint
+- (int)areaFiltering :(int)xPoint withYPoint:(int)yPoint
 {
     UInt32 * pPixelBuffer = m_donePreprocess ? m_pOutBuffer : m_pInBuffer;
+    int cleanCount = 0;
     int dirtyCount = 0;
-    
+
     for (int y = (yPoint*m_imageHeight/AREA_DIVIDE_NUMBER); y < ((yPoint+1)*m_imageHeight/AREA_DIVIDE_NUMBER); y++)
     {
         for (int x = (xPoint*m_imageWidth/AREA_DIVIDE_NUMBER); x < ((xPoint+1)*m_imageWidth/AREA_DIVIDE_NUMBER); x++)
@@ -141,12 +142,14 @@
             
             UInt32 dirtyPixel = [self getDirtyPixel:&rgba];
             if (dirtyPixel == PINK_DIRTY_PIXEL ){
+                cleanCount ++;
+            }else if(dirtyPixel == BLUE_DIRTY_PIXEL){
                 dirtyCount ++;
             }
         }
     }
     
-    if(dirtyCount>AREA_DIRTY_RATE* m_imageHeight*m_imageWidth/(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER)){
+    if(cleanCount>AREA_DIRTY_RATE* m_imageHeight*m_imageWidth/(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER)){
         for (int y = (yPoint*m_imageHeight/AREA_DIVIDE_NUMBER); y < ((yPoint+1)*m_imageHeight/AREA_DIVIDE_NUMBER); y++)
         {
             for (int x = (xPoint*m_imageWidth/AREA_DIVIDE_NUMBER); x < ((xPoint+1)*m_imageWidth/AREA_DIVIDE_NUMBER); x++)
@@ -157,12 +160,26 @@
                 m_pOutBuffer[index] = PINK_DIRTY_PIXEL;
             }
         }
-        [_areaCleanState addObject:@(YES)];
-        return true;
+        [_areaCleanState addObject:@(IS_CLEAN)];
+        return IS_CLEAN;
+    }else if(dirtyCount>AREA_DIRTY_RATE* m_imageHeight*m_imageWidth/(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER)){
+        for (int y = (yPoint*m_imageHeight/AREA_DIVIDE_NUMBER); y < ((yPoint+1)*m_imageHeight/AREA_DIVIDE_NUMBER); y++)
+        {
+            for (int x = (xPoint*m_imageWidth/AREA_DIVIDE_NUMBER); x < ((xPoint+1)*m_imageWidth/AREA_DIVIDE_NUMBER); x++)
+            {
+                int index = y * m_imageWidth + x;
+                RGBA rgba;
+                memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
+                m_pOutBuffer[index] = BLUE_DIRTY_PIXEL;
+            }
+        }
+        [_areaCleanState addObject:@(IS_DIRTY)];
+        return IS_DIRTY;
     }
-    else{
-        [_areaCleanState addObject:@(NO)];
-        return false;
+    
+    else {
+        [_areaCleanState addObject:@(NO_GEL)];
+        return NO_GEL;
     }
 }
 
