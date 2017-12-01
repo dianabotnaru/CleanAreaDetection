@@ -16,4 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
 @property (strong, nonatomic) IBOutlet UISlider *widthSlider;
 
+@property (nonatomic, strong) IBOutlet UIButton *undoButton;
+@property (nonatomic, strong) IBOutlet UIButton *redoButton;
+
 @end

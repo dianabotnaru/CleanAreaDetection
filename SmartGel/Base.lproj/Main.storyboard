@@ -264,11 +264,14 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="nB2-2O-f47" customClass="ACEDrawingView">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="872"/>
                                 <subviews>
-                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="FrF-UD-1bz">
+                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="FrF-UD-1bz">
                                         <rect key="frame" x="362" y="827" width="388" height="31"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="FEN-Vc-Rws"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="widthChange:" destination="FIQ-WK-zEP" eventType="valueChanged" id="OEE-7J-zCH"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -294,6 +297,9 @@
                                         <state key="normal" title="Undo">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="undo:" destination="FIQ-WK-zEP" eventType="touchUpInside" id="0CD-Nl-kiW"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U40-PE-uBD">
                                         <rect key="frame" x="87" y="26.5" width="44" height="35"/>
@@ -301,6 +307,9 @@
                                         <state key="normal" title="Redo">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="redo:" destination="FIQ-WK-zEP" eventType="touchUpInside" id="Kbt-70-KdQ"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate Value:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlc-aS-7FN">
                                         <rect key="frame" x="317.5" y="24" width="133.5" height="24"/>
@@ -320,6 +329,9 @@
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clear:" destination="FIQ-WK-zEP" eventType="touchUpInside" id="5AI-MJ-Wfd"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tH3-7u-etU">
                                         <rect key="frame" x="620" y="26" width="53" height="36"/>
@@ -327,6 +339,9 @@
                                         <state key="normal" title="Width">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="widthButtonClicked" destination="FIQ-WK-zEP" eventType="touchUpInside" id="BGU-YQ-nZ8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -376,7 +391,9 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="aceDrawingView" destination="nB2-2O-f47" id="ujN-nN-RrA"/>
+                        <outlet property="redoButton" destination="U40-PE-uBD" id="6nQ-li-Npi"/>
                         <outlet property="takenImageView" destination="vYb-dE-5hN" id="5I8-9z-Bmz"/>
+                        <outlet property="undoButton" destination="NRI-KU-Nz9" id="s0Z-eK-HZd"/>
                         <outlet property="widthSlider" destination="FrF-UD-1bz" id="uqQ-vt-l1H"/>
                     </connections>
                 </viewController>

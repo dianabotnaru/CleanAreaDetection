@@ -8,7 +8,7 @@
 
 #import "SGPictureEditViewController.h"
 
-@interface SGPictureEditViewController ()
+@interface SGPictureEditViewController ()<ACEDrawingViewDelegate>
 
 @end
 
@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.takenImageView setImage:self.takenImage];
+    self.aceDrawingView.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -35,6 +36,44 @@
     else
         [self.widthSlider setHidden:YES];
 }
+
+- (void)updateButtonStatus
+{
+    self.undoButton.enabled = [self.aceDrawingView canUndo];
+    self.redoButton.enabled = [self.aceDrawingView canRedo];
+}
+
+- (IBAction)undo:(id)sender
+{
+    [self.aceDrawingView undoLatestStep];
+    [self updateButtonStatus];
+}
+
+- (IBAction)redo:(id)sender
+{
+    [self.aceDrawingView redoLatestStep];
+    [self updateButtonStatus];
+}
+
+- (IBAction)clear:(id)sender
+{
+    [self.aceDrawingView clear];
+    [self updateButtonStatus];
+}
+
+- (IBAction)widthChange:(UISlider *)sender
+{
+    self.aceDrawingView.lineWidth = sender.value;
+}
+
+
+#pragma mark - ACEDrawing View Delegate
+
+- (void)drawingView:(ACEDrawingView *)view didEndDrawUsingTool:(id<ACEDrawingTool>)tool;
+{
+    [self updateButtonStatus];
+}
+
 
 /*
 #pragma mark - Navigation
