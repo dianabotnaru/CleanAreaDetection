@@ -56,12 +56,19 @@
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     
-    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState];
+    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
+}
+
+- (NSMutableArray *)nonGelAreaArrayInit{
+    NSMutableArray *gelAreaArray = [[NSMutableArray alloc] init];
+    for(int i=0;i<SGGridCount*SGGridCount;i++){
+        [gelAreaArray addObject:@(false)];
+    }
+    return gelAreaArray;
 }
 
 -(void)drawGridView:(UIImage *)image{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    
     self.gridView = [[SGGridView alloc] initWithFrame:[self calculateClientRectOfImageInUIImageView:self.takenImageView]];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
@@ -169,7 +176,6 @@
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        
         CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
         
 //        float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
@@ -293,8 +299,8 @@
     [self hideDirtyArea];
     
     CGPoint touchLocation = [touch1 locationInView:self.gridView];
-    CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
-        
+    int gelPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
+    [self.estimateImage updateNonGelAreaString:gelPosition];
 }
 
 -(void)launchPictureEditViewController{
@@ -302,6 +308,7 @@
     pictureViewController.takenImage = self.takenImage;
     [self.navigationController pushViewController:pictureViewController animated:YES];
 }
+
 
 /////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 

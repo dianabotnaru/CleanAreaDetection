@@ -42,13 +42,39 @@
     }
 }
 
--(CGRect)getContainsFrame:(UIImage *)takenImage
+//-(CGRect)getContainsFrame:(UIImage *)takenImage
+//                withPoint: (CGPoint)point
+//            withRowCount :(int)rowCount
+//            withColCount :(int)colCount{
+//    CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+//    int width = takenImage.size.height/rowCount;
+//    int height = takenImage.size.width/colCount;
+//
+//    //    int width = takenImage.size.width/rowCount;
+//    //    int height = takenImage.size.height/colCount;
+//
+//    int frameWidth = self.frame.size.width/rowCount;
+//    int frameHeight = self.frame.size.height/colCount;
+//
+//    for(int i = 0;i<rowCount;i++)
+//        for(int j = 0;j<colCount;j++){
+//            rect = CGRectMake(frameWidth*i,frameHeight*j,frameWidth,frameHeight);
+//            if(CGRectContainsPoint(rect, point)){
+//                return rect;
+////                return CGRectMake(width*j,height*(colCount-i-1),width,height);
+//                //            return CGRectMake(width*i,height*j,width,height);
+//            }
+//        }
+//    return rect;
+//}
+
+-(int)getContainsFrame:(UIImage *)takenImage
                 withPoint: (CGPoint)point
             withRowCount :(int)rowCount
             withColCount :(int)colCount{
     CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    int width = takenImage.size.height/rowCount;
-    int height = takenImage.size.width/colCount;
+//    int width = takenImage.size.height/rowCount;
+//    int height = takenImage.size.width/colCount;
     
     //    int width = takenImage.size.width/rowCount;
     //    int height = takenImage.size.height/colCount;
@@ -60,12 +86,13 @@
         for(int j = 0;j<colCount;j++){
             rect = CGRectMake(frameWidth*i,frameHeight*j,frameWidth,frameHeight);
             if(CGRectContainsPoint(rect, point)){
-                return rect;
-//                return CGRectMake(width*j,height*(colCount-i-1),width,height);
+                return i*rowCount+j;
+                //                return CGRectMake(width*j,height*(colCount-i-1),width,height);
                 //            return CGRectMake(width*i,height*j,width,height);
             }
         }
-    return rect;
+    return -1;
 }
+
 
 @end

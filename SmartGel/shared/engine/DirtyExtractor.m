@@ -278,6 +278,11 @@
     }
 }
 
+
+-(bool)detectNoGelArea:(int)xPoint withYPoint:(int)yPoint{
+    return true;
+}
+
 - (XYZ)getXYZfromRGB : (RGBA *)rgbColor{
     
     float red = (float)rgbColor->r/255;

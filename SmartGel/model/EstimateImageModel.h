@@ -33,7 +33,9 @@
        withEstimatedValue:(float)vaule
                  withDate:(NSString*)dateString
              withLocation:(NSString*)currentLocation
-           withCleanArray:(NSMutableArray *)array;
-- (NSArray *) getCleanAreaArray;
+           withCleanArray:(NSMutableArray *)cleanArray
+          withNonGelArray:(NSMutableArray *)nonGelArray;
+-(void)updateNonGelAreaString:(int)position;
+
 
 @end

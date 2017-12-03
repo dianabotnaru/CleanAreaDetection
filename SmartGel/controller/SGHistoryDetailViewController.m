@@ -152,35 +152,35 @@
     }
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch1 = [touches anyObject];
-    CGPoint location = [touch1 locationInView:self.view];
-    if(!CGRectContainsPoint(self.gridView.frame, location))
-        return ;
-    if(self.selectedEstimateImageModel.image==nil)
-        return;
-    [self hideDirtyArea];
-    if(!isShowPartArea){
-        isShowPartArea = true;
-        CGPoint touchLocation = [touch1 locationInView:self.gridView];
-        CGRect rect = [self.gridView getContainsFrame:self.selectedEstimateImageModel.image withPoint:touchLocation withRowCount:5 withColCount:5];
-        UIImage *croppedImage = [self croppIngimageByImageName:self.selectedEstimateImageModel.image toRect:rect];
-        self.takenImageView.image = croppedImage;
-        self.partyEngine = [[DirtyExtractor alloc] initWithImage:croppedImage withColoroffset:self.selectedEstimateImageModel.coloroffset];
-        self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.partyEngine.cleanValue];
-    }else{
-        isShowPartArea = false;
-        self.takenImageView.image = self.selectedEstimateImageModel.image;
-    }
-}
+//- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    UITouch *touch1 = [touches anyObject];
+//    CGPoint location = [touch1 locationInView:self.view];
+//    if(!CGRectContainsPoint(self.gridView.frame, location))
+//        return ;
+//    if(self.selectedEstimateImageModel.image==nil)
+//        return;
+//    [self hideDirtyArea];
+//    if(!isShowPartArea){
+//        isShowPartArea = true;
+//        CGPoint touchLocation = [touch1 locationInView:self.gridView];
+//        CGRect rect = [self.gridView getContainsFrame:self.selectedEstimateImageModel.image withPoint:touchLocation withRowCount:5 withColCount:5];
+//        UIImage *croppedImage = [self croppIngimageByImageName:self.selectedEstimateImageModel.image toRect:rect];
+//        self.takenImageView.image = croppedImage;
+//        self.partyEngine = [[DirtyExtractor alloc] initWithImage:croppedImage withColoroffset:self.selectedEstimateImageModel.coloroffset];
+//        self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.partyEngine.cleanValue];
+//    }else{
+//        isShowPartArea = false;
+//        self.takenImageView.image = self.selectedEstimateImageModel.image;
+//    }
+//}
 
 
-- (UIImage *)croppIngimageByImageName:(UIImage *)imageToCrop toRect:(CGRect)rect
-{
-    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
-    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
-    return image;
-}
+//- (UIImage *)croppIngimageByImageName:(UIImage *)imageToCrop toRect:(CGRect)rect
+//{
+//    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
+//    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+//    CGImageRelease(imageRef);
+//    UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
+//    return image;
+//}
 @end

@@ -41,23 +41,36 @@
        withEstimatedValue:(float)vaule
                  withDate:(NSString*)dateString
              withLocation:(NSString*)currentLocation
-           withCleanArray:(NSMutableArray *)array{
+           withCleanArray:(NSMutableArray *)cleanArray
+          withNonGelArray:(NSMutableArray *)nonGelArray{
     self.image = image;
     self.dirtyValue = vaule;
     self.date = dateString;
     self.location = currentLocation;
-    self.cleanArea = [self setDirtyAreaJsonString:array];
+    self.cleanArea = [self getStringFromArray:cleanArray];
+    self.nonGelArea = [self getStringFromArray:nonGelArray];
+
 }
 
--(NSString *)setDirtyAreaJsonString:(NSMutableArray *)array{
+
+-(void)updateNonGelAreaString:(int)position{
+    NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
+    bool isNonGelArea = [nonGelAreaArray objectAtIndex:position];
+    [nonGelAreaArray replaceObjectAtIndex:position withObject:@(!isNonGelArea)];
+    self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
+}
+
+
+
+-(NSString *)getStringFromArray:(NSMutableArray *)array{
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     return jsonString;
 }
 
-- (NSArray *)getCleanAreaArray{
-    NSData* data = [self.cleanArea dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
+- (NSMutableArray *)getArrayFromString:(NSString *)string{
+    NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
     return values;
 }
 
