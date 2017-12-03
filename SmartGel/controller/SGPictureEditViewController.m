@@ -7,7 +7,7 @@
 //
 
 #import "SGPictureEditViewController.h"
-
+#import "SGConstant.h"
 @interface SGPictureEditViewController ()<ACEDrawingViewDelegate>
 
 @end

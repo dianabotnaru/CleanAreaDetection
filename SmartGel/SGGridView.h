@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define GRID_WIDTH 1
+#define GRID_WIDTH 2
 @interface SGGridView : UIView
 - (void)addGridViews:(int)rowCount withColCount:(int)colCount;
 -(CGRect)getContainsFrame:(UIImage *)takenImage

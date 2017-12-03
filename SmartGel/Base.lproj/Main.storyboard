@@ -72,7 +72,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="showHideCleanArea" destination="BYZ-38-t0r" eventType="touchUpInside" id="eWG-oP-OmC"/>
+                                                    <action selector="showHideCleanArea" destination="BYZ-38-t0r" eventType="touchUpInside" id="3O6-Az-z0E"/>
                                                 </connections>
                                             </button>
                                         </subviews>

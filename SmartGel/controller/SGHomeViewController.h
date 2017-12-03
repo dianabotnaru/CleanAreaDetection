@@ -21,7 +21,6 @@
 @interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
-    bool isShowPartArea;
     MBProgressHUD *hud;
 }
 

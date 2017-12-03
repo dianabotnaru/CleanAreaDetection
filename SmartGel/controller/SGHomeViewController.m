@@ -39,7 +39,6 @@
     self.engine = [[DirtyExtractor alloc] init];
     isShowDirtyArea = false;
     isSavedImage = false;
-    isShowPartArea = false;
     self.estimateImage = [[EstimateImageModel alloc] init];
     [self initLocationManager];
     self.appDelegate.ref = [[FIRDatabase database] reference];
@@ -53,7 +52,7 @@
         [self.notificationLabel setHidden:YES];
     [self hideDirtyArea];
     [self.takenImageView setImage:image];
-//    [self drawGridView:image];
+    [self drawGridView:image];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     
@@ -64,7 +63,7 @@
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     
     self.gridView = [[SGGridView alloc] initWithFrame:[self calculateClientRectOfImageInUIImageView:self.takenImageView]];
-    [self.gridView addGridViews:5 withColCount:5];
+    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
 }
 
@@ -146,17 +145,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)showDirtyArea{
+-(void)showCleanAndDirtyArea{
     isShowDirtyArea = true;
     [self.notificationLabel setHidden:YES];
     [self.takePhotoButton setHidden:YES];
     [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(isShowPartArea)
-            [self drawView :self.partyEngine.areaCleanState];
-        else
-            [self drawView : self.engine.areaCleanState];
+        [self drawView : self.engine.areaCleanState];
         [hud hideAnimated:false];
     });
 }
@@ -242,22 +238,22 @@
     if(self.estimateImage.image == nil){
         [self showAlertdialog:nil message:@"Please take a photo."];
     }else{
-        [self launchPictureEditViewController];
-//        if(isSavedImage)
-//            [self showAlertdialog:nil message:@"You have already saved this Image."];
-//        else{
-//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
-//                                                                           message:@"Are you sure want to upload image?"
-//                                                                    preferredStyle:UIAlertControllerStyleAlert];
-//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                [self saveResultImage];
-//            }]];
-//
-//            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//            }]];
-//
-//            [self presentViewController:alert animated:YES completion:nil];
-//        }
+//        [self launchPictureEditViewController];
+        if(isSavedImage)
+            [self showAlertdialog:nil message:@"You have already saved this Image."];
+        else{
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
+                                                                           message:@"Are you sure want to upload image?"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [self saveResultImage];
+            }]];
+
+            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            }]];
+
+            [self presentViewController:alert animated:YES completion:nil];
+        }
     }
 }
 
@@ -269,7 +265,7 @@
     if(isShowDirtyArea)
         [self hideDirtyArea];
     else
-        [self showDirtyArea];
+        [self showCleanAndDirtyArea];
 }
 
 -(IBAction)launchPhotoPickerController{
@@ -295,27 +291,10 @@
     if(self.takenImage==nil)
         return;
     [self hideDirtyArea];
-    if(!isShowPartArea){
-        isShowPartArea = true;
-        CGPoint touchLocation = [touch1 locationInView:self.gridView];
-        CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
-        self.croppedImage = [self croppIngimageByImageName:self.takenImage toRect:rect];
-        self.takenImageView.image = self.croppedImage;
-        self.partyEngine = [[DirtyExtractor alloc] initWithImage:self.croppedImage];
-        [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.partyEngine.cleanValue]];
-    }else{
-        isShowPartArea = false;
-        self.takenImageView.image = self.takenImage;
-    }
-}
-
-- (UIImage *)croppIngimageByImageName:(UIImage *)imageToCrop toRect:(CGRect)rect
-{
-    CGImageRef imageRef = CGImageCreateWithImageInRect([imageToCrop CGImage], rect);
-    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    UIImage *image = [UIImage imageWithCGImage:cropped.CGImage scale:1.0 orientation:UIImageOrientationRight];
-    return image;
+    
+    CGPoint touchLocation = [touch1 locationInView:self.gridView];
+    CGRect rect = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:5 withColCount:5];
+        
 }
 
 -(void)launchPictureEditViewController{
