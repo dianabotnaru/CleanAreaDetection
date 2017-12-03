@@ -209,7 +209,7 @@
         if([[self.engine.areaCleanState objectAtIndex:i] intValue] == NO_GEL){
             UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
             [paintView setBackgroundColor:[UIColor yellowColor]];
-            [paintView setAlpha:0.5];
+            [paintView setAlpha:0.3];
             [self.noGelView addSubview:paintView];
         }
     }
@@ -321,6 +321,7 @@
 -(void)updateDataAndUIbyTouch:(int)touchPosition{
     [self.estimateImage updateNonGelAreaString:touchPosition];
     [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
+    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
     if(isShowDirtyArea){
         [self hideDirtyArea];
         [self showCleanAndDirtyArea];

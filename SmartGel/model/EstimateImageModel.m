@@ -31,6 +31,7 @@
         self.location = snapshot.value[@"location"];
         self.imageUrl = snapshot.value[@"image"];
         self.cleanArea = snapshot.value[@"cleanarea"];
+        self.nonGelArea = snapshot.value[@"nonGelArea"];
         self.coloroffset = [snapshot.value[@"coloroffset"] intValue];
     }
     return self;
@@ -56,6 +57,10 @@
     bool isNonGelArea = [[nonGelAreaArray objectAtIndex:position] boolValue];
     [nonGelAreaArray replaceObjectAtIndex:position withObject:@(!isNonGelArea)];
     self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
+}
+
+-(void)setCleanAreaWithArray:(NSMutableArray*)array{
+    self.cleanArea = [self getStringFromArray:array];
 }
 
 -(NSMutableArray *)getNonGelAreaArray{

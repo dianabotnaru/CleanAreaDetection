@@ -37,6 +37,7 @@
           withNonGelArray:(NSMutableArray *)nonGelArray;
 -(void)updateNonGelAreaString:(int)position;
 -(NSMutableArray *)getNonGelAreaArray;
+-(void)setCleanAreaWithArray:(NSMutableArray*)array;
 
 
 @end

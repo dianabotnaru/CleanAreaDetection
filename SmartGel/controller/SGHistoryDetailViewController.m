@@ -28,7 +28,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.gridView addGridViews:5 withColCount:5];
+    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,10 +69,11 @@
     [self.showDirtyAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(!isShowPartArea)
-            [self drawView :[self getDirtyAreaArray]];
-        else
-            [self drawView :self.partyEngine.areaCleanState];
+        [self drawView:[self getDirtyAreaArray]];
+//        if(!isShowPartArea)
+//            [self drawView :[self getDirtyAreaArray]];
+//        else
+//            [self drawView :self.partyEngine.areaCleanState];
         [self.hud hideAnimated:false];
     });
 }
@@ -81,16 +82,55 @@
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
-        float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
-        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-        if([[dirtyState objectAtIndex:i] boolValue]){
+        CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
+        
+        float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
+        float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
+        
+        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
+        if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
             [paintView setAlpha:0.5];
+            [self.takenImageView addSubview:paintView];
+        }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
+            [paintView setBackgroundColor:[UIColor blueColor]];
+            [paintView setAlpha:0.5];
+            [self.takenImageView addSubview:paintView];
+        }else if([[dirtyState objectAtIndex:i] intValue] == NO_GEL){
+            [paintView setBackgroundColor:[UIColor yellowColor]];
+            [paintView setAlpha:0.3];
             [self.takenImageView addSubview:paintView];
         }
     }
 }
+
+-(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView *)imgView
+{
+    CGSize imgViewSize=imgView.frame.size;                  // Size of UIImageView
+    CGSize imgSize=imgView.image.size;                      // Size of the image, currently displayed
+    
+    CGFloat scaleW = imgViewSize.width / imgSize.width;
+    CGFloat scaleH = imgViewSize.height / imgSize.height;
+    CGFloat aspect=fmin(scaleW, scaleH);
+    
+    CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
+    
+    // Note: the above is the same as :
+    // CGRect imageRect=CGRectMake(0,0,imgSize.width*=aspect,imgSize.height*=aspect) I just like this notation better
+    
+    // Center image
+    
+    imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
+    imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
+    
+    // Add imageView offset
+    
+    imageRect.origin.x+=imgView.frame.origin.x;
+    imageRect.origin.y+=imgView.frame.origin.y;
+    
+    return imageRect;
+}
+
 
 - (NSMutableArray *)getDirtyAreaArray{
     NSData* data = [self.selectedEstimateImageModel.cleanArea dataUsingEncoding:NSUTF8StringEncoding];
