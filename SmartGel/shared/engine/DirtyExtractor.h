@@ -49,6 +49,7 @@ typedef struct
     int         m_nBlueCount;
 }
 @property (nonatomic, strong)   NSMutableArray  *areaCleanState;
+@property (nonatomic, strong)   NSMutableArray  *originalAreaCleanState;
 
 @property (nonatomic, assign, readonly)   float   cleanValue;
 

@@ -80,7 +80,8 @@
     m_nBlueCount = 0;
     
     _areaCleanState = [[NSMutableArray alloc] init];
-    
+    _originalAreaCleanState = [[NSMutableArray alloc] init];
+
     if (m_pInBuffer)
     {
         free (m_pInBuffer);
@@ -122,6 +123,9 @@
                 m_nBlueCount++;
         }
     }
+    for(int i =0;i<_originalAreaCleanState.count;i++){
+        [_areaCleanState addObject:[_originalAreaCleanState objectAtIndex:i]];
+    }
     [self calculateDirtyValue];
 }
 
@@ -160,7 +164,7 @@
                 m_pOutBuffer[index] = PINK_DIRTY_PIXEL;
             }
         }
-        [_areaCleanState addObject:@(IS_CLEAN)];
+        [_originalAreaCleanState addObject:@(IS_CLEAN)];
         return IS_CLEAN;
     }else if(dirtyCount>AREA_DIRTY_RATE* m_imageHeight*m_imageWidth/(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER)){
         for (int y = (yPoint*m_imageHeight/AREA_DIVIDE_NUMBER); y < ((yPoint+1)*m_imageHeight/AREA_DIVIDE_NUMBER); y++)
@@ -173,12 +177,12 @@
                 m_pOutBuffer[index] = BLUE_DIRTY_PIXEL;
             }
         }
-        [_areaCleanState addObject:@(IS_DIRTY)];
+        [_originalAreaCleanState addObject:@(IS_DIRTY)];
         return IS_DIRTY;
     }
     
     else {
-        [_areaCleanState addObject:@(NO_GEL)];
+        [_originalAreaCleanState addObject:@(NO_GEL)];
         return NO_GEL;
     }
 }
@@ -280,6 +284,10 @@
 
 
 -(void)setNonGelAreaState:(NSMutableArray *)nonGelAreaArray{
+    [_areaCleanState removeAllObjects];
+    for(int i =0;i<_originalAreaCleanState.count;i++){
+        [_areaCleanState addObject:[_originalAreaCleanState objectAtIndex:i]];
+    }
     for(int i=0;i<nonGelAreaArray.count;i++){
         bool isNonGel = [[nonGelAreaArray objectAtIndex:i] boolValue];
         if(isNonGel){
