@@ -43,7 +43,6 @@
 {
     [self.hud hideAnimated:YES];
     [self showAlertdialog:@"Load Failed!" message:@"Please check internet connection!"];
-    
 }
 
 -(void)showAlertdialog:(NSString*)title message:(NSString*)message{

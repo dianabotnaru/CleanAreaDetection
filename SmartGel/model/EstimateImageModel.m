@@ -49,18 +49,18 @@
     self.location = currentLocation;
     self.cleanArea = [self getStringFromArray:cleanArray];
     self.nonGelArea = [self getStringFromArray:nonGelArray];
-
 }
-
 
 -(void)updateNonGelAreaString:(int)position{
     NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
-    bool isNonGelArea = [nonGelAreaArray objectAtIndex:position];
+    bool isNonGelArea = [[nonGelAreaArray objectAtIndex:position] boolValue];
     [nonGelAreaArray replaceObjectAtIndex:position withObject:@(!isNonGelArea)];
     self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
 }
 
-
+-(NSMutableArray *)getNonGelAreaArray{
+    return [self getArrayFromString:self.nonGelArea];
+}
 
 -(NSString *)getStringFromArray:(NSMutableArray *)array{
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array options:NSJSONWritingPrettyPrinted error:nil];
@@ -68,11 +68,10 @@
     return jsonString;
 }
 
+
 - (NSMutableArray *)getArrayFromString:(NSString *)string{
     NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
     return values;
 }
-
-
 @end

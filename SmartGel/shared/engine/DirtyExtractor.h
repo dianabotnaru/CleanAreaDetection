@@ -60,6 +60,8 @@ typedef struct
 - (UIImage *)   exportImage;
 
 - (void)        extract;
+- (void) setNonGelAreaState:(NSMutableArray *)nonGelAreaArray;
+
 -(instancetype)initWithImage:(UIImage *)image;
 -(instancetype)initWithImage:(UIImage *)image withColoroffset:(int)coloroffset;
 

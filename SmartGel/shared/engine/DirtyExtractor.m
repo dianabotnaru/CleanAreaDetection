@@ -279,8 +279,21 @@
 }
 
 
--(bool)detectNoGelArea:(int)xPoint withYPoint:(int)yPoint{
-    return true;
+-(void)setNonGelAreaState:(NSMutableArray *)nonGelAreaArray{
+    for(int i=0;i<nonGelAreaArray.count;i++){
+        bool isNonGel = [[nonGelAreaArray objectAtIndex:i] boolValue];
+        if(isNonGel){
+            int pointX = i/SGGridCount;
+            int pointY = i%SGGridCount;
+            int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+            for(int i = 0; i<rate;i++){
+                for(int j = 0; j< rate; j++){
+                    NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+                    [_areaCleanState replaceObjectAtIndex:postion withObject:@(NO_GEL)];
+                }
+            }
+        }
+    }
 }
 
 - (XYZ)getXYZfromRGB : (RGBA *)rgbColor{

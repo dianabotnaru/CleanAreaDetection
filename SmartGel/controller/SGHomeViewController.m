@@ -200,7 +200,6 @@
 -(NSString *)getCurrentTimeString{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    
     NSDate *currentDate = [NSDate date];
     NSString *dateString = [formatter stringFromDate:currentDate];
     return dateString;
@@ -296,11 +295,12 @@
         return ;
     if(self.takenImage==nil)
         return;
-    [self hideDirtyArea];
-    
     CGPoint touchLocation = [touch1 locationInView:self.gridView];
     int gelPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
     [self.estimateImage updateNonGelAreaString:gelPosition];
+    [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
+    [self hideDirtyArea];
+    [self showCleanAndDirtyArea];
 }
 
 -(void)launchPictureEditViewController{

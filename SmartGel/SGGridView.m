@@ -73,12 +73,6 @@
             withRowCount :(int)rowCount
             withColCount :(int)colCount{
     CGRect rect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-//    int width = takenImage.size.height/rowCount;
-//    int height = takenImage.size.width/colCount;
-    
-    //    int width = takenImage.size.width/rowCount;
-    //    int height = takenImage.size.height/colCount;
-    
     int frameWidth = self.frame.size.width/rowCount;
     int frameHeight = self.frame.size.height/colCount;
     
@@ -86,9 +80,7 @@
         for(int j = 0;j<colCount;j++){
             rect = CGRectMake(frameWidth*i,frameHeight*j,frameWidth,frameHeight);
             if(CGRectContainsPoint(rect, point)){
-                return i*rowCount+j;
-                //                return CGRectMake(width*j,height*(colCount-i-1),width,height);
-                //            return CGRectMake(width*i,height*j,width,height);
+                return j*SGGridCount + (SGGridCount-1-i);
             }
         }
     return -1;
