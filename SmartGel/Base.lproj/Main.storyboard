@@ -42,6 +42,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="840"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPb-Yj-bCY">
+                                                <rect key="frame" x="0.0" y="0.0" width="768" height="840"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M1e-FX-kfH">
                                                 <rect key="frame" x="359.5" y="395" width="50" height="50"/>
                                                 <constraints>
@@ -84,7 +88,9 @@
                                             <constraint firstAttribute="bottom" secondItem="RpD-T1-dX4" secondAttribute="bottom" id="FiZ-Nr-pyn"/>
                                             <constraint firstItem="0ne-iK-goy" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="JAf-qB-pp7"/>
                                             <constraint firstAttribute="bottom" secondItem="MGE-Nh-JIh" secondAttribute="bottom" constant="20" id="V1W-5L-H8Y"/>
+                                            <constraint firstItem="GPb-Yj-bCY" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="WWr-Je-Igj"/>
                                             <constraint firstItem="M1e-FX-kfH" firstAttribute="centerX" secondItem="b2m-nP-ZNq" secondAttribute="centerX" id="b3u-IU-uIF"/>
+                                            <constraint firstAttribute="trailing" secondItem="GPb-Yj-bCY" secondAttribute="trailing" id="bda-EZ-cBp"/>
                                             <constraint firstAttribute="bottom" secondItem="0ne-iK-goy" secondAttribute="bottom" id="cPx-Gm-dQ8"/>
                                             <constraint firstItem="RpD-T1-dX4" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="duy-rw-Oz8"/>
                                             <constraint firstItem="MGE-Nh-JIh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b2m-nP-ZNq" secondAttribute="leading" constant="20" symbolic="YES" id="eaE-Nd-WaA"/>
@@ -92,6 +98,8 @@
                                             <constraint firstItem="M1e-FX-kfH" firstAttribute="centerY" secondItem="b2m-nP-ZNq" secondAttribute="centerY" id="itb-BJ-Sdg"/>
                                             <constraint firstItem="0ne-iK-goy" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="mYd-QL-fEB"/>
                                             <constraint firstItem="RpD-T1-dX4" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="p53-mk-x79"/>
+                                            <constraint firstItem="GPb-Yj-bCY" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="rUl-qb-2tx"/>
+                                            <constraint firstAttribute="bottom" secondItem="GPb-Yj-bCY" secondAttribute="bottom" id="uvH-Ws-MsX"/>
                                             <constraint firstAttribute="trailing" secondItem="RpD-T1-dX4" secondAttribute="trailing" id="zUQ-78-Rgm"/>
                                         </constraints>
                                     </view>
@@ -234,6 +242,7 @@
                         <outlet property="dateLabel" destination="WZ3-Ri-j9d" id="4bf-te-7p6"/>
                         <outlet property="gridContentView" destination="RpD-T1-dX4" id="PRa-Ol-GqV"/>
                         <outlet property="locationLabel" destination="emM-ow-Xav" id="RUd-RU-vnj"/>
+                        <outlet property="noGelView" destination="GPb-Yj-bCY" id="zq3-CV-YjQ"/>
                         <outlet property="notificationLabel" destination="f3Q-ZR-bNC" id="2E4-RF-hLG"/>
                         <outlet property="showCleanAreaButton" destination="MGE-Nh-JIh" id="4M0-eF-22p"/>
                         <outlet property="takePhotoButton" destination="M1e-FX-kfH" id="vSb-kn-hAj"/>

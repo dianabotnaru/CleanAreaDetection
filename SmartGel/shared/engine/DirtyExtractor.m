@@ -36,6 +36,7 @@
 -(instancetype)initWithImage:(UIImage *)image{
     self = [super init];
     if(self){
+        m_nNoGelCount = 0;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *colorOffset = [defaults objectForKey:@"coloroffset"];
         if(colorOffset == nil){
@@ -120,7 +121,7 @@
     for(int x = 0; x<AREA_DIVIDE_NUMBER;x++){
         for(int y = 0; y<AREA_DIVIDE_NUMBER;y++){
             if([self areaFiltering:x withYPoint:y] == IS_CLEAN)
-                m_nBlueCount++;
+                m_nPinkCount++;
         }
     }
     for(int i =0;i<_originalAreaCleanState.count;i++){
@@ -166,25 +167,11 @@
         }
         [_originalAreaCleanState addObject:@(IS_CLEAN)];
         return IS_CLEAN;
-    }else if(dirtyCount>AREA_DIRTY_RATE* m_imageHeight*m_imageWidth/(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER)){
-        for (int y = (yPoint*m_imageHeight/AREA_DIVIDE_NUMBER); y < ((yPoint+1)*m_imageHeight/AREA_DIVIDE_NUMBER); y++)
-        {
-            for (int x = (xPoint*m_imageWidth/AREA_DIVIDE_NUMBER); x < ((xPoint+1)*m_imageWidth/AREA_DIVIDE_NUMBER); x++)
-            {
-                int index = y * m_imageWidth + x;
-                RGBA rgba;
-                memcpy(&rgba, &pPixelBuffer[index], sizeof(RGBA));
-                m_pOutBuffer[index] = BLUE_DIRTY_PIXEL;
-            }
-        }
+    }else {
         [_originalAreaCleanState addObject:@(IS_DIRTY)];
         return IS_DIRTY;
     }
     
-    else {
-        [_originalAreaCleanState addObject:@(NO_GEL)];
-        return NO_GEL;
-    }
 }
 
 - (void)smoothBufferByAverage
@@ -235,7 +222,20 @@
 }
 
 - (void) calculateDirtyValue{
-    _cleanValue =  10*(float)m_nBlueCount / (float)(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);
+    m_nPinkCount = 0;
+    m_nNoGelCount = 0;
+    for(int i =0;i<_areaCleanState.count;i++){
+        int areaState = [[_areaCleanState objectAtIndex:i] intValue];
+        if(areaState == IS_CLEAN)
+            m_nPinkCount++;
+        else if(areaState == NO_GEL)
+            m_nNoGelCount++;
+    }
+    float totalCount = (float)((AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER)-m_nNoGelCount);
+    if(totalCount!=0)
+        _cleanValue =  10*(float)m_nPinkCount / totalCount;
+    else
+        _cleanValue = 0;
 }
 
 - (UIImage *) exportImage
@@ -256,7 +256,7 @@
 {
     UInt8 minValue = 0x4F;
     if (rgba->r < minValue && rgba->g < minValue && rgba->b < minValue)
-        return NO_DIRTY_PIXEL;
+        return BLUE_DIRTY_PIXEL;
 
     int yellowValue = rgba->r + rgba->g;
     int greenValue = rgba->g + rgba->b;
@@ -268,7 +268,7 @@
         if(pinkValue>(yellowValue-self.m_colorOffset))
             return PINK_DIRTY_PIXEL;
         else
-            return NO_DIRTY_PIXEL;
+            return BLUE_DIRTY_PIXEL;
 //        float distance = [self getDistanceWithPinkColor:rgba];
 //        if(distance<PINK_COLOR_OFFSET)
 //            return PINK_DIRTY_PIXEL;
@@ -284,6 +284,7 @@
 
 
 -(void)setNonGelAreaState:(NSMutableArray *)nonGelAreaArray{
+    m_nNoGelCount = 0;
     [_areaCleanState removeAllObjects];
     for(int i =0;i<_originalAreaCleanState.count;i++){
         [_areaCleanState addObject:[_originalAreaCleanState objectAtIndex:i]];
@@ -294,6 +295,7 @@
             int pointX = i/SGGridCount;
             int pointY = i%SGGridCount;
             int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+            m_nNoGelCount+= rate*rate;
             for(int i = 0; i<rate;i++){
                 for(int j = 0; j< rate; j++){
                     NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
@@ -302,6 +304,7 @@
             }
         }
     }
+    [self calculateDirtyValue];
 }
 
 - (XYZ)getXYZfromRGB : (RGBA *)rgbColor{

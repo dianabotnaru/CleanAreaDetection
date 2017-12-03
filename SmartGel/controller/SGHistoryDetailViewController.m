@@ -39,7 +39,7 @@
 - (void)initUI{
     self.locationLabel.text = self.selectedEstimateImageModel.location;
     self.dateLabel.text = self.selectedEstimateImageModel.date;
-    self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.selectedEstimateImageModel.dirtyValue];
+    self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.selectedEstimateImageModel.cleanValue];
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedEstimateImageModel.imageUrl]
                                     placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]

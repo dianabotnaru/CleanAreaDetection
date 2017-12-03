@@ -47,6 +47,8 @@ typedef struct
     
     int         m_nPinkCount;
     int         m_nBlueCount;
+    
+    int         m_nNoGelCount;
 }
 @property (nonatomic, strong)   NSMutableArray  *areaCleanState;
 @property (nonatomic, strong)   NSMutableArray  *originalAreaCleanState;

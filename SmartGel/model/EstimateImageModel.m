@@ -13,7 +13,7 @@
 -(instancetype)initWithDict:(NSDictionary *)dict{
     self = [super init];
     if(self){
-        self.dirtyValue = [[dict objectForKey:@"value"] floatValue];
+        self.cleanValue = [[dict objectForKey:@"value"] floatValue];
         self.date = [dict objectForKey:@"date"];
         self.location = [dict objectForKey :@"location"];
         self.imageUrl = [dict objectForKey :@"image"];
@@ -26,7 +26,7 @@
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot{
     self = [super init];
     if(self){
-        self.dirtyValue = [snapshot.value[@"value"] floatValue];
+        self.cleanValue = [snapshot.value[@"value"] floatValue];
         self.date = snapshot.value[@"date"];
         self.location = snapshot.value[@"location"];
         self.imageUrl = snapshot.value[@"image"];
@@ -44,7 +44,7 @@
            withCleanArray:(NSMutableArray *)cleanArray
           withNonGelArray:(NSMutableArray *)nonGelArray{
     self.image = image;
-    self.dirtyValue = vaule;
+    self.cleanValue = vaule;
     self.date = dateString;
     self.location = currentLocation;
     self.cleanArea = [self getStringFromArray:cleanArray];

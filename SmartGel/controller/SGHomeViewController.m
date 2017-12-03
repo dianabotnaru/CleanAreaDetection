@@ -130,11 +130,12 @@
                     isSavedImage = true;
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
                     NSString *key = self.userID;
-                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.dirtyValue],
+                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"date": self.estimateImage.date,
                                            @"location": self.estimateImage.location,
                                            @"cleanarea": self.estimateImage.cleanArea,
+                                           @"nonGelArea": self.estimateImage.nonGelArea,
                                            @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
                                            };
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
@@ -178,9 +179,6 @@
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
         CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
         
-//        float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
-//        float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
-        
         float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
         float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
 
@@ -193,6 +191,26 @@
             [paintView setBackgroundColor:[UIColor blueColor]];
             [paintView setAlpha:0.5];
             [self.takenImageView addSubview:paintView];
+        }
+        
+    }
+}
+
+- (void)drawNoGelView{
+    [self.noGelView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
+        int y = i/AREA_DIVIDE_NUMBER;
+        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
+        
+        float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
+        float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
+        
+        if([[self.engine.areaCleanState objectAtIndex:i] intValue] == NO_GEL){
+            UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
+            [paintView setBackgroundColor:[UIColor yellowColor]];
+            [paintView setAlpha:0.5];
+            [self.noGelView addSubview:paintView];
         }
     }
 }
@@ -296,11 +314,20 @@
     if(self.takenImage==nil)
         return;
     CGPoint touchLocation = [touch1 locationInView:self.gridView];
-    int gelPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
-    [self.estimateImage updateNonGelAreaString:gelPosition];
+    int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
+    [self updateDataAndUIbyTouch:touchPosition];
+}
+
+-(void)updateDataAndUIbyTouch:(int)touchPosition{
+    [self.estimateImage updateNonGelAreaString:touchPosition];
     [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
-    [self hideDirtyArea];
-    [self showCleanAndDirtyArea];
+    if(isShowDirtyArea){
+        [self hideDirtyArea];
+        [self showCleanAndDirtyArea];
+    }
+    [self drawNoGelView];
+    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
+    self.estimateImage.cleanValue = self.engine.cleanValue;
 }
 
 -(void)launchPictureEditViewController{
