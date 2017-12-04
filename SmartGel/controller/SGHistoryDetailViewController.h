@@ -30,7 +30,10 @@
 @property (weak, nonatomic) id<SGHistoryDetailViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
-@property (strong, nonatomic) IBOutlet SGGridView *gridView;
+@property (strong, nonatomic) SGGridView *gridView;
+@property (strong, nonatomic) IBOutlet UIView *gridContentView;
+
+
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;

@@ -34,7 +34,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2m-nP-ZNq">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="840"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0ne-iK-goy">
+                                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0ne-iK-goy">
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="840"/>
                                                 <color key="backgroundColor" red="0.1960784314" green="0.2274509804" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
@@ -82,21 +82,21 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="0ne-iK-goy" secondAttribute="trailing" id="3Xk-PU-cqD"/>
                                             <constraint firstItem="f3Q-ZR-bNC" firstAttribute="centerX" secondItem="b2m-nP-ZNq" secondAttribute="centerX" id="8fA-PB-bCh"/>
                                             <constraint firstAttribute="trailing" secondItem="MGE-Nh-JIh" secondAttribute="trailing" constant="16" id="Cf9-Kn-5ll"/>
                                             <constraint firstItem="f3Q-ZR-bNC" firstAttribute="top" secondItem="M1e-FX-kfH" secondAttribute="bottom" constant="10" id="DXF-AJ-bDB"/>
                                             <constraint firstAttribute="bottom" secondItem="RpD-T1-dX4" secondAttribute="bottom" id="FiZ-Nr-pyn"/>
-                                            <constraint firstItem="0ne-iK-goy" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="JAf-qB-pp7"/>
+                                            <constraint firstAttribute="bottom" secondItem="0ne-iK-goy" secondAttribute="bottom" id="Mfj-yj-O4e"/>
                                             <constraint firstAttribute="bottom" secondItem="MGE-Nh-JIh" secondAttribute="bottom" constant="20" id="V1W-5L-H8Y"/>
                                             <constraint firstItem="GPb-Yj-bCY" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="WWr-Je-Igj"/>
                                             <constraint firstItem="M1e-FX-kfH" firstAttribute="centerX" secondItem="b2m-nP-ZNq" secondAttribute="centerX" id="b3u-IU-uIF"/>
                                             <constraint firstAttribute="trailing" secondItem="GPb-Yj-bCY" secondAttribute="trailing" id="bda-EZ-cBp"/>
-                                            <constraint firstAttribute="bottom" secondItem="0ne-iK-goy" secondAttribute="bottom" id="cPx-Gm-dQ8"/>
+                                            <constraint firstItem="0ne-iK-goy" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="bdn-ZY-Nyw"/>
                                             <constraint firstItem="RpD-T1-dX4" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="duy-rw-Oz8"/>
                                             <constraint firstItem="MGE-Nh-JIh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b2m-nP-ZNq" secondAttribute="leading" constant="20" symbolic="YES" id="eaE-Nd-WaA"/>
-                                            <constraint firstAttribute="trailing" secondItem="0ne-iK-goy" secondAttribute="trailing" id="fpr-mv-cqr"/>
+                                            <constraint firstItem="0ne-iK-goy" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="eiN-2q-vOX"/>
                                             <constraint firstItem="M1e-FX-kfH" firstAttribute="centerY" secondItem="b2m-nP-ZNq" secondAttribute="centerY" id="itb-BJ-Sdg"/>
-                                            <constraint firstItem="0ne-iK-goy" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="mYd-QL-fEB"/>
                                             <constraint firstItem="RpD-T1-dX4" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="p53-mk-x79"/>
                                             <constraint firstItem="GPb-Yj-bCY" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="rUl-qb-2tx"/>
                                             <constraint firstAttribute="bottom" secondItem="GPb-Yj-bCY" secondAttribute="bottom" id="uvH-Ws-MsX"/>
@@ -355,7 +355,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="840"/>
                                                 <color key="backgroundColor" red="0.1960784314" green="0.2274509804" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1i3-CK-I30" customClass="SGGridView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1i3-CK-I30">
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="840"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
@@ -544,7 +544,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="dateLabel" destination="vf6-1m-teY" id="bEn-0u-zZL"/>
-                        <outlet property="gridView" destination="1i3-CK-I30" id="Otu-cG-zuK"/>
+                        <outlet property="gridContentView" destination="1i3-CK-I30" id="VBV-vS-mGt"/>
                         <outlet property="locationLabel" destination="dqs-mR-Yx1" id="Dog-MC-4H8"/>
                         <outlet property="showDirtyAreaButton" destination="UoU-fQ-oIo" id="LKx-WA-GPf"/>
                         <outlet property="takenImageView" destination="ZWk-gu-8EF" id="Z9S-bY-Xhk"/>

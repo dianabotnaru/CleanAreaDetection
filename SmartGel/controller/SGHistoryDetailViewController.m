@@ -23,12 +23,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self initUI];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
+    [self initUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,6 +48,7 @@
                                               } else {
                                                   self.selectedEstimateImageModel.image = image;
                                                   self.takenImageView.image = image;
+                                                  [self drawGridView];
                                                   dispatch_async(dispatch_get_main_queue(), ^{
                                                       self.engine = [[DirtyExtractor alloc] initWithImage:image];
                                                       [self.hud hideAnimated:YES];
@@ -70,10 +70,6 @@
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self drawView:[self getDirtyAreaArray]];
-//        if(!isShowPartArea)
-//            [self drawView :[self getDirtyAreaArray]];
-//        else
-//            [self drawView :self.partyEngine.areaCleanState];
         [self.hud hideAnimated:false];
     });
 }
@@ -82,7 +78,7 @@
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
+        CGRect rect = [self calculateClientRectOfImageInUIImageView];
         
         float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
         float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
@@ -104,10 +100,10 @@
     }
 }
 
--(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView *)imgView
+-(CGRect)calculateClientRectOfImageInUIImageView
 {
-    CGSize imgViewSize=imgView.frame.size;                  // Size of UIImageView
-    CGSize imgSize=imgView.image.size;                      // Size of the image, currently displayed
+    CGSize imgViewSize=self.takenImageView.frame.size;                  // Size of UIImageView
+    CGSize imgSize=self.takenImageView.image.size;                      // Size of the image, currently displayed
     
     CGFloat scaleW = imgViewSize.width / imgSize.width;
     CGFloat scaleH = imgViewSize.height / imgSize.height;
@@ -125,8 +121,8 @@
     
     // Add imageView offset
     
-    imageRect.origin.x+=imgView.frame.origin.x;
-    imageRect.origin.y+=imgView.frame.origin.y;
+    imageRect.origin.x+=self.takenImageView.frame.origin.x;
+    imageRect.origin.y+=self.takenImageView.frame.origin.y;
     
     return imageRect;
 }
@@ -190,6 +186,14 @@
             [self hideDirtyArea];
         }
     }
+}
+
+-(void)drawGridView{
+    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    CGRect rect = [self calculateClientRectOfImageInUIImageView];
+    self.gridView = [[SGGridView alloc] initWithFrame:rect];
+    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
+    [self.gridContentView addSubview:self.gridView];
 }
 
 //- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

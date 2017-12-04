@@ -28,12 +28,15 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    if(self.takenImage!=nil)
+        [self drawGridView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (void)initData{
     self.engine = [[DirtyExtractor alloc] init];
@@ -45,18 +48,18 @@
 }
 
 -(void)initDataUiWithImage:(UIImage *)image{
+    [self.takenImageView setImage:image];
     isSavedImage = false;
     self.takenImage = image;
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
     [self hideDirtyArea];
-    [self.takenImageView setImage:image];
-    [self drawGridView:image];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     
     [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
+    
 }
 
 - (NSMutableArray *)nonGelAreaArrayInit{
@@ -67,17 +70,18 @@
     return gelAreaArray;
 }
 
--(void)drawGridView:(UIImage *)image{
+-(void)drawGridView{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    self.gridView = [[SGGridView alloc] initWithFrame:[self calculateClientRectOfImageInUIImageView:self.takenImageView]];
+    CGRect rect = [self calculateClientRectOfImageInUIImageView];
+    self.gridView = [[SGGridView alloc] initWithFrame:rect];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
 }
 
--(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView *)imgView
+-(CGRect)calculateClientRectOfImageInUIImageView
 {
-    CGSize imgViewSize=imgView.frame.size;                  // Size of UIImageView
-    CGSize imgSize=imgView.image.size;                      // Size of the image, currently displayed
+    CGSize imgViewSize=self.takenImageView.frame.size;                  // Size of UIImageView
+    CGSize imgSize=self.takenImage.size;                      // Size of the image, currently displayed
     
     CGFloat scaleW = imgViewSize.width / imgSize.width;
     CGFloat scaleH = imgViewSize.height / imgSize.height;
@@ -91,12 +95,11 @@
     // Center image
     
     imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
-    imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
-    
+ 
     // Add imageView offset
     
-    imageRect.origin.x+=imgView.frame.origin.x;
-    imageRect.origin.y+=imgView.frame.origin.y;
+    imageRect.origin.x+=self.takenImageView.frame.origin.x;
+    imageRect.origin.y+=self.takenImageView.frame.origin.y;
     
     return imageRect;
 }
@@ -177,7 +180,7 @@
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
+        CGRect rect = [self calculateClientRectOfImageInUIImageView];
         
         float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
         float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
@@ -201,7 +204,7 @@
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        CGRect rect = [self calculateClientRectOfImageInUIImageView:self.takenImageView];
+        CGRect rect = [self calculateClientRectOfImageInUIImageView];
         
         float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
         float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
@@ -292,18 +295,18 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-    NSString* imageURL = [self getImageUrl:3];
-    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                              if(error==nil){
-                                  [self initDataUiWithImage:image];
-                              }
-                          }];
+//    NSString* imageURL = [self getImageUrl:3];
+//    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+//                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                              if(error==nil){
+//                                  [self initDataUiWithImage:image];
+//                              }
+//                          }];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -324,7 +327,6 @@
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
     if(isShowDirtyArea){
         [self hideDirtyArea];
-        [self showCleanAndDirtyArea];
     }
     [self drawNoGelView];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
