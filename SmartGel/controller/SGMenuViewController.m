@@ -12,12 +12,14 @@
 #import "SGHistoryViewController.h"
 #import "SGWebViewController.h"
 #import "SGSettingViewController.h"
+#import "SGLaboratoryViewController.h"
 
 @interface SGMenuViewController ()
 @property (strong, nonatomic) SGHomeViewController *sgHomeViewController;
 @property (strong, nonatomic) SGHistoryViewController *sgHistoryViewController;
 @property (strong, nonatomic) SGWebViewController *sgWebViewController;
 @property (strong, nonatomic) SGSettingViewController *sgSettingViewController;
+@property (strong, nonatomic) SGLaboratoryViewController *sgLaboratoryViewController;
 
 @end
 
@@ -41,17 +43,19 @@
     if(indexPath.row == 0){
         [cell setLabels:@"Home"];
     }else if(indexPath.row ==1){
+        [cell setLabels:@"Laboratory"];
+    }else if(indexPath.row ==2){
         [cell setLabels:@"History"];
-    }else if(indexPath.row == 2){
-        [cell setLabels:@"Settings"];
     }else if(indexPath.row == 3){
+        [cell setLabels:@"Settings"];
+    }else if(indexPath.row == 4){
         [cell setLabels:@"About"];
     }
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,16 +72,22 @@
                                                          animated:YES];
             break;
         case 1:
+            self.sgLaboratoryViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGLaboratoryViewController"];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgLaboratoryViewController]
+                                                         animated:YES];
+            break;
+
+        case 2:
             self.sgHistoryViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHistoryViewController]
                                                          animated:YES];
             break;
-        case 2:
+        case 3:
             self.sgSettingViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGSettingViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgSettingViewController]
                                                          animated:YES];
             break;
-        case 3:
+        case 4:
             self.sgWebViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGWebViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgWebViewController]
                                                          animated:YES];

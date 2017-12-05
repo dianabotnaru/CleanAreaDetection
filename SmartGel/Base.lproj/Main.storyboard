@@ -555,6 +555,42 @@
             </objects>
             <point key="canvasLocation" x="910" y="842"/>
         </scene>
+        <!--Laboratory View Controller-->
+        <scene sceneID="Z7y-Zc-fMl">
+            <objects>
+                <viewController storyboardIdentifier="SGLaboratoryViewController" id="o4L-Oo-xZl" customClass="SGLaboratoryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5iw-2K-Hjr"/>
+                        <viewControllerLayoutGuide type="bottom" id="wXQ-QE-nz5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1Pi-zq-pTs">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mti-JJ-TNl">
+                                <rect key="frame" x="300" y="834" width="168" height="70"/>
+                                <color key="backgroundColor" red="0.72549019609999998" green="0.2901960784" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="168" id="BAf-1F-Fad"/>
+                                    <constraint firstAttribute="height" constant="70" id="Rvd-5C-k8r"/>
+                                </constraints>
+                                <state key="normal" title="Take a Photo">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mti-JJ-TNl" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="Lkz-ul-hxT"/>
+                            <constraint firstItem="wXQ-QE-nz5" firstAttribute="top" secondItem="mti-JJ-TNl" secondAttribute="bottom" constant="120" id="P6p-rK-q7D"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pZA-3u-Mx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1599.21875" y="841.9921875"/>
+        </scene>
         <!--Work History-->
         <scene sceneID="X7X-W8-PyR">
             <objects>
