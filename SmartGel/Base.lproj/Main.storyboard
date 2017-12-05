@@ -555,7 +555,7 @@
             </objects>
             <point key="canvasLocation" x="910" y="842"/>
         </scene>
-        <!--Laboratory View Controller-->
+        <!--SmartGel-->
         <scene sceneID="Z7y-Zc-fMl">
             <objects>
                 <viewController storyboardIdentifier="SGLaboratoryViewController" id="o4L-Oo-xZl" customClass="SGLaboratoryViewController" sceneMemberID="viewController">
@@ -568,7 +568,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mti-JJ-TNl">
-                                <rect key="frame" x="300" y="834" width="168" height="70"/>
+                                <rect key="frame" x="300" y="790" width="168" height="70"/>
                                 <color key="backgroundColor" red="0.72549019609999998" green="0.2901960784" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="168" id="BAf-1F-Fad"/>
@@ -579,13 +579,22 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.22745098039215686" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="mti-JJ-TNl" firstAttribute="centerX" secondItem="1Pi-zq-pTs" secondAttribute="centerX" id="Lkz-ul-hxT"/>
                             <constraint firstItem="wXQ-QE-nz5" firstAttribute="top" secondItem="mti-JJ-TNl" secondAttribute="bottom" constant="120" id="P6p-rK-q7D"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="SmartGel" id="92k-8X-ysZ">
+                        <barButtonItem key="leftBarButtonItem" image="ic_menu" id="djQ-aN-Ugw">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="o4L-Oo-xZl" id="1gd-qs-HCK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pZA-3u-Mx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
