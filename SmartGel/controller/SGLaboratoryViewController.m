@@ -16,10 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    li=([self licheck]);
+    li=[self licheck];
     DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
-//    optorpic=FALSE;
-    
     if( [[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
     {
         ugormg=FALSE;
@@ -29,41 +27,19 @@
         ugormg=TRUE;
         self.lblugormg.text = @"mg/l Organic";
     }
-    //libsegcam.segmentedControlStyle = UISegmentedControlStylePlain;
-    //libsegcam.tintColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
     
     vgood = [[NSUserDefaults standardUserDefaults] floatForKey:@"vgood"];
-    //res0val.value = vgood;
-    //res0vallab.text=[NSString stringWithFormat:@"%.2f",vgood];
-    
-    
     satis = [[NSUserDefaults standardUserDefaults] floatForKey:@"satis"];
-    //res2val.value = satis;
-    //res2vallab.text=[NSString stringWithFormat:@"%.2f",satis];
-    
-    
     vgoodlab = [[NSUserDefaults standardUserDefaults] stringForKey:@"vgoodlab"];
-    //res0lab.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"vgoodlab"];
-    
     satislab = [[NSUserDefaults standardUserDefaults] stringForKey:@"satislab"];
-    //res2lab.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"satislab"];
-    
     inadeqlab = [[NSUserDefaults standardUserDefaults] stringForKey:@"inadeqlab"];
-    //res4lab.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"inadeqlab"];
-    
     
     R = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankR"];
-    
     G= [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankG"];
-    
     B = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankB"];
-    
-    
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
     firstrun=0;
-    
-    
     
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
     thePath = [rootPath stringByAppendingPathComponent:@"Data.xml"];
@@ -71,47 +47,17 @@
     NSMutableArray *bData = [[NSMutableArray alloc] initWithContentsOfFile:thePath];
     //NSLog(@"bd:%@",bData);
     
-    
     int len;
-    
     len = [bData count];
     
     if(len<=1)
     {
         //Ausgabe mit RGB
         NSArray *plistentries = [[NSArray alloc] initWithObjects:@"Date",@"Customer",@"Tag",@"Diameter",@"Result",@"UgorMg",@"BlankR",@"BlankG",@"BlankB",@"SampleR",@"SampleG",@"SampleB",nil];
-        /*
-         //Ausgabe ohne RGB
-         NSArray *plistentries = [[NSArray alloc] initWithObjects:@"Date",@"Customer",@"Tag",@"Diameter",@"Result",@"UgorMg",nil];
-         */
         NSMutableArray *dData= [[NSMutableArray alloc] init];
         [dData addObject:plistentries];
         [dData writeToFile:thePath atomically:YES];
     }
-    
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:2];
-//
-//    if(li)
-//    {
-//        save.center=pos3;
-//        btnoptions.center=pos4;
-//        btninfo.center=pos5;
-//    }else
-//    {
-//        save.hidden=TRUE;
-//        btnoptions.hidden=TRUE;
-//        btninfo.center=pos3;
-//    }
-//
-//
-//
-//    vwslidemenu.center=slpos1;
-//
-//    [UIView commitAnimations];
-//
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,14 +71,12 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.delegate = self;
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        [self presentViewController:imagePickerController animated:NO completion:nil];
-    
-//    UIImage *image = [UIImage imageNamed:@"test.png"];
-//    [self estimateValue:image];
-    
+//        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//        imagePickerController.delegate = self;
+//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        [self presentViewController:imagePickerController animated:NO completion:nil];
+    UIImage *image = [UIImage imageNamed:@"test.png"];
+    [self estimateValue:image];
 }
 
 - (CGContextRef) createARGBBitmapContextFromImage:(CGImageRef) inImage {
@@ -324,73 +268,7 @@
         bbred=rednewby/nb+R;//-4
         bbgreen=greennewby/nb+G;//-4
         bbblue=bluenewby/nb+B;//-7
-        
-        
-        
-        
-        /*double LD,RB,RS,GB,GS,MN2S,V1M,S1M,IZERO550,IZERO625,IATT550B,IATT550S,IATT625B,IATT625S,ABS550B,ABS550S,ABS625B,ABS625S,MN7B,MN7S,MN6B,MN6S,RSF,MGL_ORG,UGCM2_ORG;
-         
-         float MN2Q=3.00;
-         float RGIZero=160.00;
-         
-         float WR550=163.00;
-         float WG550=296.00;
-         float WR625=352.00;
-         float WG625=98.00;
-         
-         float M550_7=0.212;
-         float M625_7=0.169;
-         float M550_6=0.1;
-         float M625_6=0.222;
-         
-         float DIV=0.03;
-         float MNREF=0.114;
-         
-         
-         RS=ssred;
-         RB=bbred;
-         GS=ssgreen;
-         GB=bbgreen;
-         
-         IZERO550=(RGIZero*WR550+RGIZero*WG550)/1000;
-         IZERO625=(RGIZero*WR625+RGIZero*WG625)/1000;
-         IATT550B=(RB*WR550+GB*WG550)/1000;
-         IATT550S=(RS*WR550+GS*WG550)/1000;
-         IATT625B=(RB*WR625+GB*WG625)/1000;
-         IATT625S=(RS*WR625+GS*WG625)/1000;
-         
-         ABS550B=(-log10(IATT550B/IZERO550));
-         ABS625B=(-log10(IATT625B/IZERO625));
-         ABS550S=(-log10(IATT550S/IZERO550));
-         ABS625S=(-log10(IATT625S/IZERO625));
-         
-         MN7B=((M550_7*ABS550B-M625_7*ABS625B)/DIV)*MNREF;
-         MN7S=((M550_7*ABS550S-M625_7*ABS625S)/DIV)*MNREF;
-         MN6B=((M550_6*ABS550B-M625_6*ABS625B)/DIV)*MNREF;
-         MN6S=-(((M550_6*ABS550S-M625_6*ABS625S)/DIV)*MNREF);
-         //NSLog(@"ABS:%.3f;%.3f;%.3f;%.3f",ABS550B,ABS625B,ABS550S,ABS625S);
-         //NSLog(@"MN:%.3f;%.3f;%.3f;%.3f",MN7B,MN7S,MN6B,MN6S);
-         
-         MN2S=(MN7B+MN6B)-(MN7S+MN6S);
-         //IF MN2S <0 THEN MN2S=0;
-         if(MN2S<=0)
-         {MN2S=0;
-         }
-         //NSLog(@"MN2S%.3f",MN2S);
-         
-         
-         RSF=(MN6S+4*MN2Q*MN2S)-MN6B;
-         
-         MGL_ORG=RSF*7.5;
-         
-         V1M=((LD/20)*(LD/20))*3.1415/10;
-         S1M=(LD/10)*3.1415*100;
-         
-         UGCM2_ORG=(MGL_ORG*V1M*1000)/S1M;*/
-        
-        
-        
-        
+
         double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF,mgl_CH2O,ug_cm2,Mn7R,ERR,maxmgl,maxug,RSFGO;
         I=4.07;
         T=8.53;
@@ -489,23 +367,6 @@
         Mn7R = (Mn7_CS - Mn7_S);
         ERR = abs((Mn7R-RSF)*100/Mn7R);
         
-        // Berechnungsstufe 4:
-        /*if (ERR < 20)
-         {
-         CEQU = (RSF + Mn7R) / 2;
-         }
-         else
-         {
-         if (ERR > 20 && ssgreen > ssblue)
-         {
-         CEQU = RSF;
-         }
-         else
-         {
-         CEQU = Mn7R;
-         }
-         }*/
-        // Berechnungsstufe 5:
         if(RSF*7.5<0.38)
         {   RSFGO = (RSF*7.5);
         }else
@@ -517,15 +378,6 @@
         
         maxmgl=0.2*7.5;
         maxug=(0.2*7.5*1000)/(2*1000/(Diam));
-        /*
-         NSLog([NSString stringWithFormat:@"RSF %.2f",RSF]);
-         NSLog([NSString stringWithFormat:@"maxug %.2f",maxug]);
-         NSLog([NSString stringWithFormat:@"maxmg %.2f",maxmgl]);
-         NSLog([NSString stringWithFormat:@"ug %.2f",ug_cm2]);
-         NSLog([NSString stringWithFormat:@"mg %.2f",mgl_CH2O]);
-         NSLog([NSString stringWithFormat:@"dia %.2f",Diam]);
-         NSLog([NSString stringWithFormat:@"dia %.2f",Diam]);
-         */
         li = true;
         if(li)
         {
@@ -544,81 +396,58 @@
                 self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
                 if(ug_cm2 < vgood)
                 {
-                    
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
 //                    reslabel.text = vgoodlab;
-                    
-                }else
-                {if(ug_cm2 < satis)
-                {
+                }else{
+                    if(ug_cm2 < satis){
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
 //                    reslabel.text = satislab;
-                    
-                }else
-                {
-                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-//                    reslabel.text = inadeqlab;
+                    }else{
+                        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+//                      reslabel.text = inadeqlab;
+                    }
                 }
-                }
-                
-                
-            }else
+            }
+            else
             {
                 if(RSF<=0.2)
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
-                }else
+                }
+                else
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
                 }
-//                reslabel.hidden=TRUE;
                 self.resultfoxImageView.image=nil;
                 self.lbldiam.text=@"";
             }
-        }else
+        }
+        else
         {
             self.resultValueLabel.text=@"---";
             if(ug_cm2 <= 0.01)
             {
                 self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-                
-            }else
-            {if(ug_cm2 < maxug)
-            {
-                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-                
-            }else
-            {
-                self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+            }else{
+                if(ug_cm2 < maxug)
+                {
+                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+                }else{
+                    self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+                }
             }
-            }
-            
             self.lblugormg.text = @"";
             //reslabel.hidden=TRUE;
         }
-        
         // Datum
         static NSDateFormatter *dateFormatter = nil;
         NSDate *today = [NSDate date];
-        
         if (dateFormatter == nil) {
             dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
             [dateFormatter setDateStyle:NSDateFormatterShortStyle];
         }
-//        timeLabel.text = [dateFormatter stringFromDate:today];
-//        save.enabled=TRUE;
-        //int xb=0,yb=0,rednewbx=0,greennewbx=0,bluenewbx=0,rednewby=0,greennewby=0,bluenewby=0,nb=0;
-        //double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF,CEQU,mgl_CH2O,Mn7R,ERR;
-        
     }
-    
-    
-//    if(picorimg)
-//    {
-//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-//    }
-    // Free image data memory for the context
     if (data)
     {
         free(data);
@@ -626,13 +455,10 @@
     CGContextRelease(bitmapcrop1);
 }
 
-
 - (BOOL)licheck
 {
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *lkeyI = [defaults stringForKey:@"lkey"];
-    
     //    NSString *aresult = [[[UIDevice currentDevice] uniqueIdentifier] stringByReplacingOccurrencesOfString:@"a" withString:@""];
     NSString *aresult = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"a" withString:@""];
     NSString *bresult = [aresult stringByReplacingOccurrencesOfString:@"b" withString:@""];
@@ -817,35 +643,16 @@
                 }
             }
         }
-        
-        
-        
     }
-    
     if([LK count]>=10)
     {
-        
-        if([lkeyI isEqualToString:[NSString stringWithFormat:@"%@%@%@%@-%@%@%@-%@%@%@",[LK objectAtIndex:0],[LK objectAtIndex:1],[LK objectAtIndex:2],[LK objectAtIndex:3],[LK objectAtIndex:4],[LK objectAtIndex:5],[LK objectAtIndex:6],[LK objectAtIndex:7],[LK objectAtIndex:8],[LK objectAtIndex:9]]])
-        {
+        if([lkeyI isEqualToString:[NSString stringWithFormat:@"%@%@%@%@-%@%@%@-%@%@%@",[LK objectAtIndex:0],[LK objectAtIndex:1],[LK objectAtIndex:2],[LK objectAtIndex:3],[LK objectAtIndex:4],[LK objectAtIndex:5],[LK objectAtIndex:6],[LK objectAtIndex:7],[LK objectAtIndex:8],[LK objectAtIndex:9]]]){
             return TRUE;
-        }else
-        {
+        }else{
             return FALSE;
         }
-    }else
-    {
+    }else{
         return FALSE;
     }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
