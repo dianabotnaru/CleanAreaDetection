@@ -22,10 +22,9 @@
 @property (strong, nonatomic) IBOutlet UIView *blankView;
 @property (strong, nonatomic) IBOutlet UIView *sampleView;
 @property (strong, nonatomic) IBOutlet UILabel *resultValueLabel;
-@property (strong, nonatomic) IBOutlet UILabel *resLabel;
 @property (strong, nonatomic) IBOutlet UILabel *lbldiam;
 @property (strong, nonatomic) IBOutlet UILabel *lblugormg;
-@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (strong, nonatomic) IBOutlet UIImageView *resultfoxImageView;
 

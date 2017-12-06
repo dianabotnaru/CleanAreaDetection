@@ -35,6 +35,7 @@
     //    [self presentViewController:imagePickerController animated:NO completion:nil];
     
     UIImage *image = [UIImage imageNamed:@"test.png"];
+    [self estimateValue:image];
     
 }
 
@@ -443,24 +444,24 @@
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
                 }
 //                reslabel.hidden = FALSE;
-                self.resultfoxImageView.hidden = FALSE;
+//                resultfox.hidden = FALSE;
                 self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
                 if(ug_cm2 < vgood)
                 {
                     
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-                    self.resLabel.text = vgoodlab;
+//                    reslabel.text = vgoodlab;
                     
                 }else
                 {if(ug_cm2 < satis)
                 {
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-                    self.resLabel.text = satislab;
+//                    reslabel.text = satislab;
                     
                 }else
                 {
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-                    self.resLabel.text = inadeqlab;
+//                    reslabel.text = inadeqlab;
                 }
                 }
                 
@@ -474,7 +475,7 @@
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
                 }
-                self.resLabel.hidden=TRUE;
+//                reslabel.hidden=TRUE;
                 self.resultfoxImageView.image=nil;
                 self.lbldiam.text=@"";
             }
@@ -509,28 +510,24 @@
             [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
             [dateFormatter setDateStyle:NSDateFormatterShortStyle];
         }
-        
-        
-        self.timeLabel.text = [dateFormatter stringFromDate:today];
-        
-        
-        
-        
+//        timeLabel.text = [dateFormatter stringFromDate:today];
+//        save.enabled=TRUE;
         //int xb=0,yb=0,rednewbx=0,greennewbx=0,bluenewbx=0,rednewby=0,greennewby=0,bluenewby=0,nb=0;
         //double E535_S,E435_S,E405_S,Mn7_S,Mn6_S,Mn2_S,E535_CS,E435_CS,E405_CS,Mn7_CS,Mn6_CS,Mn2_CS,I,T,RSF,CEQU,mgl_CH2O,Mn7R,ERR;
         
     }
     
+    
+//    if(picorimg)
+//    {
+//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//    }
     // Free image data memory for the context
     if (data)
     {
         free(data);
     }
-    
     CGContextRelease(bitmapcrop1);
-    //CGImageRelease(ref);
-    //[picker release];
-
 }
 
 /*

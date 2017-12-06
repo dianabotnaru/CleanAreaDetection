@@ -15,6 +15,13 @@
 		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
 		8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */; };
+		8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662561FD8247A008DFED2 /* Smiley_yellow.png */; };
+		8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662571FD8247A008DFED2 /* Smiley_pink.png */; };
+		8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662581FD8247B008DFED2 /* Smiley_green.png */; };
+		8D5662601FD8247C008DFED2 /* Smiley_).png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662591FD8247B008DFED2 /* Smiley_).png */; };
+		8D5662611FD8247C008DFED2 /* puriSCOPE_logo_color_190x30px.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625A1FD8247B008DFED2 /* puriSCOPE_logo_color_190x30px.png */; };
+		8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625B1FD8247B008DFED2 /* Smiley_(.png */; };
+		8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625C1FD8247C008DFED2 /* Smiley_.png */; };
 		8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
@@ -55,6 +62,13 @@
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryViewController.h; path = controller/SGLaboratoryViewController.h; sourceTree = "<group>"; };
 		8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryViewController.m; path = controller/SGLaboratoryViewController.m; sourceTree = "<group>"; };
+		8D5662561FD8247A008DFED2 /* Smiley_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_yellow.png; path = resource/Smiley_yellow.png; sourceTree = "<group>"; };
+		8D5662571FD8247A008DFED2 /* Smiley_pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_pink.png; path = resource/Smiley_pink.png; sourceTree = "<group>"; };
+		8D5662581FD8247B008DFED2 /* Smiley_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_green.png; path = resource/Smiley_green.png; sourceTree = "<group>"; };
+		8D5662591FD8247B008DFED2 /* Smiley_).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Smiley_).png"; path = "resource/Smiley_).png"; sourceTree = "<group>"; };
+		8D56625A1FD8247B008DFED2 /* puriSCOPE_logo_color_190x30px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = puriSCOPE_logo_color_190x30px.png; path = resource/puriSCOPE_logo_color_190x30px.png; sourceTree = "<group>"; };
+		8D56625B1FD8247B008DFED2 /* Smiley_(.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Smiley_(.png"; path = "resource/Smiley_(.png"; sourceTree = "<group>"; };
+		8D56625C1FD8247C008DFED2 /* Smiley_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_.png; path = resource/Smiley_.png; sourceTree = "<group>"; };
 		8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPictureEditViewController.h; path = controller/SGPictureEditViewController.h; sourceTree = "<group>"; };
 		8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGPictureEditViewController.m; path = controller/SGPictureEditViewController.m; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
@@ -265,6 +279,13 @@
 		8DDC4FD91F944E9D00C92EEB /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				8D56625A1FD8247B008DFED2 /* puriSCOPE_logo_color_190x30px.png */,
+				8D56625C1FD8247C008DFED2 /* Smiley_.png */,
+				8D56625B1FD8247B008DFED2 /* Smiley_(.png */,
+				8D5662591FD8247B008DFED2 /* Smiley_).png */,
+				8D5662581FD8247B008DFED2 /* Smiley_green.png */,
+				8D5662571FD8247A008DFED2 /* Smiley_pink.png */,
+				8D5662561FD8247A008DFED2 /* Smiley_yellow.png */,
 				8D24C5121FC5E3D600D6C070 /* test.png */,
 				8D24C5071FC510B200D6C070 /* smartgel-tests.json */,
 				8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */,
@@ -335,13 +356,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */,
+				8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */,
 				8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */,
 				8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */,
 				8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */,
+				8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
+				8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */,
+				8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */,
 				8D80B2D81F7CFE810025B804 /* SGFilterView.xib in Resources */,
+				8D5662611FD8247C008DFED2 /* puriSCOPE_logo_color_190x30px.png in Resources */,
+				8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */,
+				8D5662601FD8247C008DFED2 /* Smiley_).png in Resources */,
 				8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */,
 				8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */,
 				8D24C5131FC5E3D600D6C070 /* test.png in Resources */,
