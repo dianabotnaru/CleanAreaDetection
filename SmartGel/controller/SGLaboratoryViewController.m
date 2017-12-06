@@ -16,6 +16,101 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    li=([self licheck]);
+    DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
+//    optorpic=FALSE;
+    
+    if( [[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
+    {
+        ugormg=FALSE;
+        self.lblugormg.text = @"ug/cm2 Organic";
+    }else
+    {
+        ugormg=TRUE;
+        self.lblugormg.text = @"mg/l Organic";
+    }
+    //libsegcam.segmentedControlStyle = UISegmentedControlStylePlain;
+    //libsegcam.tintColor = [UIColor colorWithRed:0.90 green:0.90 blue:0.90 alpha:1.0];
+    
+    vgood = [[NSUserDefaults standardUserDefaults] floatForKey:@"vgood"];
+    //res0val.value = vgood;
+    //res0vallab.text=[NSString stringWithFormat:@"%.2f",vgood];
+    
+    
+    satis = [[NSUserDefaults standardUserDefaults] floatForKey:@"satis"];
+    //res2val.value = satis;
+    //res2vallab.text=[NSString stringWithFormat:@"%.2f",satis];
+    
+    
+    vgoodlab = [[NSUserDefaults standardUserDefaults] stringForKey:@"vgoodlab"];
+    //res0lab.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"vgoodlab"];
+    
+    satislab = [[NSUserDefaults standardUserDefaults] stringForKey:@"satislab"];
+    //res2lab.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"satislab"];
+    
+    inadeqlab = [[NSUserDefaults standardUserDefaults] stringForKey:@"inadeqlab"];
+    //res4lab.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"inadeqlab"];
+    
+    
+    R = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankR"];
+    
+    G= [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankG"];
+    
+    B = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankB"];
+    
+    
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
+    firstrun=0;
+    
+    
+    
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+    thePath = [rootPath stringByAppendingPathComponent:@"Data.xml"];
+    
+    NSMutableArray *bData = [[NSMutableArray alloc] initWithContentsOfFile:thePath];
+    //NSLog(@"bd:%@",bData);
+    
+    
+    int len;
+    
+    len = [bData count];
+    
+    if(len<=1)
+    {
+        //Ausgabe mit RGB
+        NSArray *plistentries = [[NSArray alloc] initWithObjects:@"Date",@"Customer",@"Tag",@"Diameter",@"Result",@"UgorMg",@"BlankR",@"BlankG",@"BlankB",@"SampleR",@"SampleG",@"SampleB",nil];
+        /*
+         //Ausgabe ohne RGB
+         NSArray *plistentries = [[NSArray alloc] initWithObjects:@"Date",@"Customer",@"Tag",@"Diameter",@"Result",@"UgorMg",nil];
+         */
+        NSMutableArray *dData= [[NSMutableArray alloc] init];
+        [dData addObject:plistentries];
+        [dData writeToFile:thePath atomically:YES];
+    }
+    
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:2];
+//
+//    if(li)
+//    {
+//        save.center=pos3;
+//        btnoptions.center=pos4;
+//        btninfo.center=pos5;
+//    }else
+//    {
+//        save.hidden=TRUE;
+//        btnoptions.hidden=TRUE;
+//        btninfo.center=pos3;
+//    }
+//
+//
+//
+//    vwslidemenu.center=slpos1;
+//
+//    [UIView commitAnimations];
+//
+
     // Do any additional setup after loading the view.
 }
 
@@ -25,17 +120,18 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    [self estimateValue:image];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(IBAction)launchPhotoPickerController{
-    //    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    //    imagePickerController.delegate = self;
-    //    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //    [self presentViewController:imagePickerController animated:NO completion:nil];
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:imagePickerController animated:NO completion:nil];
     
-    UIImage *image = [UIImage imageNamed:@"test.png"];
-    [self estimateValue:image];
+//    UIImage *image = [UIImage imageNamed:@"test.png"];
+//    [self estimateValue:image];
     
 }
 
@@ -528,6 +624,218 @@
         free(data);
     }
     CGContextRelease(bitmapcrop1);
+}
+
+
+- (BOOL)licheck
+{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *lkeyI = [defaults stringForKey:@"lkey"];
+    
+    //    NSString *aresult = [[[UIDevice currentDevice] uniqueIdentifier] stringByReplacingOccurrencesOfString:@"a" withString:@""];
+    NSString *aresult = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"a" withString:@""];
+    NSString *bresult = [aresult stringByReplacingOccurrencesOfString:@"b" withString:@""];
+    NSString *cresult = [bresult stringByReplacingOccurrencesOfString:@"c" withString:@""];
+    NSString *dresult = [cresult stringByReplacingOccurrencesOfString:@"d" withString:@""];
+    NSString *eresult = [dresult stringByReplacingOccurrencesOfString:@"e" withString:@""];
+    NSString *fresult = [eresult stringByReplacingOccurrencesOfString:@"f" withString:@""];
+    
+    int l = [fresult length];
+    
+    NSString *nr1 = [fresult substringFromIndex:l-2];
+    NSString *nr2 = [[fresult substringFromIndex:l-4] substringToIndex:2];
+    NSString *nr3 = [[fresult substringFromIndex:l-6] substringToIndex:2];
+    NSString *nr4 = [[fresult substringFromIndex:l-8] substringToIndex:2];
+    NSString *nr5 = [[fresult substringFromIndex:l-10] substringToIndex:2];
+    NSString *nr6 = [[fresult substringFromIndex:l-12] substringToIndex:2];
+    NSString *nr7 = [[fresult substringFromIndex:l-14] substringToIndex:2];
+    NSString *nr8 = [[fresult substringFromIndex:l-16] substringToIndex:2];
+    NSString *nr9 = [[fresult substringFromIndex:l-18] substringToIndex:2];
+    NSString *nr10 = [fresult substringToIndex:l-(l-2)];
+    
+    NSArray *nrs = [[NSArray alloc] initWithObjects:nr1,nr2,nr3,nr4,nr5,nr6,nr7,nr8,nr9,nr10,nil];
+    int i;
+    NSMutableArray *LK= [[NSMutableArray alloc] init];
+    
+    for(i=0;i<10;i++)
+    {
+        
+        float nrn = [[nrs objectAtIndex:i] floatValue]/99.0*25.0;
+        
+        if(nrn<=0)
+        {
+            [LK addObject:@"A"];
+        }else
+        {
+            if(nrn<=1)
+            {
+                [LK addObject:@"B"];
+            }else
+            {
+                if(nrn<=2)
+                {
+                    [LK addObject:@"C"];
+                }else
+                {
+                    if(nrn<=3)
+                    {
+                        [LK addObject:@"D"];
+                    }else
+                    {
+                        if(nrn<=4)
+                        {
+                            [LK addObject:@"E"];
+                        }else
+                        {
+                            if(nrn<=5)
+                            {
+                                [LK addObject:@"F"];
+                            }else
+                            {
+                                if(nrn<=6)
+                                {
+                                    [LK addObject:@"G"];
+                                }else
+                                {
+                                    if(nrn<=7)
+                                    {
+                                        [LK addObject:@"H"];
+                                    }else
+                                    {
+                                        if(nrn<=8)
+                                        {
+                                            [LK addObject:@"I"];
+                                        }else
+                                        {
+                                            if(nrn<=9)
+                                            {
+                                                [LK addObject:@"J"];
+                                            }else
+                                            {
+                                                if(nrn<=10)
+                                                {
+                                                    [LK addObject:@"K"];
+                                                }else
+                                                {
+                                                    if(nrn<=11)
+                                                    {
+                                                        [LK addObject:@"L"];
+                                                    }else
+                                                    {
+                                                        if(nrn<=12)
+                                                        {
+                                                            [LK addObject:@"M"];
+                                                        }else
+                                                        {
+                                                            if(nrn<=13)
+                                                            {
+                                                                [LK addObject:@"N"];
+                                                            }else
+                                                            {
+                                                                if(nrn<=14)
+                                                                {
+                                                                    [LK addObject:@"O"];
+                                                                }else
+                                                                {
+                                                                    if(nrn<=15)
+                                                                    {
+                                                                        [LK addObject:@"P"];
+                                                                    }else
+                                                                    {
+                                                                        if(nrn<=16)
+                                                                        {
+                                                                            [LK addObject:@"Q"];
+                                                                        }else
+                                                                        {
+                                                                            if(nrn<=17)
+                                                                            {
+                                                                                [LK addObject:@"R"];
+                                                                            }else
+                                                                            {
+                                                                                if(nrn<=18)
+                                                                                {
+                                                                                    [LK addObject:@"S"];
+                                                                                }else
+                                                                                {
+                                                                                    if(nrn<=19)
+                                                                                    {
+                                                                                        [LK addObject:@"T"];
+                                                                                    }else
+                                                                                    {
+                                                                                        if(nrn<=20)
+                                                                                        {
+                                                                                            [LK addObject:@"U"];
+                                                                                        }else
+                                                                                        {
+                                                                                            if(nrn<=21)
+                                                                                            {
+                                                                                                [LK addObject:@"V"];
+                                                                                            }else
+                                                                                            {
+                                                                                                if(nrn<=22)
+                                                                                                {
+                                                                                                    [LK addObject:@"W"];
+                                                                                                }else
+                                                                                                {
+                                                                                                    if(nrn<=23)
+                                                                                                    {
+                                                                                                        [LK addObject:@"X"];
+                                                                                                    }else
+                                                                                                    {
+                                                                                                        if(nrn<=24)
+                                                                                                        {
+                                                                                                            [LK addObject:@"Y"];
+                                                                                                        }else
+                                                                                                        {
+                                                                                                            if(nrn<=25)
+                                                                                                            {
+                                                                                                                [LK addObject:@"Z"];
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
+    }
+    
+    if([LK count]>=10)
+    {
+        
+        if([lkeyI isEqualToString:[NSString stringWithFormat:@"%@%@%@%@-%@%@%@-%@%@%@",[LK objectAtIndex:0],[LK objectAtIndex:1],[LK objectAtIndex:2],[LK objectAtIndex:3],[LK objectAtIndex:4],[LK objectAtIndex:5],[LK objectAtIndex:6],[LK objectAtIndex:7],[LK objectAtIndex:8],[LK objectAtIndex:9]]])
+        {
+            return TRUE;
+        }else
+        {
+            return FALSE;
+        }
+    }else
+    {
+        return FALSE;
+    }
 }
 
 /*
