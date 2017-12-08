@@ -8,7 +8,7 @@
 
 #import "SGPictureEditViewController.h"
 #import "SGConstant.h"
-@interface SGPictureEditViewController ()<ACEDrawingViewDelegate>
+@interface SGPictureEditViewController ()
 
 @end
 
@@ -32,7 +32,6 @@
 
 -(void)drawGridView:(UIImage *)image{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    
     self.gridView = [[SGGridView alloc] initWithFrame:[self calculateClientRectOfImageInUIImageView:self.takenImageView]];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];

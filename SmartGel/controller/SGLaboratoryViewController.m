@@ -7,6 +7,8 @@
 //
 
 #import "SGLaboratoryViewController.h"
+#import "SCLAlertView.h"
+#import "SGConstant.h"
 
 @interface SGLaboratoryViewController ()
 
@@ -39,7 +41,7 @@
     B = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankB"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
-    firstrun=0;
+    firstrun=true;
     
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
     thePath = [rootPath stringByAppendingPathComponent:@"Data.xml"];
@@ -71,10 +73,28 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-//        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//        imagePickerController.delegate = self;
-//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//        [self presentViewController:imagePickerController animated:NO completion:nil];
+    if(firstrun){
+        [self capturePhoto];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"Do you want to save the Result?"
+                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self showSaveAlertView];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self capturePhoto];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+
+    }
+}
+
+-(void)capturePhoto{
+    //        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    //        imagePickerController.delegate = self;
+    //        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //        [self presentViewController:imagePickerController animated:NO completion:nil];
     UIImage *image = [UIImage imageNamed:@"test.png"];
     [self estimateValue:image];
 }
@@ -138,7 +158,7 @@
 }
 
 - (void)estimateValue:(UIImage *)image{
-    firstrun=1;
+    firstrun=false;
     CGImageRef ref = image.CGImage;
     CGContextRef bitmapcrop1 = [self createARGBBitmapContextFromImage:ref];
     if (bitmapcrop1 == NULL)
@@ -168,7 +188,6 @@
         bl=(w*35.0/100.0);
         bt=(h*75.0/100.0);//55
         bb=(h*90.0/100.0);//70
-        
         
         for(yb=bt;yb<bb;yb++)
         {
@@ -643,7 +662,26 @@
     }
 }
 
-- (IBAction)uploadButtonTapped{
+- (void)showSaveAlertView{
     
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    alert.customViewColor = SGColorBlack;
+    alert.iconTintColor = [UIColor whiteColor];
+    alert.tintTopCircle = NO;
+    alert.backgroundViewColor = SGColorDarkGray;
+    alert.view.backgroundColor = SGColorDarkGray;
+    alert.backgroundType = SCLAlertViewBackgroundTransparent;
+
+    alert.labelTitle.textColor = [UIColor whiteColor];
+    UITextField *tagTextField = [alert addTextField:@"Type Tag in here!"];
+    UITextField *customerTextField = [alert addTextField:@"no Customer Selected!"];
+
+    [alert addButton:@"Done" actionBlock:^(void) {
+        NSLog(@"Text value: %@", tagTextField.text);
+        NSLog(@"Text value: %@", customerTextField.text);
+    }];
+    [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
+
 }
+
 @end

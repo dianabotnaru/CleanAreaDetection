@@ -37,7 +37,6 @@
     return self;
 }
 
-
 - (void)setImageDataModel:(UIImage*)image
        withEstimatedValue:(float)vaule
                  withDate:(NSString*)dateString
@@ -73,10 +72,9 @@
     return jsonString;
 }
 
-
 - (NSMutableArray *)getArrayFromString:(NSString *)string{
     NSData* data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
+    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     return values;
 }
 @end

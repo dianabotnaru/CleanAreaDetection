@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ACEDrawingView.h>
 #import "SGGridView.h"
 
 @interface SGPictureEditViewController : UIViewController
