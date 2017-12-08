@@ -28,7 +28,6 @@
     // Do any additional setup after loading the view.
     [self getHistoryArray];
     //    [self getTestResults];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated{

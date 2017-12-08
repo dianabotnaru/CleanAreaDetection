@@ -37,7 +37,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (void)initData{
     self.engine = [[DirtyExtractor alloc] init];
     isShowDirtyArea = false;

@@ -35,7 +35,7 @@
     inadeqlab = [[NSUserDefaults standardUserDefaults] stringForKey:@"inadeqlab"];
     
     R = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankR"];
-    G= [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankG"];
+    G = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankG"];
     B = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankB"];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
@@ -139,15 +139,10 @@
 
 - (void)estimateValue:(UIImage *)image{
     firstrun=1;
-    //imageView.image = image;
-    //UIColor* color=nil;
     CGImageRef ref = image.CGImage;
     CGContextRef bitmapcrop1 = [self createARGBBitmapContextFromImage:ref];
-    //CGContextRef bitmapcrop1 = CreateARGBBitmapContext(ref);
     if (bitmapcrop1 == NULL)
     {
-        //NSLog(@"Error Creating ContextRef");
-        // error creating context
         return;
     }
     
@@ -273,9 +268,7 @@
         I=4.07;
         T=8.53;
         // Diamter Berechnung
-        
         DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
-        
         switch (DIA) {
             case 1:Diam=0.2;
                 break;
@@ -492,7 +485,8 @@
         if(nrn<=0)
         {
             [LK addObject:@"A"];
-        }else
+        }
+        else
         {
             if(nrn<=1)
             {
@@ -654,5 +648,9 @@
     }else{
         return FALSE;
     }
+}
+
+- (IBAction)uploadButtonTapped{
+    
 }
 @end
