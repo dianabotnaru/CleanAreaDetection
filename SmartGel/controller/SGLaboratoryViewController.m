@@ -173,7 +173,8 @@
         for(yb=bt;yb<bb;yb++)
         {
             for(xb=br;xb<bl;xb++)
-            {nb++;
+            {
+                nb++;
                 int offset = 4*((w*yb)+xb);
                 //int alpha =  data[offset]; maybe we need it?
                 int redb = data[offset+1];
@@ -194,8 +195,6 @@
         }
         
         //NSLog(@"Blank: Pixels:%i crop:%f:%f:%f:%f",nb,br,bt,bl,bb);
-        
-        
         //________________________________________________________
         
         //SAMPLE Crop
@@ -208,11 +207,11 @@
         st=(h*75.0/100.0);//55
         sb=(h*90.0/100.0);//70
         int alpha;
-        
         for(ys=st;ys<sb;ys++)
         {
             for(xs=sr;xs<sl;xs++)
-            {ns++;
+            {
+                ns++;
                 int offset = 4*((w*ys)+xs);
                 alpha =  data[offset]; //maybe we need it?
                 int reds = data[offset+1];
@@ -225,7 +224,6 @@
                 greennewsx=greennewsx+greens;
                 bluenewsx=bluenewsx+blues;
             }
-            
             ns++;
             rednewsy=rednewsy+rednewsx;
             greennewsy=greennewsy+greennewsx;
@@ -236,7 +234,6 @@
         //NSLog(@"BLANK:%i:%i:%i:SAMPLE:%i:%i:%i",rednewby/nb, greennewby/nb,bluenewby/nb,rednewsy/ns, greennewsy/ns,bluenewsy/ns);
         //result.text = [NSString stringWithFormat:@"%ix%i",w,h];
         //result2.text = [NSString stringWithFormat:@"BLANK:%i:%i:%i  SAMPLE:%i:%i:%i",rednewby/nb, greennewby/nb,bluenewby/nb,rednewsy/ns, greennewsy/ns,bluenewsy/ns];
-        
         
         float sred,sgreen,sblue,bred,bgreen,bblue,ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
         bred=rednewby/(nb*255.0f);
@@ -332,13 +329,11 @@
         E435_S = ((-log10(((ssred/(I-4)*((T-4)*100.0/16.0*(-0.3327)+107.64)/100))/3205))*35+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
         E405_S = ((-log10(((ssred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((ssblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
         
-        
         // Berechnungsstufe 2_S:
         
         Mn7_S = (-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7);
         Mn6_S = (-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7);
         Mn2_S = (E535_S-26.6*(-1670.2*E535_S-1969.1*E435_S+4201.7*E405_S)/(-26606.7)-20*(-555.1*E535_S-5931*E435_S+8130.7*E405_S)/(26606.7))/18.3;
-        
         
         // Berechnungsstufe 1_CS:
         
@@ -346,13 +341,11 @@
         E435_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*35+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*306)/100;
         E405_CS = ((-log10(((bbred/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*130+(-log10(((bbblue/(I-4)*((T-4)*100/16*(-0.3327)+107.64)/100))/3205))*200)/100;
         
-        
         // Berechnungsstufe 2_CS:
         
         Mn7_CS = (-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7);
         Mn6_CS = (-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7);
         Mn2_CS = (E535_CS-26.6*(-1670.2*E535_CS-1969.1*E435_CS+4201.7*E405_CS)/(-26606.7)-20*(-555.1*E535_CS-5931*E435_CS+8130.7*E405_CS)/(26606.7))/18.3;
-        
         
         // Berechnungsstufe 3:
         

@@ -43,6 +43,7 @@
 		8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */; };
 		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
 		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
+		8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */; };
 		8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */; };
 		8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */; };
 		8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */; };
@@ -103,6 +104,8 @@
 		8DB0978F1F933A380053C203 /* SGMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGMenuViewController.h; path = controller/SGMenuViewController.h; sourceTree = "<group>"; };
 		8DB097901F933A380053C203 /* SGMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGMenuViewController.m; path = controller/SGMenuViewController.m; sourceTree = "<group>"; };
 		8DB097931F93456A0053C203 /* SGConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGConstant.h; sourceTree = "<group>"; };
+		8DB669E91FDA236100BB3966 /* LaboratoryDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LaboratoryDataModel.h; path = model/LaboratoryDataModel.h; sourceTree = "<group>"; };
+		8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaboratoryDataModel.m; path = model/LaboratoryDataModel.m; sourceTree = "<group>"; };
 		8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGWebViewController.h; path = controller/SGWebViewController.h; sourceTree = "<group>"; };
 		8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGWebViewController.m; path = controller/SGWebViewController.m; sourceTree = "<group>"; };
 		8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPdfViewController.h; path = controller/SGPdfViewController.h; sourceTree = "<group>"; };
@@ -228,6 +231,8 @@
 			children = (
 				8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */,
 				8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */,
+				8DB669E91FDA236100BB3966 /* LaboratoryDataModel.h */,
+				8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
+				8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */,
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
 				8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,

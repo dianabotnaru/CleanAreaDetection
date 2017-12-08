@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LaboratoryDataModel.h"
 
 @interface SGLaboratoryViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
     int firstrun;
@@ -18,6 +19,8 @@
     bool OPorIN,li,ugormg;
 
 }
+
+@property (strong, nonatomic) LaboratoryDataModel *laboratoryDataModel;
 
 @property (strong, nonatomic) IBOutlet UIView *blankView;
 @property (strong, nonatomic) IBOutlet UIView *sampleView;
