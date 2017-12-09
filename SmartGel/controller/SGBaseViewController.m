@@ -34,6 +34,14 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(NSString *)getCurrentTimeString{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+    NSDate *currentDate = [NSDate date];
+    NSString *dateString = [formatter stringFromDate:currentDate];
+    return dateString;
+}
+
 /*
 #pragma mark - Navigation
 

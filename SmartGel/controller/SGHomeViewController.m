@@ -219,13 +219,6 @@
     }
 }
 
--(NSString *)getCurrentTimeString{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    NSDate *currentDate = [NSDate date];
-    NSString *dateString = [formatter stringFromDate:currentDate];
-    return dateString;
-}
 
 -(void)initLocationManager{
     self.locationManager = [[CLLocationManager alloc] init];

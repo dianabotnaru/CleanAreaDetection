@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "LaboratoryDataModel.h"
+#import "SGBaseViewController.h"
+#import "MBProgressHUD.h"
+#import "Firebase.h"
+#import <MapKit/MapKit.h>
 
-@interface SGLaboratoryViewController : UIViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
+@interface SGLaboratoryViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     int firstrun;
     float vgood,good,satis,adeq,R,G,B,blankR,blankG,blankB,sampleR,sampleG,sampleB;
     uint DIA;
@@ -17,10 +21,11 @@
     NSString *_diam;
     NSString *vgoodlab, *satislab, *inadeqlab,*thePath;
     bool OPorIN,li,ugormg;
-
+    MBProgressHUD *hud;
 }
 
 @property (strong, nonatomic) LaboratoryDataModel *laboratoryDataModel;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property (strong, nonatomic) IBOutlet UIView *blankView;
 @property (strong, nonatomic) IBOutlet UIView *sampleView;

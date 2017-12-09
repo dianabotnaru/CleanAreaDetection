@@ -10,6 +10,8 @@
 #import "SCLAlertView.h"
 #import "SGConstant.h"
 #import <ContactsUI/ContactsUI.h>
+#import "MBProgressHUD.h"
+#import "Firebase.h"
 
 @interface SGLaboratoryViewController ()<UITextFieldDelegate,CNContactPickerDelegate>
 
@@ -19,13 +21,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.laboratoryDataModel = [[LaboratoryDataModel alloc] init];
+    [self initLocationManager];
     li=[self licheck];
     DIA = [[NSUserDefaults standardUserDefaults] integerForKey:@"DIAMETER"];
     if( [[NSUserDefaults standardUserDefaults] integerForKey:@"ugormg"]==0)
     {
         ugormg=FALSE;
         self.lblugormg.text = @"ug/cm2 Organic";
-    }else
+    }
+    else
     {
         ugormg=TRUE;
         self.lblugormg.text = @"mg/l Organic";
@@ -63,12 +68,43 @@
     }
 }
 
+-(void)initLocationManager{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
+    [self.locationManager stopUpdatingLocation];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if(placemarks && placemarks.count > 0)
+         {
+             CLPlacemark *placemark= [placemarks objectAtIndex:0];
+             NSString *address = [NSString stringWithFormat:@"%@ %@,%@ %@", [placemark subThoroughfare],[placemark thoroughfare],[placemark locality], [placemark administrativeArea]];
+             self.laboratoryDataModel.location = address;
+         }
+     }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    self.laboratoryDataModel.image = image;
+    self.laboratoryDataModel.date = [self getCurrentTimeString];
     [self estimateValue:image];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -457,6 +493,7 @@
         free(data);
     }
     CGContextRelease(bitmapcrop1);
+    self.laboratoryDataModel.resultValue = [self.resultValueLabel.text floatValue];
 }
 
 - (BOOL)licheck
@@ -699,6 +736,36 @@
     contactPicker.delegate = self;
     contactPicker.displayedPropertyKeys = @[CNContactGivenNameKey];
     [self presentViewController:contactPicker animated:YES completion:nil];
+}
+
+-(void)saveLaboratoryDatas{
+//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.label.text = @"Uploading image...";
+//    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.userID,self.estimateImage.date]];
+//    NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
+//    [riversRef putData:imageData
+//              metadata:nil
+//            completion:^(FIRStorageMetadata *metadata,NSError *error) {
+//                [hud hideAnimated:false];
+//                if (error != nil) {
+//                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+//                } else {
+//                    isSavedImage = true;
+//                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
+//                    NSString *key = self.userID;
+//                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
+//                                           @"image": metadata.downloadURL.absoluteString,
+//                                           @"date": self.estimateImage.date,
+//                                           @"location": self.estimateImage.location,
+//                                           @"cleanarea": self.estimateImage.cleanArea,
+//                                           @"nonGelArea": self.estimateImage.nonGelArea,
+//                                           @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
+//                                           };
+//                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
+//                    [self.appDelegate.ref updateChildValues:childUpdates];
+//                }
+//            }];
+
 }
 
 @end
