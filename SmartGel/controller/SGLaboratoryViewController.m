@@ -9,8 +9,9 @@
 #import "SGLaboratoryViewController.h"
 #import "SCLAlertView.h"
 #import "SGConstant.h"
+#import <ContactsUI/ContactsUI.h>
 
-@interface SGLaboratoryViewController ()
+@interface SGLaboratoryViewController ()<UITextFieldDelegate,CNContactPickerDelegate>
 
 @end
 
@@ -76,6 +77,7 @@
     if(firstrun){
         [self capturePhoto];
     }else{
+
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:@"Do you want to save the Result?"
                                                                 preferredStyle:UIAlertControllerStyleAlert]; // 1
@@ -86,15 +88,14 @@
             [self capturePhoto];
         }]];
         [self presentViewController:alert animated:YES completion:nil];
-
     }
 }
 
 -(void)capturePhoto{
-    //        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    //        imagePickerController.delegate = self;
-    //        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //        [self presentViewController:imagePickerController animated:NO completion:nil];
+//        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//        imagePickerController.delegate = self;
+//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        [self presentViewController:imagePickerController animated:NO completion:nil];
     UIImage *image = [UIImage imageNamed:@"test.png"];
     [self estimateValue:image];
 }
@@ -390,10 +391,8 @@
             {
                 if(RSF<=0.2)
                 {
-                    
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2];
-                }else
-                {
+                }else{
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
                 }
 //                reslabel.hidden = FALSE;
@@ -663,7 +662,7 @@
 }
 
 - (void)showSaveAlertView{
-    
+
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     alert.customViewColor = SGColorBlack;
     alert.iconTintColor = [UIColor whiteColor];
@@ -675,13 +674,35 @@
     alert.labelTitle.textColor = [UIColor whiteColor];
     UITextField *tagTextField = [alert addTextField:@"Type Tag in here!"];
     UITextField *customerTextField = [alert addTextField:@"no Customer Selected!"];
-
+    customerTextField.delegate = self;
     [alert addButton:@"Done" actionBlock:^(void) {
-        NSLog(@"Text value: %@", tagTextField.text);
-        NSLog(@"Text value: %@", customerTextField.text);
+//        NSLog(@"Text value: %@", tagTextField.text);
+//        NSLog(@"Text value: %@", customerTextField.text);
     }];
     [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
+}
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    CNContactPickerViewController *contactPicker = [[CNContactPickerViewController alloc] init];
+    contactPicker.delegate = self;
+    contactPicker.displayedPropertyKeys = (NSArray *)CNContactGivenNameKey;
+    [self presentViewController:contactPicker animated:YES completion:nil];
+}
+
+-(void) contactPicker:(CNContactPickerViewController *)picker didSelectContact:(CNContact *)contact{
+    NSLog(@"Contact : %@",contact);
+}
+
+-(void)contactPickerDidCancel:(CNContactPickerViewController *)picker {
+    NSLog(@"Cancelled");
+}
+
+-(void)launchContactPickerViewController{
+    CNContactPickerViewController *contactPicker = [[CNContactPickerViewController alloc] init];
+    contactPicker.delegate = self;
+    contactPicker.displayedPropertyKeys = @[CNContactGivenNameKey];
+    [self presentViewController:contactPicker animated:YES completion:nil];
 }
 
 @end

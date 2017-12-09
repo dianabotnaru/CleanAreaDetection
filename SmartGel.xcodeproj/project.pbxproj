@@ -44,6 +44,7 @@
 		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
 		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
 		8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */; };
+		8DB669ED1FDA8FA800BB3966 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */; };
 		8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */; };
 		8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */; };
 		8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */; };
@@ -106,6 +107,10 @@
 		8DB097931F93456A0053C203 /* SGConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGConstant.h; sourceTree = "<group>"; };
 		8DB669E91FDA236100BB3966 /* LaboratoryDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LaboratoryDataModel.h; path = model/LaboratoryDataModel.h; sourceTree = "<group>"; };
 		8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaboratoryDataModel.m; path = model/LaboratoryDataModel.m; sourceTree = "<group>"; };
+		8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		8DB669EE1FDA8FB400BB3966 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		8DB669EF1FDB05F800BB3966 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		8DB669F01FDB060000BB3966 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGWebViewController.h; path = controller/SGWebViewController.h; sourceTree = "<group>"; };
 		8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGWebViewController.m; path = controller/SGWebViewController.m; sourceTree = "<group>"; };
 		8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPdfViewController.h; path = controller/SGPdfViewController.h; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB669ED1FDA8FA800BB3966 /* AddressBook.framework in Frameworks */,
 				8D80B2C71F7CA5A70025B804 /* Foundation.framework in Frameworks */,
 				8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */,
 				8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */,
@@ -144,6 +150,10 @@
 		502FE1017807AF3D1749DA47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DB669F01FDB060000BB3966 /* ContactsUI.framework */,
+				8DB669EF1FDB05F800BB3966 /* Contacts.framework */,
+				8DB669EE1FDA8FB400BB3966 /* AddressBookUI.framework */,
+				8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */,
 				8D80B2C61F7CA5A70025B804 /* Foundation.framework */,
 				8D80B2C41F7CA4790025B804 /* QuartzCore.framework */,
 				8D80B2C21F7CA4700025B804 /* AVFoundation.framework */,

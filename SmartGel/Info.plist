@@ -27,6 +27,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses camera</string>
+	<key>NSContactsUsageDescription</key>
+	<string>$(PRODUCT_NAME) get contacts</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>App wants to use your location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
