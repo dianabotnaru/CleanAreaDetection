@@ -672,30 +672,26 @@
     alert.backgroundType = SCLAlertViewBackgroundTransparent;
 
     alert.labelTitle.textColor = [UIColor whiteColor];
-    UITextField *tagTextField = [alert addTextField:@"Type Tag in here!"];
-    UITextField *customerTextField = [alert addTextField:@"no Customer Selected!"];
-    customerTextField.delegate = self;
+    self.tagTextField = [alert addTextField:@"Type Tag in here!"];
+    self.customerTextField = [alert addTextField:@"no Customer Selected!"];
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(customerTextFieldTapped)];
+    [self.customerTextField addGestureRecognizer:singleFingerTap];
     [alert addButton:@"Done" actionBlock:^(void) {
-//        NSLog(@"Text value: %@", tagTextField.text);
-//        NSLog(@"Text value: %@", customerTextField.text);
     }];
     [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    CNContactPickerViewController *contactPicker = [[CNContactPickerViewController alloc] init];
-    contactPicker.delegate = self;
-    contactPicker.displayedPropertyKeys = (NSArray *)CNContactGivenNameKey;
-    [self presentViewController:contactPicker animated:YES completion:nil];
+-(void)customerTextFieldTapped{
+    [self launchContactPickerViewController];
 }
 
 -(void) contactPicker:(CNContactPickerViewController *)picker didSelectContact:(CNContact *)contact{
-    NSLog(@"Contact : %@",contact);
+    self.customerTextField.text = contact.givenName;
 }
 
 -(void)contactPickerDidCancel:(CNContactPickerViewController *)picker {
-    NSLog(@"Cancelled");
 }
 
 -(void)launchContactPickerViewController{

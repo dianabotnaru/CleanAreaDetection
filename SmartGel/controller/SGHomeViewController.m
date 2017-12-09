@@ -340,7 +340,6 @@
     [self.navigationController pushViewController:pictureViewController animated:YES];
 }
 
-
 /////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 
 - (NSString *) getImageUrl:(int)index{

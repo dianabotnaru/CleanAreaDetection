@@ -27,6 +27,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *resultValueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *lbldiam;
 @property (strong, nonatomic) IBOutlet UILabel *lblugormg;
+
+@property (strong, nonatomic) UITextField *customerTextField;
+@property (strong, nonatomic) UITextField *tagTextField;
+
 //@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (strong, nonatomic) IBOutlet UIImageView *resultfoxImageView;
