@@ -749,11 +749,11 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgW-RZ-bsj">
-                                <rect key="frame" x="192" y="30" width="384" height="480"/>
+                                <rect key="frame" x="192" y="50" width="384" height="480"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sjt-Tc-lqS" customClass="GLCalendarView">
                                         <rect key="frame" x="20" y="20" width="344" height="315"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Anx-BN-HIo">
                                         <rect key="frame" x="20" y="415" width="344" height="45"/>
@@ -801,7 +801,7 @@
                         <constraints>
                             <constraint firstItem="pgW-RZ-bsj" firstAttribute="width" secondItem="mGv-eJ-kOJ" secondAttribute="width" multiplier="0.5" id="6Eh-pt-BpX"/>
                             <constraint firstItem="pgW-RZ-bsj" firstAttribute="height" secondItem="mGv-eJ-kOJ" secondAttribute="height" multiplier="0.5" id="BUB-yk-W0f"/>
-                            <constraint firstItem="pgW-RZ-bsj" firstAttribute="top" secondItem="MjT-kM-Vmx" secondAttribute="bottom" constant="30" id="EdU-cb-aY9"/>
+                            <constraint firstItem="pgW-RZ-bsj" firstAttribute="top" secondItem="MjT-kM-Vmx" secondAttribute="bottom" constant="50" id="EdU-cb-aY9"/>
                             <constraint firstItem="pgW-RZ-bsj" firstAttribute="centerX" secondItem="mGv-eJ-kOJ" secondAttribute="centerX" id="F4z-f1-JjL"/>
                             <constraint firstItem="g8x-dq-otO" firstAttribute="top" secondItem="mGv-eJ-kOJ" secondAttribute="top" constant="10" id="KkZ-JB-UA8"/>
                             <constraint firstItem="reb-DM-KDw" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="bottom" id="XGE-De-Fow"/>
