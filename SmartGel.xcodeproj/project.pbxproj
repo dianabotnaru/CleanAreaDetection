@@ -401,6 +401,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel-resources.sh",
+				"${PODS_ROOT}/CCDropDownMenus/CCDropDownMenu/arrow.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-magnify-glass.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-magnify-glass@2x.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-shadow.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-shadow@2x.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-shadow@3x.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/GLCalendarDayCell/GLCalendarDayCell.xib",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/GLCalendarView.xib",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",

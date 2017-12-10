@@ -19,7 +19,6 @@
     isShowDirtyArea = false;
     isShowDirtyAreaUpdatedParameter = false;
     isShowPartArea = false;
-    // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated{

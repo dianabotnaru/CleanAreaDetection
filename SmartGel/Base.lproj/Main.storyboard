@@ -712,7 +712,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8x-dq-otO">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <rect key="frame" x="0.0" y="20" width="768" height="940"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bcr-MW-1iV">
                                         <rect key="frame" x="0.0" y="2" width="768" height="44"/>
@@ -761,7 +761,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lT-pp-C0g">
                                         <rect key="frame" x="0.0" y="48" width="768" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3R3-WZ-dEQ">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3R3-WZ-dEQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                                                 <connections>
                                                     <action selector="toButtonTapped" destination="T8D-db-dfv" eventType="touchUpInside" id="zjD-dC-oEo"/>
@@ -800,7 +800,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="SmartGelHistoryCollectionViewCell" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i13-5U-BrN">
-                                        <rect key="frame" x="12" y="102" width="744" height="846"/>
+                                        <rect key="frame" x="12" y="102" width="744" height="826"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="2" id="r9l-SX-r3m">
                                             <size key="itemSize" width="131" height="334"/>
@@ -830,9 +830,9 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="g8x-dq-otO" firstAttribute="top" secondItem="mGv-eJ-kOJ" secondAttribute="top" id="KkZ-JB-UA8"/>
+                            <constraint firstItem="g8x-dq-otO" firstAttribute="top" secondItem="mGv-eJ-kOJ" secondAttribute="top" constant="20" id="KkZ-JB-UA8"/>
                             <constraint firstItem="reb-DM-KDw" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="bottom" id="XGE-De-Fow"/>
                             <constraint firstAttribute="trailing" secondItem="g8x-dq-otO" secondAttribute="trailing" id="s7c-cJ-opC"/>
                             <constraint firstItem="g8x-dq-otO" firstAttribute="leading" secondItem="mGv-eJ-kOJ" secondAttribute="leading" id="tbx-cB-JHX"/>
@@ -842,6 +842,11 @@
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="Too-ui-ZuB">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="T8D-db-dfv" id="EoY-9k-M46"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Date" id="yrN-Eg-jah">
+                            <connections>
+                                <action selector="showCalendar" destination="T8D-db-dfv" id="zxU-Oi-XWa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

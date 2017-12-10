@@ -10,8 +10,9 @@
 #import "UIImageView+WebCache.h"
 #import "SmartGelHistoryCollectionViewCell.h"
 #import "SGHistoryDetailViewController.h"
+#import <CCDropDownMenus/CCDropDownMenus.h>
 
-@interface SGHistoryViewController () <SGDateTimePickerViewDelegate,SGHistoryDetailViewControllerDelegate>
+@interface SGHistoryViewController () <SGDateTimePickerViewDelegate,SGHistoryDetailViewControllerDelegate,CCDropDownMenuDelegate>
 
 @end
 
@@ -26,13 +27,26 @@
     toDate = [self getLocalTime:[NSDate date]];
     [self.toLabel setText:[self getDateString:toDate]];
     // Do any additional setup after loading the view.
-    [self getHistoryArray];
+    [self initNavigationBar];
+//    [self getHistoryArray];
     //    [self getTestResults];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 }
+
+-(void)initNavigationBar{
+    SyuDropDownMenu *menu = [[SyuDropDownMenu alloc] initWithNavigationBar:self.navigationController.navigationBar useNavigationController:YES];
+    menu.delegate = self;
+    menu.numberOfRows = 2;
+    menu.textOfRows = @[@"SmartGel", @"Laboratory"];
+    [self.view addSubview:menu];
+}
+
+- (void)dropDownMenu:(CCDropDownMenu *)dropDownMenu didSelectRowAtIndex:(NSInteger)index {
+}
+
 
 - (void)onDeletedImage{
     [self getHistoryArray];
@@ -218,6 +232,10 @@
     [self.smartGelHistoryCollectionView reloadData];
 }
 
+
+- (IBAction)showCalendar{
+    
+}
 
 /*
 #pragma mark - Navigation
