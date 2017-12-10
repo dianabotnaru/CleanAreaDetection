@@ -714,15 +714,46 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8x-dq-otO">
                                 <rect key="frame" x="0.0" y="10" width="768" height="950"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January 21, 2016 - January 21, 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZS-yO-Tmo">
-                                        <rect key="frame" x="0.0" y="0.0" width="768" height="22"/>
-                                        <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KhI-AI-z4G">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="36"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdZ-W4-LZ9">
+                                                <rect key="frame" x="0.0" y="0.0" width="768" height="36"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="showCalendar" destination="T8D-db-dfv" eventType="touchUpInside" id="2c4-Vy-ter"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January 21, 2016 - January 21, 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZS-yO-Tmo">
+                                                <rect key="frame" x="247.5" y="6.5" width="273" height="22"/>
+                                                <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_calendar" translatesAutoresizingMaskIntoConstraints="NO" id="Pzg-kV-jbz">
+                                                <rect key="frame" x="528.5" y="5.5" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="PCr-x3-YJa"/>
+                                                    <constraint firstAttribute="width" constant="25" id="Wd9-oz-aO4"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="FZS-yO-Tmo" firstAttribute="centerY" secondItem="KhI-AI-z4G" secondAttribute="centerY" id="1qR-W6-Vyf"/>
+                                            <constraint firstItem="qdZ-W4-LZ9" firstAttribute="top" secondItem="KhI-AI-z4G" secondAttribute="top" id="7TK-G0-Tw4"/>
+                                            <constraint firstAttribute="bottom" secondItem="qdZ-W4-LZ9" secondAttribute="bottom" id="A3m-4A-tpR"/>
+                                            <constraint firstAttribute="trailing" secondItem="qdZ-W4-LZ9" secondAttribute="trailing" id="BbF-al-jmY"/>
+                                            <constraint firstItem="Pzg-kV-jbz" firstAttribute="leading" secondItem="FZS-yO-Tmo" secondAttribute="trailing" constant="8" id="Da6-Ty-pbL"/>
+                                            <constraint firstItem="Pzg-kV-jbz" firstAttribute="centerY" secondItem="KhI-AI-z4G" secondAttribute="centerY" id="Jb1-J0-LX1"/>
+                                            <constraint firstAttribute="height" constant="36" id="li1-JN-cu7"/>
+                                            <constraint firstItem="qdZ-W4-LZ9" firstAttribute="leading" secondItem="KhI-AI-z4G" secondAttribute="leading" id="pi6-oW-pkn"/>
+                                            <constraint firstItem="FZS-yO-Tmo" firstAttribute="centerX" secondItem="KhI-AI-z4G" secondAttribute="centerX" id="xdB-l2-f0P"/>
+                                        </constraints>
+                                    </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="SmartGelHistoryCollectionViewCell" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i13-5U-BrN">
-                                        <rect key="frame" x="0.0" y="22" width="768" height="928"/>
+                                        <rect key="frame" x="0.0" y="36" width="768" height="914"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="2" id="r9l-SX-r3m">
                                             <size key="itemSize" width="131" height="334"/>
@@ -739,13 +770,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="FZS-yO-Tmo" secondAttribute="trailing" id="Gj8-E4-AJ9"/>
-                                    <constraint firstItem="i13-5U-BrN" firstAttribute="top" secondItem="FZS-yO-Tmo" secondAttribute="bottom" id="Rt6-18-Fna"/>
-                                    <constraint firstItem="i13-5U-BrN" firstAttribute="leading" secondItem="g8x-dq-otO" secondAttribute="leading" id="T6k-l4-SJ7"/>
-                                    <constraint firstItem="FZS-yO-Tmo" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="top" id="Wcj-wY-9Vw"/>
-                                    <constraint firstItem="FZS-yO-Tmo" firstAttribute="leading" secondItem="g8x-dq-otO" secondAttribute="leading" id="jae-9n-pfP"/>
-                                    <constraint firstAttribute="trailing" secondItem="i13-5U-BrN" secondAttribute="trailing" id="wAt-w1-G6W"/>
-                                    <constraint firstAttribute="bottom" secondItem="i13-5U-BrN" secondAttribute="bottom" id="xS5-zl-Tma"/>
+                                    <constraint firstItem="KhI-AI-z4G" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="top" id="GKz-iY-Tig"/>
+                                    <constraint firstAttribute="trailing" secondItem="KhI-AI-z4G" secondAttribute="trailing" id="PF8-Og-elr"/>
+                                    <constraint firstAttribute="trailing" secondItem="i13-5U-BrN" secondAttribute="trailing" id="UJY-R3-TWf"/>
+                                    <constraint firstItem="i13-5U-BrN" firstAttribute="leading" secondItem="g8x-dq-otO" secondAttribute="leading" id="VpA-sh-tNy"/>
+                                    <constraint firstItem="KhI-AI-z4G" firstAttribute="leading" secondItem="g8x-dq-otO" secondAttribute="leading" id="ZvE-vi-cN4"/>
+                                    <constraint firstAttribute="bottom" secondItem="i13-5U-BrN" secondAttribute="bottom" id="glx-aD-Ucz"/>
+                                    <constraint firstItem="i13-5U-BrN" firstAttribute="top" secondItem="KhI-AI-z4G" secondAttribute="bottom" id="tYj-fB-mao"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgW-RZ-bsj">
@@ -813,11 +844,6 @@
                         <barButtonItem key="leftBarButtonItem" image="ic_menu" id="Too-ui-ZuB">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="T8D-db-dfv" id="EoY-9k-M46"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Date" id="yrN-Eg-jah">
-                            <connections>
-                                <action selector="showCalendar" destination="T8D-db-dfv" id="zxU-Oi-XWa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1046,6 +1072,7 @@
     </scenes>
     <resources>
         <image name="ic_back" width="18" height="18"/>
+        <image name="ic_calendar" width="25" height="25"/>
         <image name="ic_location" width="24" height="24"/>
         <image name="ic_menu" width="19" height="20"/>
         <image name="ic_take_photo" width="23" height="19"/>
