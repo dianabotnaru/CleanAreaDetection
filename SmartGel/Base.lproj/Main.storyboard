@@ -764,6 +764,9 @@
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didSelectDateRange" destination="T8D-db-dfv" eventType="touchUpInside" id="YHR-r5-jKt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2f-3t-Eyv">
                                         <rect key="frame" x="20" y="355" width="344" height="45"/>
@@ -774,6 +777,9 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didCancelDateRange" destination="T8D-db-dfv" eventType="touchUpInside" id="biZ-jo-TUf"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.19607843137254902" green="0.22745098039215686" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

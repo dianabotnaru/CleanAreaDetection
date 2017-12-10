@@ -236,39 +236,21 @@
 
 -(void)initGlcalendarView{
     NSDate *today = [NSDate date];
-    NSDate *beginDate = [GLDateUtils dateByAddingDays:-1 toDate:today];
-    NSDate *endDate = [GLDateUtils dateByAddingDays:+1 toDate:today];
-    GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:beginDate endDate:endDate];
-    range.backgroundColor = [UIColor blueColor];
+//    NSDate *beginDate = [GLDateUtils dateByAddingDays:-1 toDate:today];
+//    NSDate *endDate = [GLDateUtils dateByAddingDays:+1 toDate:today];
+    GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:today endDate:today];
+    range.backgroundColor = UIColorFromRGB(0x80ae99);
     range.editable = YES;
     //    range.binding = yourModelObject // you can bind your model to the range
     self.calendarView.ranges = [@[range] mutableCopy];
     self.calendarView.delegate = self;
     self.calendarView.firstDate = fromDate;
     self.rangeUnderEdit = range;
-    [self initUIGLCalendarView];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.calendarView scrollToDate:today animated:NO];
     });
 }
 
--(void)initUIGLCalendarView{
-    [GLCalendarView appearance].rowHeight = 54;
-    [GLCalendarView appearance].padding = 6;
-    [GLCalendarView appearance].weekDayTitleAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:8], NSForegroundColorAttributeName:[UIColor grayColor]};
-    [GLCalendarView appearance].monthCoverAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:30]};
-    
-    [GLCalendarDayCell appearance].dayLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:20], NSForegroundColorAttributeName:UIColorFromRGB(0x555555)};
-    [GLCalendarDayCell appearance].monthLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:8]};
-    
-    [GLCalendarDayCell appearance].editCoverBorderWidth = 2;
-    [GLCalendarDayCell appearance].editCoverBorderColor = UIColorFromRGB(0x366aac);
-    [GLCalendarDayCell appearance].editCoverPointSize = 14;
-    
-    [GLCalendarDayCell appearance].todayBackgroundColor = UIColorFromRGB(0x366aac);
-    [GLCalendarDayCell appearance].todayLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
-    [GLCalendarDayCell appearance].rangeDisplayMode = RANGE_DISPLAY_MODE_CONTINUOUS;
-}
 
 - (BOOL)calenderView:(GLCalendarView *)calendarView canAddRangeWithBeginDate:(NSDate *)beginDate
 {
@@ -322,6 +304,19 @@
 - (IBAction)showCalendar{
     [self.calendarContainerView setHidden:NO];
 }
+
+-(IBAction)didSelectDateRange{
+    [self.calendarContainerView setHidden:YES];
+    [self.calendarView removeRange:self.rangeUnderEdit];
+    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
+    [self getFilterArray];
+}
+
+-(IBAction)didCancelDateRange{
+    [self.calendarView removeRange:self.rangeUnderEdit];
+    [self.calendarContainerView setHidden:YES];
+}
+
 
 /*
 #pragma mark - Navigation
