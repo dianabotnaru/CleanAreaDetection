@@ -19,15 +19,19 @@
     SGDateTimePickerView *sgDateTimePickerView;
     NSDate *fromDate;
     NSDate *toDate;
+    int dateSelectState;
 }
 @property (strong, nonatomic) IBOutlet UICollectionView *smartGelHistoryCollectionView;
 @property (strong, nonatomic) IBOutlet GLCalendarView *calendarView;
 @property (strong, nonatomic) IBOutlet UIView *historyView;
+@property (strong, nonatomic) IBOutlet UIView *calendarContainerView;
+
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (strong, nonatomic) NSMutableArray *historyArray;
 @property (strong, nonatomic) NSMutableArray *historyFilterArray;
 
 @property (strong, nonatomic) MBProgressHUD *hud;
+@property (nonatomic, weak) GLCalendarDateRange *rangeUnderEdit;
 
 @end

@@ -15,7 +15,7 @@
 #import <GLCalendarDateRange.h>
 #import <GLCalendarDayCell.h>
 
-@interface SGHistoryViewController () <SGDateTimePickerViewDelegate,SGHistoryDetailViewControllerDelegate,CCDropDownMenuDelegate,GLCalendarViewDelegate>
+@interface SGHistoryViewController () <SGHistoryDetailViewControllerDelegate,CCDropDownMenuDelegate,GLCalendarViewDelegate>
 
 @end
 
@@ -245,52 +245,82 @@
     self.calendarView.ranges = [@[range] mutableCopy];
     self.calendarView.delegate = self;
     self.calendarView.firstDate = fromDate;
+    self.rangeUnderEdit = range;
+    [self initUIGLCalendarView];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.calendarView scrollToDate:today animated:NO];
     });
+}
+
+-(void)initUIGLCalendarView{
+    [GLCalendarView appearance].rowHeight = 54;
+    [GLCalendarView appearance].padding = 6;
+    [GLCalendarView appearance].weekDayTitleAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:8], NSForegroundColorAttributeName:[UIColor grayColor]};
+    [GLCalendarView appearance].monthCoverAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:30]};
     
+    [GLCalendarDayCell appearance].dayLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:20], NSForegroundColorAttributeName:UIColorFromRGB(0x555555)};
+    [GLCalendarDayCell appearance].monthLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:8]};
     
+    [GLCalendarDayCell appearance].editCoverBorderWidth = 2;
+    [GLCalendarDayCell appearance].editCoverBorderColor = UIColorFromRGB(0x366aac);
+    [GLCalendarDayCell appearance].editCoverPointSize = 14;
+    
+    [GLCalendarDayCell appearance].todayBackgroundColor = UIColorFromRGB(0x366aac);
+    [GLCalendarDayCell appearance].todayLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:20]};
+    [GLCalendarDayCell appearance].rangeDisplayMode = RANGE_DISPLAY_MODE_CONTINUOUS;
 }
 
 - (BOOL)calenderView:(GLCalendarView *)calendarView canAddRangeWithBeginDate:(NSDate *)beginDate
 {
-    // you should check whether user can add a range with the given begin date
     return YES;
 }
 
 - (GLCalendarDateRange *)calenderView:(GLCalendarView *)calendarView rangeToAddWithBeginDate:(NSDate *)beginDate
 {
-    // construct a new range object and return it
-    NSDate* endDate = [GLDateUtils dateByAddingDays:0 toDate:beginDate];
-    GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:beginDate endDate:endDate];
-    range.backgroundColor = [UIColor blueColor];
-    range.editable = YES;
-    return range;
+    [self.calendarView removeRange:self.rangeUnderEdit];
+    if(dateSelectState == 0){
+        dateSelectState =1;
+        fromDate = beginDate;
+        GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:beginDate endDate:beginDate];
+        range.backgroundColor = UIColorFromRGB(0x80ae99);
+        range.editable = YES;
+        self.rangeUnderEdit = range;
+        return range;
+    }else{
+        dateSelectState =0;
+        toDate = beginDate;
+        GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:fromDate endDate:beginDate];
+        range.backgroundColor = UIColorFromRGB(0x80ae99);
+        range.editable = YES;
+        self.rangeUnderEdit = range;
+        return range;
+    }
 }
 
 - (void)calenderView:(GLCalendarView *)calendarView beginToEditRange:(GLCalendarDateRange *)range
 {
-    // save the range to a instance variable so that you can make some operation on it
+    NSLog(@"begin to edit range: %@", range);
+    self.rangeUnderEdit = range;
 }
 
 - (void)calenderView:(GLCalendarView *)calendarView finishEditRange:(GLCalendarDateRange *)range continueEditing:(BOOL)continueEditing
 {
-    // retrieve the model from the range, do some updates to your model
+    NSLog(@"finish edit range: %@", range);
+    self.rangeUnderEdit = nil;
 }
 
 - (BOOL)calenderView:(GLCalendarView *)calendarView canUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
 {
-    // you should check whether the beginDate or the endDate is valid
     return YES;
 }
 
 - (void)calenderView:(GLCalendarView *)calendarView didUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
 {
-    // update your model if necessary
+    NSLog(@"did update range: %@", range);
 }
 
 - (IBAction)showCalendar{
-    [self.calendarView setHidden:NO];
+    [self.calendarContainerView setHidden:NO];
 }
 
 /*

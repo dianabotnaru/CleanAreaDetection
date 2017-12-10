@@ -748,18 +748,56 @@
                                     <constraint firstAttribute="bottom" secondItem="i13-5U-BrN" secondAttribute="bottom" id="xS5-zl-Tma"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJr-Rl-szu" customClass="GLCalendarView">
-                                <rect key="frame" x="0.0" y="30" width="768" height="930"/>
-                                <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pgW-RZ-bsj">
+                                <rect key="frame" x="192" y="30" width="384" height="480"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sjt-Tc-lqS" customClass="GLCalendarView">
+                                        <rect key="frame" x="20" y="20" width="344" height="315"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Anx-BN-HIo">
+                                        <rect key="frame" x="20" y="415" width="344" height="45"/>
+                                        <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Iya-CO-wAC"/>
+                                        </constraints>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2f-3t-Eyv">
+                                        <rect key="frame" x="20" y="355" width="344" height="45"/>
+                                        <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Dkf-rr-brv"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.22745098039215686" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Sjt-Tc-lqS" secondAttribute="trailing" constant="20" id="H8t-WB-7EF"/>
+                                    <constraint firstItem="Anx-BN-HIo" firstAttribute="top" secondItem="P2f-3t-Eyv" secondAttribute="bottom" constant="15" id="SPg-ZB-SMu"/>
+                                    <constraint firstAttribute="trailing" secondItem="P2f-3t-Eyv" secondAttribute="trailing" constant="20" id="eFG-Lx-VZe"/>
+                                    <constraint firstItem="P2f-3t-Eyv" firstAttribute="leading" secondItem="pgW-RZ-bsj" secondAttribute="leading" constant="20" id="giB-xr-eKd"/>
+                                    <constraint firstItem="Sjt-Tc-lqS" firstAttribute="top" secondItem="pgW-RZ-bsj" secondAttribute="top" constant="20" id="l0j-n3-3ih"/>
+                                    <constraint firstItem="Anx-BN-HIo" firstAttribute="leading" secondItem="pgW-RZ-bsj" secondAttribute="leading" constant="20" id="oFC-q8-D95"/>
+                                    <constraint firstAttribute="bottom" secondItem="Anx-BN-HIo" secondAttribute="bottom" constant="20" id="olj-Av-Xnx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Anx-BN-HIo" secondAttribute="trailing" constant="20" id="umt-Rn-04q"/>
+                                    <constraint firstItem="Sjt-Tc-lqS" firstAttribute="leading" secondItem="pgW-RZ-bsj" secondAttribute="leading" constant="20" id="yyt-wM-atu"/>
+                                    <constraint firstItem="P2f-3t-Eyv" firstAttribute="top" secondItem="Sjt-Tc-lqS" secondAttribute="bottom" constant="20" id="z20-Nx-qNF"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="RJr-Rl-szu" secondAttribute="trailing" id="DZP-A0-SbP"/>
-                            <constraint firstItem="reb-DM-KDw" firstAttribute="top" secondItem="RJr-Rl-szu" secondAttribute="bottom" id="HHn-x4-cdg"/>
+                            <constraint firstItem="pgW-RZ-bsj" firstAttribute="width" secondItem="mGv-eJ-kOJ" secondAttribute="width" multiplier="0.5" id="6Eh-pt-BpX"/>
+                            <constraint firstItem="pgW-RZ-bsj" firstAttribute="height" secondItem="mGv-eJ-kOJ" secondAttribute="height" multiplier="0.5" id="BUB-yk-W0f"/>
+                            <constraint firstItem="pgW-RZ-bsj" firstAttribute="top" secondItem="MjT-kM-Vmx" secondAttribute="bottom" constant="30" id="EdU-cb-aY9"/>
+                            <constraint firstItem="pgW-RZ-bsj" firstAttribute="centerX" secondItem="mGv-eJ-kOJ" secondAttribute="centerX" id="F4z-f1-JjL"/>
                             <constraint firstItem="g8x-dq-otO" firstAttribute="top" secondItem="mGv-eJ-kOJ" secondAttribute="top" constant="10" id="KkZ-JB-UA8"/>
-                            <constraint firstItem="RJr-Rl-szu" firstAttribute="leading" secondItem="mGv-eJ-kOJ" secondAttribute="leading" id="Mxc-4x-2Xb"/>
-                            <constraint firstItem="RJr-Rl-szu" firstAttribute="top" secondItem="MjT-kM-Vmx" secondAttribute="bottom" constant="30" id="WCj-B9-lFm"/>
                             <constraint firstItem="reb-DM-KDw" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="bottom" id="XGE-De-Fow"/>
                             <constraint firstAttribute="trailing" secondItem="g8x-dq-otO" secondAttribute="trailing" id="s7c-cJ-opC"/>
                             <constraint firstItem="g8x-dq-otO" firstAttribute="leading" secondItem="mGv-eJ-kOJ" secondAttribute="leading" id="tbx-cB-JHX"/>
@@ -779,7 +817,8 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="calendarView" destination="RJr-Rl-szu" id="nik-Lj-pg1"/>
+                        <outlet property="calendarContainerView" destination="pgW-RZ-bsj" id="tgS-vq-ZD8"/>
+                        <outlet property="calendarView" destination="Sjt-Tc-lqS" id="VhN-co-Jjo"/>
                         <outlet property="dateLabel" destination="FZS-yO-Tmo" id="Sg0-ts-zHH"/>
                         <outlet property="historyView" destination="g8x-dq-otO" id="y2j-J7-soK"/>
                         <outlet property="smartGelHistoryCollectionView" destination="i13-5U-BrN" id="gPt-8n-BQg"/>
@@ -787,7 +826,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t7W-RB-bKs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1908" y="123.68815592203899"/>
+            <point key="canvasLocation" x="1907.8125" y="123.63281249999999"/>
         </scene>
         <!--About SmartGel-->
         <scene sceneID="CsO-RI-HiC">
