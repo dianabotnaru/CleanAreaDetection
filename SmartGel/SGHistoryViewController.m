@@ -11,8 +11,11 @@
 #import "SmartGelHistoryCollectionViewCell.h"
 #import "SGHistoryDetailViewController.h"
 #import <CCDropDownMenus/CCDropDownMenus.h>
+#import <GLDateUtils.h>
+#import <GLCalendarDateRange.h>
+#import <GLCalendarDayCell.h>
 
-@interface SGHistoryViewController () <SGDateTimePickerViewDelegate,SGHistoryDetailViewControllerDelegate,CCDropDownMenuDelegate>
+@interface SGHistoryViewController () <SGDateTimePickerViewDelegate,SGHistoryDetailViewControllerDelegate,CCDropDownMenuDelegate,GLCalendarViewDelegate>
 
 @end
 
@@ -23,17 +26,18 @@
     [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
     [self initDateTimePickerView];
     fromDate = [self setMinDate];
-    [self.fromLabel setText:[self getDateString:fromDate]];
     toDate = [self getLocalTime:[NSDate date]];
-    [self.toLabel setText:[self getDateString:toDate]];
+    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
     // Do any additional setup after loading the view.
     [self initNavigationBar];
+    [self initGlcalendarView];
 //    [self getHistoryArray];
     //    [self getTestResults];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [self.calendarView reload];
 }
 
 -(void)initNavigationBar{
@@ -135,19 +139,17 @@
     [sgDateTimePickerView setHidden:YES];
 }
 
--(void)doneButtonTapped:(NSDate *)date{
-    [sgDateTimePickerView setHidden:YES];
-    if(isFromButtonTapped){
-        fromDate = [self getLocalTime:date];
-        [self.fromLabel setText:[self getDateString:date]];
-        [self getFilterArray];
-    }
-    else{
-        toDate = [self getLocalTime:date];
-        [self.toLabel setText:[self getDateString:date]];
-        [self getFilterArray];
-    }
-}
+//-(void)doneButtonTapped:(NSDate *)date{
+//    [sgDateTimePickerView setHidden:YES];
+//    if(isFromButtonTapped){
+//        fromDate = [self getLocalTime:date];
+//        [self getFilterArray];
+//    }
+//    else{
+//        toDate = [self getLocalTime:date];
+//        [self getFilterArray];
+//    }
+//}
 
 -(void)cancelButtonTapped{
     [sgDateTimePickerView setHidden:YES];
@@ -187,7 +189,7 @@
 
 - (NSString *)getDateString:(NSDate*)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+    [formatter setDateFormat:@"MMM dd,yyyy"];
     NSString *dateString = [formatter stringFromDate:date];
     return dateString;
 }
@@ -232,9 +234,63 @@
     [self.smartGelHistoryCollectionView reloadData];
 }
 
+-(void)initGlcalendarView{
+    NSDate *today = [NSDate date];
+    NSDate *beginDate = [GLDateUtils dateByAddingDays:-1 toDate:today];
+    NSDate *endDate = [GLDateUtils dateByAddingDays:+1 toDate:today];
+    GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:beginDate endDate:endDate];
+    range.backgroundColor = [UIColor blueColor];
+    range.editable = YES;
+    //    range.binding = yourModelObject // you can bind your model to the range
+    self.calendarView.ranges = [@[range] mutableCopy];
+    self.calendarView.delegate = self;
+    self.calendarView.firstDate = fromDate;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.calendarView scrollToDate:today animated:NO];
+    });
+    
+    
+}
+
+- (BOOL)calenderView:(GLCalendarView *)calendarView canAddRangeWithBeginDate:(NSDate *)beginDate
+{
+    // you should check whether user can add a range with the given begin date
+    return YES;
+}
+
+- (GLCalendarDateRange *)calenderView:(GLCalendarView *)calendarView rangeToAddWithBeginDate:(NSDate *)beginDate
+{
+    // construct a new range object and return it
+    NSDate* endDate = [GLDateUtils dateByAddingDays:0 toDate:beginDate];
+    GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:beginDate endDate:endDate];
+    range.backgroundColor = [UIColor blueColor];
+    range.editable = YES;
+    return range;
+}
+
+- (void)calenderView:(GLCalendarView *)calendarView beginToEditRange:(GLCalendarDateRange *)range
+{
+    // save the range to a instance variable so that you can make some operation on it
+}
+
+- (void)calenderView:(GLCalendarView *)calendarView finishEditRange:(GLCalendarDateRange *)range continueEditing:(BOOL)continueEditing
+{
+    // retrieve the model from the range, do some updates to your model
+}
+
+- (BOOL)calenderView:(GLCalendarView *)calendarView canUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
+{
+    // you should check whether the beginDate or the endDate is valid
+    return YES;
+}
+
+- (void)calenderView:(GLCalendarView *)calendarView didUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
+{
+    // update your model if necessary
+}
 
 - (IBAction)showCalendar{
-    
+    [self.calendarView setHidden:NO];
 }
 
 /*
