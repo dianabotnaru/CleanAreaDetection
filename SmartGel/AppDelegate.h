@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorageReference *storageRef;
+@property (strong, nonatomic) NSString *userID;
 
 -(void)setFireDataBaseRef:(FIRDatabaseReference*)ref;
 -(FIRDatabaseReference*)getFireDataBaseRef;

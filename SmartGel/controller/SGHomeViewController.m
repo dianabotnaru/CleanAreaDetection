@@ -110,7 +110,7 @@
     [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
         [hud hideAnimated:false];
         if(error==nil){
-            self.userID = user.uid;
+            self.appDelegate.userID = user.uid;
             self.appDelegate.ref = [[FIRDatabase database] reference];
             self.appDelegate.storageRef = [[FIRStorage storage] reference];
         }else{
@@ -122,7 +122,7 @@
 - (void)saveResultImage{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"Uploading image...";
-    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.userID,self.estimateImage.date]];
+    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.userID,self.estimateImage.date]];
     NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
     [riversRef putData:imageData
               metadata:nil
@@ -133,7 +133,7 @@
                 } else {
                     isSavedImage = true;
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSString *key = self.userID;
+                    NSString *key = self.appDelegate.userID;
                     NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"date": self.estimateImage.date,
