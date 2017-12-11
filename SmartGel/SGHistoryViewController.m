@@ -9,6 +9,8 @@
 #import "SGHistoryViewController.h"
 #import "UIImageView+WebCache.h"
 #import "SmartGelHistoryCollectionViewCell.h"
+#import "SGLaboratoryCollectionViewCell.h"
+
 #import "SGHistoryDetailViewController.h"
 #import <PFNavigationDropdownMenu.h>
 #import <GLDateUtils.h>
@@ -26,6 +28,7 @@
     [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
     fromDate = [self setMinDate];
     toDate = [self getLocalTime:[NSDate date]];
+    isLaboratory = false;
     [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
     // Do any additional setup after loading the view.
     [self initNavigationBar];
@@ -46,8 +49,13 @@
     menuView.cellTextLabelColor = [UIColor whiteColor];
     menuView.didSelectItemAtIndexHandler = ^(NSUInteger indexPath){
         if(indexPath == 0){
+            [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
+            isLaboratory = false;
         }else{
+            [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SGLaboratoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SGLaboratoryCollectionViewCell"];
+            isLaboratory = true;
         }
+        [self.smartGelHistoryCollectionView reloadData];
     };
     self.navigationItem.titleView = menuView;
 }
@@ -87,7 +95,10 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.historyFilterArray.count;
+    if(isLaboratory)
+        return 20;
+    else
+        return self.historyFilterArray.count;
 }
 
 #pragma mark collection view cell paddings
@@ -104,21 +115,29 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"SmartGelHistoryCollectionViewCell";
-    SmartGelHistoryCollectionViewCell *cell = (SmartGelHistoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
-    [cell setEstimateData:estimateImageModel];
-    cell.layer.shouldRasterize = YES;
-    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    return cell;
+    if(!isLaboratory){
+        NSString *cellIdentifier = @"SmartGelHistoryCollectionViewCell";
+        SmartGelHistoryCollectionViewCell *cell = (SmartGelHistoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
+        [cell setEstimateData:estimateImageModel];
+        cell.layer.shouldRasterize = YES;
+        cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        return cell;
+    }else{
+        NSString *cellIdentifier = @"SGLaboratoryCollectionViewCell";
+        SGLaboratoryCollectionViewCell *cell = (SGLaboratoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        return cell;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
-    SGHistoryDetailViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
-    detailViewController.selectedEstimateImageModel = estimateImageModel;
-    detailViewController.delegate = self;
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    if(!isLaboratory){
+        EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
+        SGHistoryDetailViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
+        detailViewController.selectedEstimateImageModel = estimateImageModel;
+        detailViewController.delegate = self;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
 }
 
 - (NSDate *)setMinDate{

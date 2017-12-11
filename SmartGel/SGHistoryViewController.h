@@ -20,6 +20,7 @@
     NSDate *fromDate;
     NSDate *toDate;
     int dateSelectState;
+    bool isLaboratory;
 }
 @property (strong, nonatomic) IBOutlet UICollectionView *smartGelHistoryCollectionView;
 @property (strong, nonatomic) IBOutlet GLCalendarView *calendarView;
@@ -30,6 +31,9 @@
 
 @property (strong, nonatomic) NSMutableArray *historyArray;
 @property (strong, nonatomic) NSMutableArray *historyFilterArray;
+
+@property (strong, nonatomic) NSMutableArray *laboratoryArray;
+@property (strong, nonatomic) NSMutableArray *laboratoryFilterArray;
 
 @property (strong, nonatomic) MBProgressHUD *hud;
 @property (nonatomic, weak) GLCalendarDateRange *rangeUnderEdit;
