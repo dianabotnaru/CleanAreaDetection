@@ -31,8 +31,8 @@
     // Do any additional setup after loading the view.
     [self initNavigationBar];
     [self initGlcalendarView];
-//    [self getHistoryArray];
-    //    [self getTestResults];
+    [self getHistoryArray];
+//        [self getTestResults];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -95,8 +95,11 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/2-4,220);
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/4-8,220);
+    else
+        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/2-4,220);
+
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -237,12 +240,9 @@
 
 -(void)initGlcalendarView{
     NSDate *today = [NSDate date];
-//    NSDate *beginDate = [GLDateUtils dateByAddingDays:-1 toDate:today];
-//    NSDate *endDate = [GLDateUtils dateByAddingDays:+1 toDate:today];
     GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:today endDate:today];
     range.backgroundColor = UIColorFromRGB(0x80ae99);
     range.editable = YES;
-    //    range.binding = yourModelObject // you can bind your model to the range
     self.calendarView.ranges = [@[range] mutableCopy];
     self.calendarView.delegate = self;
     self.calendarView.firstDate = fromDate;
@@ -250,6 +250,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.calendarView scrollToDate:today animated:NO];
     });
+    [self initCalendarViewUi];
+}
+
+-(void)initCalendarViewUi{
+    [GLCalendarDayCell appearance].dayLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:UIColorFromRGB(0x555555)};
+    [GLCalendarDayCell appearance].monthLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:8]};
 }
 
 
@@ -282,14 +288,10 @@
 
 - (void)calenderView:(GLCalendarView *)calendarView beginToEditRange:(GLCalendarDateRange *)range
 {
-    NSLog(@"begin to edit range: %@", range);
-    self.rangeUnderEdit = range;
 }
 
 - (void)calenderView:(GLCalendarView *)calendarView finishEditRange:(GLCalendarDateRange *)range continueEditing:(BOOL)continueEditing
 {
-    NSLog(@"finish edit range: %@", range);
-    self.rangeUnderEdit = nil;
 }
 
 - (BOOL)calenderView:(GLCalendarView *)calendarView canUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
@@ -299,7 +301,6 @@
 
 - (void)calenderView:(GLCalendarView *)calendarView didUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
 {
-    NSLog(@"did update range: %@", range);
 }
 
 - (IBAction)showCalendar{
