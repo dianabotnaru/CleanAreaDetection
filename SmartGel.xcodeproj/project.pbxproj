@@ -47,6 +47,7 @@
 		8DB669ED1FDA8FA800BB3966 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */; };
 		8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */; };
 		8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */; };
+		8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */; };
 		8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */; };
 		8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */; };
 		8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */; };
@@ -116,6 +117,8 @@
 		8DB669F11FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryCollectionViewCell.h; path = view/SGLaboratoryCollectionViewCell.h; sourceTree = "<group>"; };
 		8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryCollectionViewCell.m; path = view/SGLaboratoryCollectionViewCell.m; sourceTree = "<group>"; };
 		8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SGLaboratoryCollectionViewCell.xib; path = view/SGLaboratoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		8DB669F71FDE8B6100BB3966 /* SGLaboratoryItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryItemViewController.h; path = laboratory/SGLaboratoryItemViewController.h; sourceTree = "<group>"; };
+		8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryItemViewController.m; path = laboratory/SGLaboratoryItemViewController.m; sourceTree = "<group>"; };
 		8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGWebViewController.h; path = controller/SGWebViewController.h; sourceTree = "<group>"; };
 		8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGWebViewController.m; path = controller/SGWebViewController.m; sourceTree = "<group>"; };
 		8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPdfViewController.h; path = controller/SGPdfViewController.h; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 		8DA332081F7C8FC00066148E /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				8DB669F61FDE8B0F00BB3966 /* laboratory */,
 				8DA3320B1F7C90430066148E /* SGHomeViewController.h */,
 				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
 				8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */,
@@ -235,8 +239,6 @@
 				8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */,
 				8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */,
 				8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */,
-				8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */,
-				8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -297,6 +299,17 @@
 				8DB097931F93456A0053C203 /* SGConstant.h */,
 			);
 			name = Constant;
+			sourceTree = "<group>";
+		};
+		8DB669F61FDE8B0F00BB3966 /* laboratory */ = {
+			isa = PBXGroup;
+			children = (
+				8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */,
+				8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */,
+				8DB669F71FDE8B6100BB3966 /* SGLaboratoryItemViewController.h */,
+				8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */,
+			);
+			name = laboratory;
 			sourceTree = "<group>";
 		};
 		8DDC4FD91F944E9D00C92EEB /* resource */ = {
@@ -485,6 +498,7 @@
 				8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */,
 				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
+				8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
 				8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */,
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
