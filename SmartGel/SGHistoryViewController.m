@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "SmartGelHistoryCollectionViewCell.h"
 #import "SGLaboratoryCollectionViewCell.h"
+#import "SGLaboratoryItemViewController.h"
 
 #import "SGHistoryDetailViewController.h"
 #import <PFNavigationDropdownMenu.h>
@@ -147,6 +148,11 @@
         detailViewController.selectedEstimateImageModel = estimateImageModel;
         detailViewController.delegate = self;
         [self.navigationController pushViewController:detailViewController animated:YES];
+    }else{
+        LaboratoryDataModel *laboratoryDatamodel = [self.laboratoryFilterArray objectAtIndex:indexPath.row];
+        SGLaboratoryItemViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGLaboratoryItemViewController"];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+
     }
 }
 
