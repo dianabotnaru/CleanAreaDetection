@@ -146,15 +146,15 @@
 }
 
 -(void)capturePhoto{
-//        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//        imagePickerController.delegate = self;
-//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//        [self presentViewController:imagePickerController animated:NO completion:nil];
-    UIImage *image = [UIImage imageNamed:@"test.png"];
-    self.laboratoryDataModel.image = image;
-    self.laboratoryDataModel.date = [self getCurrentTimeString];
-
-    [self estimateValue:image];
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:imagePickerController animated:NO completion:nil];
+//    UIImage *image = [UIImage imageNamed:@"test.png"];
+//    self.laboratoryDataModel.image = image;
+//    self.laboratoryDataModel.date = [self getCurrentTimeString];
+//
+//    [self estimateValue:image];
 }
 
 -(void)loadPhoto{

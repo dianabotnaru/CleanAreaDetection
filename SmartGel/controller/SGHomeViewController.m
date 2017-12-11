@@ -289,18 +289,18 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-    NSString* imageURL = [self getImageUrl:3];
-    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                              if(error==nil){
-                                  [self initDataUiWithImage:image];
-                              }
-                          }];
+//    NSString* imageURL = [self getImageUrl:3];
+//    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+//                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                              if(error==nil){
+//                                  [self initDataUiWithImage:image];
+//                              }
+//                          }];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

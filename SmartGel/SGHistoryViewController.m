@@ -64,19 +64,21 @@
     self.historyArray = [NSMutableArray array];
     self.historyFilterArray = [NSMutableArray array];
     NSString *userID = [FIRAuth auth].currentUser.uid;
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[self.appDelegate.ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        [self.hud hideAnimated:YES];
-        for(snapshot in snapshot.children){
-            EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
-            [self.historyArray addObject:estimageImageModel];
-        }
-        self.historyFilterArray = self.historyArray;
-        [self.smartGelHistoryCollectionView reloadData];
-    } withCancelBlock:^(NSError * _Nonnull error) {
-        [self.hud hideAnimated:YES];
-        [self showAlertdialog:@"Error" message:error.localizedDescription];
-    }];
+    if(userID!= NULL){
+        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[self.appDelegate.ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            [self.hud hideAnimated:YES];
+            for(snapshot in snapshot.children){
+                EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
+                [self.historyArray addObject:estimageImageModel];
+            }
+            self.historyFilterArray = self.historyArray;
+            [self.smartGelHistoryCollectionView reloadData];
+        } withCancelBlock:^(NSError * _Nonnull error) {
+            [self.hud hideAnimated:YES];
+            [self showAlertdialog:@"Error" message:error.localizedDescription];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
