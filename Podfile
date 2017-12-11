@@ -16,7 +16,7 @@ pod 'Firebase/DynamicLinks'
 pod 'GPUImage', '~> 0.1.4'
 pod 'SDWebImage', '~> 4.0'
 pod 'SCLAlertView-Objective-C'
-pod 'CCDropDownMenus'
+pod "PFNavigationDropdownMenu"
 pod 'GLCalendarView', '~> 1.0.0'
 
 post_install do |installer|

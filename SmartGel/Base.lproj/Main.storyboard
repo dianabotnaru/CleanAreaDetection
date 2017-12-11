@@ -712,7 +712,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8x-dq-otO">
-                                <rect key="frame" x="0.0" y="10" width="768" height="950"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KhI-AI-z4G">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="36"/>
@@ -753,7 +753,7 @@
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="SmartGelHistoryCollectionViewCell" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="i13-5U-BrN">
-                                        <rect key="frame" x="0.0" y="36" width="768" height="914"/>
+                                        <rect key="frame" x="0.0" y="36" width="768" height="924"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="2" id="r9l-SX-r3m">
                                             <size key="itemSize" width="131" height="334"/>
@@ -834,7 +834,7 @@
                             <constraint firstItem="pgW-RZ-bsj" firstAttribute="height" secondItem="mGv-eJ-kOJ" secondAttribute="height" multiplier="0.5" id="BUB-yk-W0f"/>
                             <constraint firstItem="pgW-RZ-bsj" firstAttribute="top" secondItem="MjT-kM-Vmx" secondAttribute="bottom" constant="50" id="EdU-cb-aY9"/>
                             <constraint firstItem="pgW-RZ-bsj" firstAttribute="centerX" secondItem="mGv-eJ-kOJ" secondAttribute="centerX" id="F4z-f1-JjL"/>
-                            <constraint firstItem="g8x-dq-otO" firstAttribute="top" secondItem="mGv-eJ-kOJ" secondAttribute="top" constant="10" id="KkZ-JB-UA8"/>
+                            <constraint firstItem="g8x-dq-otO" firstAttribute="top" secondItem="mGv-eJ-kOJ" secondAttribute="top" id="KkZ-JB-UA8"/>
                             <constraint firstItem="reb-DM-KDw" firstAttribute="top" secondItem="g8x-dq-otO" secondAttribute="bottom" id="XGE-De-Fow"/>
                             <constraint firstAttribute="trailing" secondItem="g8x-dq-otO" secondAttribute="trailing" id="s7c-cJ-opC"/>
                             <constraint firstItem="g8x-dq-otO" firstAttribute="leading" secondItem="mGv-eJ-kOJ" secondAttribute="leading" id="tbx-cB-JHX"/>

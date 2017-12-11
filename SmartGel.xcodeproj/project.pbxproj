@@ -401,7 +401,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel-resources.sh",
-				"${PODS_ROOT}/CCDropDownMenus/CCDropDownMenu/arrow.png",
 				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-magnify-glass.png",
 				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-magnify-glass@2x.png",
 				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-shadow.png",
@@ -414,6 +413,7 @@
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
+				"${PODS_ROOT}/PFNavigationDropdownMenu/Classes/PFNavigationDropdownMenu.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (

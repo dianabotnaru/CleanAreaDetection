@@ -10,12 +10,12 @@
 #import "UIImageView+WebCache.h"
 #import "SmartGelHistoryCollectionViewCell.h"
 #import "SGHistoryDetailViewController.h"
-#import <CCDropDownMenus/CCDropDownMenus.h>
+#import <PFNavigationDropdownMenu.h>
 #import <GLDateUtils.h>
 #import <GLCalendarDateRange.h>
 #import <GLCalendarDayCell.h>
 
-@interface SGHistoryViewController () <SGHistoryDetailViewControllerDelegate,CCDropDownMenuDelegate,GLCalendarViewDelegate>
+@interface SGHistoryViewController () <SGHistoryDetailViewControllerDelegate,GLCalendarViewDelegate>
 
 @end
 
@@ -41,16 +41,17 @@
 }
 
 -(void)initNavigationBar{
-    SyuDropDownMenu *menu = [[SyuDropDownMenu alloc] initWithNavigationBar:self.navigationController.navigationBar useNavigationController:YES];
-    menu.delegate = self;
-    menu.numberOfRows = 2;
-    menu.textOfRows = @[@"SmartGel", @"Laboratory"];
-    [self.view addSubview:menu];
+    NSArray *items = @[@"SmartGel", @"Laboratory"];
+    PFNavigationDropdownMenu *menuView = [[PFNavigationDropdownMenu alloc]initWithFrame:CGRectMake(0, 0, 300, 44)title:[items objectAtIndex:0] items:items containerView:self.view];
+    [menuView setCellBackgroundColor:SGColorBlack];
+    menuView.cellTextLabelColor = [UIColor whiteColor];
+    menuView.didSelectItemAtIndexHandler = ^(NSUInteger indexPath){
+        if(indexPath == 0){
+        }else{
+        }
+    };
+    self.navigationItem.titleView = menuView;
 }
-
-- (void)dropDownMenu:(CCDropDownMenu *)dropDownMenu didSelectRowAtIndex:(NSInteger)index {
-}
-
 
 - (void)onDeletedImage{
     [self getHistoryArray];
