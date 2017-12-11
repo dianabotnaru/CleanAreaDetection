@@ -71,15 +71,25 @@
 -(void)getHistoryArray{
     self.historyArray = [NSMutableArray array];
     self.historyFilterArray = [NSMutableArray array];
+    self.laboratoryArray = [NSMutableArray array];
+    self.laboratoryFilterArray = [NSMutableArray array];
+
     NSString *userID = [FIRAuth auth].currentUser.uid;
     if(userID!= NULL){
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[self.appDelegate.ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             [self.hud hideAnimated:YES];
             for(snapshot in snapshot.children){
-                EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
-                [self.historyArray addObject:estimageImageModel];
+                bool  isLaboraotoryHistory = [snapshot.value[@"islaboratory"] boolValue];
+                if(!isLaboraotoryHistory){
+                    EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
+                    [self.historyArray addObject:estimageImageModel];
+                }else{
+                    LaboratoryDataModel *laboratoryDataModel = [[LaboratoryDataModel alloc] initWithSnapshot:snapshot];
+                    [self.laboratoryArray addObject:laboratoryDataModel];
+                }
             }
+            self.laboratoryFilterArray = self.laboratoryArray;
             self.historyFilterArray = self.historyArray;
             [self.smartGelHistoryCollectionView reloadData];
         } withCancelBlock:^(NSError * _Nonnull error) {
@@ -96,7 +106,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if(isLaboratory)
-        return 20;
+        return self.laboratoryFilterArray.count;
     else
         return self.historyFilterArray.count;
 }

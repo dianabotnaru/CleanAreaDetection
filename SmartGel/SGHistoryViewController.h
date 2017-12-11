@@ -10,6 +10,7 @@
 #import "Firebase.h"
 #import "MBProgressHUD.h"
 #import "EstimateImageModel.h"
+#import "LaboratoryDataModel.h"
 #import "SGDateTimePickerView.h"
 #import "SGBaseViewController.h"
 #import <GLCalendarView.h>
@@ -22,6 +23,7 @@
     int dateSelectState;
     bool isLaboratory;
 }
+
 @property (strong, nonatomic) IBOutlet UICollectionView *smartGelHistoryCollectionView;
 @property (strong, nonatomic) IBOutlet GLCalendarView *calendarView;
 @property (strong, nonatomic) IBOutlet UIView *historyView;

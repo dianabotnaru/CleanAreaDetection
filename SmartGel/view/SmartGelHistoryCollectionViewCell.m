@@ -25,7 +25,6 @@
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:estimateImageData.imageUrl]
                            placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
                                     options:SDWebImageProgressiveDownload];
-    
 }
-
 @end
+

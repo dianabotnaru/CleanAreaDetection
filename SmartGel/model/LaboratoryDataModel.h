@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Firebase.h"
 
 @interface LaboratoryDataModel : NSObject
 
@@ -20,5 +21,7 @@
 @property (strong, nonatomic) NSString *tag;
 @property (strong, nonatomic) NSString *customer;
 @property (assign, nonatomic) bool islaboratory;
+
+-(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;
 
 @end
