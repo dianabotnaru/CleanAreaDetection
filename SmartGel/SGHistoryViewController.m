@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
-    [self initDateTimePickerView];
     fromDate = [self setMinDate];
     toDate = [self getLocalTime:[NSDate date]];
     [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
@@ -118,45 +117,6 @@
     detailViewController.selectedEstimateImageModel = estimateImageModel;
     detailViewController.delegate = self;
     [self.navigationController pushViewController:detailViewController animated:YES];
-}
-
--(IBAction)fromButtonTapped{
-    isFromButtonTapped = true;
-    sgDateTimePickerView.datePicker.minimumDate = [self setMinDate];
-    sgDateTimePickerView.datePicker.maximumDate = [NSDate date];
-    [sgDateTimePickerView setHidden:NO];
-}
-
--(IBAction)toButtonTapped{
-    isFromButtonTapped = false;
-    sgDateTimePickerView.datePicker.minimumDate = fromDate;
-    sgDateTimePickerView.datePicker.maximumDate = [NSDate date];
-    [sgDateTimePickerView setHidden:NO];
-}
-
-/////////////////////////// Add DateTimePicker View/////////////////////////////////////////////////////////////
-- (void)initDateTimePickerView{
-    sgDateTimePickerView = [[[NSBundle mainBundle] loadNibNamed:@"SGDateTimePickerView" owner:nil options:nil] lastObject];
-    sgDateTimePickerView.frame = CGRectMake(5, [[[UIApplication sharedApplication] delegate] window].frame.size.height-305, [[[UIApplication sharedApplication] delegate] window].frame.size.width-10,300);
-    sgDateTimePickerView.delegate = self;
-    [self.view addSubview:sgDateTimePickerView];
-    [sgDateTimePickerView setHidden:YES];
-}
-
-//-(void)doneButtonTapped:(NSDate *)date{
-//    [sgDateTimePickerView setHidden:YES];
-//    if(isFromButtonTapped){
-//        fromDate = [self getLocalTime:date];
-//        [self getFilterArray];
-//    }
-//    else{
-//        toDate = [self getLocalTime:date];
-//        [self getFilterArray];
-//    }
-//}
-
--(void)cancelButtonTapped{
-    [sgDateTimePickerView setHidden:YES];
 }
 
 - (NSDate *)setMinDate{

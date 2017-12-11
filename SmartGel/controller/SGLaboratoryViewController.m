@@ -109,7 +109,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(IBAction)launchPhotoPickerController{
+-(IBAction)launchCameraController{
     if(firstrun){
         [self capturePhoto];
     }else{
@@ -127,6 +127,24 @@
     }
 }
 
+-(IBAction)choosePhotoPickerController{
+    if(firstrun){
+        [self loadPhoto];
+    }else{
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                       message:@"Do you want to save the Result?"
+                                                                preferredStyle:UIAlertControllerStyleAlert]; // 1
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self showSaveAlertView];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self loadPhoto];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
 -(void)capturePhoto{
 //        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
 //        imagePickerController.delegate = self;
@@ -137,6 +155,13 @@
     self.laboratoryDataModel.date = [self getCurrentTimeString];
 
     [self estimateValue:image];
+}
+
+-(void)loadPhoto{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
 }
 
 - (CGContextRef) createARGBBitmapContextFromImage:(CGImageRef) inImage {
