@@ -152,6 +152,7 @@
     }else{
         LaboratoryDataModel *laboratoryDatamodel = [self.laboratoryFilterArray objectAtIndex:indexPath.row];
         SGLaboratoryItemViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGLaboratoryItemViewController"];
+        detailViewController.laboratoryDataModel = laboratoryDatamodel;
         [self.navigationController pushViewController:detailViewController animated:YES];
 
     }

@@ -778,7 +778,5 @@
                     [self.appDelegate.ref updateChildValues:childUpdates];
                 }
             }];
-
 }
-
 @end

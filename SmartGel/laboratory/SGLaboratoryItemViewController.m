@@ -16,22 +16,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self initLabels];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+-(void)initLabels{
+    self.locationLabel.text = self.laboratoryDataModel.location;
+    self.dateLabel.text = self.laboratoryDataModel.date;
+    self.resultValueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.laboratoryDataModel.resultValue];
+    self.customerLabel.text = self.laboratoryDataModel.customer;
+    self.tagLabel.text = self.laboratoryDataModel.tag;
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    self.blankView.backgroundColor = [self getUIColorFromInt:self.laboratoryDataModel.blankColor];
+    self.sampleView.backgroundColor = [self getUIColorFromInt:self.laboratoryDataModel.sampleColor];
+    
+    if(self.laboratoryDataModel.resultState == 1)
+        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+    else if(self.laboratoryDataModel.resultState == 2)
+        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+    else if(self.laboratoryDataModel.resultState == 3)
+        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
 }
-*/
+
+- (UIColor *)getUIColorFromInt:(int)intValue{
+    return [UIColor colorWithRed:((CGFloat)((intValue & 0xFF0000) >> 16)) / 255.0
+                           green:((CGFloat)((intValue & 0xFF00) >> 8)) / 255.0
+                            blue:((CGFloat)(intValue & 0xFF)) / 255.0
+                           alpha:1.0];
+}
+
 
 @end
