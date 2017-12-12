@@ -20,6 +20,8 @@
         self.location = snapshot.value[@"location"];
         self.customer = snapshot.value[@"customer"];
         self.tag = snapshot.value[@"tag"];
+        self.blankColor = [snapshot.value[@"blankcolor"] intValue];
+        self.sampleColor = [snapshot.value[@"samplecolor"] intValue];
     }
     return self;
 }

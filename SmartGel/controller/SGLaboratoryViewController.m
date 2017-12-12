@@ -235,11 +235,7 @@
     size_t h = CGImageGetHeight(ref);
     CGRect rect = {{0,0},{w,h}};
     CGContextDrawImage(bitmapcrop1, rect, ref);
-    
-    //NSLog(@"w ,%i h, %i",w,h);
-    
     unsigned char* data = CGBitmapContextGetData (bitmapcrop1);
-    
     if (data != NULL)
     {
         
@@ -260,7 +256,6 @@
             {
                 nb++;
                 int offset = 4*((w*yb)+xb);
-                //int alpha =  data[offset]; maybe we need it?
                 int redb = data[offset+1];
                 data[offset+1]=255;
                 int greenb = data[offset+2];
@@ -275,16 +270,10 @@
             rednewby=rednewby+rednewbx;
             greennewby=greennewby+greennewbx;
             bluenewby=bluenewby+bluenewbx;
-            rednewbx=0,greennewbx=0,bluenewbx=0;
+            rednewbx=0;greennewbx=0;bluenewbx=0;
         }
         
-        //NSLog(@"Blank: Pixels:%i crop:%f:%f:%f:%f",nb,br,bt,bl,bb);
-        //________________________________________________________
-        
-        //SAMPLE Crop
-        
         int xs=0,ys=0,rednewsx=0,greennewsx=0,bluenewsx=0,rednewsy=0,greennewsy=0,bluenewsy=0,ns=0;
-        //sr = (width*width%/100)
         float sr,sl,st,sb;
         sr=(w*70.0/100.0);
         sl=(w*85.0/100.0);
@@ -312,12 +301,8 @@
             rednewsy=rednewsy+rednewsx;
             greennewsy=greennewsy+greennewsx;
             bluenewsy=bluenewsy+bluenewsx;
-            rednewsx=0,greennewsx=0,bluenewsx=0;
+            rednewsx=0; greennewsx=0; bluenewsx=0;
         }
-        
-        //NSLog(@"BLANK:%i:%i:%i:SAMPLE:%i:%i:%i",rednewby/nb, greennewby/nb,bluenewby/nb,rednewsy/ns, greennewsy/ns,bluenewsy/ns);
-        //result.text = [NSString stringWithFormat:@"%ix%i",w,h];
-        //result2.text = [NSString stringWithFormat:@"BLANK:%i:%i:%i  SAMPLE:%i:%i:%i",rednewby/nb, greennewby/nb,bluenewby/nb,rednewsy/ns, greennewsy/ns,bluenewsy/ns];
         
         float sred,sgreen,sblue,bred,bgreen,bblue,ssred,ssgreen,ssblue,bbblue,bbgreen,bbred;
         bred=rednewby/(nb*255.0f);
@@ -326,6 +311,10 @@
         sred=rednewsy/(ns*255.0f);
         sgreen=greennewsy/(ns*255.0f);
         sblue=bluenewsy/(ns*255.0f);
+        
+        self.laboratoryDataModel.blankColor =((unsigned)(bred * 255) << 16) + ((unsigned)(bgreen * 255) << 8) + ((unsigned)(bblue * 255) << 0);
+        self.laboratoryDataModel.sampleColor = ((unsigned)(sred * 255) << 16) + ((unsigned)(sgreen * 255) << 8) + ((unsigned)(sblue * 255) << 0);
+
         self.blankView.backgroundColor = [UIColor colorWithRed:bred green:bgreen blue:bblue alpha:1];
         self.sampleView.backgroundColor = [UIColor colorWithRed:sred green:sgreen blue:sblue alpha:1];
         
@@ -459,20 +448,15 @@
                 }else{
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
                 }
-//                reslabel.hidden = FALSE;
-//                resultfox.hidden = FALSE;
                 self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
                 if(ug_cm2 < vgood)
                 {
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
-//                    reslabel.text = vgoodlab;
                 }else{
                     if(ug_cm2 < satis){
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
-//                    reslabel.text = satislab;
                     }else{
                         self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
-//                      reslabel.text = inadeqlab;
                     }
                 }
             }
@@ -505,15 +489,6 @@
                 }
             }
             self.lblugormg.text = @"";
-            //reslabel.hidden=TRUE;
-        }
-        // Datum
-        static NSDateFormatter *dateFormatter = nil;
-        NSDate *today = [NSDate date];
-        if (dateFormatter == nil) {
-            dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-            [dateFormatter setDateStyle:NSDateFormatterShortStyle];
         }
     }
     if (data)
@@ -790,6 +765,8 @@
                                            @"customer": self.laboratoryDataModel.customer,
                                            @"date": self.laboratoryDataModel.date,
                                            @"location": self.laboratoryDataModel.location,
+                                           @"blankcolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.blankColor],
+                                           @"samplecolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.sampleColor]
                                            };
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.laboratoryDataModel.date]: post};
                     [self.appDelegate.ref updateChildValues:childUpdates];

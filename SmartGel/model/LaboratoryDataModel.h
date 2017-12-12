@@ -20,6 +20,9 @@
 @property (strong, nonatomic) NSString *unit;
 @property (strong, nonatomic) NSString *tag;
 @property (strong, nonatomic) NSString *customer;
+@property (assign, nonatomic) int64_t blankColor;
+@property (assign, nonatomic) int64_t sampleColor;
+
 @property (assign, nonatomic) bool islaboratory;
 
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;

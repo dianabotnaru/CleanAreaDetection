@@ -93,6 +93,14 @@
                 <constraint firstAttribute="bottom" secondItem="6hZ-Gj-PFn" secondAttribute="bottom" id="stZ-Rk-37Z"/>
             </constraints>
             <size key="customSize" width="265" height="344"/>
+            <connections>
+                <outlet property="blankView" destination="tqY-V0-qMP" id="By8-hM-1Qb"/>
+                <outlet property="dateLabel" destination="j6n-8e-UEa" id="Ki1-7H-EMT"/>
+                <outlet property="locationLabel" destination="K3s-M5-KuJ" id="Dch-O9-C8B"/>
+                <outlet property="resultValueLabel" destination="y3w-y9-Nda" id="zYM-sg-00R"/>
+                <outlet property="resultfoxImageView" destination="4pE-oq-bHD" id="J6J-J9-Hx7"/>
+                <outlet property="sampleView" destination="JI3-RV-nsS" id="7xH-fh-nK8"/>
+            </connections>
             <point key="canvasLocation" x="-40.5" y="44"/>
         </collectionViewCell>
     </objects>

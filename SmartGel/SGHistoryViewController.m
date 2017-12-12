@@ -122,7 +122,6 @@
         return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/4-8,220);
     else
         return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/2-4,220);
-
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -137,6 +136,8 @@
     }else{
         NSString *cellIdentifier = @"SGLaboratoryCollectionViewCell";
         SGLaboratoryCollectionViewCell *cell = (SGLaboratoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        LaboratoryDataModel *laboratoryDataModel = [self.laboratoryFilterArray objectAtIndex:indexPath.row];
+        [cell setLaboratoryData:laboratoryDataModel];
         return cell;
     }
 }

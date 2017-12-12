@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LaboratoryDataModel.h"
 
 @interface SGLaboratoryCollectionViewCell : UICollectionViewCell
+
+@property (strong, nonatomic) IBOutlet UIView *blankView;
+@property (strong, nonatomic) IBOutlet UIView *sampleView;
+@property (strong, nonatomic) IBOutlet UIImageView *resultfoxImageView;
+
+@property (strong, nonatomic) IBOutlet UILabel *resultValueLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+
+-(void)setLaboratoryData:(LaboratoryDataModel *)laboratoryData;
 
 @end
