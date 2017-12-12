@@ -63,8 +63,12 @@
                                 <rect key="frame" x="132.5" y="0.0" width="132.5" height="160"/>
                                 <color key="backgroundColor" red="0.2784313725" green="0.3411764706" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smiley_pink.png" translatesAutoresizingMaskIntoConstraints="NO" id="4pE-oq-bHD">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4pE-oq-bHD">
                                 <rect key="frame" x="87" y="35" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="24o-he-dS9"/>
+                                    <constraint firstAttribute="height" constant="90" id="f8v-ay-yoS"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,7 +108,4 @@
             <point key="canvasLocation" x="-40.5" y="44"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="Smiley_pink.png" width="90" height="90"/>
-    </resources>
 </document>

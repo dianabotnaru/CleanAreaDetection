@@ -23,6 +23,7 @@
 @property (assign, nonatomic) int64_t blankColor;
 @property (assign, nonatomic) int64_t sampleColor;
 
+@property (assign, nonatomic) int resultState;
 @property (assign, nonatomic) bool islaboratory;
 
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;

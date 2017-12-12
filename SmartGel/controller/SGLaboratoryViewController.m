@@ -452,11 +452,14 @@
                 if(ug_cm2 < vgood)
                 {
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+                    self.laboratoryDataModel.resultState = 1;
                 }else{
                     if(ug_cm2 < satis){
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+                        self.laboratoryDataModel.resultState = 2;
                     }else{
                         self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+                        self.laboratoryDataModel.resultState = 3;
                     }
                 }
             }
@@ -480,12 +483,16 @@
             if(ug_cm2 <= 0.01)
             {
                 self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+                self.laboratoryDataModel.resultState = 1;
             }else{
                 if(ug_cm2 < maxug)
                 {
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+                    self.laboratoryDataModel.resultState = 2;
+
                 }else{
                     self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
+                    self.laboratoryDataModel.resultState = 3;
                 }
             }
             self.lblugormg.text = @"";
@@ -530,9 +537,7 @@
     
     for(i=0;i<10;i++)
     {
-        
         float nrn = [[nrs objectAtIndex:i] floatValue]/99.0*25.0;
-        
         if(nrn<=0)
         {
             [LK addObject:@"A"];
@@ -766,7 +771,8 @@
                                            @"date": self.laboratoryDataModel.date,
                                            @"location": self.laboratoryDataModel.location,
                                            @"blankcolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.blankColor],
-                                           @"samplecolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.sampleColor]
+                                           @"samplecolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.sampleColor],
+                                           @"resultstate":[NSString stringWithFormat:@"%d",self.laboratoryDataModel.resultState]
                                            };
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.laboratoryDataModel.date]: post};
                     [self.appDelegate.ref updateChildValues:childUpdates];

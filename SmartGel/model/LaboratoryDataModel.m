@@ -22,6 +22,7 @@
         self.tag = snapshot.value[@"tag"];
         self.blankColor = [snapshot.value[@"blankcolor"] intValue];
         self.sampleColor = [snapshot.value[@"samplecolor"] intValue];
+        self.resultState = [snapshot.value[@"resultstate"] intValue];        
     }
     return self;
 }

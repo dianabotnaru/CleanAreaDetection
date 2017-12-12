@@ -22,6 +22,13 @@
     
     self.blankView.backgroundColor = [self getUIColorFromInt:laboratoryData.blankColor];
     self.sampleView.backgroundColor = [self getUIColorFromInt:laboratoryData.sampleColor];
+    
+    if(laboratoryData.resultState == 1)
+        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_pink.png"];
+    else if(laboratoryData.resultState == 2)
+        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_green.png"];
+    else if(laboratoryData.resultState == 3)
+        self.resultfoxImageView.image = [UIImage imageNamed:@"Smiley_yellow.png"];
 }
 
 - (UIColor *)getUIColorFromInt:(int)intValue{
