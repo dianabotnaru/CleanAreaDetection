@@ -1250,9 +1250,9 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Laboratory History" id="Mgy-h2-lSV">
-                        <barButtonItem key="leftBarButtonItem" image="ic_menu" id="ibu-vf-kON">
+                        <barButtonItem key="leftBarButtonItem" image="ic_back" id="ibu-vf-kON">
                             <connections>
-                                <action selector="presentLeftMenuViewController:" destination="odx-nC-8gw" id="CkI-OE-Oyi"/>
+                                <action selector="backButtonClicked:" destination="odx-nC-8gw" id="cP9-vD-zDl"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="FEn-lh-KfW"/>

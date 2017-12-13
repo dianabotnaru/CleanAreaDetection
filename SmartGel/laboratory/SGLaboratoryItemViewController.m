@@ -48,5 +48,7 @@
                            alpha:1.0];
 }
 
-
+-(IBAction)backButtonClicked:(id)sender{
+    [self.navigationController popViewControllerAnimated: YES];
+}
 @end
