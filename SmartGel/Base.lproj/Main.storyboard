@@ -698,7 +698,11 @@
                                 <action selector="presentLeftMenuViewController:" destination="o4L-Oo-xZl" id="1gd-qs-HCK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="rwR-qU-1Dg"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="rwR-qU-1Dg">
+                            <connections>
+                                <action selector="uploadImage" destination="o4L-Oo-xZl" id="id8-nh-3cn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -1255,7 +1259,11 @@
                                 <action selector="backButtonClicked:" destination="odx-nC-8gw" id="cP9-vD-zDl"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="FEn-lh-KfW"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="FEn-lh-KfW">
+                            <connections>
+                                <action selector="removeLaboratoryItem" destination="odx-nC-8gw" id="Bd1-x9-mLH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>

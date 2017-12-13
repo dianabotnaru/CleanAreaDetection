@@ -785,4 +785,11 @@
                 }
             }];
 }
+
+-(IBAction)uploadImage{
+    if(self.laboratoryDataModel.image==nil)
+        [self showAlertdialog:nil message:@"Please take a photo."];
+    else
+        [self showSaveAlertView];
+}
 @end

@@ -18,7 +18,7 @@
 #import <GLCalendarDateRange.h>
 #import <GLCalendarDayCell.h>
 
-@interface SGHistoryViewController () <SGHistoryDetailViewControllerDelegate,GLCalendarViewDelegate>
+@interface SGHistoryViewController () <SGHistoryDetailViewControllerDelegate,GLCalendarViewDelegate,SGLaboratoryItemViewControllerDelegate>
 
 @end
 
@@ -153,6 +153,7 @@
         LaboratoryDataModel *laboratoryDatamodel = [self.laboratoryFilterArray objectAtIndex:indexPath.row];
         SGLaboratoryItemViewController *detailViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGLaboratoryItemViewController"];
         detailViewController.laboratoryDataModel = laboratoryDatamodel;
+        detailViewController.delegate = self;
         [self.navigationController pushViewController:detailViewController animated:YES];
 
     }

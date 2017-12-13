@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "LaboratoryDataModel.h"
+#import "MBProgressHUD.h"
+#import "SGBaseViewController.h"
 
-@interface SGLaboratoryItemViewController : UIViewController
+@protocol SGLaboratoryItemViewControllerDelegate <NSObject>
+@required
+- (void)onDeletedImage;
+@end
+
+
+@interface SGLaboratoryItemViewController : SGBaseViewController
+
+@property (weak, nonatomic) id<SGLaboratoryItemViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIView *blankView;
 @property (strong, nonatomic) IBOutlet UIView *sampleView;
@@ -22,5 +32,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *customerLabel;
 
 @property (strong, nonatomic) LaboratoryDataModel *laboratoryDataModel;
+
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end
