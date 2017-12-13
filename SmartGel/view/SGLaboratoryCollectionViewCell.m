@@ -18,7 +18,7 @@
 -(void)setLaboratoryData:(LaboratoryDataModel *)laboratoryData{
     self.locationLabel.text = laboratoryData.location;
     self.dateLabel.text = laboratoryData.date;
-    self.resultValueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", laboratoryData.resultValue];
+    self.resultValueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.2f", laboratoryData.resultValue];
     
     self.blankView.backgroundColor = [self getUIColorFromInt:laboratoryData.blankColor];
     self.sampleView.backgroundColor = [self getUIColorFromInt:laboratoryData.sampleColor];

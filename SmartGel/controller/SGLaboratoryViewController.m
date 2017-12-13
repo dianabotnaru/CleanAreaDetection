@@ -445,8 +445,11 @@
                 if(RSF<=0.2)
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2];
+                    self.laboratoryDataModel.resultValue = ug_cm2;
                 }else{
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
+                    self.laboratoryDataModel.resultValue = maxug;
+
                 }
                 self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
                 if(ug_cm2 < vgood)
@@ -468,10 +471,14 @@
                 if(RSF<=0.2)
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
+                    self.laboratoryDataModel.resultValue = mgl_CH2O;
+
                 }
                 else
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
+                    self.laboratoryDataModel.resultValue = maxmgl;
+
                 }
                 self.resultfoxImageView.image=nil;
                 self.lbldiam.text=@"";
@@ -503,7 +510,6 @@
         free(data);
     }
     CGContextRelease(bitmapcrop1);
-    self.laboratoryDataModel.resultValue = [self.resultValueLabel.text floatValue];
 }
 
 - (BOOL)licheck
@@ -763,7 +769,7 @@
                 } else {
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
                     NSString *key = self.appDelegate.userID;
-                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.laboratoryDataModel.resultValue],
+                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.resultValue],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"tag": self.laboratoryDataModel.tag,
                                            @"islaboratory" : @"1",

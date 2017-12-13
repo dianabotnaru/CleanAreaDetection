@@ -26,7 +26,7 @@
 -(void)initLabels{
     self.locationLabel.text = self.laboratoryDataModel.location;
     self.dateLabel.text = self.laboratoryDataModel.date;
-    self.resultValueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.laboratoryDataModel.resultValue];
+    self.resultValueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.2f", self.laboratoryDataModel.resultValue];
     self.customerLabel.text = self.laboratoryDataModel.customer;
     self.tagLabel.text = self.laboratoryDataModel.tag;
 
