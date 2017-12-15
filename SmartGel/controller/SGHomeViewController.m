@@ -47,6 +47,7 @@
 
 -(void)initDataUiWithImage:(UIImage *)image{
     [self.takenImageView setImage:image];
+    [self.cleanareaViews removeAllObjects];
     isSavedImage = false;
     self.takenImage = image;
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
@@ -280,18 +281,20 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-    NSString* imageURL = [self getImageUrl:3];
-    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                              if(error==nil){
-                                  [self initDataUiWithImage:image];
-                              }
-                          }];
+//    [self initDataUiWithImage:[UIImage imageNamed:@"test.png"]];
+
+//    NSString* imageURL = [self getImageUrl:3];
+//    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+//                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                              if(error==nil){
+//                                  [self initDataUiWithImage:image];
+//                              }
+//                          }];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -327,12 +330,6 @@
             }
         }
     }
-//    [self hideDirtyArea];
-//    [self showCleanAndDirtyArea];
-//    if(isShowDirtyArea){
-//        [self hideDirtyArea];
-//    }
-//    [self drawNoGelView];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }

@@ -91,11 +91,12 @@
             [paintView setBackgroundColor:[UIColor blueColor]];
             [paintView setAlpha:0.5];
             [self.takenImageView addSubview:paintView];
-        }else if([[dirtyState objectAtIndex:i] intValue] == NO_GEL){
-            [paintView setBackgroundColor:[UIColor yellowColor]];
-            [paintView setAlpha:0.3];
-            [self.takenImageView addSubview:paintView];
         }
+//        else if([[dirtyState objectAtIndex:i] intValue] == NO_GEL){
+//            [paintView setBackgroundColor:[UIColor yellowColor]];
+//            [paintView setAlpha:0.3];
+//            [self.takenImageView addSubview:paintView];
+//        }
     }
 }
 
