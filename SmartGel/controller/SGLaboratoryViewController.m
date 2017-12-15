@@ -113,7 +113,6 @@
     if(firstrun){
         [self capturePhoto];
     }else{
-
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
                                                                        message:@"Do you want to save the Result?"
                                                                 preferredStyle:UIAlertControllerStyleAlert]; // 1

@@ -23,7 +23,7 @@
     [self initData];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self loginFireBase];
-    // Do any additional setup after loading the view.
+    self.cleanareaViews = [NSMutableArray array];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -34,7 +34,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)initData{
@@ -61,6 +60,7 @@
     [self hideDirtyArea];
     [self.noGelView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     [self drawGridView];
+    [self initCleanareaViews: self.engine.areaCleanState];
 }
 
 - (NSMutableArray *)nonGelAreaArrayInit{
@@ -83,25 +83,13 @@
 {
     CGSize imgViewSize=self.takenImageView.frame.size;                  // Size of UIImageView
     CGSize imgSize=self.takenImage.size;                      // Size of the image, currently displayed
-    
     CGFloat scaleW = imgViewSize.width / imgSize.width;
     CGFloat scaleH = imgViewSize.height / imgSize.height;
     CGFloat aspect=fmin(scaleW, scaleH);
-    
     CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
-    
-    // Note: the above is the same as :
-    // CGRect imageRect=CGRectMake(0,0,imgSize.width*=aspect,imgSize.height*=aspect) I just like this notation better
-    
-    // Center image
-    
     imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
- 
-    // Add imageView offset
-    
     imageRect.origin.x+=self.takenImageView.frame.origin.x;
     imageRect.origin.y+=self.takenImageView.frame.origin.y;
-    
     return imageRect;
 }
 
@@ -164,7 +152,10 @@
     [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self drawView : self.engine.areaCleanState];
+        for (int i = 0; i<self.cleanareaViews.count; i++) {
+            UIView *view = [self.cleanareaViews objectAtIndex:i];
+            [self.takenImageView addSubview:view];
+        }
         [hud hideAnimated:false];
     });
 }
@@ -174,10 +165,13 @@
     [self.notificationLabel setHidden:NO];
     [self.takePhotoButton setHidden:NO];
     [self.showCleanAreaButton setTitle:@"Show Clean Area" forState:UIControlStateNormal];
-    [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    for (int i = 0; i<self.cleanareaViews.count; i++) {
+        UIView *view = [self.cleanareaViews objectAtIndex:i];
+        [view removeFromSuperview];
+    }
 }
 
--(void)drawView:(NSMutableArray*)dirtyState{
+-(void)initCleanareaViews:(NSMutableArray*)dirtyState{
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
@@ -190,35 +184,32 @@
         if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
             [paintView setAlpha:0.5];
-            [self.takenImageView addSubview:paintView];
         }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
             [paintView setBackgroundColor:[UIColor blueColor]];
             [paintView setAlpha:0.5];
-            [self.takenImageView addSubview:paintView];
         }
-        
+        [self.cleanareaViews addObject:paintView];
     }
 }
 
 - (void)drawNoGelView{
-    [self.noGelView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-        int y = i/AREA_DIVIDE_NUMBER;
-        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        CGRect rect = [self calculateClientRectOfImageInUIImageView];
-        
-        float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
-        float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
-        
-        if([[self.engine.areaCleanState objectAtIndex:i] intValue] == NO_GEL){
-            UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
-            [paintView setBackgroundColor:[UIColor yellowColor]];
-            [paintView setAlpha:0.3];
-            [self.noGelView addSubview:paintView];
-        }
-    }
+//    [self.noGelView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+//    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
+//        int y = i/AREA_DIVIDE_NUMBER;
+//        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+//        CGRect rect = [self calculateClientRectOfImageInUIImageView];
+//
+//        float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
+//        float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
+//
+//        if([[self.engine.areaCleanState objectAtIndex:i] intValue] == NO_GEL){
+//            UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
+//            [paintView setBackgroundColor:[UIColor yellowColor]];
+//            [paintView setAlpha:0.3];
+//            [self.noGelView addSubview:paintView];
+//        }
+//    }
 }
-
 
 -(void)initLocationManager{
     self.locationManager = [[CLLocationManager alloc] init];
@@ -289,18 +280,18 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-//    NSString* imageURL = [self getImageUrl:3];
-//    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
-//                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                              if(error==nil){
-//                                  [self initDataUiWithImage:image];
-//                              }
-//                          }];
+    NSString* imageURL = [self getImageUrl:3];
+    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                              if(error==nil){
+                                  [self initDataUiWithImage:image];
+                              }
+                          }];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -312,17 +303,36 @@
         return;
     CGPoint touchLocation = [touch1 locationInView:self.gridView];
     int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
-    [self updateDataAndUIbyTouch:touchPosition];
+    if(touchPosition != -1){
+        [self updateDataAndUIbyTouch:touchPosition];
+    }
 }
 
 -(void)updateDataAndUIbyTouch:(int)touchPosition{
     [self.estimateImage updateNonGelAreaString:touchPosition];
     [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-    if(isShowDirtyArea){
-        [self hideDirtyArea];
+    
+    int pointX = touchPosition/SGGridCount;
+    int pointY = touchPosition%SGGridCount;
+    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+    for(int i = 0; i<rate;i++){
+        for(int j = 0; j< rate; j++){
+            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+            UIView *view = [self.cleanareaViews objectAtIndex:postion];
+            if([[self.engine.areaCleanState objectAtIndex:postion] intValue] == NO_GEL){
+                [view removeFromSuperview];
+            }else{
+                [self.takenImageView addSubview:view];
+            }
+        }
     }
-    [self drawNoGelView];
+//    [self hideDirtyArea];
+//    [self showCleanAndDirtyArea];
+//    if(isShowDirtyArea){
+//        [self hideDirtyArea];
+//    }
+//    [self drawNoGelView];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
@@ -368,7 +378,7 @@
 
 - (NSMutableArray *)getDirtyAreaArray :(NSString *)diryAreaString{
     NSData* data = [diryAreaString dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
+    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     return values;
 }
 

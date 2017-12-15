@@ -48,4 +48,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
 
+@property (strong, nonatomic) IBOutlet NSMutableArray *cleanareaViews;
+
+
 @end
