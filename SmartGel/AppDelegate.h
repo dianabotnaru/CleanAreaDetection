@@ -20,6 +20,7 @@
 -(FIRDatabaseReference*)getFireDataBaseRef;
 -(void)setFireStorageRef:(FIRStorageReference*)storageRef;
 -(FIRStorageReference*)getFireStorageRef;
+- (void)initMenuViewController;
 
 @end
 

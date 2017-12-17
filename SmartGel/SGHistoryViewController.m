@@ -155,7 +155,6 @@
         detailViewController.laboratoryDataModel = laboratoryDatamodel;
         detailViewController.delegate = self;
         [self.navigationController pushViewController:detailViewController animated:YES];
-
     }
 }
 

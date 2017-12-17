@@ -23,6 +23,7 @@
 		8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625B1FD8247B008DFED2 /* Smiley_(.png */; };
 		8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625C1FD8247C008DFED2 /* Smiley_.png */; };
 		8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */; };
+		8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
 		8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C41F7CA4790025B804 /* QuartzCore.framework */; };
@@ -52,6 +53,8 @@
 		8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */; };
 		8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */; };
 		8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */; };
+		8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCFD781FE665FD0074663B /* SGUserSignUpViewController.m */; };
+		8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCFD7E1FE6764C0074663B /* SGForgotPasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,8 @@
 		8D56625C1FD8247C008DFED2 /* Smiley_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_.png; path = resource/Smiley_.png; sourceTree = "<group>"; };
 		8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPictureEditViewController.h; path = controller/SGPictureEditViewController.h; sourceTree = "<group>"; };
 		8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGPictureEditViewController.m; path = controller/SGPictureEditViewController.m; sourceTree = "<group>"; };
+		8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSigninViewController.h; path = controller/Signin/SGUserSigninViewController.h; sourceTree = "<group>"; };
+		8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUserSigninViewController.m; path = controller/Signin/SGUserSigninViewController.m; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
 		8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EstimateImageModel.m; path = model/EstimateImageModel.m; sourceTree = "<group>"; };
 		8D80B2C21F7CA4700025B804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +131,10 @@
 		8DDC4FD61F9445A400C92EEB /* SGBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGBaseViewController.h; path = controller/SGBaseViewController.h; sourceTree = "<group>"; };
 		8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGBaseViewController.m; path = controller/SGBaseViewController.m; sourceTree = "<group>"; };
 		8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tm_smart_gel.png; path = resource/tm_smart_gel.png; sourceTree = "<group>"; };
+		8DFCFD771FE665FD0074663B /* SGUserSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSignUpViewController.h; path = controller/Signin/SGUserSignUpViewController.h; sourceTree = "<group>"; };
+		8DFCFD781FE665FD0074663B /* SGUserSignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUserSignUpViewController.m; path = controller/Signin/SGUserSignUpViewController.m; sourceTree = "<group>"; };
+		8DFCFD7D1FE6764C0074663B /* SGForgotPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGForgotPasswordViewController.h; path = controller/Signin/SGForgotPasswordViewController.h; sourceTree = "<group>"; };
+		8DFCFD7E1FE6764C0074663B /* SGForgotPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGForgotPasswordViewController.m; path = controller/Signin/SGForgotPasswordViewController.m; sourceTree = "<group>"; };
 		C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.debug.xcconfig"; sourceTree = "<group>"; };
 		D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartGel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -168,6 +177,19 @@
 				D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D72F2391FE5B90D0047CB66 /* sign in */ = {
+			isa = PBXGroup;
+			children = (
+				8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */,
+				8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */,
+				8DFCFD771FE665FD0074663B /* SGUserSignUpViewController.h */,
+				8DFCFD781FE665FD0074663B /* SGUserSignUpViewController.m */,
+				8DFCFD7D1FE6764C0074663B /* SGForgotPasswordViewController.h */,
+				8DFCFD7E1FE6764C0074663B /* SGForgotPasswordViewController.m */,
+			);
+			name = "sign in";
 			sourceTree = "<group>";
 		};
 		8DA331E51F7C8F3C0066148E = {
@@ -220,6 +242,7 @@
 		8DA332081F7C8FC00066148E /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				8D72F2391FE5B90D0047CB66 /* sign in */,
 				8DB669F61FDE8B0F00BB3966 /* laboratory */,
 				8DA3320B1F7C90430066148E /* SGHomeViewController.h */,
 				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
@@ -502,9 +525,12 @@
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
 				8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */,
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
+				8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */,
 				8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */,
+				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
 				8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */,
+				8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */,
 				8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */,
 				8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */,
 			);

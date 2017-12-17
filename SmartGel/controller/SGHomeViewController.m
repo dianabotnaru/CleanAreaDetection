@@ -57,8 +57,7 @@
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     
     [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
-    
-    [self hideDirtyArea];
+
     [self.noGelView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     [self drawGridView];
     [self initCleanareaViews: self.engine.areaCleanState];
@@ -123,7 +122,8 @@
                     isSavedImage = true;
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
                     NSString *key = self.appDelegate.userID;
-                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
+                    NSDictionary *post = @{
+                                           @"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"date": self.estimateImage.date,
                                            @"location": self.estimateImage.location,
@@ -281,12 +281,12 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-//    [self initDataUiWithImage:[UIImage imageNamed:@"test.png"]];
+    [self initDataUiWithImage:[UIImage imageNamed:@"test.png"]];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
