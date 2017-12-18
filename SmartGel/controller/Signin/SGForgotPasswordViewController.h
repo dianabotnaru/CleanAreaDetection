@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "SGBaseViewController.h"
+#import "MBProgressHUD.h"
 
-@interface SGForgotPasswordViewController : SGBaseViewController <UITextFieldDelegate>
+@interface SGForgotPasswordViewController : SGBaseViewController <UITextFieldDelegate>{
+    MBProgressHUD *hud;
+}
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 
 @end
