@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Firebase.h"
+#import "SGUser.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorageReference *storageRef;
+@property (strong, nonatomic) SGUser *user;
+
 @property (strong, nonatomic) NSString *userID;
 
 -(void)setFireDataBaseRef:(FIRDatabaseReference*)ref;
@@ -21,6 +24,8 @@
 -(void)setFireStorageRef:(FIRStorageReference*)storageRef;
 -(FIRStorageReference*)getFireStorageRef;
 - (void)initMenuViewController;
+-(SGUser*)getSGUser;
++(void)setSGUser:(SGUser*) user;
 
 @end
 

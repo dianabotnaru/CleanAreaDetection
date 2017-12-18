@@ -34,6 +34,7 @@
 		8D80B2D81F7CFE810025B804 /* SGFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D21F7CFE810025B804 /* SGFilterView.xib */; };
 		8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */; };
 		8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */; };
+		8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D84CBB41FE813F2006B2F74 /* SGUser.m */; };
 		8DA331F31F7C8F3C0066148E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F21F7C8F3C0066148E /* main.m */; };
 		8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F51F7C8F3C0066148E /* AppDelegate.m */; };
 		8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FA1F7C8F3C0066148E /* Main.storyboard */; };
@@ -95,6 +96,8 @@
 		8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmartGelHistoryCollectionViewCell.h; path = view/SmartGelHistoryCollectionViewCell.h; sourceTree = "<group>"; };
 		8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmartGelHistoryCollectionViewCell.m; path = view/SmartGelHistoryCollectionViewCell.m; sourceTree = "<group>"; };
 		8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SmartGelHistoryCollectionViewCell.xib; path = view/SmartGelHistoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D84CBB31FE813F2006B2F74 /* SGUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUser.h; path = model/SGUser.h; sourceTree = "<group>"; };
+		8D84CBB41FE813F2006B2F74 /* SGUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUser.m; path = model/SGUser.m; sourceTree = "<group>"; };
 		8DA331EE1F7C8F3C0066148E /* SmartGel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartGel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DA331F21F7C8F3C0066148E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8DA331F41F7C8F3C0066148E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -273,6 +276,8 @@
 				8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */,
 				8DB669E91FDA236100BB3966 /* LaboratoryDataModel.h */,
 				8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */,
+				8D84CBB31FE813F2006B2F74 /* SGUser.h */,
+				8D84CBB41FE813F2006B2F74 /* SGUser.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 				8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */,
 				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
+				8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */,
 				8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */,
 				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,

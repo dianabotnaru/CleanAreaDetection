@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "SGBaseViewController.h"
+#import "MBProgressHUD.h"
 
-@interface SGUserSignUpViewController : SGBaseViewController <UITextFieldDelegate>
+@interface SGUserSignUpViewController : SGBaseViewController <UITextFieldDelegate>{
+    MBProgressHUD *hud;
+}
+
 @property (strong, nonatomic) IBOutlet UITextField *companyNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *pwTextField;

@@ -23,7 +23,7 @@
     // Override point for customization after application launch.
     [FIRApp configure];
     [self initNavigationbar];
-    [self initMenuViewController];
+//    [self initMenuViewController];
     return YES;
 }
 
@@ -87,6 +87,15 @@
     [[UINavigationBar appearance] setTranslucent:NO];
 
 }
+
+-(SGUser*)getSGUser{
+    return self.user;
+}
+
+-(void)setSGUser:(SGUser*) user{
+    self.user = user;
+}
+
 
 -(void)setFireDataBaseRef:(FIRDatabaseReference*)ref{
     self.ref = ref;
