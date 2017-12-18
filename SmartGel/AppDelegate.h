@@ -24,8 +24,6 @@
 -(void)setFireStorageRef:(FIRStorageReference*)storageRef;
 -(FIRStorageReference*)getFireStorageRef;
 - (void)initMenuViewController;
--(SGUser*)getSGUser;
-+(void)setSGUser:(SGUser*) user;
 
 @end
 

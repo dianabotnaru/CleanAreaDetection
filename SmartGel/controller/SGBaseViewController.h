@@ -15,5 +15,4 @@
 -(void)showAlertdialog:(NSString*)title message:(NSString*)message;
 -(NSString *)getCurrentTimeString;
 - (BOOL)isValidEmailAddress:(NSString *)emailAddress;
-
 @end

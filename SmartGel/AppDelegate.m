@@ -23,7 +23,14 @@
     // Override point for customization after application launch.
     [FIRApp configure];
     [self initNavigationbar];
-//    [self initMenuViewController];
+    if ([FIRAuth auth].currentUser) {
+        FIRUser* user = [FIRAuth auth].currentUser;
+        NSString *email = user.email;
+        self.ref = [[FIRDatabase database] reference];
+        self.storageRef = [[FIRStorage storage] reference];
+        [self initMenuViewController];
+    }
+
     return YES;
 }
 
@@ -88,15 +95,6 @@
 
 }
 
--(SGUser*)getSGUser{
-    return self.user;
-}
-
--(void)setSGUser:(SGUser*) user{
-    self.user = user;
-}
-
-
 -(void)setFireDataBaseRef:(FIRDatabaseReference*)ref{
     self.ref = ref;
 }
@@ -111,6 +109,11 @@
 
 -(FIRStorageReference*)getFireStorageRef{
     return self.storageRef;
+}
+
+-(NSString *)readUserID{
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    return [preferences objectForKey:@"userid"];
 }
 
 @end
