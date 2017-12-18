@@ -38,6 +38,43 @@
 
 - (IBAction)signInButtonTapped{
     
+    if([self.emailTextField.text isEqualToString:@""]){
+        [self showAlertdialog:nil message:@"Please input a valid email"];
+        return;
+    }
+    if(![self isValidEmailAddress:self.emailTextField.text]){
+        [self showAlertdialog:nil message:@"Please input a valid email"];
+        return;
+    }
+    if([self.pwTextField.text isEqualToString:@""]){
+        [self showAlertdialog:nil message:@"Please input a password"];
+        return;
+    }
+    [self signIn];
+}
+
+- (void)signIn{
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[FIRAuth auth] signInWithEmail:self.emailTextField.text
+                           password:self.pwTextField.text
+                         completion:^(FIRUser *user, NSError *error) {
+                             if(error==nil){
+                                 NSString *userID =user.uid;
+                                 self.appDelegate.ref = [[FIRDatabase database] reference];
+                                 self.appDelegate.storageRef = [[FIRStorage storage] reference];
+                                 [[[self.appDelegate.ref child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                                     self.appDelegate.user = [[SGUser alloc] initWithSnapshot:snapshot];
+                                     [self.appDelegate initMenuViewController];
+                                     [hud hideAnimated:false];
+                                 } withCancelBlock:^(NSError * _Nonnull error) {
+                                     [self showAlertdialog:nil message:error.localizedDescription];
+                                     [hud hideAnimated:false];
+                                 }];
+                             }else{
+                                 [self showAlertdialog:nil message:error.localizedDescription];
+                                 [hud hideAnimated:false];
+                             }
+                         }];
 }
 
 - (IBAction)signUpButtonTapped{

@@ -9,5 +9,15 @@
 #import "SGUser.h"
 
 @implementation SGUser
-
+-(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot{
+    
+    self = [super init];
+    if(self){
+        self.userID = snapshot.value[@"userid"];
+        self.email = snapshot.value[@"email"];
+        self.companyName = snapshot.value[@"companyname"];
+        self.latestLoginDate = snapshot.value[@"latestdate"];
+    }
+    return self;
+}
 @end
