@@ -137,7 +137,7 @@
                                            @"nonGelArea": self.estimateImage.nonGelArea,
                                            @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
                                            };
-                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.estimateImage.date]: post};
+                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.estimateImage.date]: post};
                     [self.appDelegate.ref updateChildValues:childUpdates];
                 }
             }];

@@ -78,7 +78,7 @@
     NSString *userID = [FIRAuth auth].currentUser.uid;
     if(userID!= NULL){
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[self.appDelegate.ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        [[self.appDelegate.ref child:[NSString stringWithFormat:@"%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos"]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             [self.hud hideAnimated:YES];
             for(snapshot in snapshot.children){
                 bool  isLaboraotoryHistory = [snapshot.value[@"islaboratory"] boolValue];
