@@ -17,13 +17,14 @@
 @property (strong, nonatomic) FIRStorageReference *storageRef;
 @property (strong, nonatomic) SGUser *user;
 
-@property (strong, nonatomic) NSString *userID;
+@property (assign, nonatomic) bool isAreadyLoggedIn;
 
 -(void)setFireDataBaseRef:(FIRDatabaseReference*)ref;
 -(FIRDatabaseReference*)getFireDataBaseRef;
 -(void)setFireStorageRef:(FIRStorageReference*)storageRef;
 -(FIRStorageReference*)getFireStorageRef;
 - (void)initMenuViewController;
+-(void)gotoSignInScreen;
 
 @end
 

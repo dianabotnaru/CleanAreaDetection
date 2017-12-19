@@ -13,6 +13,7 @@
 #import "SGWebViewController.h"
 #import "SGSettingViewController.h"
 #import "SGLaboratoryViewController.h"
+#import "Firebase.h"
 
 @interface SGMenuViewController ()
 @property (strong, nonatomic) SGHomeViewController *sgHomeViewController;
@@ -47,12 +48,14 @@
         [cell setLabels:@"Settings"];
     }else if(indexPath.row == 4){
         [cell setLabels:@"About"];
+    }else if(indexPath.row == 5){
+        [cell setLabels:@"Log Out"];
     }
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,9 +92,22 @@
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgWebViewController]
                                                          animated:YES];
             break;
+        case 5:
+            [self logOut];
         default:
             break;
     }
     [self.sideMenuViewController hideMenuViewController];
+}
+
+- (void)logOut{
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }else{
+        [self.appDelegate gotoSignInScreen];
+    }
 }
 @end

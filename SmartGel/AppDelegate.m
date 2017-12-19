@@ -10,6 +10,8 @@
 #import "Firebase.h"
 #import "SGHomeViewController.h"
 #import "SGMenuViewController.h"
+#import "SGUserSigninViewController.h"
+
 #import "SGConstant.h"
 
 @interface AppDelegate () <RESideMenuDelegate>
@@ -24,13 +26,13 @@
     [FIRApp configure];
     [self initNavigationbar];
     if ([FIRAuth auth].currentUser) {
-        FIRUser* user = [FIRAuth auth].currentUser;
-        NSString *email = user.email;
+        self.isAreadyLoggedIn = true;
         self.ref = [[FIRDatabase database] reference];
         self.storageRef = [[FIRStorage storage] reference];
         [self initMenuViewController];
+    }else{
+        self.isAreadyLoggedIn = false;
     }
-
     return YES;
 }
 
@@ -84,6 +86,12 @@
     [self.window makeKeyAndVisible];
 }
 
+-(void)gotoSignInScreen{
+    SGUserSigninViewController *signInViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGUserSigninViewController"];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:signInViewController];
+    self.window.rootViewController = navigationController;
+}
+
 -(void)initNavigationbar{
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:SGColorBlack];
@@ -92,7 +100,6 @@
       NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:18]}];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setTranslucent:NO];
-
 }
 
 -(void)setFireDataBaseRef:(FIRDatabaseReference*)ref{

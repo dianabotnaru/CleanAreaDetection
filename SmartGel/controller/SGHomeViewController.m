@@ -22,7 +22,7 @@
     [super viewDidLoad];
     [self initData];
     [self.dateLabel setText:[self getCurrentTimeString]];
-    [self loginFireBase];
+//    [self loginFireBase];
     self.cleanareaViews = [NSMutableArray array];
 }
 
@@ -38,7 +38,6 @@
 
 - (void)initData{
     self.engine = [[DirtyExtractor alloc] init];
-    isShowDirtyArea = false;
     isSavedImage = false;
     self.estimateImage = [[EstimateImageModel alloc] init];
     [self initLocationManager];
@@ -94,11 +93,37 @@
 }
 
 -(void)loginFireBase{
+    if(self.appDelegate.isAreadyLoggedIn){
+        if(([FIRAuth auth].currentUser.email != nil) || (![[FIRAuth auth].currentUser.email isEqualToString:@""])){
+            [self getUserData];
+        }else{
+            [self signinAnonymously];
+        }
+    }
+}
+
+- (void)getUserData{
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.appDelegate.ref = [[FIRDatabase database] reference];
+    self.appDelegate.storageRef = [[FIRStorage storage] reference];
+    
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+
+    
+    [[[self.appDelegate.ref child:@"users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        self.appDelegate.user = [[SGUser alloc] initWithSnapshot:snapshot];
+        [hud hideAnimated:false];
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        [self showAlertdialog:nil message:error.localizedDescription];
+        [hud hideAnimated:false];
+    }];
+}
+
+-(void)signinAnonymously{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
         [hud hideAnimated:false];
         if(error==nil){
-            self.appDelegate.userID = user.uid;
             self.appDelegate.ref = [[FIRDatabase database] reference];
             self.appDelegate.storageRef = [[FIRStorage storage] reference];
         }else{
@@ -107,10 +132,11 @@
     }];
 }
 
+
 - (void)saveResultImage{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"Uploading image...";
-    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.userID,self.estimateImage.date]];
+    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.estimateImage.date]];
     NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
     [riversRef putData:imageData
               metadata:nil
@@ -121,7 +147,7 @@
                 } else {
                     isSavedImage = true;
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSString *key = self.appDelegate.userID;
+                    NSString *key = self.appDelegate.user.userID;
                     NSDictionary *post = @{
                                            @"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
                                            @"image": metadata.downloadURL.absoluteString,

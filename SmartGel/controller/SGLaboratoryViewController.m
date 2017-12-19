@@ -757,7 +757,7 @@
 -(void)saveLaboratoryDatas{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"Uploading image...";
-    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.userID,self.laboratoryDataModel.date]];
+    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.laboratoryDataModel.date]];
     NSData *imageData = UIImageJPEGRepresentation(self.laboratoryDataModel.image,0.7);
     [riversRef putData:imageData
               metadata:nil
@@ -767,7 +767,7 @@
                     [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
                 } else {
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSString *key = self.appDelegate.userID;
+                    NSString *key = self.appDelegate.user.userID;
                     NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.resultValue],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"tag": self.laboratoryDataModel.tag,
