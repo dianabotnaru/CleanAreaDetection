@@ -22,7 +22,7 @@
     [super viewDidLoad];
     [self initData];
     [self.dateLabel setText:[self getCurrentTimeString]];
-//    [self loginFireBase];
+    [self loginFireBase];
     self.cleanareaViews = [NSMutableArray array];
 }
 
@@ -96,8 +96,6 @@
     if(self.appDelegate.isAreadyLoggedIn){
         if(([FIRAuth auth].currentUser.email != nil) || (![[FIRAuth auth].currentUser.email isEqualToString:@""])){
             [self getUserData];
-        }else{
-            [self signinAnonymously];
         }
     }
 }
@@ -106,10 +104,6 @@
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.appDelegate.ref = [[FIRDatabase database] reference];
     self.appDelegate.storageRef = [[FIRStorage storage] reference];
-    
-    NSString *userID = [FIRAuth auth].currentUser.uid;
-
-    
     [[[self.appDelegate.ref child:@"users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         self.appDelegate.user = [[SGUser alloc] initWithSnapshot:snapshot];
         [hud hideAnimated:false];
@@ -118,20 +112,6 @@
         [hud hideAnimated:false];
     }];
 }
-
--(void)signinAnonymously{
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-        [hud hideAnimated:false];
-        if(error==nil){
-            self.appDelegate.ref = [[FIRDatabase database] reference];
-            self.appDelegate.storageRef = [[FIRStorage storage] reference];
-        }else{
-            [self showAlertdialog:@"Error" message:error.localizedDescription];
-        }
-    }];
-}
-
 
 - (void)saveResultImage{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

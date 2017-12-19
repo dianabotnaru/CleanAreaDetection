@@ -70,8 +70,17 @@
 }
 
 - (IBAction)notNowButtonTapped{
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [appDelegate initMenuViewController];
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+        [hud hideAnimated:false];
+        if(error==nil){
+            self.appDelegate.ref = [[FIRDatabase database] reference];
+            self.appDelegate.storageRef = [[FIRStorage storage] reference];
+            [self.appDelegate initMenuViewController];
+        }else{
+            [self showAlertdialog:@"Error" message:error.localizedDescription];
+        }
+    }];
 }
 
 - (IBAction)signInButtonTapped{

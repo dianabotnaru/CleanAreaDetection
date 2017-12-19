@@ -107,6 +107,7 @@
         NSLog(@"Error signing out: %@", signOutError);
         return;
     }else{
+        self.appDelegate.isAreadyLoggedIn = false;
         [self.appDelegate gotoSignInScreen];
     }
 }
