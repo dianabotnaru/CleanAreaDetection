@@ -63,7 +63,7 @@
         [desertRef deleteWithCompletion:^(NSError *error){
             [self.hud hideAnimated:false];
             if (error == nil) {
-                [[[self.appDelegate.ref child:userID] child:self.laboratoryDataModel.date] removeValue];
+                [[[self.appDelegate.ref child:[NSString stringWithFormat:@"%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos"]] child:self.laboratoryDataModel.date] removeValue];
             } else {
                 [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
             }
