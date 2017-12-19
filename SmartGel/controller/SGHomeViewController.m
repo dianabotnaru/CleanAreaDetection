@@ -127,7 +127,6 @@
                 } else {
                     isSavedImage = true;
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSString *key = self.appDelegate.user.userID;
                     NSDictionary *post = @{
                                            @"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
                                            @"image": metadata.downloadURL.absoluteString,

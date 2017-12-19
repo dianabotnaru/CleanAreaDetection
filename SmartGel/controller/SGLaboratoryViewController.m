@@ -767,7 +767,6 @@
                     [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
                 } else {
                     [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSString *key = self.appDelegate.user.userID;
                     NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.resultValue],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"tag": self.laboratoryDataModel.tag,
@@ -779,7 +778,7 @@
                                            @"samplecolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.sampleColor],
                                            @"resultstate":[NSString stringWithFormat:@"%d",self.laboratoryDataModel.resultState]
                                            };
-                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@", key,self.laboratoryDataModel.date]: post};
+                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.laboratoryDataModel.date]: post};
                     [self.appDelegate.ref updateChildValues:childUpdates];
                 }
             }];
