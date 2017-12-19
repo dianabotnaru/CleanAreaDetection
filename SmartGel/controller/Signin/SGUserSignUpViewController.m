@@ -32,8 +32,7 @@
     }
     if(![self isValidEmailAddress:self.emailTextField.text]){
         [self showAlertdialog:nil message:@"Please input a valid email"];
-        return;
-    }
+        }
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[FIRAuth auth] createUserWithEmail:self.emailTextField.text
                                password:self.pwTextField.text

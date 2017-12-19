@@ -298,16 +298,18 @@
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UITouch *touch1 = [touches anyObject];
-    CGPoint location = [touch1 locationInView:self.view];
-    if(!CGRectContainsPoint(self.gridView.frame, location))
-        return ;
-    if(self.takenImage==nil)
-        return;
-    CGPoint touchLocation = [touch1 locationInView:self.gridView];
-    int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
-    if(touchPosition != -1){
-        [self updateDataAndUIbyTouch:touchPosition];
+    if(isShowDirtyArea){
+        UITouch *touch1 = [touches anyObject];
+        CGPoint location = [touch1 locationInView:self.view];
+        if(!CGRectContainsPoint(self.gridView.frame, location))
+            return ;
+        if(self.takenImage==nil)
+            return;
+        CGPoint touchLocation = [touch1 locationInView:self.gridView];
+        int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
+        if(touchPosition != -1){
+            [self updateDataAndUIbyTouch:touchPosition];
+        }
     }
 }
 
