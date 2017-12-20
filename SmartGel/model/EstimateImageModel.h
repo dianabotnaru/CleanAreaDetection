@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *cleanArea;
 @property (strong, nonatomic) NSString *dirtyArea;
 @property (strong, nonatomic) NSString *nonGelArea;
+@property (strong, nonatomic) NSString *tag;
 
 
 @property (assign) int coloroffset;

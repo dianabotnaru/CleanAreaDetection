@@ -28,8 +28,10 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(self.takenImage!=nil)
-        [self drawGridView];
+    if(isTakenPhoto){
+        [self initDataUiWithImage];
+        isTakenPhoto = false;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,27 +39,26 @@
 }
 
 - (void)initData{
-    self.engine = [[DirtyExtractor alloc] init];
     isSavedImage = false;
+    isTakenPhoto = false;
+    self.engine = [[DirtyExtractor alloc] init];
     self.estimateImage = [[EstimateImageModel alloc] init];
     [self initLocationManager];
     self.appDelegate.ref = [[FIRDatabase database] reference];
 }
 
--(void)initDataUiWithImage:(UIImage *)image{
-    [self.takenImageView setImage:image];
+-(void)initDataUiWithImage{
+    [self.takenImageView setImage:self.takenImage];
     [self.cleanareaViews removeAllObjects];
     isSavedImage = false;
-    self.takenImage = image;
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
     
-    [self.estimateImage setImageDataModel:image withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
+    [self.estimateImage setImageDataModel:self.takenImage withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
 
-    [self.noGelView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     [self drawGridView];
     [self initCleanareaViews: self.engine.areaCleanState];
 }
@@ -130,6 +131,7 @@
                     NSDictionary *post = @{
                                            @"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
                                            @"image": metadata.downloadURL.absoluteString,
+                                           @"tag": self.estimateImage.tag,
                                            @"date": self.estimateImage.date,
                                            @"location": self.estimateImage.location,
                                            @"cleanarea": self.estimateImage.cleanArea,
@@ -143,7 +145,8 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-    [self initDataUiWithImage:image];
+    self.takenImage = image;
+    isTakenPhoto = true;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -182,39 +185,18 @@
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
         CGRect rect = [self calculateClientRectOfImageInUIImageView];
-        
         float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
         float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
-
         UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
         if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
-            [paintView setAlpha:0.5];
+            [paintView setAlpha:0.3];
         }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
             [paintView setBackgroundColor:[UIColor blueColor]];
-            [paintView setAlpha:0.5];
+            [paintView setAlpha:0.1];
         }
         [self.cleanareaViews addObject:paintView];
     }
-}
-
-- (void)drawNoGelView{
-//    [self.noGelView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-//    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-//        int y = i/AREA_DIVIDE_NUMBER;
-//        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-//        CGRect rect = [self calculateClientRectOfImageInUIImageView];
-//
-//        float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
-//        float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
-//
-//        if([[self.engine.areaCleanState objectAtIndex:i] intValue] == NO_GEL){
-//            UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
-//            [paintView setBackgroundColor:[UIColor yellowColor]];
-//            [paintView setAlpha:0.3];
-//            [self.noGelView addSubview:paintView];
-//        }
-//    }
 }
 
 -(void)initLocationManager{
@@ -291,7 +273,8 @@
 //    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 //    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-    [self initDataUiWithImage:[UIImage imageNamed:@"test.png"]];
+    self.takenImage = [UIImage imageNamed:@"test.png"];
+    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]

@@ -21,6 +21,7 @@
 @interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
+    bool isTakenPhoto;
     MBProgressHUD *hud;
 }
 
@@ -29,15 +30,12 @@
 @property (strong, nonatomic) IBOutlet UIView *gridContentView;
 
 @property (strong, nonatomic) SGGridView *gridView;
-@property (strong, nonatomic) IBOutlet UIView *noGelView;
+@property (strong, nonatomic) UIImage *takenImage;
 
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
-
-@property (strong, nonatomic) UIImage *takenImage;
-@property (strong, nonatomic) UIImage *croppedImage;
 
 @property (nonatomic, strong) DirtyExtractor *engine;
 @property (nonatomic, strong) DirtyExtractor *partyEngine;
