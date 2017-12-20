@@ -20,21 +20,22 @@
 */
 - (void)addGridViews:(int)rowCount withColCount:(int)colCount {
     
-    int width = self.frame.size.width/rowCount;
-    int height = self.frame.size.height/colCount;
+    float width = self.frame.size.width/(float)rowCount;
+    float height = self.frame.size.height/(float)colCount;
     for(int i = 0;i<=rowCount;i++){
         UIView *paintView;
         if(i == rowCount)
-            paintView=[[UIView alloc]initWithFrame:CGRectMake(width*i-GRID_WIDTH,0,GRID_WIDTH,self.frame.size.height)];
+            paintView=[[UIView alloc]initWithFrame:CGRectMake(width*i,0,GRID_WIDTH,self.frame.size.height)];
         else
             paintView=[[UIView alloc]initWithFrame:CGRectMake(width*i,0,GRID_WIDTH,self.frame.size.height)];
         [paintView setBackgroundColor:SGColorDarkGray];
+
         [self addSubview:paintView];
     }
     for(int j = 0;j<=colCount;j++){
         UIView *paintView;
         if(j==colCount)
-            paintView=[[UIView alloc]initWithFrame:CGRectMake(0,height*j-GRID_WIDTH,self.frame.size.width,GRID_WIDTH)];
+            paintView=[[UIView alloc]initWithFrame:CGRectMake(0,height*j,self.frame.size.width,GRID_WIDTH)];
         else
             paintView=[[UIView alloc]initWithFrame:CGRectMake(0,height*j,self.frame.size.width,GRID_WIDTH)];
         [paintView setBackgroundColor:SGColorDarkGray];
