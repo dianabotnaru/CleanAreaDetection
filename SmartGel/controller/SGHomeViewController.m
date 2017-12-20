@@ -22,7 +22,7 @@
     [super viewDidLoad];
     [self initData];
     [self.dateLabel setText:[self getCurrentTimeString]];
-    [self loginFireBase];
+//    [self loginFireBase];
     self.cleanareaViews = [NSMutableArray array];
 }
 
@@ -56,7 +56,7 @@
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
     [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
+    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
     
     [self.estimateImage setImageDataModel:self.takenImage withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
 
@@ -153,8 +153,8 @@
 -(void)showCleanAndDirtyArea{
     isShowDirtyArea = true;
     [self.notificationLabel setHidden:YES];
-    [self.takePhotoButton setHidden:YES];
-    [self.showCleanAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
+    [self.showCleanAreaLabel setText:@"Hide clean area"];
+    [self.showCleanAreaButton setBackgroundColor:SGColorDarkGreen];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         for (int i = 0; i<self.cleanareaViews.count; i++) {
@@ -169,8 +169,8 @@
 -(void)hideDirtyArea{
     isShowDirtyArea = false;
     [self.notificationLabel setHidden:NO];
-    [self.takePhotoButton setHidden:NO];
-    [self.showCleanAreaButton setTitle:@"Show Clean Area" forState:UIControlStateNormal];
+    [self.showCleanAreaLabel setText:@"Show clean area"];
+    [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
     for (int i = 0; i<self.cleanareaViews.count; i++) {
         UIView *view = [self.cleanareaViews objectAtIndex:i];
         [view removeFromSuperview];
@@ -190,7 +190,7 @@
             [paintView setAlpha:0.3];
         }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
             [paintView setBackgroundColor:[UIColor blueColor]];
-            [paintView setAlpha:0.1];
+            [paintView setAlpha:0.2];
         }
         [self.cleanareaViews addObject:paintView];
     }
@@ -324,7 +324,7 @@
             }
         }
     }
-    [self.valueLabel setText:[NSString stringWithFormat:@"Estimated Value: %.2f", self.engine.cleanValue]];
+    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
 

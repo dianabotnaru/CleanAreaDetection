@@ -44,6 +44,8 @@
 @property (strong, nonatomic) EstimateImageModel *estimateImage;
 
 @property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
+@property (strong, nonatomic) IBOutlet UILabel *showCleanAreaLabel;
+
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
 
 @property (strong, nonatomic) IBOutlet NSMutableArray *cleanareaViews;

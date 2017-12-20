@@ -18,8 +18,8 @@ alpha:1.0]
 
 #define SGColorBlack UIColorFromRGB(0x262D36)
 #define SGColorDarkGray UIColorFromRGB(0x323A45)
-#define SGColorDarkGreen UIColorFromRGB(0x323A45)
-#define SGColorDarkPink UIColorFromRGB(0x323A45)
+#define SGColorDarkGreen UIColorFromRGB(0x3AA7CB)
+#define SGColorDarkPink UIColorFromRGB(0xC04399)
 #define SGColorDarkYellow UIColorFromRGB(0x323A45)
 
 #define SGDefaultColorOffset 5
