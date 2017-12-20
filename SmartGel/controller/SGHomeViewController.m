@@ -159,7 +159,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         for (int i = 0; i<self.cleanareaViews.count; i++) {
             UIView *view = [self.cleanareaViews objectAtIndex:i];
-            [self.takenImageView addSubview:view];
+            if([[self.engine.areaCleanState objectAtIndex:i] intValue] != NO_GEL)
+                [self.takenImageView addSubview:view];
         }
         [hud hideAnimated:false];
     });
@@ -233,7 +234,6 @@
     if(self.estimateImage.image == nil){
         [self showAlertdialog:nil message:@"Please take a photo."];
     }else{
-//        [self launchPictureEditViewController];
         if(isSavedImage)
             [self showAlertdialog:nil message:@"You have already saved this Image."];
         else{
