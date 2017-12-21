@@ -89,6 +89,7 @@
     CGFloat aspect=fmin(scaleW, scaleH);
     CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
     imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
+    imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
     imageRect.origin.x+=self.takenImageView.frame.origin.x;
     imageRect.origin.y+=self.takenImageView.frame.origin.y;
     return imageRect;
@@ -178,12 +179,12 @@
 }
 
 -(void)initCleanareaViews:(NSMutableArray*)dirtyState{
+    CGRect rect = [self calculateClientRectOfImageInUIImageView];
+    float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
+    float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
         int y = i/AREA_DIVIDE_NUMBER;
         int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        CGRect rect = [self calculateClientRectOfImageInUIImageView];
-        float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
-        float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
         UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
         if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
