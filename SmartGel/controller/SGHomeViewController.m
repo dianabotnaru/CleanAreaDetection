@@ -57,7 +57,8 @@
         [self.notificationLabel setHidden:YES];
     [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
-    
+    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
+
     [self.estimateImage setImageDataModel:self.takenImage withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
 
     [self drawGridView];
@@ -325,6 +326,8 @@
         }
     }
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
+    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
+
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
 
