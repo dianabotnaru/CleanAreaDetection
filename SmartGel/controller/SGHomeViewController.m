@@ -264,13 +264,13 @@
 }
 
 -(IBAction)launchPhotoPickerController{
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-//    self.takenImage = [UIImage imageNamed:@"test.png"];
-//    [self initDataUiWithImage];
+    self.takenImage = [UIImage imageNamed:@"test.png"];
+    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -287,7 +287,6 @@
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     if(isShowDirtyArea){
