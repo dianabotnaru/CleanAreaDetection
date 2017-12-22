@@ -85,6 +85,7 @@
 -(void)gotoSignInScreen{
     SGUserSigninViewController *signInViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGUserSigninViewController"];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:signInViewController];
+    [self initNavigationbar];
     self.window.rootViewController = navigationController;
 }
 

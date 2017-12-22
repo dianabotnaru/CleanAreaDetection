@@ -8,6 +8,7 @@
 
 #import "SGForgotPasswordViewController.h"
 #import "Firebase.h"
+#import "SGUtil.h"
 
 @interface SGForgotPasswordViewController ()
 
@@ -28,10 +29,11 @@
         [self showAlertdialog:nil message:@"Please input a valid email"];
         return;
     }
-//    if(![self isValidEmailAddress:self.emailTextField.text]){
-//        [self showAlertdialog:nil message:@"Please input a valid email"];
-//        return;
-//    }
+    bool isVaildEmail = [[SGUtil sharedUtil] isValidEmailAddress:self.emailTextField.text];
+    if(!isVaildEmail){
+        [self showAlertdialog:nil message:@"Please input a valid email"];
+        return ;
+    }
     [self submitForgotPassword];
 }
 
