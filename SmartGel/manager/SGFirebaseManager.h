@@ -25,5 +25,7 @@
 - (void)signInWithEmail:(NSString *)email
                password:(NSString *)password
        completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;
+-(void)getCurrentUserwithUserID:(NSString *)userID
+              completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;
 
 @end

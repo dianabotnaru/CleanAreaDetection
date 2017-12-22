@@ -70,34 +70,34 @@
 }
 
 -(void)getHistoryArray{
-    self.historyArray = [NSMutableArray array];
-    self.historyFilterArray = [NSMutableArray array];
-    self.laboratoryArray = [NSMutableArray array];
-    self.laboratoryFilterArray = [NSMutableArray array];
-
-    NSString *userID = [FIRAuth auth].currentUser.uid;
-    if(userID!= NULL){
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[self.appDelegate.ref child:[NSString stringWithFormat:@"%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos"]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            [self.hud hideAnimated:YES];
-            for(snapshot in snapshot.children){
-                bool  isLaboraotoryHistory = [snapshot.value[@"islaboratory"] boolValue];
-                if(!isLaboraotoryHistory){
-                    EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
-                    [self.historyArray addObject:estimageImageModel];
-                }else{
-                    LaboratoryDataModel *laboratoryDataModel = [[LaboratoryDataModel alloc] initWithSnapshot:snapshot];
-                    [self.laboratoryArray addObject:laboratoryDataModel];
-                }
-            }
-            self.laboratoryFilterArray = self.laboratoryArray;
-            self.historyFilterArray = self.historyArray;
-            [self.smartGelHistoryCollectionView reloadData];
-        } withCancelBlock:^(NSError * _Nonnull error) {
-            [self.hud hideAnimated:YES];
-            [self showAlertdialog:@"Error" message:error.localizedDescription];
-        }];
-    }
+//    self.historyArray = [NSMutableArray array];
+//    self.historyFilterArray = [NSMutableArray array];
+//    self.laboratoryArray = [NSMutableArray array];
+//    self.laboratoryFilterArray = [NSMutableArray array];
+//
+//    NSString *userID = [FIRAuth auth].currentUser.uid;
+//    if(userID!= NULL){
+//        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        [[self.appDelegate.ref child:[NSString stringWithFormat:@"%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos"]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//            [self.hud hideAnimated:YES];
+//            for(snapshot in snapshot.children){
+//                bool  isLaboraotoryHistory = [snapshot.value[@"islaboratory"] boolValue];
+//                if(!isLaboraotoryHistory){
+//                    EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
+//                    [self.historyArray addObject:estimageImageModel];
+//                }else{
+//                    LaboratoryDataModel *laboratoryDataModel = [[LaboratoryDataModel alloc] initWithSnapshot:snapshot];
+//                    [self.laboratoryArray addObject:laboratoryDataModel];
+//                }
+//            }
+//            self.laboratoryFilterArray = self.laboratoryArray;
+//            self.historyFilterArray = self.historyArray;
+//            [self.smartGelHistoryCollectionView reloadData];
+//        } withCancelBlock:^(NSError * _Nonnull error) {
+//            [self.hud hideAnimated:YES];
+//            [self showAlertdialog:@"Error" message:error.localizedDescription];
+//        }];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

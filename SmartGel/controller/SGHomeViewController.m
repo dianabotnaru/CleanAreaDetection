@@ -11,6 +11,8 @@
 #import "SGConstant.h"
 #import "AppDelegate.h"
 #import "SGPictureEditViewController.h"
+#import "SGFirebaseManager.h"
+#import "SGUtil.h"
 
 @interface SGHomeViewController ()
 
@@ -21,9 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
-//    [self.dateLabel setText:[self getCurrentTimeString]];
-//    [self loginFireBase];
-    self.cleanareaViews = [NSMutableArray array];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -45,24 +44,43 @@
     self.engine = [[DirtyExtractor alloc] init];
     self.estimateImage = [[EstimateImageModel alloc] init];
     [self initLocationManager];
-    self.appDelegate.ref = [[FIRDatabase database] reference];
+    [self getCurrentUser];
+    self.cleanareaViews = [NSMutableArray array];
+    [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
+}
+
+-(void)getCurrentUser{
+    if(self.appDelegate.isAreadyLoggedIn){
+        if(([FIRAuth auth].currentUser.email != nil) || (![[FIRAuth auth].currentUser.email isEqualToString:@""])){
+            hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[SGFirebaseManager sharedManager] getCurrentUserwithUserID:[FIRAuth auth].currentUser.uid
+                                                      completionHandler:^(NSError *error, SGUser *sgUser) {
+                                                          [hud hideAnimated:false];
+                                                          if(error != nil){
+                                                              [self showAlertdialog:nil message:error.localizedDescription];
+                                                          }
+                                                      }];
+        }
+    }
 }
 
 -(void)initDataUiWithImage{
-    [self.takenImageView setImage:self.takenImage];
     [self.cleanareaViews removeAllObjects];
     isSavedImage = false;
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
-    if(!self.notificationLabel.isHidden)
-        [self.notificationLabel setHidden:YES];
-//    [self.dateLabel setText:[self getCurrentTimeString]];
-    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
-    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
-
     [self.estimateImage setImageDataModel:self.takenImage withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
-
+    [self setLabelsWithEstimateData];
     [self drawGridView];
     [self initCleanareaViews: self.engine.areaCleanState];
+}
+
+-(void)setLabelsWithEstimateData{
+    if(!self.notificationLabel.isHidden)
+        [self.notificationLabel setHidden:YES];
+    [self.takenImageView setImage:self.takenImage];
+    [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
+    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.estimateImage.cleanValue]];
+    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
 }
 
 - (NSMutableArray *)nonGelAreaArrayInit{
@@ -75,76 +93,40 @@
 
 -(void)drawGridView{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    CGRect rect = [self calculateClientRectOfImageInUIImageView];
+    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.takenImage];
     self.gridView = [[SGGridView alloc] initWithFrame:rect];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
 }
 
--(CGRect)calculateClientRectOfImageInUIImageView
-{
-    CGSize imgViewSize=self.takenImageView.frame.size;                  // Size of UIImageView
-    CGSize imgSize=self.takenImage.size;                      // Size of the image, currently displayed
-    CGFloat scaleW = imgViewSize.width / imgSize.width;
-    CGFloat scaleH = imgViewSize.height / imgSize.height;
-    CGFloat aspect=fmin(scaleW, scaleH);
-    CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
-    imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
-    imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
-    imageRect.origin.x+=self.takenImageView.frame.origin.x;
-    imageRect.origin.y+=self.takenImageView.frame.origin.y;
-    return imageRect;
-}
-
--(void)loginFireBase{
-    if(self.appDelegate.isAreadyLoggedIn){
-        if(([FIRAuth auth].currentUser.email != nil) || (![[FIRAuth auth].currentUser.email isEqualToString:@""])){
-            [self getUserData];
-        }
-    }
-}
-
-- (void)getUserData{
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.appDelegate.ref = [[FIRDatabase database] reference];
-    self.appDelegate.storageRef = [[FIRStorage storage] reference];
-    [[[self.appDelegate.ref child:@"users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        self.appDelegate.user = [[SGUser alloc] initWithSnapshot:snapshot];
-        [hud hideAnimated:false];
-    } withCancelBlock:^(NSError * _Nonnull error) {
-        [self showAlertdialog:nil message:error.localizedDescription];
-        [hud hideAnimated:false];
-    }];
-}
-
 - (void)saveResultImage{
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.label.text = @"Uploading image...";
-    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.estimateImage.date]];
-    NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
-    [riversRef putData:imageData
-              metadata:nil
-            completion:^(FIRStorageMetadata *metadata,NSError *error) {
-                [hud hideAnimated:false];
-                if (error != nil) {
-                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
-                } else {
-                    isSavedImage = true;
-                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSDictionary *post = @{
-                                           @"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
-                                           @"image": metadata.downloadURL.absoluteString,
-                                           @"tag": self.estimateImage.tag,
-                                           @"date": self.estimateImage.date,
-                                           @"location": self.estimateImage.location,
-                                           @"cleanarea": self.estimateImage.cleanArea,
-                                           @"nonGelArea": self.estimateImage.nonGelArea,
-                                           @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
-                                           };
-                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.estimateImage.date]: post};
-                    [self.appDelegate.ref updateChildValues:childUpdates];
-                }
-            }];
+//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.label.text = @"Uploading image...";
+//    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.estimateImage.date]];
+//    NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
+//    [riversRef putData:imageData
+//              metadata:nil
+//            completion:^(FIRStorageMetadata *metadata,NSError *error) {
+//                [hud hideAnimated:false];
+//                if (error != nil) {
+//                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+//                } else {
+//                    isSavedImage = true;
+//                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
+//                    NSDictionary *post = @{
+//                                           @"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
+//                                           @"image": metadata.downloadURL.absoluteString,
+//                                           @"tag": self.estimateImage.tag,
+//                                           @"date": self.estimateImage.date,
+//                                           @"location": self.estimateImage.location,
+//                                           @"cleanarea": self.estimateImage.cleanArea,
+//                                           @"nonGelArea": self.estimateImage.nonGelArea,
+//                                           @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
+//                                           };
+//                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.estimateImage.date]: post};
+//                    [self.appDelegate.ref updateChildValues:childUpdates];
+//                }
+//            }];
 }
 
 
@@ -180,7 +162,7 @@
 }
 
 -(void)initCleanareaViews:(NSMutableArray*)dirtyState{
-    CGRect rect = [self calculateClientRectOfImageInUIImageView];
+    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.takenImage];
     float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
@@ -327,7 +309,6 @@
     }
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
-
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
 

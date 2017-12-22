@@ -80,4 +80,14 @@
                              }
                          }];
 }
+
+-(void)getCurrentUserwithUserID:(NSString *)userID
+              completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler {
+    [[[self.dataBaseRef child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        self.currentUser = [[SGUser alloc] initWithSnapshot:snapshot];
+        completionHandler(nil, self.currentUser);
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        completionHandler(error, nil);
+    }];
+}
 @end

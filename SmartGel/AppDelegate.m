@@ -11,7 +11,6 @@
 #import "SGHomeViewController.h"
 #import "SGMenuViewController.h"
 #import "SGUserSigninViewController.h"
-
 #import "SGConstant.h"
 
 @interface AppDelegate () <RESideMenuDelegate>
@@ -27,8 +26,6 @@
     [self initNavigationbar];
     if ([FIRAuth auth].currentUser) {
         self.isAreadyLoggedIn = true;
-        self.ref = [[FIRDatabase database] reference];
-        self.storageRef = [[FIRStorage storage] reference];
         [self initMenuViewController];
     }else{
         self.isAreadyLoggedIn = false;
@@ -97,26 +94,5 @@
       NSFontAttributeName:[UIFont fontWithName:@"Avenir" size:18]}];
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setTranslucent:NO];
-}
-
--(void)setFireDataBaseRef:(FIRDatabaseReference*)ref{
-    self.ref = ref;
-}
-
--(FIRDatabaseReference*)getFireDataBaseRef{
-    return self.ref;
-}
-
--(void)setFireStorageRef:(FIRStorageReference*)storageRef{
-    self.storageRef = storageRef;
-}
-
--(FIRStorageReference*)getFireStorageRef{
-    return self.storageRef;
-}
-
--(NSString *)readUserID{
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    return [preferences objectForKey:@"userid"];
 }
 @end

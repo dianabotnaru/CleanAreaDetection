@@ -11,7 +11,6 @@
 #import "SGBaseViewController.h"
 
 #import "MBProgressHUD.h"
-#import "Firebase.h"
 #import "EstimateImageModel.h"
 #import "DirtyExtractor.h"
 #import "RESideMenu.h"
@@ -53,6 +52,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
 
 @property (strong, nonatomic) IBOutlet NSMutableArray *cleanareaViews;
-
 
 @end

@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface SGUtil : NSObject
 + (instancetype)sharedUtil;
 
 -(NSString *)getCurrentTimeString;
 - (BOOL)isValidEmailAddress:(NSString *)emailAddress;
+-(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView*)imageView
+                                      takenImage:(UIImage*)takenImage;
+
 @end

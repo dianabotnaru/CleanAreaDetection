@@ -755,33 +755,33 @@
 }
 
 -(void)saveLaboratoryDatas{
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.label.text = @"Uploading image...";
-    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.laboratoryDataModel.date]];
-    NSData *imageData = UIImageJPEGRepresentation(self.laboratoryDataModel.image,0.7);
-    [riversRef putData:imageData
-              metadata:nil
-            completion:^(FIRStorageMetadata *metadata,NSError *error) {
-                [hud hideAnimated:false];
-                if (error != nil) {
-                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
-                } else {
-                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.resultValue],
-                                           @"image": metadata.downloadURL.absoluteString,
-                                           @"tag": self.laboratoryDataModel.tag,
-                                           @"islaboratory" : @"1",
-                                           @"customer": self.laboratoryDataModel.customer,
-                                           @"date": self.laboratoryDataModel.date,
-                                           @"location": self.laboratoryDataModel.location,
-                                           @"blankcolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.blankColor],
-                                           @"samplecolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.sampleColor],
-                                           @"resultstate":[NSString stringWithFormat:@"%d",self.laboratoryDataModel.resultState]
-                                           };
-                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.laboratoryDataModel.date]: post};
-                    [self.appDelegate.ref updateChildValues:childUpdates];
-                }
-            }];
+//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.label.text = @"Uploading image...";
+//    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.laboratoryDataModel.date]];
+//    NSData *imageData = UIImageJPEGRepresentation(self.laboratoryDataModel.image,0.7);
+//    [riversRef putData:imageData
+//              metadata:nil
+//            completion:^(FIRStorageMetadata *metadata,NSError *error) {
+//                [hud hideAnimated:false];
+//                if (error != nil) {
+//                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+//                } else {
+//                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
+//                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.resultValue],
+//                                           @"image": metadata.downloadURL.absoluteString,
+//                                           @"tag": self.laboratoryDataModel.tag,
+//                                           @"islaboratory" : @"1",
+//                                           @"customer": self.laboratoryDataModel.customer,
+//                                           @"date": self.laboratoryDataModel.date,
+//                                           @"location": self.laboratoryDataModel.location,
+//                                           @"blankcolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.blankColor],
+//                                           @"samplecolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.sampleColor],
+//                                           @"resultstate":[NSString stringWithFormat:@"%d",self.laboratoryDataModel.resultState]
+//                                           };
+//                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.laboratoryDataModel.date]: post};
+//                    [self.appDelegate.ref updateChildValues:childUpdates];
+//                }
+//            }];
 }
 
 -(IBAction)uploadImage{

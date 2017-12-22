@@ -47,4 +47,21 @@
     return (regExMatches == 0) ? NO : YES ;
 }
 
+-(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView*)imageView
+                                      takenImage:(UIImage*)takenImage
+{
+    CGSize imgViewSize=imageView.frame.size;                  // Size of UIImageView
+    CGSize imgSize=takenImage.size;                      // Size of the image, currently displayed
+    CGFloat scaleW = imgViewSize.width / imgSize.width;
+    CGFloat scaleH = imgViewSize.height / imgSize.height;
+    CGFloat aspect=fmin(scaleW, scaleH);
+    CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
+    imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
+    imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
+    imageRect.origin.x+=imageView.frame.origin.x;
+    imageRect.origin.y+=imageView.frame.origin.y;
+    return imageRect;
+}
+
+
 @end

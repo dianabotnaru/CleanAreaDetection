@@ -53,28 +53,28 @@
 }
 
 -(IBAction)removeLaboratoryItem{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:@"Are you sure to delete this image?"
-                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSString *userID = [FIRAuth auth].currentUser.uid;
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.laboratoryDataModel.date]];
-        [desertRef deleteWithCompletion:^(NSError *error){
-            [self.hud hideAnimated:false];
-            if (error == nil) {
-                [[[self.appDelegate.ref child:[NSString stringWithFormat:@"%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos"]] child:self.laboratoryDataModel.date] removeValue];
-            } else {
-                [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
-            }
-            if(self.delegate!=nil){
-                [self.delegate onDeletedImage];
-            }
-            [self backButtonClicked:nil];
-        }];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }]];
-    [self presentViewController:alert animated:YES completion:nil];
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+//                                                                   message:@"Are you sure to delete this image?"
+//                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
+//    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//        NSString *userID = [FIRAuth auth].currentUser.uid;
+//        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.laboratoryDataModel.date]];
+//        [desertRef deleteWithCompletion:^(NSError *error){
+//            [self.hud hideAnimated:false];
+//            if (error == nil) {
+//                [[[self.appDelegate.ref child:[NSString stringWithFormat:@"%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos"]] child:self.laboratoryDataModel.date] removeValue];
+//            } else {
+//                [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
+//            }
+//            if(self.delegate!=nil){
+//                [self.delegate onDeletedImage];
+//            }
+//            [self backButtonClicked:nil];
+//        }];
+//    }]];
+//    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//    }]];
+//    [self presentViewController:alert animated:YES completion:nil];
 }
 @end

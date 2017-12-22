@@ -13,16 +13,9 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRStorageReference *storageRef;
-@property (strong, nonatomic) SGUser *user;
 
 @property (assign, nonatomic) bool isAreadyLoggedIn;
 
--(void)setFireDataBaseRef:(FIRDatabaseReference*)ref;
--(FIRDatabaseReference*)getFireDataBaseRef;
--(void)setFireStorageRef:(FIRStorageReference*)storageRef;
--(FIRStorageReference*)getFireStorageRef;
 - (void)initMenuViewController;
 -(void)gotoSignInScreen;
 
