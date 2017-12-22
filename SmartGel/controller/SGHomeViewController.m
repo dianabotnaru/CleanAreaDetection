@@ -337,6 +337,10 @@
     [self.navigationController pushViewController:pictureViewController animated:YES];
 }
 
+-(IBAction)resetNonGelAreaTapped:(id)sender{
+    
+}
+
 -(IBAction)btnTagDropTapped:(id)sender{
     NSArray *dataSourceArray = @[@"Wall",@"Tile",@"Stainless"];
     AJDropDownPicker *picker=[[AJDropDownPicker alloc]initWithDelegate:self dataSourceArray:dataSourceArray];

@@ -23,6 +23,7 @@
 		8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625B1FD8247B008DFED2 /* Smiley_(.png */; };
 		8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625C1FD8247C008DFED2 /* Smiley_.png */; };
 		8D56D54E1FECACD80051EE76 /* AJDropDownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D54C1FECACD70051EE76 /* AJDropDownPicker.m */; };
+		8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */; };
 		8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */; };
 		8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
@@ -81,6 +82,8 @@
 		8D56625C1FD8247C008DFED2 /* Smiley_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_.png; path = resource/Smiley_.png; sourceTree = "<group>"; };
 		8D56D54C1FECACD70051EE76 /* AJDropDownPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AJDropDownPicker.m; path = shared/DropDownPicker/AJDropDownPicker.m; sourceTree = "<group>"; };
 		8D56D54D1FECACD70051EE76 /* AJDropDownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AJDropDownPicker.h; path = shared/DropDownPicker/AJDropDownPicker.h; sourceTree = "<group>"; };
+		8D56D5511FED090A0051EE76 /* SGFirebaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGFirebaseManager.h; path = manager/SGFirebaseManager.h; sourceTree = "<group>"; };
+		8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGFirebaseManager.m; path = manager/SGFirebaseManager.m; sourceTree = "<group>"; };
 		8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPictureEditViewController.h; path = controller/SGPictureEditViewController.h; sourceTree = "<group>"; };
 		8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGPictureEditViewController.m; path = controller/SGPictureEditViewController.m; sourceTree = "<group>"; };
 		8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSigninViewController.h; path = controller/Signin/SGUserSigninViewController.h; sourceTree = "<group>"; };
@@ -194,6 +197,24 @@
 			name = dropdown;
 			sourceTree = "<group>";
 		};
+		8D56D54F1FECFBF30051EE76 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				8D56D5501FECFC1A0051EE76 /* SGFirebaseManager */,
+				8DA3320F1F7C92590066148E /* engine */,
+			);
+			name = manager;
+			sourceTree = "<group>";
+		};
+		8D56D5501FECFC1A0051EE76 /* SGFirebaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				8D56D5511FED090A0051EE76 /* SGFirebaseManager.h */,
+				8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */,
+			);
+			name = SGFirebaseManager;
+			sourceTree = "<group>";
+		};
 		8D72F2391FE5B90D0047CB66 /* sign in */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,9 +250,9 @@
 			isa = PBXGroup;
 			children = (
 				8DDC4FD91F944E9D00C92EEB /* resource */,
-				8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */,
-				8DB097921F9345210053C203 /* Constant */,
-				8DA3320E1F7C92440066148E /* shared */,
+				8DB097921F9345210053C203 /* constant */,
+				8DA3320E1F7C92440066148E /* vendor */,
+				8D56D54F1FECFBF30051EE76 /* manager */,
 				8DA3320A1F7C8FD30066148E /* view */,
 				8DA332091F7C8FC90066148E /* model */,
 				8DA332081F7C8FC00066148E /* controller */,
@@ -240,6 +261,7 @@
 				8DA331FA1F7C8F3C0066148E /* Main.storyboard */,
 				8DA331FD1F7C8F3C0066148E /* Assets.xcassets */,
 				8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */,
+				8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */,
 				8DA332021F7C8F3C0066148E /* Info.plist */,
 				8DA331F11F7C8F3C0066148E /* Supporting Files */,
 			);
@@ -316,13 +338,12 @@
 			name = view;
 			sourceTree = "<group>";
 		};
-		8DA3320E1F7C92440066148E /* shared */ = {
+		8DA3320E1F7C92440066148E /* vendor */ = {
 			isa = PBXGroup;
 			children = (
 				8D56D54B1FECACBC0051EE76 /* dropdown */,
-				8DA3320F1F7C92590066148E /* engine */,
 			);
-			name = shared;
+			name = vendor;
 			sourceTree = "<group>";
 		};
 		8DA3320F1F7C92590066148E /* engine */ = {
@@ -334,12 +355,12 @@
 			name = engine;
 			sourceTree = "<group>";
 		};
-		8DB097921F9345210053C203 /* Constant */ = {
+		8DB097921F9345210053C203 /* constant */ = {
 			isa = PBXGroup;
 			children = (
 				8DB097931F93456A0053C203 /* SGConstant.h */,
 			);
-			name = Constant;
+			name = constant;
 			sourceTree = "<group>";
 		};
 		8DB669F61FDE8B0F00BB3966 /* laboratory */ = {
@@ -547,6 +568,7 @@
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
 				8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */,
 				8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */,
+				8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */,
 				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
 				8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */,

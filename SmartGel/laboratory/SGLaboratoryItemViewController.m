@@ -76,7 +76,5 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }]];
     [self presentViewController:alert animated:YES completion:nil];
-
 }
-
 @end
