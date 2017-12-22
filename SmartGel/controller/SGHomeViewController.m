@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
-    [self.dateLabel setText:[self getCurrentTimeString]];
+//    [self.dateLabel setText:[self getCurrentTimeString]];
 //    [self loginFireBase];
     self.cleanareaViews = [NSMutableArray array];
 }
@@ -55,7 +55,7 @@
     self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
-    [self.dateLabel setText:[self getCurrentTimeString]];
+//    [self.dateLabel setText:[self getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
 

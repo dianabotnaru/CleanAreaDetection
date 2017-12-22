@@ -10,6 +10,8 @@
 #import "SGUserSigninViewController.h"
 #import "AppDelegate.h"
 #import "SGConstant.h"
+#import "SGFirebaseManager.h"
+#import "SGUtil.h"
 
 @interface SGUserSignUpViewController ()
 
@@ -26,47 +28,34 @@
 }
 
 - (IBAction)signUpButtonTapped{
-    if([self.emailTextField.text isEqualToString:@""]){
-        [self showAlertdialog:nil message:@"Please input a valid email"];
-        return;
+    if([self checkInputValidation]){
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[SGFirebaseManager sharedManager] registerWithCompanyname:self.companyNameTextField.text email:self.emailTextField.text password:self.pwTextField.text completionHandler:^(NSError *error, SGUser *sgUser) {
+            [hud hideAnimated:false];
+            if(error == nil){
+               [self.appDelegate initMenuViewController];
+            }else{
+                [self showAlertdialog:nil message:error.localizedDescription];
+            }
+        }];
     }
-    if(![self isValidEmailAddress:self.emailTextField.text]){
-        [self showAlertdialog:nil message:@"Please input a valid email"];
-        }
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[FIRAuth auth] createUserWithEmail:self.emailTextField.text
-                               password:self.pwTextField.text
-                             completion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
-                                 
-                                 if(error == nil){
-                                     self.appDelegate.user =[self getSGUserFromFIRUser:user];
-                                     self.appDelegate.ref = [[FIRDatabase database] reference];
-                                     self.appDelegate.storageRef = [[FIRStorage storage] reference];
-                                     NSDictionary *post = @{
-                                                            @"userid": self.appDelegate.user.userID,
-                                                            @"email": self.appDelegate.user.email,
-                                                            @"password": self.appDelegate.user.email,
-                                                            @"companyname": self.appDelegate.user.companyName,
-                                                            @"latestdate": [self getCurrentTimeString]
-                                                            };
-                                     [[[self.appDelegate.ref child:@"users"] child:self.appDelegate.user.userID] setValue:post];
-                                     [self.appDelegate initMenuViewController];
-                                     [hud hideAnimated:false];
-                                 }else{
-                                     [self showAlertdialog:nil message:error.localizedDescription];
-                                     [hud hideAnimated:false];
-                                 }
-                             }];
 }
 
--(SGUser *)getSGUserFromFIRUser:(FIRUser *)user{
-    SGUser *sgUser = [[SGUser alloc] init];
-    sgUser.userID = user.uid;
-    sgUser.companyName = self.companyNameTextField.text;
-    sgUser.email = user.email;
-    sgUser.password = self.pwTextField.text;
-    sgUser.latestLoginDate = [self getCurrentTimeString];
-    return sgUser;
+-(BOOL)checkInputValidation{
+    if([self.emailTextField.text isEqualToString:@""]){
+        [self showAlertdialog:nil message:@"Please input a valid email"];
+        return false;
+    }
+    bool isVaildEmail = [[SGUtil sharedUtil] isValidEmailAddress:self.emailTextField.text];
+    if(!isVaildEmail){
+        [self showAlertdialog:nil message:@"Please input a valid email"];
+        return false;
+    }
+    if([self.pwTextField.text isEqualToString:@""]){
+        [self showAlertdialog:nil message:@"Please input a password"];
+        return false;
+    }
+    return true;
 }
 
 - (IBAction)notNowButtonTapped{

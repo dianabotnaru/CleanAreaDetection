@@ -1756,7 +1756,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="signUpButtonTapped" destination="fzs-DO-ygk" eventType="touchUpInside" id="R6a-Ot-W1i"/>
+                                            <action selector="signUpButtonTapped" destination="fzs-DO-ygk" eventType="touchUpInside" id="kWL-7n-2da"/>
                                         </connections>
                                     </button>
                                 </subviews>

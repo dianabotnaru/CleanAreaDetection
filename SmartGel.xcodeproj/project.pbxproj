@@ -24,6 +24,7 @@
 		8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625C1FD8247C008DFED2 /* Smiley_.png */; };
 		8D56D54E1FECACD80051EE76 /* AJDropDownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D54C1FECACD70051EE76 /* AJDropDownPicker.m */; };
 		8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */; };
+		8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5561FED0CB10051EE76 /* SGUtil.m */; };
 		8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */; };
 		8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
@@ -84,6 +85,8 @@
 		8D56D54D1FECACD70051EE76 /* AJDropDownPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AJDropDownPicker.h; path = shared/DropDownPicker/AJDropDownPicker.h; sourceTree = "<group>"; };
 		8D56D5511FED090A0051EE76 /* SGFirebaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGFirebaseManager.h; path = manager/SGFirebaseManager.h; sourceTree = "<group>"; };
 		8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGFirebaseManager.m; path = manager/SGFirebaseManager.m; sourceTree = "<group>"; };
+		8D56D5551FED0CB10051EE76 /* SGUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUtil.h; path = SGUtil/SGUtil.h; sourceTree = "<group>"; };
+		8D56D5561FED0CB10051EE76 /* SGUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUtil.m; path = SGUtil/SGUtil.m; sourceTree = "<group>"; };
 		8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPictureEditViewController.h; path = controller/SGPictureEditViewController.h; sourceTree = "<group>"; };
 		8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGPictureEditViewController.m; path = controller/SGPictureEditViewController.m; sourceTree = "<group>"; };
 		8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSigninViewController.h; path = controller/Signin/SGUserSigninViewController.h; sourceTree = "<group>"; };
@@ -200,6 +203,7 @@
 		8D56D54F1FECFBF30051EE76 /* manager */ = {
 			isa = PBXGroup;
 			children = (
+				8D56D5541FED0C8C0051EE76 /* SGUtil */,
 				8D56D5501FECFC1A0051EE76 /* SGFirebaseManager */,
 				8DA3320F1F7C92590066148E /* engine */,
 			);
@@ -213,6 +217,15 @@
 				8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */,
 			);
 			name = SGFirebaseManager;
+			sourceTree = "<group>";
+		};
+		8D56D5541FED0C8C0051EE76 /* SGUtil */ = {
+			isa = PBXGroup;
+			children = (
+				8D56D5551FED0CB10051EE76 /* SGUtil.h */,
+				8D56D5561FED0CB10051EE76 /* SGUtil.m */,
+			);
+			name = SGUtil;
 			sourceTree = "<group>";
 		};
 		8D72F2391FE5B90D0047CB66 /* sign in */ = {
@@ -571,6 +584,7 @@
 				8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */,
 				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
+				8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */,
 				8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */,
 				8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */,
 				8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */,

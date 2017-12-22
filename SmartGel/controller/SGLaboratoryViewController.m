@@ -104,7 +104,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
     self.laboratoryDataModel.image = image;
-    self.laboratoryDataModel.date = [self getCurrentTimeString];
+//    self.laboratoryDataModel.date = [self getCurrentTimeString];
     [self estimateValue:image];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

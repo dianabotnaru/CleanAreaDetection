@@ -28,10 +28,10 @@
         [self showAlertdialog:nil message:@"Please input a valid email"];
         return;
     }
-    if(![self isValidEmailAddress:self.emailTextField.text]){
-        [self showAlertdialog:nil message:@"Please input a valid email"];
-        return;
-    }
+//    if(![self isValidEmailAddress:self.emailTextField.text]){
+//        [self showAlertdialog:nil message:@"Please input a valid email"];
+//        return;
+//    }
     [self submitForgotPassword];
 }
 

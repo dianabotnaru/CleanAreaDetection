@@ -31,23 +31,4 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
--(NSString *)getCurrentTimeString{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    NSDate *currentDate = [NSDate date];
-    NSString *dateString = [formatter stringFromDate:currentDate];
-    return dateString;
-}
-
-- (BOOL)isValidEmailAddress:(NSString *)emailAddress {
-    NSString *regExPattern = @"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$";
-    NSRegularExpression *regEx = [[NSRegularExpression alloc]
-                                  initWithPattern:regExPattern
-                                  options:NSRegularExpressionCaseInsensitive
-                                  error:nil];
-    NSUInteger regExMatches = [regEx numberOfMatchesInString:emailAddress
-                                                     options:0
-                                                       range:NSMakeRange(0, [emailAddress length])];
-    return (regExMatches == 0) ? NO : YES ;
-}
 @end
