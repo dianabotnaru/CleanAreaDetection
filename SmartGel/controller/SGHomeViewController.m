@@ -337,6 +337,19 @@
     [self.navigationController pushViewController:pictureViewController animated:YES];
 }
 
+-(IBAction)btnTagDropTapped:(id)sender{
+    NSArray *dataSourceArray = @[@"Wall",@"Tile",@"Stainless"];
+    AJDropDownPicker *picker=[[AJDropDownPicker alloc]initWithDelegate:self dataSourceArray:dataSourceArray];
+    picker.delegate = self;
+    [picker showFromView:sender];
+}
+
+-(void)dropDownPicker:(AJDropDownPicker *)dropDownPicker didPickObject:(id)pickedObject{
+    NSString *outputStatus= [NSString stringWithFormat: @"%@",pickedObject];
+    self.tagLabel.text = outputStatus;
+    self.estimateImage.tag = outputStatus;
+//    [self. setTitle:(NSString*)pickedObject forState:UIControlStateNormal];
+}
 /////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 
 - (NSString *) getImageUrl:(int)index{

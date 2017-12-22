@@ -17,8 +17,9 @@
 #import "RESideMenu.h"
 #import "SGGridView.h"
 #import "UIImageView+WebCache.h"
+#import "AJDropDownPicker.h"
 
-@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
+@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,AJDropDownPickerDelegte>{
     bool isShowDirtyArea;
     bool isSavedImage;
     bool isTakenPhoto;
@@ -34,6 +35,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dirtyvalueLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
