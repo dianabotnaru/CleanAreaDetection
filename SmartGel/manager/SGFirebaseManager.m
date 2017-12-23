@@ -90,4 +90,34 @@
         completionHandler(error, nil);
     }];
 }
+
+-(void)saveResultImage:(EstimateImageModel *)estimateImageModel
+     engineColorOffset:(int)colorOffset
+     completionHandler:(void (^)(NSError *error))completionHandler {
+        FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.currentUser.userID,estimateImageModel.date]];
+        NSData *imageData = UIImageJPEGRepresentation(estimateImageModel.image,0.7);
+        [riversRef putData:imageData
+                  metadata:nil
+                completion:^(FIRStorageMetadata *metadata,NSError *error) {
+                    if (error != nil) {
+                        completionHandler(error);
+                    } else {
+                        NSDictionary *post = @{
+                                               @"value": [NSString stringWithFormat:@"%.2f",estimateImageModel.cleanValue],
+                                               @"image": metadata.downloadURL.absoluteString,
+                                               @"tag": estimateImageModel.tag,
+                                               @"date": estimateImageModel.date,
+                                               @"location": estimateImageModel.location,
+                                               @"cleanarea": estimateImageModel.cleanArea,
+                                               @"nonGelArea": estimateImageModel.nonGelArea,
+                                               @"coloroffset": [NSString stringWithFormat:@"%d", colorOffset]
+                                               };
+                        NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.currentUser.userID, @"photos",estimateImageModel.date]: post};
+                        [self.dataBaseRef updateChildValues:childUpdates];
+                        completionHandler(error);
+                    }
+                }];
+}
+
+
 @end

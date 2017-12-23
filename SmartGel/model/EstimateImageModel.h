@@ -33,9 +33,9 @@
 - (void)setImageDataModel:(UIImage*)image
        withEstimatedValue:(float)vaule
                  withDate:(NSString*)dateString
+                  withTag:(NSString*)tag
              withLocation:(NSString*)currentLocation
-           withCleanArray:(NSMutableArray *)cleanArray
-          withNonGelArray:(NSMutableArray *)nonGelArray;
+           withCleanArray:(NSMutableArray *)cleanArray;
 -(void)updateNonGelAreaString:(int)position;
 -(NSMutableArray *)getNonGelAreaArray;
 -(void)setCleanAreaWithArray:(NSMutableArray*)array;

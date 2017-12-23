@@ -64,15 +64,6 @@
     }
 }
 
--(void)initDataUiWithImage{
-    [self.cleanareaViews removeAllObjects];
-    isSavedImage = false;
-    self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
-    [self.estimateImage setImageDataModel:self.takenImage withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withLocation:self.locationLabel.text withCleanArray:self.engine.areaCleanState withNonGelArray:[self nonGelAreaArrayInit]];
-    [self setLabelsWithEstimateData];
-    [self drawGridView];
-    [self initCleanareaViews: self.engine.areaCleanState];
-}
 
 -(void)setLabelsWithEstimateData{
     if(!self.notificationLabel.isHidden)
@@ -83,13 +74,6 @@
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
 }
 
-- (NSMutableArray *)nonGelAreaArrayInit{
-    NSMutableArray *gelAreaArray = [[NSMutableArray alloc] init];
-    for(int i=0;i<SGGridCount*SGGridCount;i++){
-        [gelAreaArray addObject:@(false)];
-    }
-    return gelAreaArray;
-}
 
 -(void)drawGridView{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
@@ -99,40 +83,6 @@
     [self.gridContentView addSubview:self.gridView];
 }
 
-- (void)saveResultImage{
-//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    hud.label.text = @"Uploading image...";
-//    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.estimateImage.date]];
-//    NSData *imageData = UIImageJPEGRepresentation(self.estimateImage.image,0.7);
-//    [riversRef putData:imageData
-//              metadata:nil
-//            completion:^(FIRStorageMetadata *metadata,NSError *error) {
-//                [hud hideAnimated:false];
-//                if (error != nil) {
-//                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
-//                } else {
-//                    isSavedImage = true;
-//                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-//                    NSDictionary *post = @{
-//                                           @"value": [NSString stringWithFormat:@"%.1f",self.estimateImage.cleanValue],
-//                                           @"image": metadata.downloadURL.absoluteString,
-//                                           @"tag": self.estimateImage.tag,
-//                                           @"date": self.estimateImage.date,
-//                                           @"location": self.estimateImage.location,
-//                                           @"cleanarea": self.estimateImage.cleanArea,
-//                                           @"nonGelArea": self.estimateImage.nonGelArea,
-//                                           @"coloroffset": [NSString stringWithFormat:@"%d", self.engine.m_colorOffset]
-//                                           };
-//                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.estimateImage.date]: post};
-//                    [self.appDelegate.ref updateChildValues:childUpdates];
-//                }
-//            }];
-}
-
-
--(IBAction)backButtonPressed{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 -(void)showCleanAndDirtyArea{
     isShowDirtyArea = true;
@@ -236,6 +186,21 @@
     }
 }
 
+- (void)saveResultImage{
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[SGFirebaseManager sharedManager] saveResultImage:self.estimateImage
+                                    engineColorOffset :self.engine.m_colorOffset
+                                     completionHandler:^(NSError *error) {
+                                         [hud hideAnimated:false];
+                                         if(error == nil){
+                                             isSavedImage = true;
+                                             [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
+                                         }else{
+                                             [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+                                         }
+                                     }];
+}
+
 -(IBAction)showHideCleanArea{
     if(self.estimateImage.image == nil){
         [self showAlertdialog:nil message:@"Please take a photo."];
@@ -247,14 +212,20 @@
         [self showCleanAndDirtyArea];
 }
 
--(IBAction)launchPhotoPickerController{
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
+-(IBAction)resetNonGelAreaTapped:(id)sender{
+    
+}
 
-    self.takenImage = [UIImage imageNamed:@"test.png"];
-    [self initDataUiWithImage];
+-(IBAction)launchPhotoPickerController{
+    if(isShowDirtyArea)
+        [self hideDirtyArea];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
+
+//    self.takenImage = [UIImage imageNamed:@"test.png"];
+//    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -270,6 +241,17 @@
     isTakenPhoto = true;
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+-(void)initDataUiWithImage{
+    [self.cleanareaViews removeAllObjects];
+    isSavedImage = false;
+    self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
+    [self.estimateImage setImageDataModel:self.takenImage withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
+    [self setLabelsWithEstimateData];
+    [self drawGridView];
+    [self initCleanareaViews: self.engine.areaCleanState];
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -318,9 +300,6 @@
     [self.navigationController pushViewController:pictureViewController animated:YES];
 }
 
--(IBAction)resetNonGelAreaTapped:(id)sender{
-    
-}
 
 -(IBAction)btnTagDropTapped:(id)sender{
     NSArray *dataSourceArray = @[@"Wall",@"Tile",@"Stainless"];
@@ -333,10 +312,10 @@
     NSString *outputStatus= [NSString stringWithFormat: @"%@",pickedObject];
     self.tagLabel.text = outputStatus;
     self.estimateImage.tag = outputStatus;
-//    [self. setTitle:(NSString*)pickedObject forState:UIControlStateNormal];
+    self.estimateImage.tag = outputStatus;
 }
-/////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 - (NSString *) getImageUrl:(int)index{
     NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
     NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];

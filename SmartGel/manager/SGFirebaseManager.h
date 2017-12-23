@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Firebase.h"
 #import "SGUser.h"
+#import "EstimateImageModel.h"
 
 @interface SGFirebaseManager : NSObject
 + (instancetype)sharedManager;
@@ -25,7 +26,12 @@
 - (void)signInWithEmail:(NSString *)email
                password:(NSString *)password
        completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;
+
 -(void)getCurrentUserwithUserID:(NSString *)userID
               completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;
+
+-(void)saveResultImage:(EstimateImageModel *)estimateImageModel
+     engineColorOffset:(int)colorOffset
+     completionHandler:(void (^)(NSError *error))completionHandler ;
 
 @end

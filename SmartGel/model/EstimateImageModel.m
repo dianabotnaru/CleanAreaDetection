@@ -7,6 +7,7 @@
 //
 
 #import "EstimateImageModel.h"
+#import "SGConstant.h"
 
 @implementation EstimateImageModel
 
@@ -40,16 +41,27 @@
 - (void)setImageDataModel:(UIImage*)image
        withEstimatedValue:(float)vaule
                  withDate:(NSString*)dateString
+                  withTag:(NSString*)tag
              withLocation:(NSString*)currentLocation
-           withCleanArray:(NSMutableArray *)cleanArray
-          withNonGelArray:(NSMutableArray *)nonGelArray{
+           withCleanArray:(NSMutableArray *)cleanArray{
+    
     self.image = image;
     self.cleanValue = vaule;
     self.date = dateString;
+    self.tag = tag;
     self.location = currentLocation;
     self.cleanArea = [self getStringFromArray:cleanArray];
-    self.nonGelArea = [self getStringFromArray:nonGelArray];
+    self.nonGelArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
 }
+
+- (NSMutableArray *)nonGelAreaArrayInit{
+    NSMutableArray *gelAreaArray = [[NSMutableArray alloc] init];
+    for(int i=0;i<SGGridCount*SGGridCount;i++){
+        [gelAreaArray addObject:@(false)];
+    }
+    return gelAreaArray;
+}
+
 
 -(void)updateNonGelAreaString:(int)position{
     NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
