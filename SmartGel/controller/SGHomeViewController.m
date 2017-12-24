@@ -13,6 +13,7 @@
 #import "SGPictureEditViewController.h"
 #import "SGFirebaseManager.h"
 #import "SGUtil.h"
+#import "SCLAlertView.h"
 
 @interface SGHomeViewController ()
 
@@ -171,17 +172,18 @@
         if(isSavedImage)
             [self showAlertdialog:nil message:@"You have already saved this Image."];
         else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
-                                                                           message:@"Are you sure want to upload image?"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                [self saveResultImage];
-            }]];
-
-            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-            }]];
-
-            [self presentViewController:alert animated:YES completion:nil];
+            [self showSaveAlertView];
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
+//                                                                           message:@"Are you sure want to upload image?"
+//                                                                    preferredStyle:UIAlertControllerStyleAlert];
+//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//                [self saveResultImage];
+//            }]];
+//
+//            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+//            }]];
+//
+//            [self presentViewController:alert animated:YES completion:nil];
         }
     }
 }
@@ -219,13 +221,13 @@
 -(IBAction)launchPhotoPickerController{
     if(isShowDirtyArea)
         [self hideDirtyArea];
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-//    self.takenImage = [UIImage imageNamed:@"test.png"];
-//    [self initDataUiWithImage];
+    self.takenImage = [UIImage imageNamed:@"test.png"];
+    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -313,6 +315,37 @@
     self.tagLabel.text = outputStatus;
     self.estimateImage.tag = outputStatus;
     self.estimateImage.tag = outputStatus;
+}
+
+- (void)showSaveAlertView{
+    
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    alert.customViewColor = SGColorBlack;
+    alert.iconTintColor = [UIColor whiteColor];
+    alert.tintTopCircle = NO;
+    alert.backgroundViewColor = SGColorDarkGray;
+    alert.view.backgroundColor = SGColorDarkGray;
+    alert.backgroundType = SCLAlertViewBackgroundTransparent;
+    
+    alert.labelTitle.textColor = [UIColor whiteColor];
+    
+    UITextField *tagTextField = [alert addTextField:self.estimateImage.tag];
+    [tagTextField setText:self.estimateImage.tag];
+    [tagTextField setEnabled:false];
+    [tagTextField setBackgroundColor:[UIColor clearColor]];
+    [tagTextField setTextColor:[UIColor lightGrayColor]];
+
+    UITextField *customerTextField = [alert addTextField:[SGFirebaseManager sharedManager].currentUser.email];
+    [customerTextField setText:[SGFirebaseManager sharedManager].currentUser.email];
+    [customerTextField setEnabled:false];
+    [customerTextField setBackgroundColor:[UIColor clearColor]];
+    [customerTextField setTextColor:[UIColor lightGrayColor]];
+
+    [alert addButton:@"Done" actionBlock:^(void) {
+        [self saveResultImage];
+    }];
+    [alert.viewText setTextColor:[UIColor whiteColor]];
+    [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
 }
 
 /////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////

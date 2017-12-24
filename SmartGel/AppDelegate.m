@@ -23,6 +23,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [FIRApp configure];
+//    BOOL status = [[FIRAuth auth] signOut:nil];
     [self initNavigationbar];
     if ([FIRAuth auth].currentUser) {
         self.isAreadyLoggedIn = true;

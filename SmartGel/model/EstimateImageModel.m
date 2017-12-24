@@ -33,7 +33,6 @@
         self.imageUrl = snapshot.value[@"image"];
         self.cleanArea = snapshot.value[@"cleanarea"];
         self.nonGelArea = snapshot.value[@"nonGelArea"];
-        self.coloroffset = [snapshot.value[@"coloroffset"] intValue];
     }
     return self;
 }
@@ -44,7 +43,6 @@
                   withTag:(NSString*)tag
              withLocation:(NSString*)currentLocation
            withCleanArray:(NSMutableArray *)cleanArray{
-    
     self.image = image;
     self.cleanValue = vaule;
     self.date = dateString;
