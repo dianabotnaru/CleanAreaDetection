@@ -34,4 +34,6 @@
      engineColorOffset:(int)colorOffset
      completionHandler:(void (^)(NSError *error))completionHandler ;
 
+-(void)getSmartGelHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
+
 @end

@@ -28,11 +28,13 @@
     self = [super init];
     if(self){
         self.cleanValue = [snapshot.value[@"value"] floatValue];
+        self.imageUrl = snapshot.value[@"image"];
+        self.tag = snapshot.value[@"tag"];
         self.date = snapshot.value[@"date"];
         self.location = snapshot.value[@"location"];
-        self.imageUrl = snapshot.value[@"image"];
         self.cleanArea = snapshot.value[@"cleanarea"];
         self.nonGelArea = snapshot.value[@"nonGelArea"];
+        self.coloroffset = [snapshot.value[@"colorOffset"] intValue];
     }
     return self;
 }
