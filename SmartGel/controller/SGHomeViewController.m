@@ -53,11 +53,15 @@
 -(void)getCurrentUser{
     if([SGFirebaseManager sharedManager].currentUser == nil){
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) wself = self;
         [[SGFirebaseManager sharedManager] getCurrentUserwithUserID:[FIRAuth auth].currentUser.uid
                                                   completionHandler:^(NSError *error, SGUser *sgUser) {
-                                                      [hud hideAnimated:false];
-                                                      if (error!= nil)
-                                                         [self showAlertdialog:@"Error" message:error.localizedDescription];
+                                                      __strong typeof(wself) sself = wself;
+                                                      if(sself){
+                                                          [hud hideAnimated:false];
+                                                          if (error!= nil)
+                                                              [sself showAlertdialog:@"Error" message:error.localizedDescription];
+                                                      }
                                                   }];
     }
 }

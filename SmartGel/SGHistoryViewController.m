@@ -34,7 +34,7 @@
     [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
     // Do any additional setup after loading the view.
     [self initNavigationBar];
-    [self initGlcalendarView];
+//    [self initGlcalendarView];
     [self getHistoryArray];
 //        [self getTestResults];
 }
