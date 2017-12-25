@@ -34,7 +34,7 @@
     [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
     // Do any additional setup after loading the view.
     [self initNavigationBar];
-//    [self initGlcalendarView];
+    [self initGlcalendarView];
     [self getHistoryArray];
 //        [self getTestResults];
 }
@@ -155,17 +155,12 @@
 }
 
 - (NSDate *)setMinDate{
-    NSDate *date = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components: NSUIntegerMax fromDate: date];
-    [components setYear:2017];
-    [components setMonth:1];
-    [components setDay:1];
-    [components setHour: 0];
-    [components setMinute: 0];
-    [components setSecond: 0];
-    NSDate *newDate = [gregorian dateFromComponents: components];
-    return newDate;
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setDay:1];
+    [comps setMonth:1];
+    [comps setYear:2017];
+    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+    return date;
 }
 
 -(void)getFilterArray{
