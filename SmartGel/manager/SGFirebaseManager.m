@@ -120,12 +120,12 @@
 }
 
 -(void)getSmartGelHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
-    [[[self.dataBaseRef child:@"users"] child:[NSString stringWithFormat:@"%@/%@",self.currentUser.userID,@"photos"]] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[self.dataBaseRef child:@"users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSMutableArray *estimateImageArray = [NSMutableArray array];
-        for(snapshot in snapshot.children){
-            EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
-            [estimateImageArray addObject:estimageImageModel];
-        }
+//        for(snapshot in snapshot.children){
+//            EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
+//            [estimateImageArray addObject:estimageImageModel];
+//        }
         completionHandler(nil,estimateImageArray);
     } withCancelBlock:^(NSError * _Nonnull error) {
         completionHandler(error,nil);

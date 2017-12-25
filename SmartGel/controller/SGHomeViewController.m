@@ -51,20 +51,16 @@
 }
 
 -(void)getCurrentUser{
-    if(self.appDelegate.isAreadyLoggedIn){
-        if(([FIRAuth auth].currentUser.email != nil) || (![[FIRAuth auth].currentUser.email isEqualToString:@""])){
-            hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[SGFirebaseManager sharedManager] getCurrentUserwithUserID:[FIRAuth auth].currentUser.uid
-                                                      completionHandler:^(NSError *error, SGUser *sgUser) {
-                                                          [hud hideAnimated:false];
-                                                          if(error != nil){
-                                                              [self showAlertdialog:nil message:error.localizedDescription];
-                                                          }
-                                                      }];
-        }
+    if([SGFirebaseManager sharedManager].currentUser == nil){
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[SGFirebaseManager sharedManager] getCurrentUserwithUserID:[FIRAuth auth].currentUser.uid
+                                                  completionHandler:^(NSError *error, SGUser *sgUser) {
+                                                      [hud hideAnimated:false];
+                                                      if (error!= nil)
+                                                         [self showAlertdialog:@"Error" message:error.localizedDescription];
+                                                  }];
     }
 }
-
 
 -(void)setLabelsWithEstimateData{
     if(!self.notificationLabel.isHidden)
@@ -75,7 +71,6 @@
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
 }
 
-
 -(void)drawGridView{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.takenImage];
@@ -83,7 +78,6 @@
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
 }
-
 
 -(void)showCleanAndDirtyArea{
     isShowDirtyArea = true;

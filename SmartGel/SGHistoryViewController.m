@@ -71,23 +71,27 @@
 }
 
 -(void)initArrays{
-    self.historyArray = [NSMutableArray array];
-    self.historyFilterArray = [NSMutableArray array];
-    self.laboratoryArray = [NSMutableArray array];
-    self.laboratoryFilterArray = [NSMutableArray array];
+    self.historyArray = [[NSMutableArray alloc] init];
+    self.historyFilterArray = [[NSMutableArray alloc] init];
+    self.laboratoryArray = [[NSMutableArray alloc] init];
+    self.laboratoryFilterArray = [[NSMutableArray alloc] init];
 }
 
 -(void)getHistoryArray{
     [self initArrays];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) wself = self;
     [[SGFirebaseManager sharedManager] getSmartGelHistorys:^(NSError *error,NSMutableArray* array) {
-        [self.hud hideAnimated:false];
-        if(error==nil){
-            self.historyArray = array;
-            self.historyFilterArray = array;
-            [self.smartGelHistoryCollectionView reloadData];
-        }else{
-            [self showAlertdialog:@"Error!" message:error.localizedDescription];
+        __strong typeof(wself) sself = wself;
+        [hud hideAnimated:false];
+        if (sself) {
+            if(error==nil){
+                sself.historyArray = array;
+                sself.historyFilterArray = array;
+                [sself.smartGelHistoryCollectionView reloadData];
+            }else{
+                [sself showAlertdialog:@"Error!" message:error.localizedDescription];
+            }
         }
     }];
 }

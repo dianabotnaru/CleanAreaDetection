@@ -37,7 +37,5 @@
 @property (strong, nonatomic) NSMutableArray *laboratoryArray;
 @property (strong, nonatomic) NSMutableArray *laboratoryFilterArray;
 
-@property (strong, nonatomic) MBProgressHUD *hud;
 @property (nonatomic, weak) GLCalendarDateRange *rangeUnderEdit;
-
 @end
