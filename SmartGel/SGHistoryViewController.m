@@ -333,22 +333,22 @@
                                                             preferredStyle:UIAlertControllerStyleActionSheet]; // 1
     UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Date"
                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                              NSLog(@"You pressed button one");
-                                                          }]; // 2
+                                                              [self sortbyDate];
+                                                          }];
     UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Value"
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                               NSLog(@"You pressed button two");
-                                                           }]; // 3
+                                                               [self sortbyValue];
+                                                           }];
     
     UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Tag"
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                               NSLog(@"You pressed button two");
-                                                           }]; // 3
-    [alert addAction:firstAction]; // 4
-    [alert addAction:secondAction]; // 5
-    [alert addAction:thirdAction]; // 5
+                                                               [self sortbyTag];
+                                                           }];
+    [alert addAction:firstAction];
+    [alert addAction:secondAction];
+    [alert addAction:thirdAction];
     
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         UIPopoverPresentationController *popPresenter = [alert
                                                          popoverPresentationController];
@@ -356,24 +356,37 @@
         popPresenter.sourceRect = CGRectMake(self.view.frame.size.width-30, 0, 30, 0);
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        [self presentViewController:alert animated:YES completion:nil]; // 6
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
 -(void)sortbyDate{
+    NSArray *array = [[NSArray alloc] initWithArray:self.historyFilterArray];
     NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"birthDate"
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date"
                                                  ascending:YES];
-    self.historyFilterArray = [self.historyFilterArray sortedArrayUsingDescriptors:@[sortDescriptor]];
-    
-
+    NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
+    self.historyFilterArray = [[NSMutableArray alloc] initWithArray:sortedArray];
+    [self.smartGelHistoryCollectionView reloadData];
 }
 
 -(void)sortbyValue{
-    
+    NSArray *array = [[NSArray alloc] initWithArray:self.historyFilterArray];
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"cleanValue"
+                                                 ascending:YES];
+    NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
+    self.historyFilterArray = [[NSMutableArray alloc] initWithArray:sortedArray];
+    [self.smartGelHistoryCollectionView reloadData];
 }
 
 -(void)sortbyTag{
-    
+    NSArray *array = [[NSArray alloc] initWithArray:self.historyFilterArray];
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag"
+                                                 ascending:YES];
+    NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
+    self.historyFilterArray = [[NSMutableArray alloc] initWithArray:sortedArray];
+    [self.smartGelHistoryCollectionView reloadData];
 }
 @end
