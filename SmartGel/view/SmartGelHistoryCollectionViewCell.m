@@ -21,6 +21,7 @@
 -(void)setEstimateData:(EstimateImageModel *)estimateImageData{
     self.locationLabel.text = estimateImageData.location;
     self.dateLabel.text = estimateImageData.date;
+    self.tagLabel.text = estimateImageData.tag;
     self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.2f", estimateImageData.cleanValue];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:estimateImageData.imageUrl]
                            placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]

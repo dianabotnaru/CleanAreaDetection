@@ -134,9 +134,9 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/4-8,220);
+        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/4-8,240);
     else
-        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/2-4,220);
+        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/2-4,240);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
