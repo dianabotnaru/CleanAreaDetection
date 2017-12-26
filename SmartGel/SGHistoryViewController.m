@@ -326,4 +326,54 @@
     [self.calendarView removeRange:self.rangeUnderEdit];
     [self.calendarContainerView setHidden:YES];
 }
+
+-(IBAction)didSortButtonTapped{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sort"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet]; // 1
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Date"
+                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                              NSLog(@"You pressed button one");
+                                                          }]; // 2
+    UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Value"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               NSLog(@"You pressed button two");
+                                                           }]; // 3
+    
+    UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Tag"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               NSLog(@"You pressed button two");
+                                                           }]; // 3
+    [alert addAction:firstAction]; // 4
+    [alert addAction:secondAction]; // 5
+    [alert addAction:thirdAction]; // 5
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+    {
+        UIPopoverPresentationController *popPresenter = [alert
+                                                         popoverPresentationController];
+        popPresenter.sourceView = self.view;
+        popPresenter.sourceRect = CGRectMake(self.view.frame.size.width-30, 0, 30, 0);
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        [self presentViewController:alert animated:YES completion:nil]; // 6
+    }
+}
+
+-(void)sortbyDate{
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"birthDate"
+                                                 ascending:YES];
+    self.historyFilterArray = [self.historyFilterArray sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
+
+}
+
+-(void)sortbyValue{
+    
+}
+
+-(void)sortbyTag{
+    
+}
 @end

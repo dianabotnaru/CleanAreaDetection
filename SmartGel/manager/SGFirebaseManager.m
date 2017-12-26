@@ -153,7 +153,8 @@
               metadata:nil
             completion:^(FIRStorageMetadata *metadata,NSError *error) {
                 if (error == nil) {
-                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",laboratoryData.resultValue],
+                    NSDictionary *post = @{
+                                           @"value": [NSString stringWithFormat:@"%.2f",laboratoryData.resultValue],
                                            @"image": metadata.downloadURL.absoluteString,
                                            @"tag": laboratoryData.tag,
                                            @"islaboratory" : @"1",

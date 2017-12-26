@@ -1117,6 +1117,11 @@
                                 <action selector="presentLeftMenuViewController:" destination="T8D-db-dfv" id="EoY-9k-M46"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="ic_sort" id="TIU-ZJ-vVt">
+                            <connections>
+                                <action selector="didSortButtonTapped" destination="T8D-db-dfv" id="Gms-xn-Da7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
@@ -1949,6 +1954,7 @@
         <image name="ic_calendar" width="25" height="25"/>
         <image name="ic_dropdown" width="25" height="25"/>
         <image name="ic_menu" width="19" height="20"/>
+        <image name="ic_sort" width="25" height="25"/>
         <image name="ic_take_photo" width="35" height="30"/>
         <image name="logo" width="150" height="150"/>
         <image name="tm_smart_gel.png" width="310" height="233"/>
