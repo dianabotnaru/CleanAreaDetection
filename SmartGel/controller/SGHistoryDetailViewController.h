@@ -35,8 +35,12 @@
 
 
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dirtyLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tagLabel;
+
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+
 @property (strong, nonatomic) IBOutlet UIButton *showDirtyAreaButton;
 
 @property (strong, nonatomic) MBProgressHUD *hud;

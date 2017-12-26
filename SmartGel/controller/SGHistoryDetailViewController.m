@@ -37,7 +37,9 @@
 - (void)initUI{
     self.locationLabel.text = self.selectedEstimateImageModel.location;
     self.dateLabel.text = self.selectedEstimateImageModel.date;
-    self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.1f", self.selectedEstimateImageModel.cleanValue];
+    self.valueLabel.text = [NSString stringWithFormat:@"%.2f", self.selectedEstimateImageModel.cleanValue];
+    self.dirtyLabel.text = [NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE-self.selectedEstimateImageModel.cleanValue];
+    self.tagLabel.text = self.selectedEstimateImageModel.tag;
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedEstimateImageModel.imageUrl]
                                     placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
@@ -85,11 +87,11 @@
         UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
         if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
-            [paintView setAlpha:0.5];
+            [paintView setAlpha:0.3];
             [self.takenImageView addSubview:paintView];
         }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
             [paintView setBackgroundColor:[UIColor blueColor]];
-            [paintView setAlpha:0.5];
+            [paintView setAlpha:0.2];
             [self.takenImageView addSubview:paintView];
         }
 //        else if([[dirtyState objectAtIndex:i] intValue] == NO_GEL){
