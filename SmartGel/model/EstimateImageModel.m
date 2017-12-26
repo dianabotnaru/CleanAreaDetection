@@ -39,18 +39,20 @@
     return self;
 }
 
-- (void)setImageDataModel:(UIImage*)image
-       withEstimatedValue:(float)vaule
+- (void)setImageDataModel:(float)vaule
                  withDate:(NSString*)dateString
                   withTag:(NSString*)tag
              withLocation:(NSString*)currentLocation
            withCleanArray:(NSMutableArray *)cleanArray{
-    self.image = image;
     self.cleanValue = vaule;
     self.date = dateString;
     self.tag = tag;
     self.location = currentLocation;
     self.cleanArea = [self getStringFromArray:cleanArray];
+    self.nonGelArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
+}
+
+-(void)resetNonGelArea{
     self.nonGelArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
 }
 

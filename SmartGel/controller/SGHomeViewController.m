@@ -43,7 +43,6 @@
     isSavedImage = false;
     isTakenPhoto = false;
     self.engine = [[DirtyExtractor alloc] init];
-    self.estimateImage = [[EstimateImageModel alloc] init];
     [self initLocationManager];
     [self getCurrentUser];
     self.cleanareaViews = [NSMutableArray array];
@@ -69,7 +68,7 @@
 -(void)setLabelsWithEstimateData{
     if(!self.notificationLabel.isHidden)
         [self.notificationLabel setHidden:YES];
-    [self.takenImageView setImage:self.takenImage];
+    [self.takenImageView setImage:self.estimateImage.image];
     [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.estimateImage.cleanValue]];
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
@@ -77,7 +76,7 @@
 
 -(void)drawGridView{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.takenImage];
+    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
     self.gridView = [[SGGridView alloc] initWithFrame:rect];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
@@ -111,7 +110,7 @@
 }
 
 -(void)initCleanareaViews:(NSMutableArray*)dirtyState{
-    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.takenImage];
+    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
     float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
@@ -171,17 +170,6 @@
             [self showAlertdialog:nil message:@"You have already saved this Image."];
         else{
             [self showSaveAlertView];
-//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Uploading Image"
-//                                                                           message:@"Are you sure want to upload image?"
-//                                                                    preferredStyle:UIAlertControllerStyleAlert];
-//            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                [self saveResultImage];
-//            }]];
-//
-//            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//            }]];
-//
-//            [self presentViewController:alert animated:YES completion:nil];
         }
     }
 }
@@ -217,24 +205,21 @@
         [self showAlertdialog:nil message:@"Please take a photo."];
         return;
     }
-    if(isShowDirtyArea){
-        [self hideDirtyArea];
-        [self initDataUiWithImage];
-        [self showHideCleanArea];
-    }else
-        [self initDataUiWithImage];
+    [self.estimateImage resetNonGelArea];
+    [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
+    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
 }
 
 -(IBAction)launchPhotoPickerController{
     if(isShowDirtyArea)
         [self hideDirtyArea];
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
 
-    self.takenImage = [UIImage imageNamed:@"test.png"];
-    [self initDataUiWithImage];
+//    self.takenImage = [UIImage imageNamed:@"test.png"];
+//    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -246,7 +231,8 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-    self.takenImage = image;
+    self.estimateImage = [[EstimateImageModel alloc] init];
+    self.estimateImage.image = image;
     isTakenPhoto = true;
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -256,8 +242,8 @@
 -(void)initDataUiWithImage{
     [self.cleanareaViews removeAllObjects];
     isSavedImage = false;
-    self.engine = [[DirtyExtractor alloc] initWithImage:self.takenImage];
-    [self.estimateImage setImageDataModel:self.takenImage withEstimatedValue:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
+    self.engine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
+    [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
     [self setLabelsWithEstimateData];
     [self drawGridView];
     [self initCleanareaViews: self.engine.areaCleanState];
@@ -269,10 +255,10 @@
         CGPoint location = [touch1 locationInView:self.view];
         if(!CGRectContainsPoint(self.gridView.frame, location))
             return ;
-        if(self.takenImage==nil)
+        if(self.estimateImage==nil)
             return;
         CGPoint touchLocation = [touch1 locationInView:self.gridView];
-        int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
+        int touchPosition = [self.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
         if(touchPosition != -1){
             [self updateDataAndUIbyTouch:touchPosition];
         }
@@ -286,6 +272,11 @@
     
     int pointX = touchPosition/SGGridCount;
     int pointY = touchPosition%SGGridCount;
+    [self updateNonGelAreaViews:pointX withPointY:pointY];
+}
+
+-(void)updateNonGelAreaViews:(int)pointX
+                 withPointY:(int)pointY{
     int rate = AREA_DIVIDE_NUMBER/SGGridCount;
     for(int i = 0; i<rate;i++){
         for(int j = 0; j< rate; j++){
@@ -302,13 +293,6 @@
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
-
--(void)launchPictureEditViewController{
-    SGPictureEditViewController *pictureViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGPictureEditViewController"];
-    pictureViewController.takenImage = self.takenImage;
-    [self.navigationController pushViewController:pictureViewController animated:YES];
-}
-
 
 -(IBAction)btnTagDropTapped:(id)sender{
     NSArray *dataSourceArray = @[@"Wall",@"Tile",@"Stainless"];
@@ -354,6 +338,7 @@
     [alert.viewText setTextColor:[UIColor whiteColor]];
     [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
 }
+
 
 /////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 - (NSString *) getImageUrl:(int)index{

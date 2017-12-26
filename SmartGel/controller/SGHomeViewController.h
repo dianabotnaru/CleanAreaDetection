@@ -30,7 +30,6 @@
 @property (strong, nonatomic) IBOutlet UIView *gridContentView;
 
 @property (strong, nonatomic) SGGridView *gridView;
-@property (strong, nonatomic) UIImage *takenImage;
 
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dirtyvalueLabel;

@@ -30,8 +30,7 @@
 -(instancetype)initWithDict:(NSDictionary *)dict;
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;
 
-- (void)setImageDataModel:(UIImage*)image
-       withEstimatedValue:(float)vaule
+- (void)setImageDataModel:(float)vaule
                  withDate:(NSString*)dateString
                   withTag:(NSString*)tag
              withLocation:(NSString*)currentLocation
@@ -39,6 +38,6 @@
 -(void)updateNonGelAreaString:(int)position;
 -(NSMutableArray *)getNonGelAreaArray;
 -(void)setCleanAreaWithArray:(NSMutableArray*)array;
-
+-(void)resetNonGelArea;
 
 @end
