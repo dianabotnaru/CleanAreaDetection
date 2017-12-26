@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
+    [self initDeviceRotateNotification];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -37,6 +38,28 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+-(void)initDeviceRotateNotification{
+    UIDevice *device = [UIDevice currentDevice];
+    //Tell it to start monitoring the accelerometer for orientation
+    [device beginGeneratingDeviceOrientationNotifications];
+    //Get the notification centre for the app
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(orientationChanged:)  name:UIDeviceOrientationDidChangeNotification
+             object:device];
+}
+
+- (void)orientationChanged:(NSNotification *)note
+{
+    if(self.estimateImage!=nil){
+        if(isShowDirtyArea){
+           [self hideDirtyArea];
+        }
+        [self.cleanareaViews removeAllObjects];
+        [self drawGridView];
+        [self initCleanareaViews: self.engine.areaCleanState];
+    }
 }
 
 - (void)initData{
