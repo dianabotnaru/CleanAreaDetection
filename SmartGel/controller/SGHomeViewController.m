@@ -243,7 +243,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 -(void)initDataUiWithImage{
     [self.cleanareaViews removeAllObjects];
     isSavedImage = false;
