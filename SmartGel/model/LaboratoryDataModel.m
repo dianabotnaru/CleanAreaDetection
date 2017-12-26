@@ -27,5 +27,23 @@
     return self;
 }
 
+-(instancetype)init{
+    
+    self = [super init];
+    if(self){
+        self.resultValue = 0;
+        self.imageUrl = @"";
+        self.date = @"";
+        self.location = @"";
+        self.customer = @"";
+        self.tag = @"";
+        self.unit = @"";
+        self.blankColor = 0;
+        self.sampleColor = 0;
+        self.resultState = 0;
+    }
+    return self;
+}
+
 
 @end

@@ -134,15 +134,40 @@
 
 -(void)removeSmartGelHistory:(EstimateImageModel *)estimateImageModel
            completionHandler:(void (^)(NSError *error))completionHandler {
-        NSString *userID = [FIRAuth auth].currentUser.uid;
-        FIRStorageReference *desertRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,estimateImageModel.date]];
-        [desertRef deleteWithCompletion:^(NSError *error){
-            if (error == nil) {
-                [[[self.dataBaseRef child:[NSString stringWithFormat:@"%@/%@/%@",@"users", userID, @"photos"]] child:estimateImageModel.date] removeValue];
-            }
-            completionHandler(error);
-        }];
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    FIRStorageReference *desertRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,estimateImageModel.date]];
+    [desertRef deleteWithCompletion:^(NSError *error){
+        if (error == nil) {
+            [[[self.dataBaseRef child:[NSString stringWithFormat:@"%@/%@/%@",@"users", userID, @"photos"]] child:estimateImageModel.date] removeValue];
+        }
+        completionHandler(error);
+    }];
 }
 
-
+-(void)saveLaboratoryResult:(LaboratoryDataModel *)laboratoryData
+     completionHandler:(void (^)(NSError *error))completionHandler {
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,laboratoryData.date]];
+    NSData *imageData = UIImageJPEGRepresentation(laboratoryData.image,0.7);
+    [riversRef putData:imageData
+              metadata:nil
+            completion:^(FIRStorageMetadata *metadata,NSError *error) {
+                if (error == nil) {
+                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",laboratoryData.resultValue],
+                                           @"image": metadata.downloadURL.absoluteString,
+                                           @"tag": laboratoryData.tag,
+                                           @"islaboratory" : @"1",
+                                           @"customer": laboratoryData.customer,
+                                           @"date": laboratoryData.date,
+                                           @"location": laboratoryData.location,
+                                           @"blankcolor":[NSString stringWithFormat:@"%lld",laboratoryData.blankColor],
+                                           @"samplecolor":[NSString stringWithFormat:@"%lld",laboratoryData.sampleColor],
+                                           @"resultstate":[NSString stringWithFormat:@"%d",laboratoryData.resultState]
+                                           };
+                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", userID, @"laboratories",laboratoryData.date]: post};
+                    [self.dataBaseRef updateChildValues:childUpdates];
+                }
+                completionHandler(error);
+            }];
+}
 @end

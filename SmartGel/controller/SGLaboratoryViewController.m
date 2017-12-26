@@ -11,7 +11,8 @@
 #import "SGConstant.h"
 #import <ContactsUI/ContactsUI.h>
 #import "MBProgressHUD.h"
-#import "Firebase.h"
+#import "SGFirebaseManager.h"
+#import "SGUtil.h"
 
 @interface SGLaboratoryViewController ()<UITextFieldDelegate,CNContactPickerDelegate>
 
@@ -104,7 +105,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
     self.laboratoryDataModel.image = image;
-//    self.laboratoryDataModel.date = [self getCurrentTimeString];
+    self.laboratoryDataModel.date = [[SGUtil sharedUtil] getCurrentTimeString];
     [self estimateValue:image];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -711,30 +712,6 @@
     }
 }
 
-- (void)showSaveAlertView{
-
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    alert.customViewColor = SGColorBlack;
-    alert.iconTintColor = [UIColor whiteColor];
-    alert.tintTopCircle = NO;
-    alert.backgroundViewColor = SGColorDarkGray;
-    alert.view.backgroundColor = SGColorDarkGray;
-    alert.backgroundType = SCLAlertViewBackgroundTransparent;
-
-    alert.labelTitle.textColor = [UIColor whiteColor];
-    self.tagTextField = [alert addTextField:@"Type Tag in here!"];
-    self.customerTextField = [alert addTextField:@"no Customer Selected!"];
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(customerTextFieldTapped)];
-    [self.customerTextField addGestureRecognizer:singleFingerTap];
-    [alert addButton:@"Done" actionBlock:^(void) {
-        self.laboratoryDataModel.tag = self.tagTextField.text;
-        self.laboratoryDataModel.customer = self.customerTextField.text;
-        [self saveLaboratoryDatas];
-    }];
-    [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
-}
 
 -(void)customerTextFieldTapped{
     [self launchContactPickerViewController];
@@ -754,40 +731,54 @@
     [self presentViewController:contactPicker animated:YES completion:nil];
 }
 
--(void)saveLaboratoryDatas{
-//    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    hud.label.text = @"Uploading image...";
-//    FIRStorageReference *riversRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",self.appDelegate.user.userID,self.laboratoryDataModel.date]];
-//    NSData *imageData = UIImageJPEGRepresentation(self.laboratoryDataModel.image,0.7);
-//    [riversRef putData:imageData
-//              metadata:nil
-//            completion:^(FIRStorageMetadata *metadata,NSError *error) {
-//                [hud hideAnimated:false];
-//                if (error != nil) {
-//                    [self showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
-//                } else {
-//                    [self showAlertdialog:@"Image Uploading Success!" message:error.localizedDescription];
-//                    NSDictionary *post = @{@"value": [NSString stringWithFormat:@"%.2f",self.laboratoryDataModel.resultValue],
-//                                           @"image": metadata.downloadURL.absoluteString,
-//                                           @"tag": self.laboratoryDataModel.tag,
-//                                           @"islaboratory" : @"1",
-//                                           @"customer": self.laboratoryDataModel.customer,
-//                                           @"date": self.laboratoryDataModel.date,
-//                                           @"location": self.laboratoryDataModel.location,
-//                                           @"blankcolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.blankColor],
-//                                           @"samplecolor":[NSString stringWithFormat:@"%lld",self.laboratoryDataModel.sampleColor],
-//                                           @"resultstate":[NSString stringWithFormat:@"%d",self.laboratoryDataModel.resultState]
-//                                           };
-//                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"%@/%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos",self.laboratoryDataModel.date]: post};
-//                    [self.appDelegate.ref updateChildValues:childUpdates];
-//                }
-//            }];
-}
-
 -(IBAction)uploadImage{
     if(self.laboratoryDataModel.image==nil)
         [self showAlertdialog:nil message:@"Please take a photo."];
     else
         [self showSaveAlertView];
 }
+
+- (void)showSaveAlertView{
+    
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    alert.customViewColor = SGColorBlack;
+    alert.iconTintColor = [UIColor whiteColor];
+    alert.tintTopCircle = NO;
+    alert.backgroundViewColor = SGColorDarkGray;
+    alert.view.backgroundColor = SGColorDarkGray;
+    alert.backgroundType = SCLAlertViewBackgroundTransparent;
+    
+    alert.labelTitle.textColor = [UIColor whiteColor];
+    self.tagTextField = [alert addTextField:@"Type Tag in here!"];
+    self.customerTextField = [alert addTextField:@"no Customer Selected!"];
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(customerTextFieldTapped)];
+    [self.customerTextField addGestureRecognizer:singleFingerTap];
+    [alert addButton:@"Done" actionBlock:^(void) {
+        self.laboratoryDataModel.tag = self.tagTextField.text;
+        self.laboratoryDataModel.customer = self.customerTextField.text;
+        [self saveLaboratoryDatas];
+    }];
+    [alert showEdit:self title:@"TAG YOUR RESULT" subTitle:nil closeButtonTitle:@"Cancel" duration:0.0f];
+}
+
+-(void)saveLaboratoryDatas{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"Uploading image...";
+    __weak typeof(self) wself = self;
+    [[SGFirebaseManager sharedManager] saveLaboratoryResult:self.laboratoryDataModel
+                                          completionHandler:^(NSError *error) {
+                                              [hud hideAnimated:false];
+                                              __strong typeof(wself) sself = wself;
+                                              if(sself){
+                                                  if(error==nil){
+                                                      [self showAlertdialog:@"Image Uploading Success!" message:nil];
+                                                  }else{
+                                                      [sself showAlertdialog:@"Image Uploading Failed!" message:error.localizedDescription];
+                                                  }
+                                              }
+                                          }];
+}
+
 @end

@@ -10,6 +10,7 @@
 #import "Firebase.h"
 #import "SGUser.h"
 #import "EstimateImageModel.h"
+#import "LaboratoryDataModel.h"
 
 @interface SGFirebaseManager : NSObject
 + (instancetype)sharedManager;
@@ -38,5 +39,8 @@
 
 -(void)removeSmartGelHistory:(EstimateImageModel *)estimateImageModel
            completionHandler:(void (^)(NSError *error))completionHandler;
+
+-(void)saveLaboratoryResult:(LaboratoryDataModel *)laboratoryData
+          completionHandler:(void (^)(NSError *error))completionHandler ;
 
 @end
