@@ -208,6 +208,11 @@
     [self.estimateImage resetNonGelArea];
     [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
+    for(int i = 0; i<SGGridCount;i++){
+        for(int j = 0; j<SGGridCount;j++){
+            [self updateNonGelAreaViews:i withPointY:j];
+        }
+    }
 }
 
 -(IBAction)launchPhotoPickerController{
