@@ -213,7 +213,16 @@
 }
 
 -(IBAction)resetNonGelAreaTapped:(id)sender{
-    
+    if(self.estimateImage.image == nil){
+        [self showAlertdialog:nil message:@"Please take a photo."];
+        return;
+    }
+    if(isShowDirtyArea){
+        [self hideDirtyArea];
+        [self initDataUiWithImage];
+        [self showHideCleanArea];
+    }else
+        [self initDataUiWithImage];
 }
 
 -(IBAction)launchPhotoPickerController{
