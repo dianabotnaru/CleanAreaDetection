@@ -170,4 +170,17 @@
                 completionHandler(error);
             }];
 }
+
+-(void)getLaboratoryHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
+    [[[[self.dataBaseRef child:@"users"] child:[FIRAuth auth].currentUser.uid] child:@"laboratories"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSMutableArray *estimateImageArray = [NSMutableArray array];
+        for(snapshot in snapshot.children){
+            LaboratoryDataModel *laboratoryData =  [[LaboratoryDataModel alloc] initWithSnapshot:snapshot];
+            [estimateImageArray addObject:laboratoryData];
+        }
+        completionHandler(nil,estimateImageArray);
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        completionHandler(error,nil);
+    }];
+}
 @end

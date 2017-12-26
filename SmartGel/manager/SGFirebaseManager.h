@@ -41,6 +41,8 @@
            completionHandler:(void (^)(NSError *error))completionHandler;
 
 -(void)saveLaboratoryResult:(LaboratoryDataModel *)laboratoryData
-          completionHandler:(void (^)(NSError *error))completionHandler ;
+          completionHandler:(void (^)(NSError *error))completionHandler;
+
+-(void)getLaboratoryHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 
 @end

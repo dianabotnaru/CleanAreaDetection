@@ -53,11 +53,12 @@
         if(indexPath == 0){
             [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
             isLaboratory = false;
+            [self getHistoryArray];
         }else{
             [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SGLaboratoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SGLaboratoryCollectionViewCell"];
             isLaboratory = true;
+            [self getLabortories];
         }
-        [self.smartGelHistoryCollectionView reloadData];
     };
     self.navigationItem.titleView = menuView;
 }
@@ -73,8 +74,6 @@
 -(void)initArrays{
     self.historyArray = [[NSMutableArray alloc] init];
     self.historyFilterArray = [[NSMutableArray alloc] init];
-    self.laboratoryArray = [[NSMutableArray alloc] init];
-    self.laboratoryFilterArray = [[NSMutableArray alloc] init];
 }
 
 -(void)getHistoryArray{
@@ -88,6 +87,26 @@
             if(error==nil){
                 sself.historyArray = array;
                 sself.historyFilterArray = array;
+                [sself.smartGelHistoryCollectionView reloadData];
+            }else{
+                [sself showAlertdialog:@"Error!" message:error.localizedDescription];
+            }
+        }
+    }];
+}
+
+-(void)getLabortories{
+    self.laboratoryArray = [[NSMutableArray alloc] init];
+    self.laboratoryFilterArray = [[NSMutableArray alloc] init];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) wself = self;
+    [[SGFirebaseManager sharedManager] getLaboratoryHistorys:^(NSError *error,NSMutableArray* array) {
+        __strong typeof(wself) sself = wself;
+        [hud hideAnimated:false];
+        if (sself) {
+            if(error==nil){
+                sself.laboratoryArray = array;
+                sself.laboratoryFilterArray = array;
                 [sself.smartGelHistoryCollectionView reloadData];
             }else{
                 [sself showAlertdialog:@"Error!" message:error.localizedDescription];
