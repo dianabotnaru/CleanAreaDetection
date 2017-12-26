@@ -132,5 +132,17 @@
     }];
 }
 
+-(void)removeSmartGelHistory:(EstimateImageModel *)estimateImageModel
+           completionHandler:(void (^)(NSError *error))completionHandler {
+        NSString *userID = [FIRAuth auth].currentUser.uid;
+        FIRStorageReference *desertRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,estimateImageModel.date]];
+        [desertRef deleteWithCompletion:^(NSError *error){
+            if (error == nil) {
+                [[[self.dataBaseRef child:[NSString stringWithFormat:@"%@/%@/%@",@"users", userID, @"photos"]] child:estimateImageModel.date] removeValue];
+            }
+            completionHandler(error);
+        }];
+}
+
 
 @end

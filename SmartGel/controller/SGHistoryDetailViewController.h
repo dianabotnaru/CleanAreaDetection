@@ -43,7 +43,6 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *showDirtyAreaButton;
 
-@property (strong, nonatomic) MBProgressHUD *hud;
 @property (strong, nonatomic) EstimateImageModel *selectedEstimateImageModel;
 
 @property (nonatomic, strong) DirtyExtractor *engine;

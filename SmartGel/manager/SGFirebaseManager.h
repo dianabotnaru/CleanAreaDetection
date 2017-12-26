@@ -36,4 +36,7 @@
 
 -(void)getSmartGelHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 
+-(void)removeSmartGelHistory:(EstimateImageModel *)estimateImageModel
+           completionHandler:(void (^)(NSError *error))completionHandler;
+
 @end

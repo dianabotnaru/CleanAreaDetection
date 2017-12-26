@@ -7,6 +7,7 @@
 //
 
 #import "SGHistoryDetailViewController.h"
+#import "SGFirebaseManager.h"
 
 @interface SGHistoryDetailViewController ()
 
@@ -40,7 +41,7 @@
     self.valueLabel.text = [NSString stringWithFormat:@"%.2f", self.selectedEstimateImageModel.cleanValue];
     self.dirtyLabel.text = [NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE-self.selectedEstimateImageModel.cleanValue];
     self.tagLabel.text = self.selectedEstimateImageModel.tag;
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedEstimateImageModel.imageUrl]
                                     placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]
                                     options:SDWebImageProgressiveDownload
@@ -52,7 +53,7 @@
                                                   [self drawGridView];
                                                   dispatch_async(dispatch_get_main_queue(), ^{
                                                       self.engine = [[DirtyExtractor alloc] initWithImage:image];
-                                                      [self.hud hideAnimated:YES];
+                                                      [hud hideAnimated:YES];
                                                   });
                                               }
                                           }];
@@ -68,10 +69,10 @@
 -(void)showDirtyArea{
     isShowDirtyArea = true;
     [self.showDirtyAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self drawView:[self getDirtyAreaArray]];
-        [self.hud hideAnimated:false];
+        [hud hideAnimated:false];
     });
 }
 
@@ -94,11 +95,6 @@
             [paintView setAlpha:0.2];
             [self.takenImageView addSubview:paintView];
         }
-//        else if([[dirtyState objectAtIndex:i] intValue] == NO_GEL){
-//            [paintView setBackgroundColor:[UIColor yellowColor]];
-//            [paintView setAlpha:0.3];
-//            [self.takenImageView addSubview:paintView];
-//        }
     }
 }
 
@@ -106,22 +102,12 @@
 {
     CGSize imgViewSize=self.takenImageView.frame.size;                  // Size of UIImageView
     CGSize imgSize=self.takenImageView.image.size;                      // Size of the image, currently displayed
-    
     CGFloat scaleW = imgViewSize.width / imgSize.width;
     CGFloat scaleH = imgViewSize.height / imgSize.height;
     CGFloat aspect=fmin(scaleW, scaleH);
-    
     CGRect imageRect={ {0,0} , { imgSize.width*=aspect, imgSize.height*=aspect } };
-    
-    // Note: the above is the same as :
-    // CGRect imageRect=CGRectMake(0,0,imgSize.width*=aspect,imgSize.height*=aspect) I just like this notation better
-    
-    // Center image
-    
     imageRect.origin.x=(imgViewSize.width-imageRect.size.width)/2;
     imageRect.origin.y=(imgViewSize.height-imageRect.size.height)/2;
-    
-    // Add imageView offset
     
     imageRect.origin.x+=self.takenImageView.frame.origin.x;
     imageRect.origin.y+=self.takenImageView.frame.origin.y;
@@ -146,30 +132,36 @@
     [self.navigationController popViewControllerAnimated: YES];
 }
 
-- (IBAction)removeImage{
-//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-//                                                                   message:@"Are you sure to delete this image?"
-//                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-//    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//        NSString *userID = [FIRAuth auth].currentUser.uid;
-//        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.selectedEstimateImageModel.date]];
-//        [desertRef deleteWithCompletion:^(NSError *error){
-//            [self.hud hideAnimated:false];
-//            if (error == nil) {
-//                [[[self.appDelegate.ref child:[NSString stringWithFormat:@"%@/%@/%@",@"users", self.appDelegate.user.userID, @"photos"]] child:self.selectedEstimateImageModel.date] removeValue];
-//            } else {
-//                [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
-//            }
-//            if(self.delegate!=nil){
-//                [self.delegate onDeletedImage];
-//            }
-//            [self backButtonClicked:nil];
-//        }];
-//    }]];
-//    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//    }]];
-//    [self presentViewController:alert animated:YES completion:nil];
+- (IBAction)rightTrashButtonCliecked{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:@"Are you sure to delete this image?"
+                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self removeHistory];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)removeHistory{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) wself = self;
+    [[SGFirebaseManager sharedManager] removeSmartGelHistory:self.selectedEstimateImageModel
+                                     completionHandler:^(NSError *error) {
+                                         [hud hideAnimated:false];
+                                         __strong typeof(wself) sself = wself;
+                                         if(sself){
+                                             if(error != nil)
+                                                  [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
+                                             else{
+                                                 if(self.delegate!=nil){
+                                                    [self.delegate onDeletedImage];
+                                                    [self backButtonClicked:nil];
+                                                 }
+                                             }
+                                         }
+                                     }];
 }
 
 ////harded code to test/////////////////////////////////////
@@ -178,10 +170,10 @@
         if(!isShowDirtyAreaUpdatedParameter){
             isShowDirtyAreaUpdatedParameter = true;
             [self.showDirtyAreaButton setTitle:@"Hide Clean Area" forState:UIControlStateNormal];
-            self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self drawView :self.engine.areaCleanState];
-                [self.hud hideAnimated:false];
+                [hud hideAnimated:false];
             });
         }else{
             isShowDirtyAreaUpdatedParameter = false;

@@ -709,7 +709,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="6x7-Ro-Ucc">
                             <connections>
-                                <action selector="removeImage" destination="ltU-Cq-Nog" id="bSm-cM-CMG"/>
+                                <action selector="rightTrashButtonCliecked" destination="ltU-Cq-Nog" id="r1E-wH-kxL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
