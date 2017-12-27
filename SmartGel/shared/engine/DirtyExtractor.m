@@ -57,6 +57,7 @@
     if(self){
         self.m_colorOffset = coloroffset;
         [self reset];
+
         //        [self importImage:[self gpuImageFilter:image]];
         [self importImage:image];
         [self extract];
@@ -391,9 +392,9 @@
     LAB labPink = [self getLABfromXYZ:xyzPink];
     LAB lab1 = [self getLABfromXYZ:xyz1];
     
-    float l = labPink.l - lab1.l;
-    float a = labPink.a - lab1.a;
-    float b = labPink.b - lab1.b;
+//    float l = labPink.l - lab1.l;
+//    float a = labPink.a - lab1.a;
+//    float b = labPink.b - lab1.b;
 
 //    float distance = sqrt((l*l)+(a*a)+(b*b));
     float distance = [self getDeltaE:labPink:lab1];
@@ -424,4 +425,5 @@
     image = [filter imageByFilteringImage:image];
     return image;
 }
+
 @end

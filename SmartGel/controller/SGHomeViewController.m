@@ -42,9 +42,7 @@
 
 -(void)initDeviceRotateNotification{
     UIDevice *device = [UIDevice currentDevice];
-    //Tell it to start monitoring the accelerometer for orientation
     [device beginGeneratingDeviceOrientationNotifications];
-    //Get the notification centre for the app
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(orientationChanged:)  name:UIDeviceOrientationDidChangeNotification
              object:device];
@@ -137,8 +135,20 @@
     float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-        int y = i/AREA_DIVIDE_NUMBER;
-        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        int x,y;
+        if(self.estimateImage.image.imageOrientation == UIImageOrientationLeft){
+            y = (AREA_DIVIDE_NUMBER-1) - i/AREA_DIVIDE_NUMBER;
+            x = i%AREA_DIVIDE_NUMBER;
+        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationRight){
+            y = i/AREA_DIVIDE_NUMBER;
+            x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationUp){
+            x = i/AREA_DIVIDE_NUMBER;
+            y = i%AREA_DIVIDE_NUMBER;
+        }else{
+            x = (AREA_DIVIDE_NUMBER-1)-i/AREA_DIVIDE_NUMBER;
+            y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
+        }
         UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
         if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
             [paintView setBackgroundColor:[UIColor redColor]];
