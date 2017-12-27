@@ -17,9 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    isShowDirtyArea = false;
-    isShowDirtyAreaUpdatedParameter = false;
-    isShowPartArea = false;
+    [self initDeviceRotateNotification];
+    [self initDatas];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -33,6 +32,28 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)initDatas{
+    isShowDirtyArea = false;
+    isShowDirtyAreaUpdatedParameter = false;
+    isShowPartArea = false;
+}
+
+-(void)initDeviceRotateNotification{
+    UIDevice *device = [UIDevice currentDevice];
+    [device beginGeneratingDeviceOrientationNotifications];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(orientationChanged:)  name:UIDeviceOrientationDidChangeNotification
+             object:device];
+}
+
+- (void)orientationChanged:(NSNotification *)note
+{
+    if(isShowDirtyArea){
+        [self hideDirtyArea];
+    }
+    [self drawGridView];
 }
 
 - (void)initUI{
@@ -78,8 +99,22 @@
 
 -(void)drawView:(NSMutableArray*)dirtyState{
     for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-        int y = i/AREA_DIVIDE_NUMBER;
-        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        int x,y;
+        if(self.takenImageView.image.imageOrientation == UIImageOrientationLeft){
+            y = (AREA_DIVIDE_NUMBER-1) - i/AREA_DIVIDE_NUMBER;
+            x = i%AREA_DIVIDE_NUMBER;
+        }else if(self.takenImageView.image.imageOrientation == UIImageOrientationRight){
+            y = i/AREA_DIVIDE_NUMBER;
+            x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+        }else if(self.takenImageView.image.imageOrientation == UIImageOrientationUp){
+            x = i/AREA_DIVIDE_NUMBER;
+            y = i%AREA_DIVIDE_NUMBER;
+        }else{
+            x = (AREA_DIVIDE_NUMBER-1)-i/AREA_DIVIDE_NUMBER;
+            y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
+        }
+//        int y = i/AREA_DIVIDE_NUMBER;
+//        int x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
         CGRect rect = [self calculateClientRectOfImageInUIImageView];
         
         float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
