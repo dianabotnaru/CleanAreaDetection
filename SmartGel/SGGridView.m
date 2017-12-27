@@ -55,11 +55,17 @@
         for(int j = 0;j<colCount;j++){
             rect = CGRectMake(frameWidth*i,frameHeight*j,frameWidth,frameHeight);
             if(CGRectContainsPoint(rect, point)){
-                return j*SGGridCount + (SGGridCount-1-i);
+                if(takenImage.imageOrientation == UIImageOrientationLeft){
+                    return (SGGridCount-1-j)*SGGridCount + i;
+                }else if(takenImage.imageOrientation == UIImageOrientationRight){
+                    return j*SGGridCount + (SGGridCount-1-i);
+                }else if(takenImage.imageOrientation == UIImageOrientationUp){
+                    return i*SGGridCount + j;
+                }else{
+                    return (SGGridCount-1-i)*SGGridCount + (SGGridCount-1-j);
+                }
             }
         }
     return -1;
 }
-
-
 @end
