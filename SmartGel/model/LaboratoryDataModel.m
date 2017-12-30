@@ -14,7 +14,7 @@
     
     self = [super init];
     if(self){
-        self.resultValue = [snapshot.value[@"value"] floatValue];
+        self.cleanValue = [snapshot.value[@"value"] floatValue];
         self.imageUrl = snapshot.value[@"image"];
         self.date = snapshot.value[@"date"];
         self.location = snapshot.value[@"location"];
@@ -31,7 +31,7 @@
     
     self = [super init];
     if(self){
-        self.resultValue = 0;
+        self.cleanValue = 0;
         self.imageUrl = @"";
         self.date = @"";
         self.location = @"";

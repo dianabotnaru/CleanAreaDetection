@@ -35,6 +35,28 @@
     return dateString;
 }
 
+- (NSString *)getDateString:(NSDate*)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMM dd,yyyy"];
+    NSString *dateString = [formatter stringFromDate:date];
+    return dateString;
+}
+
+- (NSDate *)getDateFromString:(NSString*)dateString{
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+    NSDate *date = [formatter dateFromString:dateString];
+    return [self getLocalTime:date];
+}
+
+- (NSDate *)getLocalTime:(NSDate *)date{
+    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
+    NSDate *dateInLocalTimezone = [date dateByAddingTimeInterval:timeZoneSeconds];
+    return dateInLocalTimezone;
+}
+
+
 - (BOOL)isValidEmailAddress:(NSString *)emailAddress {
     NSString *regExPattern = @"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$";
     NSRegularExpression *regEx = [[NSRegularExpression alloc]
@@ -63,5 +85,15 @@
     return imageRect;
 }
 
+-(NSMutableArray *)sortbyKey:(NSMutableArray *)mutableArray
+                     withKey:(NSString *)sortKey{
+    NSArray *array = [[NSArray alloc] initWithArray:mutableArray];
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey
+                                                 ascending:YES];
+    NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
+    mutableArray = [[NSMutableArray alloc] initWithArray:sortedArray];
+    return mutableArray;
+}
 
 @end

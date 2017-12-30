@@ -18,6 +18,7 @@
 #import <GLDateUtils.h>
 #import <GLCalendarDateRange.h>
 #import <GLCalendarDayCell.h>
+#import "SGUtil.h"
 
 @interface SGHistoryViewController () <SGHistoryDetailViewControllerDelegate,GLCalendarViewDelegate,SGLaboratoryItemViewControllerDelegate>
 
@@ -29,14 +30,12 @@
     [super viewDidLoad];
     [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
     fromDate = [self setMinDate];
-    toDate = [self getLocalTime:[NSDate date]];
+    toDate = [SGUtil.sharedUtil getLocalTime:[NSDate date]];
     isLaboratory = false;
-    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
-    // Do any additional setup after loading the view.
+    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[SGUtil.sharedUtil getDateString:fromDate],[SGUtil.sharedUtil getDateString: toDate]]];
     [self initNavigationBar];
     [self initGlcalendarView];
     [self getHistoryArray];
-//        [self getTestResults];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -117,7 +116,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -187,7 +185,7 @@
     for(int i = 0; i<self.historyArray.count;i++){
         EstimateImageModel *estimateImageModel = [[EstimateImageModel alloc] init];
         estimateImageModel = [self.historyArray objectAtIndex:i];
-        NSDate *takenDate = [self getDateFromString:estimateImageModel.date];
+        NSDate *takenDate = [SGUtil.sharedUtil getDateFromString:estimateImageModel.date];
         
         double fromDateLongValue = fromDate.timeIntervalSince1970;
         double toDateLongValue = toDate.timeIntervalSince1970;
@@ -200,52 +198,6 @@
     [self.smartGelHistoryCollectionView reloadData];
 }
 
-- (NSString *)getDateString:(NSDate*)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMM dd,yyyy"];
-    NSString *dateString = [formatter stringFromDate:date];
-    return dateString;
-}
-
-- (NSDate *)getDateFromString:(NSString*)dateString{
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];
-    NSDate *date = [formatter dateFromString:dateString];
-    return [self getLocalTime:date];
-}
-
-- (NSDate *)getLocalTime:(NSDate *)date{
-    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
-    NSDate *dateInLocalTimezone = [date dateByAddingTimeInterval:timeZoneSeconds];
-    return dateInLocalTimezone;
-}
-
-//todo remove- harded code
-- (void)getTestResults{
-    
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
-    NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"\n Result = %@",stringContent);
-    NSData *objectData = [stringContent dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *jsonError = nil;
-    NSDictionary *imageArrayDict = [NSJSONSerialization JSONObjectWithData:objectData
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&jsonError];
-    NSArray* keys=[imageArrayDict allKeys];
-
-    NSLog(@"\n jsonError = %@",jsonError.description);
-    self.historyArray = [NSMutableArray array];
-    self.historyFilterArray = [NSMutableArray array];
-
-    for(int i =0 ; i<keys.count;i++){
-        NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:i]];
-        EstimateImageModel *estimageImageModel = [[EstimateImageModel alloc] initWithDict:imageDict];
-        [self.historyArray addObject:estimageImageModel];
-    }
-    self.historyFilterArray = self.historyArray;
-    [self.smartGelHistoryCollectionView reloadData];
-}
 
 -(void)initGlcalendarView{
     NSDate *today = [NSDate date];
@@ -318,7 +270,7 @@
 -(IBAction)didSelectDateRange{
     [self.calendarContainerView setHidden:YES];
     [self.calendarView removeRange:self.rangeUnderEdit];
-    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[self getDateString:fromDate],[self getDateString: toDate]]];
+    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[SGUtil.sharedUtil getDateString:fromDate],[SGUtil.sharedUtil getDateString: toDate]]];
     [self getFilterArray];
 }
 
@@ -333,16 +285,16 @@
                                                             preferredStyle:UIAlertControllerStyleActionSheet]; // 1
     UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Date"
                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                              [self sortbyDate];
+                                                              [self sortHistoryFilterArrar:@"date"];
                                                           }];
     UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Value"
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                               [self sortbyValue];
+                                                               [self sortHistoryFilterArrar:@"cleanValue"];
                                                            }];
     
     UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Tag"
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                               [self sortbyTag];
+                                                               [self sortHistoryFilterArrar:@"tag"];
                                                            }];
     [alert addAction:firstAction];
     [alert addAction:secondAction];
@@ -360,33 +312,12 @@
     }
 }
 
--(void)sortbyDate{
-    NSArray *array = [[NSArray alloc] initWithArray:self.historyFilterArray];
-    NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date"
-                                                 ascending:YES];
-    NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
-    self.historyFilterArray = [[NSMutableArray alloc] initWithArray:sortedArray];
+-(void)sortHistoryFilterArrar:(NSString *)sortKey{
+    if(isLaboratory)
+        self.laboratoryFilterArray = [SGUtil.sharedUtil sortbyKey:self.laboratoryFilterArray withKey:sortKey];
+    else
+        self.historyFilterArray = [SGUtil.sharedUtil sortbyKey:self.historyFilterArray withKey:sortKey];
     [self.smartGelHistoryCollectionView reloadData];
 }
 
--(void)sortbyValue{
-    NSArray *array = [[NSArray alloc] initWithArray:self.historyFilterArray];
-    NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"cleanValue"
-                                                 ascending:YES];
-    NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
-    self.historyFilterArray = [[NSMutableArray alloc] initWithArray:sortedArray];
-    [self.smartGelHistoryCollectionView reloadData];
-}
-
--(void)sortbyTag{
-    NSArray *array = [[NSArray alloc] initWithArray:self.historyFilterArray];
-    NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag"
-                                                 ascending:YES];
-    NSArray *sortedArray = [array sortedArrayUsingDescriptors:@[sortDescriptor]];
-    self.historyFilterArray = [[NSMutableArray alloc] initWithArray:sortedArray];
-    [self.smartGelHistoryCollectionView reloadData];
-}
 @end

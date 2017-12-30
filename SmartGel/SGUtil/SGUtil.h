@@ -16,5 +16,10 @@
 - (BOOL)isValidEmailAddress:(NSString *)emailAddress;
 -(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView*)imageView
                                       takenImage:(UIImage*)takenImage;
+-(NSMutableArray *)sortbyKey:(NSMutableArray *)mutableArray
+                     withKey:(NSString *)sortKey;
 
+- (NSString *)getDateString:(NSDate*)date;
+- (NSDate *)getDateFromString:(NSString*)dateString;
+- (NSDate *)getLocalTime:(NSDate *)date;
 @end

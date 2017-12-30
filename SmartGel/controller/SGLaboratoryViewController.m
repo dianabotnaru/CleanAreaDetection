@@ -47,7 +47,6 @@
     G = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankG"];
     B = [[NSUserDefaults standardUserDefaults] floatForKey:@"BlankB"];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque animated:NO];
     firstrun=true;
     
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) objectAtIndex:0];
@@ -445,10 +444,10 @@
                 if(RSF<=0.2)
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",ug_cm2];
-                    self.laboratoryDataModel.resultValue = ug_cm2;
+                    self.laboratoryDataModel.cleanValue = ug_cm2;
                 }else{
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxug];
-                    self.laboratoryDataModel.resultValue = maxug;
+                    self.laboratoryDataModel.cleanValue = maxug;
 
                 }
                 self.lbldiam.text=[NSString stringWithFormat:@"%@", _diam];
@@ -471,13 +470,13 @@
                 if(RSF<=0.2)
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"%.2f",mgl_CH2O];
-                    self.laboratoryDataModel.resultValue = mgl_CH2O;
+                    self.laboratoryDataModel.cleanValue = mgl_CH2O;
 
                 }
                 else
                 {
                     self.resultValueLabel.text =[ NSString stringWithFormat:@"> %.2f",maxmgl];
-                    self.laboratoryDataModel.resultValue = maxmgl;
+                    self.laboratoryDataModel.cleanValue = maxmgl;
 
                 }
                 self.resultfoxImageView.image=nil;

@@ -251,13 +251,15 @@
 -(IBAction)launchPhotoPickerController{
     if(isShowDirtyArea)
         [self hideDirtyArea];
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
-
-//    self.takenImage = [UIImage imageNamed:@"test.png"];
-//    [self initDataUiWithImage];
+//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    [self presentViewController:imagePickerController animated:NO completion:nil];
+    
+    self.estimateImage = [[EstimateImageModel alloc] init];
+    self.estimateImage.image = [UIImage imageNamed:@"test.png"];
+    isTakenPhoto = true;
+    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -375,7 +377,6 @@
     [alert.viewText setTextColor:[UIColor whiteColor]];
     [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
 }
-
 
 /////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
 - (NSString *) getImageUrl:(int)index{
