@@ -11,6 +11,7 @@
 #import "SGUser.h"
 #import "EstimateImageModel.h"
 #import "LaboratoryDataModel.h"
+#import "SGTag.h"
 
 @interface SGFirebaseManager : NSObject
 + (instancetype)sharedManager;
@@ -44,5 +45,10 @@
           completionHandler:(void (^)(NSError *error))completionHandler;
 
 -(void)getLaboratoryHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
+
+-(void)addTags:(SGTag *)tag
+completionHandler:(void (^)(NSError *error))completionHandler;
+
+-(void)getTags:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 
 @end

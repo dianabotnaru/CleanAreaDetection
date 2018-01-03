@@ -184,4 +184,40 @@
         completionHandler(error,nil);
     }];
 }
+
+-(void)addTags:(SGTag *)tag
+    completionHandler:(void (^)(NSError *error))completionHandler {
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    NSString *currentTimeStirng = [SGUtil.sharedUtil getCurrentTimeString];
+    FIRStorageReference *riversRef = [self.storageRef child:[NSString stringWithFormat:@"tags/%@/%@.png",userID,currentTimeStirng]];
+    NSData *imageData = UIImageJPEGRepresentation(tag.tagImage,0.7);
+    [riversRef putData:imageData
+              metadata:nil
+            completion:^(FIRStorageMetadata *metadata,NSError *error) {
+                if (error == nil) {
+                    NSString *key = [[self.dataBaseRef child:@"tags"] childByAutoId].key;
+                    NSDictionary *post = @{
+                                           @"name": tag.tagName,
+                                           @"image": metadata.downloadURL.absoluteString,
+                                           };
+                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@/%@",@"tags", userID,key]: post};
+                    [self.dataBaseRef updateChildValues:childUpdates];
+                }
+                completionHandler(error);
+            }];
+}
+
+-(void)getTags:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
+    [[[self.dataBaseRef child:@"tags"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSMutableArray *tagArray = [NSMutableArray array];
+        for(snapshot in snapshot.children){
+            SGTag *sgTag =  [[SGTag alloc] initWithSnapshot:snapshot];
+            [tagArray addObject:sgTag];
+        }
+        completionHandler(nil,tagArray);
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        completionHandler(error,nil);
+    }];
+}
+
 @end

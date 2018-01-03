@@ -15,6 +15,7 @@
 		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
 		8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */; };
 		8D26D14A1FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */; };
+		8D26D14D1FFCC146002BFAB8 /* SGTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D14C1FFCC146002BFAB8 /* SGTag.m */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
 		8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */; };
 		8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662561FD8247A008DFED2 /* Smiley_yellow.png */; };
@@ -72,6 +73,8 @@
 		8D26D1461FFCBC05002BFAB8 /* SGTagCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGTagCollectionViewCell.h; path = view/SGTagCollectionViewCell.h; sourceTree = "<group>"; };
 		8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGTagCollectionViewCell.m; path = view/SGTagCollectionViewCell.m; sourceTree = "<group>"; };
 		8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SGTagCollectionViewCell.xib; path = view/SGTagCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D26D14B1FFCC146002BFAB8 /* SGTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGTag.h; sourceTree = "<group>"; };
+		8D26D14C1FFCC146002BFAB8 /* SGTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGTag.m; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryViewController.h; path = controller/SGLaboratoryViewController.h; sourceTree = "<group>"; };
 		8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryViewController.m; path = controller/SGLaboratoryViewController.m; sourceTree = "<group>"; };
@@ -306,6 +309,8 @@
 				8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */,
 				8D84CBB31FE813F2006B2F74 /* SGUser.h */,
 				8D84CBB41FE813F2006B2F74 /* SGUser.m */,
+				8D26D14B1FFCC146002BFAB8 /* SGTag.h */,
+				8D26D14C1FFCC146002BFAB8 /* SGTag.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -648,6 +653,7 @@
 				8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */,
 				8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */,
 				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
+				8D26D14D1FFCC146002BFAB8 /* SGTag.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
 				8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */,
 				8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */,
