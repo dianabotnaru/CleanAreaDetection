@@ -11,13 +11,11 @@
 #import "MBProgressHUD.h"
 #import "EstimateImageModel.h"
 #import "LaboratoryDataModel.h"
-#import "SGDateTimePickerView.h"
 #import "SGBaseViewController.h"
 #import <GLCalendarView.h>
 
 @interface SGHistoryViewController : SGBaseViewController{
     bool isFromButtonTapped;
-    SGDateTimePickerView *sgDateTimePickerView;
     NSDate *fromDate;
     NSDate *toDate;
     int dateSelectState;

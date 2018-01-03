@@ -30,9 +30,6 @@
 		8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C41F7CA4790025B804 /* QuartzCore.framework */; };
 		8D80B2C71F7CA5A70025B804 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C61F7CA5A70025B804 /* Foundation.framework */; };
 		8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */; };
-		8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2D01F7CFE810025B804 /* SGDateTimePickerView.m */; };
-		8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D11F7CFE810025B804 /* SGDateTimePickerView.xib */; };
-		8D80B2D81F7CFE810025B804 /* SGFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D21F7CFE810025B804 /* SGFilterView.xib */; };
 		8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */; };
 		8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */; };
 		8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D84CBB41FE813F2006B2F74 /* SGUser.m */; };
@@ -93,10 +90,6 @@
 		8D80B2C61F7CA5A70025B804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHistoryViewController.h; sourceTree = "<group>"; };
 		8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHistoryViewController.m; sourceTree = "<group>"; };
-		8D80B2CF1F7CFE810025B804 /* SGDateTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGDateTimePickerView.h; path = view/SGDateTimePickerView.h; sourceTree = "<group>"; };
-		8D80B2D01F7CFE810025B804 /* SGDateTimePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGDateTimePickerView.m; path = view/SGDateTimePickerView.m; sourceTree = "<group>"; };
-		8D80B2D11F7CFE810025B804 /* SGDateTimePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGDateTimePickerView.xib; path = view/SGDateTimePickerView.xib; sourceTree = "<group>"; };
-		8D80B2D21F7CFE810025B804 /* SGFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGFilterView.xib; path = view/SGFilterView.xib; sourceTree = "<group>"; };
 		8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmartGelHistoryCollectionViewCell.h; path = view/SmartGelHistoryCollectionViewCell.h; sourceTree = "<group>"; };
 		8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmartGelHistoryCollectionViewCell.m; path = view/SmartGelHistoryCollectionViewCell.m; sourceTree = "<group>"; };
 		8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SmartGelHistoryCollectionViewCell.xib; path = view/SmartGelHistoryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -306,21 +299,8 @@
 		8DA3320A1F7C8FD30066148E /* view */ = {
 			isa = PBXGroup;
 			children = (
-				8D80B2CF1F7CFE810025B804 /* SGDateTimePickerView.h */,
-				8D80B2D01F7CFE810025B804 /* SGDateTimePickerView.m */,
-				8D80B2D11F7CFE810025B804 /* SGDateTimePickerView.xib */,
-				8D80B2D21F7CFE810025B804 /* SGFilterView.xib */,
-				8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */,
-				8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */,
-				8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */,
-				8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */,
-				8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */,
-				8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */,
-				8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */,
-				8D24C5101FC5AC0F00D6C070 /* SGGridView.m */,
-				8DB669F11FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.h */,
-				8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */,
-				8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */,
+				8DB4121C1FFC833700ED5550 /* customview */,
+				8DB4121B1FFC831100ED5550 /* cell */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -393,6 +373,63 @@
 				8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */,
 			);
 			name = base;
+			sourceTree = "<group>";
+		};
+		8DB4121B1FFC831100ED5550 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				8DB412211FFC83A400ED5550 /* SGLaboratoryCollectionViewCell */,
+				8DB412201FFC839300ED5550 /* SGMenuTableViewCell */,
+				8DB4121F1FFC838100ED5550 /* SmartGelHistoryCollectionViewCell */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		8DB4121C1FFC833700ED5550 /* customview */ = {
+			isa = PBXGroup;
+			children = (
+				8DB4121E1FFC836600ED5550 /* SGGridView */,
+			);
+			name = customview;
+			sourceTree = "<group>";
+		};
+		8DB4121E1FFC836600ED5550 /* SGGridView */ = {
+			isa = PBXGroup;
+			children = (
+				8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */,
+				8D24C5101FC5AC0F00D6C070 /* SGGridView.m */,
+			);
+			name = SGGridView;
+			sourceTree = "<group>";
+		};
+		8DB4121F1FFC838100ED5550 /* SmartGelHistoryCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */,
+				8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */,
+				8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */,
+			);
+			name = SmartGelHistoryCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		8DB412201FFC839300ED5550 /* SGMenuTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */,
+				8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */,
+				8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */,
+			);
+			name = SGMenuTableViewCell;
+			sourceTree = "<group>";
+		};
+		8DB412211FFC83A400ED5550 /* SGLaboratoryCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8DB669F11FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.h */,
+				8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */,
+				8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */,
+			);
+			name = SGLaboratoryCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		8DB669F61FDE8B0F00BB3966 /* laboratory */ = {
@@ -489,12 +526,10 @@
 				8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */,
 				8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */,
 				8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */,
-				8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */,
 				8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
 				8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */,
 				8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */,
-				8D80B2D81F7CFE810025B804 /* SGFilterView.xib in Resources */,
 				8D5662611FD8247C008DFED2 /* puriSCOPE_logo_color_190x30px.png in Resources */,
 				8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
@@ -580,7 +615,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */,
 				8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */,
 				8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */,
 				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
