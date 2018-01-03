@@ -25,7 +25,6 @@
 		8D56D54E1FECACD80051EE76 /* AJDropDownPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D54C1FECACD70051EE76 /* AJDropDownPicker.m */; };
 		8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */; };
 		8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5561FED0CB10051EE76 /* SGUtil.m */; };
-		8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */; };
 		8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
@@ -87,8 +86,6 @@
 		8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGFirebaseManager.m; path = manager/SGFirebaseManager.m; sourceTree = "<group>"; };
 		8D56D5551FED0CB10051EE76 /* SGUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUtil.h; path = SGUtil/SGUtil.h; sourceTree = "<group>"; };
 		8D56D5561FED0CB10051EE76 /* SGUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUtil.m; path = SGUtil/SGUtil.m; sourceTree = "<group>"; };
-		8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPictureEditViewController.h; path = controller/SGPictureEditViewController.h; sourceTree = "<group>"; };
-		8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGPictureEditViewController.m; path = controller/SGPictureEditViewController.m; sourceTree = "<group>"; };
 		8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSigninViewController.h; path = controller/Signin/SGUserSigninViewController.h; sourceTree = "<group>"; };
 		8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUserSigninViewController.m; path = controller/Signin/SGUserSigninViewController.m; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
@@ -292,26 +289,13 @@
 		8DA332081F7C8FC00066148E /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				8DB412171FFC607000ED5550 /* base */,
+				8DB412161FFC604C00ED5550 /* about */,
+				8DB412151FFC602B00ED5550 /* setting */,
+				8DB412141FFC600F00ED5550 /* history */,
+				8DB412131FFC5FED00ED5550 /* home */,
 				8D72F2391FE5B90D0047CB66 /* sign in */,
 				8DB669F61FDE8B0F00BB3966 /* laboratory */,
-				8DA3320B1F7C90430066148E /* SGHomeViewController.h */,
-				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
-				8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */,
-				8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */,
-				8DB0978F1F933A380053C203 /* SGMenuViewController.h */,
-				8DB097901F933A380053C203 /* SGMenuViewController.m */,
-				8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */,
-				8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */,
-				8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */,
-				8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */,
-				8DDC4FD61F9445A400C92EEB /* SGBaseViewController.h */,
-				8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */,
-				8D199ED41FCC4AB300704CE2 /* SGSettingViewController.h */,
-				8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */,
-				8D199ED71FCD56E200704CE2 /* SGHistoryDetailViewController.h */,
-				8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */,
-				8D5A013F1FD08C54000FDB6D /* SGPictureEditViewController.h */,
-				8D5A01401FD08C54000FDB6D /* SGPictureEditViewController.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -374,6 +358,57 @@
 				8DB097931F93456A0053C203 /* SGConstant.h */,
 			);
 			name = constant;
+			sourceTree = "<group>";
+		};
+		8DB412131FFC5FED00ED5550 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				8DA3320B1F7C90430066148E /* SGHomeViewController.h */,
+				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
+				8DB0978F1F933A380053C203 /* SGMenuViewController.h */,
+				8DB097901F933A380053C203 /* SGMenuViewController.m */,
+			);
+			name = home;
+			sourceTree = "<group>";
+		};
+		8DB412141FFC600F00ED5550 /* history */ = {
+			isa = PBXGroup;
+			children = (
+				8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */,
+				8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */,
+				8D199ED71FCD56E200704CE2 /* SGHistoryDetailViewController.h */,
+				8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */,
+			);
+			name = history;
+			sourceTree = "<group>";
+		};
+		8DB412151FFC602B00ED5550 /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				8D199ED41FCC4AB300704CE2 /* SGSettingViewController.h */,
+				8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */,
+			);
+			name = setting;
+			sourceTree = "<group>";
+		};
+		8DB412161FFC604C00ED5550 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */,
+				8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */,
+				8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */,
+				8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */,
+			);
+			name = about;
+			sourceTree = "<group>";
+		};
+		8DB412171FFC607000ED5550 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				8DDC4FD61F9445A400C92EEB /* SGBaseViewController.h */,
+				8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */,
+			);
+			name = base;
 			sourceTree = "<group>";
 		};
 		8DB669F61FDE8B0F00BB3966 /* laboratory */ = {
@@ -580,7 +615,6 @@
 				8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */,
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
 				8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */,
-				8D5A01411FD08C54000FDB6D /* SGPictureEditViewController.m in Sources */,
 				8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */,
 				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
