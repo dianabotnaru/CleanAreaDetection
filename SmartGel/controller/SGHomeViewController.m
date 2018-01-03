@@ -7,12 +7,12 @@
 //
 
 #import "SGHomeViewController.h"
-#import "SGHistoryViewController.h"
 #import "SGConstant.h"
 #import "AppDelegate.h"
 #import "SGFirebaseManager.h"
 #import "SGUtil.h"
 #import "SCLAlertView.h"
+#import "SGTagViewController.h"
 
 @interface SGHomeViewController ()
 
@@ -332,18 +332,9 @@
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
 
--(IBAction)btnTagDropTapped:(id)sender{
-    NSArray *dataSourceArray = @[@"Wall",@"Tile",@"Stainless"];
-    AJDropDownPicker *picker=[[AJDropDownPicker alloc]initWithDelegate:self dataSourceArray:dataSourceArray];
-    picker.delegate = self;
-    [picker showFromView:sender];
-}
-
--(void)dropDownPicker:(AJDropDownPicker *)dropDownPicker didPickObject:(id)pickedObject{
-    NSString *outputStatus= [NSString stringWithFormat: @"%@",pickedObject];
-    self.tagLabel.text = outputStatus;
-    self.estimateImage.tag = outputStatus;
-    self.estimateImage.tag = outputStatus;
+-(IBAction)btnTagIndicatorTapped:(id)sender{
+    SGTagViewController *tagVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGTagViewController"];
+    [self.navigationController pushViewController:tagVC animated:YES];
 }
 
 - (void)showSaveAlertView{

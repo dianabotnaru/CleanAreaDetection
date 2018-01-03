@@ -16,9 +16,8 @@
 #import "RESideMenu.h"
 #import "SGGridView.h"
 #import "UIImageView+WebCache.h"
-#import "AJDropDownPicker.h"
 
-@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,AJDropDownPickerDelegte>{
+@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
     bool isTakenPhoto;
