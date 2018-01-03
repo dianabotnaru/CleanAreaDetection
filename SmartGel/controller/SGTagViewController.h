@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SGBaseViewController.h"
+#import "SGTagCollectionViewCell.h"
 
-@interface SGTagViewController : UIViewController
+@interface SGTagViewController : SGBaseViewController <SGTagCollectionViewCellDelegate>
 @property (strong, nonatomic) IBOutlet UICollectionView *tagCollectionView;
+@property (strong, nonatomic) NSMutableArray *tagArray;
 
 @end

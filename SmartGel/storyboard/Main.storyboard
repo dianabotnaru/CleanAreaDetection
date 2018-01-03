@@ -812,6 +812,11 @@
                                 <action selector="backButtonClicked:" destination="FIQ-WK-zEP" id="bWU-5e-Gwe"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="IIi-mT-KHA">
+                            <connections>
+                                <action selector="addButtonClicked:" destination="FIQ-WK-zEP" id="p6g-Qm-8ec"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>

@@ -11,7 +11,10 @@
 #import "Firebase.h"
 
 @interface SGTag : NSObject
+@property (strong, nonatomic) NSString *tagId;
 @property (strong, nonatomic) NSString *tagName;
+@property (strong, nonatomic) NSString *tagImageUrl;
+
 @property (strong, nonatomic) UIImage *tagImage;
 
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;

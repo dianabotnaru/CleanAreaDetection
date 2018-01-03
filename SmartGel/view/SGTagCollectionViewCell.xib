@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="test.png" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-6h-RbM">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-6h-RbM">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -37,10 +37,20 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1I-ck-PK0">
+                        <rect key="frame" x="83" y="85" width="35" height="30"/>
+                        <state key="normal" image="ic_take_photo"/>
+                        <connections>
+                            <action selector="addPictureButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="nqj-ZA-bFm"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="d8Q-7p-pgi" secondAttribute="bottom" id="3B9-DB-gYH"/>
+                <constraint firstItem="v1I-ck-PK0" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="5ol-Z6-JN2"/>
+                <constraint firstItem="v1I-ck-PK0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="7vb-yZ-tsK"/>
                 <constraint firstAttribute="bottom" secondItem="Oyk-cG-tke" secondAttribute="bottom" constant="5" id="Bya-Jo-btW"/>
                 <constraint firstItem="Oyk-cG-tke" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Cy9-QX-AQZ"/>
                 <constraint firstAttribute="bottom" secondItem="Oyk-cG-tke" secondAttribute="bottom" constant="5" id="ozd-yf-Sa8"/>
@@ -51,13 +61,14 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="220" height="195"/>
             <connections>
-                <outlet property="tagImageView" destination="SzI-6h-RbM" id="Wkz-xi-Yyu"/>
+                <outlet property="addPictureButton" destination="v1I-ck-PK0" id="QLi-9x-hgd"/>
+                <outlet property="tagImageView" destination="SzI-6h-RbM" id="PIy-cy-bxo"/>
                 <outlet property="tagLabel" destination="Oyk-cG-tke" id="vqo-qK-bd0"/>
             </connections>
             <point key="canvasLocation" x="-60" y="124"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="test.png" width="2448" height="3264"/>
+        <image name="ic_take_photo" width="35" height="30"/>
     </resources>
 </document>

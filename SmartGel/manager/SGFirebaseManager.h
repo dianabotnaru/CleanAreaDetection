@@ -46,8 +46,10 @@
 
 -(void)getLaboratoryHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 
--(void)addTags:(SGTag *)tag
-completionHandler:(void (^)(NSError *error))completionHandler;
+-(void)addTagsWithoutImage:(SGTag *)tag;
+
+-(void)addTagsWithImage:(SGTag *)tag
+      completionHandler:(void (^)(NSError *error))completionHandler;
 
 -(void)getTags:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 

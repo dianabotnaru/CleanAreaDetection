@@ -185,7 +185,7 @@
     }];
 }
 
--(void)addTags:(SGTag *)tag
+-(void)addTagsWithImage:(SGTag *)tag
     completionHandler:(void (^)(NSError *error))completionHandler {
     NSString *userID = [FIRAuth auth].currentUser.uid;
     NSString *currentTimeStirng = [SGUtil.sharedUtil getCurrentTimeString];
@@ -206,6 +206,19 @@
                 completionHandler(error);
             }];
 }
+
+-(void)addTagsWithoutImage:(SGTag *)tag{
+    NSString *userID = [FIRAuth auth].currentUser.uid;
+    NSString *key = [[self.dataBaseRef child:@"tags"] childByAutoId].key;
+    NSDictionary *post = @{
+                           @"key": key,
+                           @"name": tag.tagName,
+                           @"image": @"",
+                           };
+    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@/%@",@"tags", userID,key]: post};
+    [self.dataBaseRef updateChildValues:childUpdates];
+}
+
 
 -(void)getTags:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
     [[[self.dataBaseRef child:@"tags"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {

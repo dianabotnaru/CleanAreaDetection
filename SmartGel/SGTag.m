@@ -13,8 +13,9 @@
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot{
     self = [super init];
     if(self){
+        self.tagId = snapshot.value[@"key"];
         self.tagName = snapshot.value[@"name"];
-        self.tagImage = snapshot.value[@"image"];
+        self.tagImageUrl = snapshot.value[@"image"];
     }
     return self;
 }
