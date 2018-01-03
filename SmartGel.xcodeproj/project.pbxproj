@@ -13,6 +13,8 @@
 		8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5071FC510B200D6C070 /* smartgel-tests.json */; };
 		8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D24C5101FC5AC0F00D6C070 /* SGGridView.m */; };
 		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
+		8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */; };
+		8D26D14A1FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
 		8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */; };
 		8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662561FD8247A008DFED2 /* Smiley_yellow.png */; };
@@ -35,15 +37,15 @@
 		8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D84CBB41FE813F2006B2F74 /* SGUser.m */; };
 		8DA331F31F7C8F3C0066148E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F21F7C8F3C0066148E /* main.m */; };
 		8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F51F7C8F3C0066148E /* AppDelegate.m */; };
-		8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FA1F7C8F3C0066148E /* Main.storyboard */; };
 		8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FD1F7C8F3C0066148E /* Assets.xcassets */; };
-		8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */; };
 		8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3320C1F7C90430066148E /* SGHomeViewController.m */; };
 		8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA332111F7C92880066148E /* DirtyExtractor.m */; };
 		8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */; };
 		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
 		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
 		8DB4121A1FFC786C00ED5550 /* SGTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB412191FFC786C00ED5550 /* SGTagViewController.m */; };
+		8DB412251FFC84B100ED5550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DB412231FFC84B100ED5550 /* LaunchScreen.storyboard */; };
+		8DB412261FFC84B100ED5550 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DB412241FFC84B100ED5550 /* Main.storyboard */; };
 		8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */; };
 		8DB669ED1FDA8FA800BB3966 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */; };
 		8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */; };
@@ -67,6 +69,9 @@
 		8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGGridView.h; sourceTree = "<group>"; };
 		8D24C5101FC5AC0F00D6C070 /* SGGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGridView.m; sourceTree = "<group>"; };
 		8D24C5121FC5E3D600D6C070 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		8D26D1461FFCBC05002BFAB8 /* SGTagCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGTagCollectionViewCell.h; path = view/SGTagCollectionViewCell.h; sourceTree = "<group>"; };
+		8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGTagCollectionViewCell.m; path = view/SGTagCollectionViewCell.m; sourceTree = "<group>"; };
+		8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SGTagCollectionViewCell.xib; path = view/SGTagCollectionViewCell.xib; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryViewController.h; path = controller/SGLaboratoryViewController.h; sourceTree = "<group>"; };
 		8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryViewController.m; path = controller/SGLaboratoryViewController.m; sourceTree = "<group>"; };
@@ -99,9 +104,7 @@
 		8DA331F21F7C8F3C0066148E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8DA331F41F7C8F3C0066148E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8DA331F51F7C8F3C0066148E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8DA331FB1F7C8F3C0066148E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8DA331FD1F7C8F3C0066148E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8DA332001F7C8F3C0066148E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DA332021F7C8F3C0066148E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DA3320B1F7C90430066148E /* SGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGHomeViewController.h; path = controller/SGHomeViewController.h; sourceTree = "<group>"; };
 		8DA3320C1F7C90430066148E /* SGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGHomeViewController.m; path = controller/SGHomeViewController.m; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 		8DB097931F93456A0053C203 /* SGConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGConstant.h; sourceTree = "<group>"; };
 		8DB412181FFC786C00ED5550 /* SGTagViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGTagViewController.h; path = controller/SGTagViewController.h; sourceTree = "<group>"; };
 		8DB412191FFC786C00ED5550 /* SGTagViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGTagViewController.m; path = controller/SGTagViewController.m; sourceTree = "<group>"; };
+		8DB412231FFC84B100ED5550 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = storyboard/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8DB412241FFC84B100ED5550 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = storyboard/Main.storyboard; sourceTree = "<group>"; };
 		8DB669E91FDA236100BB3966 /* LaboratoryDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LaboratoryDataModel.h; path = model/LaboratoryDataModel.h; sourceTree = "<group>"; };
 		8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaboratoryDataModel.m; path = model/LaboratoryDataModel.m; sourceTree = "<group>"; };
 		8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -181,6 +186,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8D26D1451FFCB992002BFAB8 /* SGTagCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8D26D1461FFCBC05002BFAB8 /* SGTagCollectionViewCell.h */,
+				8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */,
+				8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */,
+			);
+			name = SGTagCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		8D56D54F1FECFBF30051EE76 /* manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,7 +224,7 @@
 			name = SGUtil;
 			sourceTree = "<group>";
 		};
-		8D72F2391FE5B90D0047CB66 /* sign in */ = {
+		8D72F2391FE5B90D0047CB66 /* signin */ = {
 			isa = PBXGroup;
 			children = (
 				8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */,
@@ -219,7 +234,7 @@
 				8DFCFD7D1FE6764C0074663B /* SGForgotPasswordViewController.h */,
 				8DFCFD7E1FE6764C0074663B /* SGForgotPasswordViewController.m */,
 			);
-			name = "sign in";
+			name = signin;
 			sourceTree = "<group>";
 		};
 		8DA331E51F7C8F3C0066148E = {
@@ -249,11 +264,10 @@
 				8DA3320A1F7C8FD30066148E /* view */,
 				8DA332091F7C8FC90066148E /* model */,
 				8DA332081F7C8FC00066148E /* controller */,
+				8DB412221FFC84A200ED5550 /* storyboard */,
 				8DA331F41F7C8F3C0066148E /* AppDelegate.h */,
 				8DA331F51F7C8F3C0066148E /* AppDelegate.m */,
-				8DA331FA1F7C8F3C0066148E /* Main.storyboard */,
 				8DA331FD1F7C8F3C0066148E /* Assets.xcassets */,
-				8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */,
 				8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */,
 				8DA332021F7C8F3C0066148E /* Info.plist */,
 				8DA331F11F7C8F3C0066148E /* Supporting Files */,
@@ -277,7 +291,7 @@
 				8DB412151FFC602B00ED5550 /* setting */,
 				8DB412141FFC600F00ED5550 /* history */,
 				8DB412131FFC5FED00ED5550 /* home */,
-				8D72F2391FE5B90D0047CB66 /* sign in */,
+				8D72F2391FE5B90D0047CB66 /* signin */,
 				8DB669F61FDE8B0F00BB3966 /* laboratory */,
 			);
 			name = controller;
@@ -378,6 +392,7 @@
 		8DB4121B1FFC831100ED5550 /* cell */ = {
 			isa = PBXGroup;
 			children = (
+				8D26D1451FFCB992002BFAB8 /* SGTagCollectionViewCell */,
 				8DB412211FFC83A400ED5550 /* SGLaboratoryCollectionViewCell */,
 				8DB412201FFC839300ED5550 /* SGMenuTableViewCell */,
 				8DB4121F1FFC838100ED5550 /* SmartGelHistoryCollectionViewCell */,
@@ -430,6 +445,15 @@
 				8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */,
 			);
 			name = SGLaboratoryCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		8DB412221FFC84A200ED5550 /* storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				8DB412231FFC84B100ED5550 /* LaunchScreen.storyboard */,
+				8DB412241FFC84B100ED5550 /* Main.storyboard */,
+			);
+			name = storyboard;
 			sourceTree = "<group>";
 		};
 		8DB669F61FDE8B0F00BB3966 /* laboratory */ = {
@@ -524,20 +548,21 @@
 			files = (
 				8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */,
 				8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */,
-				8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */,
 				8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */,
 				8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
 				8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */,
+				8DB412261FFC84B100ED5550 /* Main.storyboard in Resources */,
 				8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */,
 				8D5662611FD8247C008DFED2 /* puriSCOPE_logo_color_190x30px.png in Resources */,
+				8D26D14A1FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib in Resources */,
 				8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */,
+				8DB412251FFC84B100ED5550 /* LaunchScreen.storyboard in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */,
 				8D5662601FD8247C008DFED2 /* Smiley_).png in Resources */,
 				8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */,
 				8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */,
-				8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */,
 				8D24C5131FC5E3D600D6C070 /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,6 +641,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */,
+				8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */,
 				8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */,
 				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
 				8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */,
@@ -645,25 +671,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		8DA331FA1F7C8F3C0066148E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8DA331FB1F7C8F3C0066148E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8DA332001F7C8F3C0066148E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8DA332031F7C8F3C0066148E /* Debug */ = {
@@ -775,11 +782,12 @@
 			baseConfigurationReference = C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -794,11 +802,12 @@
 			baseConfigurationReference = 6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";

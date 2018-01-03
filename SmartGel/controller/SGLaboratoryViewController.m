@@ -423,7 +423,7 @@
         
         RSF = (Mn6_S - Mn6_CS) + ((Mn2_S - Mn2_CS)*4);
         Mn7R = (Mn7_CS - Mn7_S);
-        ERR = abs((Mn7R-RSF)*100/Mn7R);
+        ERR = fabs((Mn7R-RSF)*100/Mn7R);
         
         if(RSF*7.5<0.38)
         {   RSFGO = (RSF*7.5);

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SGTagViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UICollectionView *tagCollectionView;
 
 @end

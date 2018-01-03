@@ -397,11 +397,12 @@
 //    float b = labPink.b - lab1.b;
 
 //    float distance = sqrt((l*l)+(a*a)+(b*b));
-    float distance = [self getDeltaE:labPink:lab1];
+    float distance = [self getDeltaE:labPink withLab2:lab1];
     return distance;
 }
 
--(float)getDeltaE:(LAB)labl:(LAB)lab2{
+-(float)getDeltaE:(LAB)labl
+         withLab2:(LAB)lab2{
     float deltaL = labl.l - lab2.l;
     float deltaA = labl.a - lab2.a;
     float deltaB = labl.b - lab2.b;
