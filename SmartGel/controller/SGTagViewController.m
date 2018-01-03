@@ -119,17 +119,19 @@
 }
 
 - (void)addPictureButtonTapped:(NSInteger)index withSender:(UICollectionViewCell *)sender{
-    
+    self.selectedCell = (SGTagCollectionViewCell *)sender;
+    self.selectedTag = [self.tagArray objectAtIndex:index];
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Choose a Photo" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self capturePhoto];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self loadPhoto];
     }]];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self presentViewController:actionSheet animated:YES completion:nil];
@@ -140,5 +142,45 @@
         actionSheet.popoverPresentationController.sourceRect = sender.frame;
         [self presentViewController:actionSheet animated:YES completion:nil];
     }
+}
+
+
+
+-(void)capturePhoto{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
+}
+
+-(void)loadPhoto{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    self.selectedTag.tagImage = image;
+    self.selectedCell.tagImageView.image = image;
+    [self addImageInTag];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addImageInTag{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) wself = self;
+    [[SGFirebaseManager sharedManager] addTagsWithImage:self.selectedTag
+                                              completionHandler:^(NSError *error) {
+                                                  __strong typeof(wself) sself = wself;
+                                                  if(sself){
+                                                      [hud hideAnimated:false];
+                                                      if (error!= nil)
+                                                          [sself showAlertdialog:@"Error" message:error.localizedDescription];
+                                                      else{
+                                                          
+                                                      }
+                                                  }
+                                              }];
 }
 @end

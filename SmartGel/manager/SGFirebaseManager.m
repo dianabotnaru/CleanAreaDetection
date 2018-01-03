@@ -195,12 +195,7 @@
               metadata:nil
             completion:^(FIRStorageMetadata *metadata,NSError *error) {
                 if (error == nil) {
-                    NSString *key = [[self.dataBaseRef child:@"tags"] childByAutoId].key;
-                    NSDictionary *post = @{
-                                           @"name": tag.tagName,
-                                           @"image": metadata.downloadURL.absoluteString,
-                                           };
-                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@/%@",@"tags", userID,key]: post};
+                    NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@/%@/image/",@"tags", userID,tag.tagId]: metadata.downloadURL.absoluteString};
                     [self.dataBaseRef updateChildValues:childUpdates];
                 }
                 completionHandler(error);
