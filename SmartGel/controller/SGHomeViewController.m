@@ -10,7 +10,6 @@
 #import "SGHistoryViewController.h"
 #import "SGConstant.h"
 #import "AppDelegate.h"
-#import "SGPictureEditViewController.h"
 #import "SGFirebaseManager.h"
 #import "SGUtil.h"
 #import "SCLAlertView.h"
