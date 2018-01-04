@@ -11,25 +11,13 @@
 
 @implementation EstimateImageModel
 
--(instancetype)initWithDict:(NSDictionary *)dict{
-    self = [super init];
-    if(self){
-        self.cleanValue = [[dict objectForKey:@"value"] floatValue];
-        self.date = [dict objectForKey:@"date"];
-        self.location = [dict objectForKey :@"location"];
-        self.imageUrl = [dict objectForKey :@"image"];
-        self.cleanArea = [dict objectForKey :@"cleanarea"];
-        self.coloroffset = [[dict objectForKey :@"coloroffset"] intValue];
-    }
-    return self;
-}
-
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot{
     self = [super init];
     if(self){
         self.cleanValue = [snapshot.value[@"value"] floatValue];
         self.imageUrl = snapshot.value[@"image"];
         self.tag = snapshot.value[@"tag"];
+        self.tagImageUrl = snapshot.value[@"tagImageUrl"];
         self.date = snapshot.value[@"date"];
         self.location = snapshot.value[@"location"];
         self.cleanArea = snapshot.value[@"cleanarea"];

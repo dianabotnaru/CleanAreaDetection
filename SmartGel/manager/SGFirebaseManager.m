@@ -122,7 +122,7 @@
 }
 
 -(void)getSmartGelHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
-    [[[[self.dataBaseRef child:@"users"] child:[FIRAuth auth].currentUser.uid] child:@"photos"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[self.dataBaseRef child:@"photos"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSMutableArray *estimateImageArray = [NSMutableArray array];
         for(snapshot in snapshot.children){
             EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] initWithSnapshot:snapshot];
