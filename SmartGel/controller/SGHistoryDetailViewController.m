@@ -62,6 +62,10 @@
     self.valueLabel.text = [NSString stringWithFormat:@"%.2f", self.selectedEstimateImageModel.cleanValue];
     self.dirtyLabel.text = [NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE-self.selectedEstimateImageModel.cleanValue];
     self.tagLabel.text = self.selectedEstimateImageModel.tag;
+    [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedEstimateImageModel.tagImageUrl]
+                         placeholderImage:[UIImage imageNamed:@""]
+                                  options:SDWebImageProgressiveDownload];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:self.selectedEstimateImageModel.imageUrl]
                                     placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]

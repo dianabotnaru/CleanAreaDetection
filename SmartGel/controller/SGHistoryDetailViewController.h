@@ -41,6 +41,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 
+@property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
+
 @property (strong, nonatomic) IBOutlet UIButton *showDirtyAreaButton;
 
 @property (strong, nonatomic) EstimateImageModel *selectedEstimateImageModel;

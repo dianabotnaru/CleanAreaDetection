@@ -216,7 +216,6 @@
     [self.dataBaseRef updateChildValues:childUpdates];
 }
 
-
 -(void)getTags:(void (^)(NSError *error,NSMutableArray* array))completionHandler {
     [[[self.dataBaseRef child:@"tags"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSMutableArray *tagArray = [NSMutableArray array];
