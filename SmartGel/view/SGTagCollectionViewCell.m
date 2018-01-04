@@ -8,6 +8,7 @@
 
 #import "SGTagCollectionViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "SGConstant.h"
 
 @implementation SGTagCollectionViewCell
 
@@ -20,6 +21,7 @@
     [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:sgTag.tagImageUrl]
                            placeholderImage:[UIImage imageNamed:@""]
                                     options:SDWebImageProgressiveDownload];
+    [self initSelectedUi];
 }
 
 -(IBAction)addPictureButtonTapped:(id)sender{
@@ -27,4 +29,13 @@
         [self.delegate addPictureButtonTapped:self.index withSender:self];
 }
 
+-(void)initSelectedUi{
+    self.layer.borderWidth = 1.0;
+    self.layer.borderColor = SGColorDarkGreen.CGColor;
+    [self.selectImageView setHidden:false];
+}
+
+-(void)initDeselectedUi{
+    [self.selectImageView setHidden:true];
+}
 @end

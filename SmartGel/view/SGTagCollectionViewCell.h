@@ -21,6 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
 @property (strong, nonatomic) IBOutlet UIButton *addPictureButton;
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
+
+@property (strong, nonatomic) IBOutlet UIImageView *selectImageView;
+
 @property (assign, nonatomic) int index;
 
 

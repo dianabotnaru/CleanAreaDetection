@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-6h-RbM">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="test.png" translatesAutoresizingMaskIntoConstraints="NO" id="SzI-6h-RbM">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -44,6 +44,17 @@
                             <action selector="addPictureButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="nqj-ZA-bFm"/>
                         </connections>
                     </button>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tpt-kI-mcj">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_select" translatesAutoresizingMaskIntoConstraints="NO" id="gYg-GU-LfA">
+                        <rect key="frame" x="155" y="155" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="KCo-aZ-vQi"/>
+                            <constraint firstAttribute="height" constant="25" id="a7O-hi-nDY"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
@@ -51,17 +62,24 @@
                 <constraint firstAttribute="bottom" secondItem="d8Q-7p-pgi" secondAttribute="bottom" id="3B9-DB-gYH"/>
                 <constraint firstItem="v1I-ck-PK0" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="5ol-Z6-JN2"/>
                 <constraint firstItem="v1I-ck-PK0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="7vb-yZ-tsK"/>
+                <constraint firstAttribute="trailing" secondItem="gYg-GU-LfA" secondAttribute="trailing" constant="20" id="AXp-Gn-vKi"/>
                 <constraint firstAttribute="bottom" secondItem="Oyk-cG-tke" secondAttribute="bottom" constant="5" id="Bya-Jo-btW"/>
                 <constraint firstItem="Oyk-cG-tke" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Cy9-QX-AQZ"/>
+                <constraint firstItem="Tpt-kI-mcj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="L2d-FK-3Uq"/>
+                <constraint firstAttribute="bottom" secondItem="gYg-GU-LfA" secondAttribute="bottom" constant="20" id="LKY-Xw-Wi1"/>
+                <constraint firstAttribute="trailing" secondItem="Tpt-kI-mcj" secondAttribute="trailing" id="RiG-Sd-bCO"/>
+                <constraint firstItem="Tpt-kI-mcj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="a4w-zy-xel"/>
                 <constraint firstAttribute="bottom" secondItem="Oyk-cG-tke" secondAttribute="bottom" constant="5" id="ozd-yf-Sa8"/>
                 <constraint firstAttribute="trailing" secondItem="d8Q-7p-pgi" secondAttribute="trailing" id="pRO-WD-NUC"/>
                 <constraint firstItem="d8Q-7p-pgi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qtS-tP-S3H"/>
+                <constraint firstAttribute="bottom" secondItem="Tpt-kI-mcj" secondAttribute="bottom" id="wKJ-Wx-YMn"/>
                 <constraint firstItem="Oyk-cG-tke" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="yNG-xV-AEd"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="220" height="195"/>
             <connections>
                 <outlet property="addPictureButton" destination="v1I-ck-PK0" id="QLi-9x-hgd"/>
+                <outlet property="selectImageView" destination="gYg-GU-LfA" id="KRJ-wU-bXA"/>
                 <outlet property="tagImageView" destination="SzI-6h-RbM" id="PIy-cy-bxo"/>
                 <outlet property="tagLabel" destination="Oyk-cG-tke" id="vqo-qK-bd0"/>
             </connections>
@@ -69,6 +87,8 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_select" width="25" height="25"/>
         <image name="ic_take_photo" width="35" height="30"/>
+        <image name="test.png" width="2448" height="3264"/>
     </resources>
 </document>
