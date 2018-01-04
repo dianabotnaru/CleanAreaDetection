@@ -13,6 +13,7 @@
 #import "SGUtil.h"
 #import "SCLAlertView.h"
 #import "SGTagViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface SGHomeViewController ()
 
@@ -334,6 +335,7 @@
 
 -(IBAction)btnTagIndicatorTapped:(id)sender{
     SGTagViewController *tagVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGTagViewController"];
+    tagVC.delegate = self;
     [self.navigationController pushViewController:tagVC animated:YES];
 }
 
@@ -366,6 +368,13 @@
     }];
     [alert.viewText setTextColor:[UIColor whiteColor]];
     [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
+}
+
+- (void)didSelectTag:(SGTag *)tag{
+    self.tagLabel.text = tag.tagName;
+    [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:tag.tagImageUrl]
+                         placeholderImage:[UIImage imageNamed:@""]
+                                  options:SDWebImageProgressiveDownload];
 }
 
 @end

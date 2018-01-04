@@ -16,8 +16,9 @@
 #import "RESideMenu.h"
 #import "SGGridView.h"
 #import "UIImageView+WebCache.h"
+#import "SGTagViewController.h"
 
-@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>{
+@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGTagViewControllerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
     bool isTakenPhoto;
@@ -32,7 +33,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dirtyvalueLabel;
-@property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
@@ -49,6 +49,9 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
 
-@property (strong, nonatomic) IBOutlet NSMutableArray *cleanareaViews;
+@property (strong, nonatomic) NSMutableArray *cleanareaViews;
+
+@property (strong, nonatomic) IBOutlet UILabel *tagLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
 
 @end

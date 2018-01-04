@@ -119,6 +119,7 @@
     if(self.delegate){
         SGTag *tag = [self.tagArray objectAtIndex:indexPath.row];
         [self.delegate didSelectTag:tag];
+        [self.navigationController popViewControllerAnimated: YES];
     }
 }
 

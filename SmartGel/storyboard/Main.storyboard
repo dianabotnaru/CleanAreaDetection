@@ -564,6 +564,8 @@
                         <outlet property="notificationLabel" destination="f3Q-ZR-bNC" id="2E4-RF-hLG"/>
                         <outlet property="showCleanAreaButton" destination="MGE-Nh-JIh" id="4M0-eF-22p"/>
                         <outlet property="showCleanAreaLabel" destination="uAM-pf-dng" id="bO9-dj-LPC"/>
+                        <outlet property="tagImageView" destination="bhD-7U-EzC" id="7A5-Dj-U8L"/>
+                        <outlet property="tagLabel" destination="jnk-gN-FLo" id="Ucw-3U-QWQ"/>
                         <outlet property="takePhotoButton" destination="M1e-FX-kfH" id="vSb-kn-hAj"/>
                         <outlet property="takenImageView" destination="0ne-iK-goy" id="c2M-wW-8I1"/>
                         <outlet property="valueLabel" destination="XlK-fN-2iW" id="ziB-1A-6fv"/>
