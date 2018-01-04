@@ -15,7 +15,9 @@
 - (void)didSelectTag:(SGTag *)tag;
 @end
 
-@interface SGTagViewController : SGBaseViewController <SGTagCollectionViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface SGTagViewController : SGBaseViewController <SGTagCollectionViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
+    bool isSelect;
+}
 
 @property (weak, nonatomic) id<SGTagViewControllerDelegate> delegate;
 
@@ -23,5 +25,8 @@
 @property (strong, nonatomic) NSMutableArray *tagArray;
 @property (strong, nonatomic) SGTag *selectedTag;
 @property (assign, nonatomic) SGTagCollectionViewCell *selectedCell;
+
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *trashBarButtonItem;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *selectBarButtonItem;
 
 @end

@@ -9,6 +9,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -793,7 +794,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vw1-nl-b8A">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="870"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3z5-FT-RaF">
                                     <size key="itemSize" width="50" height="50"/>
@@ -816,13 +817,36 @@
                                     <outlet property="delegate" destination="FIQ-WK-zEP" id="qDl-p2-2Li"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDG-za-OvT">
+                                <rect key="frame" x="354" y="885" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.75294117650000003" green="0.26274509800000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="YKI-ko-tn9"/>
+                                    <constraint firstAttribute="height" constant="60" id="fwM-l4-wKj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addButtonClicked:" destination="FIQ-WK-zEP" eventType="touchUpInside" id="Y7x-sP-yRc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1960784314" green="0.2274509804" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Vw1-nl-b8A" secondAttribute="trailing" id="1gI-D2-PCK"/>
-                            <constraint firstItem="Vw1-nl-b8A" firstAttribute="leading" secondItem="sdO-VQ-Obe" secondAttribute="leading" id="IWi-PP-CYj"/>
-                            <constraint firstItem="ROT-TH-UjP" firstAttribute="top" secondItem="Vw1-nl-b8A" secondAttribute="bottom" id="sTA-XS-1Op"/>
-                            <constraint firstItem="Vw1-nl-b8A" firstAttribute="top" secondItem="3iJ-LM-HcO" secondAttribute="bottom" id="yAp-Bk-O7u"/>
+                            <constraint firstItem="hDG-za-OvT" firstAttribute="top" secondItem="Vw1-nl-b8A" secondAttribute="bottom" constant="15" id="3cY-3z-3bJ"/>
+                            <constraint firstItem="Vw1-nl-b8A" firstAttribute="leading" secondItem="sdO-VQ-Obe" secondAttribute="leading" id="XQ9-Ej-lP0"/>
+                            <constraint firstItem="ROT-TH-UjP" firstAttribute="top" secondItem="hDG-za-OvT" secondAttribute="bottom" constant="15" id="byi-SJ-0nh"/>
+                            <constraint firstItem="Vw1-nl-b8A" firstAttribute="top" secondItem="3iJ-LM-HcO" secondAttribute="bottom" id="jMD-iH-UHP"/>
+                            <constraint firstItem="hDG-za-OvT" firstAttribute="centerX" secondItem="sdO-VQ-Obe" secondAttribute="centerX" id="psm-kh-Xai"/>
+                            <constraint firstAttribute="trailing" secondItem="Vw1-nl-b8A" secondAttribute="trailing" id="qJO-VT-xlT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="SmartGel" id="axK-5o-cig">
@@ -832,15 +856,24 @@
                                 <action selector="backButtonClicked:" destination="FIQ-WK-zEP" id="bWU-5e-Gwe"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="IIi-mT-KHA">
-                            <connections>
-                                <action selector="addButtonClicked:" destination="FIQ-WK-zEP" id="p6g-Qm-8ec"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Select" id="IIi-mT-KHA">
+                                <connections>
+                                    <action selector="didTapSelectBarButton" destination="FIQ-WK-zEP" id="WjF-bO-O3j"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="qCr-ND-IPW">
+                                <connections>
+                                    <action selector="didTapTrashBarButton" destination="FIQ-WK-zEP" id="el4-8t-f17"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="selectBarButtonItem" destination="IIi-mT-KHA" id="ajW-7P-89X"/>
                         <outlet property="tagCollectionView" destination="Vw1-nl-b8A" id="sq0-F1-uI2"/>
+                        <outlet property="trashBarButtonItem" destination="qCr-ND-IPW" id="WPd-yE-DhH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wWw-fs-92t" sceneMemberID="firstResponder"/>

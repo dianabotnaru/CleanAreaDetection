@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initBarButtons];
     [self.tagCollectionView registerNib:[UINib nibWithNibName:@"SGTagCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SGTagCollectionViewCell"];
     [self getTags];
 }
@@ -27,6 +28,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+-(void)initBarButtons{
+    isSelect = false;
+    self.selectBarButtonItem.title = @"Select";
+    self.trashBarButtonItem.tintColor = [UIColor clearColor];
+    self.trashBarButtonItem.enabled = NO;
+}
+
+-(void)selectBarButton{
+    isSelect = true;
+    self.selectBarButtonItem.title = @"Cancel";
+    self.trashBarButtonItem.tintColor = [UIColor whiteColor];
+    self.trashBarButtonItem.enabled = YES;
+}
+
 
 -(void)getTags{
     self.tagArray = [NSMutableArray array];
@@ -188,4 +204,17 @@
                                                   }
                                               }];
 }
+
+- (IBAction)didTapSelectBarButton{
+    if(isSelect){
+        [self initBarButtons];
+    }else{
+        [self selectBarButton];
+    }
+}
+
+- (IBAction)didTapTrashBarButton{
+    
+}
+
 @end
