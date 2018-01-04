@@ -33,8 +33,9 @@
               completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;
 
 -(void)saveResultImage:(EstimateImageModel *)estimateImageModel
+           selectedTag:(SGTag *)tag
      engineColorOffset:(int)colorOffset
-     completionHandler:(void (^)(NSError *error))completionHandler ;
+     completionHandler:(void (^)(NSError *error))completionHandler;
 
 -(void)getSmartGelHistorys:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 

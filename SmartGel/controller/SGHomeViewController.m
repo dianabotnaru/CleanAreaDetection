@@ -212,6 +212,7 @@
 - (void)saveResultImage{
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[SGFirebaseManager sharedManager] saveResultImage:self.estimateImage
+                                            selectedTag:self.selectedTag
                                     engineColorOffset :self.engine.m_colorOffset
                                      completionHandler:^(NSError *error) {
                                          [hud hideAnimated:false];

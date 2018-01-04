@@ -21,7 +21,6 @@
 @property (strong, nonatomic) NSString *dirtyArea;
 @property (strong, nonatomic) NSString *nonGelArea;
 @property (strong, nonatomic) NSString *tag;
-@property (strong, nonatomic) NSString *tagImageUrl;
 
 @property (assign) int coloroffset;
 

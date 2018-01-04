@@ -561,6 +561,7 @@
                         <outlet property="dateLabel" destination="7wL-2c-Txc" id="k1G-Q3-0rM"/>
                         <outlet property="dirtyvalueLabel" destination="854-Yh-x7d" id="aeP-2f-e6J"/>
                         <outlet property="gridContentView" destination="RpD-T1-dX4" id="PRa-Ol-GqV"/>
+                        <outlet property="locationLabel" destination="A8I-5h-BTo" id="HbW-vt-Zur"/>
                         <outlet property="notificationLabel" destination="f3Q-ZR-bNC" id="2E4-RF-hLG"/>
                         <outlet property="showCleanAreaButton" destination="MGE-Nh-JIh" id="4M0-eF-22p"/>
                         <outlet property="showCleanAreaLabel" destination="uAM-pf-dng" id="bO9-dj-LPC"/>
