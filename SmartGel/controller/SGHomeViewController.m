@@ -14,6 +14,7 @@
 #import "SCLAlertView.h"
 #import "SGTagViewController.h"
 #import "UIImageView+WebCache.h"
+#import "SGSharedManager.h"
 
 @interface SGHomeViewController ()
 
@@ -24,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
+    [self initTag];
     [self initDeviceRotateNotification];
 }
 
@@ -370,11 +372,20 @@
     [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
 }
 
+-(void)initTag{
+    SGTag *tag = [SGSharedManager.sharedManager getTag];
+    self.tagLabel.text = tag.tagName;
+    [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:tag.tagImageUrl]
+                         placeholderImage:[UIImage imageNamed:@""]
+                                  options:SDWebImageProgressiveDownload];
+}
+
 - (void)didSelectTag:(SGTag *)tag{
     self.tagLabel.text = tag.tagName;
     [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:tag.tagImageUrl]
                          placeholderImage:[UIImage imageNamed:@""]
                                   options:SDWebImageProgressiveDownload];
+    [SGSharedManager.sharedManager saveTag:tag];
 }
 
 @end

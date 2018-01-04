@@ -16,6 +16,7 @@
 		8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */; };
 		8D26D14A1FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */; };
 		8D26D14D1FFCC146002BFAB8 /* SGTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D14C1FFCC146002BFAB8 /* SGTag.m */; };
+		8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
 		8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */; };
 		8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662561FD8247A008DFED2 /* Smiley_yellow.png */; };
@@ -75,6 +76,8 @@
 		8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SGTagCollectionViewCell.xib; path = view/SGTagCollectionViewCell.xib; sourceTree = "<group>"; };
 		8D26D14B1FFCC146002BFAB8 /* SGTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGTag.h; sourceTree = "<group>"; };
 		8D26D14C1FFCC146002BFAB8 /* SGTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGTag.m; sourceTree = "<group>"; };
+		8D26D14E1FFDC197002BFAB8 /* SGSharedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGSharedManager.h; path = manager/SGSharedManager.h; sourceTree = "<group>"; };
+		8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSharedManager.m; path = manager/SGSharedManager.m; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryViewController.h; path = controller/SGLaboratoryViewController.h; sourceTree = "<group>"; };
 		8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryViewController.m; path = controller/SGLaboratoryViewController.m; sourceTree = "<group>"; };
@@ -199,9 +202,19 @@
 			name = SGTagCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		8D26D1511FFDC19F002BFAB8 /* SGSharedManager */ = {
+			isa = PBXGroup;
+			children = (
+				8D26D14E1FFDC197002BFAB8 /* SGSharedManager.h */,
+				8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */,
+			);
+			name = SGSharedManager;
+			sourceTree = "<group>";
+		};
 		8D56D54F1FECFBF30051EE76 /* manager */ = {
 			isa = PBXGroup;
 			children = (
+				8D26D1511FFDC19F002BFAB8 /* SGSharedManager */,
 				8D56D5541FED0C8C0051EE76 /* SGUtil */,
 				8D56D5501FECFC1A0051EE76 /* SGFirebaseManager */,
 				8DA3320F1F7C92590066148E /* engine */,
@@ -658,6 +671,7 @@
 				8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */,
 				8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */,
 				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
+				8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
 				8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
