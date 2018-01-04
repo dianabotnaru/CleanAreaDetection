@@ -116,6 +116,10 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if(self.delegate){
+        SGTag *tag = [self.tagArray objectAtIndex:indexPath.row];
+        [self.delegate didSelectTag:tag];
+    }
 }
 
 - (void)addPictureButtonTapped:(NSInteger)index withSender:(UICollectionViewCell *)sender{

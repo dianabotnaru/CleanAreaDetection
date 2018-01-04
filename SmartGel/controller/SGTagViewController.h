@@ -10,7 +10,15 @@
 #import "SGBaseViewController.h"
 #import "SGTagCollectionViewCell.h"
 
+@protocol SGTagViewControllerDelegate<NSObject>
+@required
+- (void)didSelectTag:(SGTag *)tag;
+@end
+
 @interface SGTagViewController : SGBaseViewController <SGTagCollectionViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@property (weak, nonatomic) id<SGTagViewControllerDelegate> delegate;
+
 @property (strong, nonatomic) IBOutlet UICollectionView *tagCollectionView;
 @property (strong, nonatomic) NSMutableArray *tagArray;
 @property (strong, nonatomic) SGTag *selectedTag;

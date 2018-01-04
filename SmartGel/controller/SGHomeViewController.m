@@ -368,42 +368,4 @@
     [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
 }
 
-/////////////////////////////// remove-harded code////////////////////////////////////////////////////////////////////////////////
-- (NSString *) getImageUrl:(int)index{
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
-    NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"\n Result = %@",stringContent);
-    NSData *objectData = [stringContent dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *jsonError = nil;
-    NSDictionary *imageArrayDict = [NSJSONSerialization JSONObjectWithData:objectData
-                                                                   options:NSJSONReadingMutableContainers
-                                                                     error:&jsonError];
-    NSArray* keys=[imageArrayDict allKeys];
-    NSLog(@"\n jsonError = %@",jsonError.description);
-    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:index]];
-    return  [imageDict objectForKey :@"image"];
-}
-
-- (NSMutableArray *) getDirtyState:(int)index{
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"smartgel-tests" ofType:@"json"];
-    NSString *stringContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"\n Result = %@",stringContent);
-    NSData *objectData = [stringContent dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *jsonError = nil;
-    NSDictionary *imageArrayDict = [NSJSONSerialization JSONObjectWithData:objectData
-                                                                   options:NSJSONReadingMutableContainers
-                                                                     error:&jsonError];
-    NSArray* keys=[imageArrayDict allKeys];
-    NSLog(@"\n jsonError = %@",jsonError.description);
-    NSDictionary* imageDict = [imageArrayDict objectForKey:[keys objectAtIndex:index]];
-    NSString *dirtyAreaString = [imageDict objectForKey :@"dirtyarea"];
-    return  [self getDirtyAreaArray:dirtyAreaString];
-}
-
-- (NSMutableArray *)getDirtyAreaArray :(NSString *)diryAreaString{
-    NSData* data = [diryAreaString dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    return values;
-}
-
 @end
