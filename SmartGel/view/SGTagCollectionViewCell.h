@@ -23,10 +23,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 
 @property (strong, nonatomic) IBOutlet UIImageView *selectImageView;
+@property (strong, nonatomic) IBOutlet UIView *maskView;
 
 @property (assign, nonatomic) int index;
 
+@property (assign, nonatomic) bool selectedState;
 
 -(void)setTags:(SGTag *)sgTag;
-
+-(void)initSelectedUi;
+-(void)initDeselectedUi;
 @end

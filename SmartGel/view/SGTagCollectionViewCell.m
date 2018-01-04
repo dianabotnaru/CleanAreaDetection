@@ -21,7 +21,7 @@
     [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:sgTag.tagImageUrl]
                            placeholderImage:[UIImage imageNamed:@""]
                                     options:SDWebImageProgressiveDownload];
-    [self initSelectedUi];
+    [self initDeselectedUi];
 }
 
 -(IBAction)addPictureButtonTapped:(id)sender{
@@ -30,12 +30,17 @@
 }
 
 -(void)initSelectedUi{
-    self.layer.borderWidth = 1.0;
+    self.selectedState = YES;
+    self.layer.borderWidth = 2.0;
     self.layer.borderColor = SGColorDarkGreen.CGColor;
     [self.selectImageView setHidden:false];
+    [self.maskView setHidden:false];
 }
 
 -(void)initDeselectedUi{
+    self.selectedState = NO;
+    self.layer.borderWidth = 0.0;
     [self.selectImageView setHidden:true];
+    [self.maskView setHidden:true];
 }
 @end

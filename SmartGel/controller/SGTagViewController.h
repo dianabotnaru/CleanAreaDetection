@@ -23,6 +23,8 @@
 
 @property (strong, nonatomic) IBOutlet UICollectionView *tagCollectionView;
 @property (strong, nonatomic) NSMutableArray *tagArray;
+@property (strong, nonatomic) NSMutableArray *selectedTagArray;
+
 @property (strong, nonatomic) SGTag *selectedTag;
 @property (assign, nonatomic) SGTagCollectionViewCell *selectedCell;
 

@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.selectedTagArray = [NSMutableArray array];
     [self initBarButtons];
     [self.tagCollectionView registerNib:[UINib nibWithNibName:@"SGTagCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SGTagCollectionViewCell"];
     [self getTags];
@@ -40,9 +41,8 @@
     isSelect = true;
     self.selectBarButtonItem.title = @"Cancel";
     self.trashBarButtonItem.tintColor = [UIColor whiteColor];
-    self.trashBarButtonItem.enabled = YES;
+    self.trashBarButtonItem.enabled = NO;
 }
-
 
 -(void)getTags{
     self.tagArray = [NSMutableArray array];
@@ -132,10 +132,26 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if(self.delegate){
-        SGTag *tag = [self.tagArray objectAtIndex:indexPath.row];
-        [self.delegate didSelectTag:tag];
-        [self.navigationController popViewControllerAnimated: YES];
+    if(isSelect){
+        SGTagCollectionViewCell *cell = (SGTagCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        if(cell.selectedState){
+            [cell initDeselectedUi];
+        }
+        else{
+            [cell initSelectedUi];
+        }
+        [self getSeletedTagArray];
+        if([self hasSeletedTag]){
+            self.trashBarButtonItem.enabled = true;
+        }else{
+            self.trashBarButtonItem.enabled = false;
+        }
+    }else{
+        if(self.delegate){
+            SGTag *tag = [self.tagArray objectAtIndex:indexPath.row];
+            [self.delegate didSelectTag:tag];
+            [self.navigationController popViewControllerAnimated: YES];
+        }
     }
 }
 
@@ -203,6 +219,22 @@
                                                       }
                                                   }
                                               }];
+}
+
+-(void)getSeletedTagArray{
+    [self.selectedTagArray removeAllObjects];
+    for(int i = 0; i<self.tagArray.count;i++){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        SGTagCollectionViewCell *cell = (SGTagCollectionViewCell*)[self.tagCollectionView cellForItemAtIndexPath:indexPath];
+        if(cell.selectedState){
+            SGTag *tag = [self.tagArray objectAtIndex:i];
+            [self.selectedTagArray addObject:tag];
+        }
+    }
+}
+
+-(bool)hasSeletedTag{
+    return self.selectedTagArray.count>0;
 }
 
 - (IBAction)didTapSelectBarButton{
