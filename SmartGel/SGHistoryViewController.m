@@ -198,7 +198,6 @@
     [self.smartGelHistoryCollectionView reloadData];
 }
 
-
 -(void)initGlcalendarView{
     NSDate *today = [NSDate date];
     GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:today endDate:today];

@@ -140,7 +140,7 @@
     FIRStorageReference *desertRef = [self.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,estimateImageModel.date]];
     [desertRef deleteWithCompletion:^(NSError *error){
         if (error == nil) {
-            [[[self.dataBaseRef child:[NSString stringWithFormat:@"%@/%@/%@",@"users", userID, @"photos"]] child:estimateImageModel.date] removeValue];
+            [[[self.dataBaseRef child:[NSString stringWithFormat:@"%@/%@",@"photos", userID]] child:estimateImageModel.date] removeValue];
         }
         completionHandler(error);
     }];

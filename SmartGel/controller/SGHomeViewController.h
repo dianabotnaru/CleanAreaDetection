@@ -23,6 +23,10 @@
     bool isSavedImage;
     bool isTakenPhoto;
     MBProgressHUD *hud;
+    
+    UITapGestureRecognizer *tap;
+    BOOL isFullScreen;
+    CGRect prevFrame;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
