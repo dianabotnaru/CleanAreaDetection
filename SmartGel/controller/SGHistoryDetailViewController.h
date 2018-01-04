@@ -25,6 +25,9 @@
     bool isShowDirtyArea;
     bool isShowDirtyAreaUpdatedParameter;
     bool isShowPartArea;
+    
+    BOOL isFullScreen;
+    CGRect prevFrame;
 }
 
 @property (weak, nonatomic) id<SGHistoryDetailViewControllerDelegate> delegate;

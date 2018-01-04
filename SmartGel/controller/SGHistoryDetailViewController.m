@@ -203,6 +203,40 @@
                                      }];
 }
 
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch1 = [touches anyObject];
+    CGPoint location = [touch1 locationInView:self.view];
+    
+    if(CGRectContainsPoint(self.tagImageView.frame, location)){
+        [self imgToFullScreen];
+        return ;
+    }
+}
+
+-(void)imgToFullScreen{
+    if (!isFullScreen) {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
+            //save previous frame
+            prevFrame = self.tagImageView.frame;
+            [self.tagImageView setFrame:[[UIScreen mainScreen] bounds]];
+        }completion:^(BOOL finished){
+            isFullScreen = true;
+        }];
+        return;
+    } else {
+        [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
+            [self.tagImageView setFrame:prevFrame];
+        }completion:^(BOOL finished){
+            isFullScreen = false;
+        }];
+        return;
+    }
+}
+
+
 ////harded code to test/////////////////////////////////////
 -(IBAction)showDetailViewWithUpdatedParameter{
     if(self.takenImageView.image!=nil){
@@ -228,4 +262,6 @@
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.gridContentView addSubview:self.gridView];
 }
+
+
 @end

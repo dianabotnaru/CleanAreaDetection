@@ -658,19 +658,11 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pLX-Of-y2W">
-                                        <rect key="frame" x="25" y="240" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="65b-US-fhn"/>
-                                            <constraint firstAttribute="height" constant="50" id="LMS-f4-k1F"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.1764705882" blue="0.21176470589999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="SX2-kK-vBg" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="1A3-ZT-dhB"/>
                                     <constraint firstItem="dP9-Hf-d5N" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="3L5-Lt-LDe"/>
-                                    <constraint firstItem="pLX-Of-y2W" firstAttribute="top" secondItem="SX2-kK-vBg" secondAttribute="bottom" constant="20" id="6NB-pk-Kjq"/>
                                     <constraint firstItem="xxT-Zr-T14" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="7GL-FL-8h0"/>
                                     <constraint firstItem="hPJ-di-utx" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="80F-Np-k2r"/>
                                     <constraint firstAttribute="width" constant="100" id="8rh-jb-FPr"/>
@@ -679,7 +671,6 @@
                                     <constraint firstItem="hSE-M0-5kr" firstAttribute="top" secondItem="hPJ-di-utx" secondAttribute="bottom" constant="3" id="N7k-SW-VAs"/>
                                     <constraint firstItem="SX2-kK-vBg" firstAttribute="top" secondItem="xxT-Zr-T14" secondAttribute="bottom" constant="5" id="N8I-8a-9ae"/>
                                     <constraint firstItem="hSE-M0-5kr" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="O17-Xn-hE7"/>
-                                    <constraint firstItem="pLX-Of-y2W" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="XpB-Ze-8UF"/>
                                     <constraint firstItem="Evq-6r-ce3" firstAttribute="top" secondItem="UwL-gc-Txd" secondAttribute="bottom" constant="8" id="ZnA-g3-3Sc"/>
                                     <constraint firstItem="Evq-6r-ce3" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="c8c-Jg-m04"/>
                                     <constraint firstItem="UwL-gc-Txd" firstAttribute="centerX" secondItem="Pra-34-wt4" secondAttribute="centerX" id="fFa-6A-Qdp"/>
@@ -735,9 +726,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pLX-Of-y2W">
+                                <rect key="frame" x="693" y="235.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="d7t-rh-gUV"/>
+                                    <constraint firstAttribute="width" constant="50" id="gIx-2M-PSh"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.1960784314" green="0.2274509804" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="pLX-Of-y2W" secondAttribute="trailing" constant="5" id="0D2-dk-v52"/>
                             <constraint firstItem="akx-8w-Mew" firstAttribute="leading" secondItem="xEH-nL-HuH" secondAttribute="leading" constant="20" id="4Hn-WS-ta8"/>
                             <constraint firstItem="akx-8w-Mew" firstAttribute="top" secondItem="SEE-c1-jMk" secondAttribute="bottom" constant="60" id="DWN-4t-urd"/>
                             <constraint firstItem="whd-Pf-EUt" firstAttribute="top" secondItem="SEE-c1-jMk" secondAttribute="bottom" constant="20" id="Py9-fK-Qn6"/>
@@ -745,6 +744,7 @@
                             <constraint firstItem="LwF-aU-z9y" firstAttribute="top" secondItem="SEE-c1-jMk" secondAttribute="bottom" constant="20" id="Xsa-ru-W69"/>
                             <constraint firstItem="zVG-2w-WsJ" firstAttribute="top" secondItem="Pra-34-wt4" secondAttribute="bottom" id="Yhp-ka-sLq"/>
                             <constraint firstItem="Pra-34-wt4" firstAttribute="top" secondItem="SEE-c1-jMk" secondAttribute="bottom" id="Zq2-8D-OKG"/>
+                            <constraint firstItem="pLX-Of-y2W" firstAttribute="top" secondItem="SEE-c1-jMk" secondAttribute="bottom" constant="235.5" id="csL-y8-bDP"/>
                             <constraint firstItem="zVG-2w-WsJ" firstAttribute="top" secondItem="akx-8w-Mew" secondAttribute="bottom" constant="20" id="dS8-Ci-QFd"/>
                             <constraint firstItem="LwF-aU-z9y" firstAttribute="leading" secondItem="xEH-nL-HuH" secondAttribute="leadingMargin" id="jrn-Bv-PNr"/>
                             <constraint firstAttribute="trailing" secondItem="Pra-34-wt4" secondAttribute="trailing" id="uTa-R1-3f1"/>

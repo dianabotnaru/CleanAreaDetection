@@ -24,7 +24,6 @@
     bool isTakenPhoto;
     MBProgressHUD *hud;
     
-    UITapGestureRecognizer *tap;
     BOOL isFullScreen;
     CGRect prevFrame;
 }
