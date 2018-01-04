@@ -26,11 +26,8 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
-
 @property (strong, nonatomic) IBOutlet UIView *gridContentView;
-
 @property (strong, nonatomic) SGGridView *gridView;
-
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dirtyvalueLabel;
 
@@ -38,20 +35,21 @@
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
 
+@property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
+@property (strong, nonatomic) IBOutlet UILabel *showCleanAreaLabel;
+@property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
+
+@property (strong, nonatomic) IBOutlet UILabel *tagLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
+
+
 @property (nonatomic, strong) DirtyExtractor *engine;
 @property (nonatomic, strong) DirtyExtractor *partyEngine;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) EstimateImageModel *estimateImage;
 
-@property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
-@property (strong, nonatomic) IBOutlet UILabel *showCleanAreaLabel;
-
-@property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
-
+@property (strong, nonatomic) SGTag *selectedTag;
 @property (strong, nonatomic) NSMutableArray *cleanareaViews;
-
-@property (strong, nonatomic) IBOutlet UILabel *tagLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
 
 @end

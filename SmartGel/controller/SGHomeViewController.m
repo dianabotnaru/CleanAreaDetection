@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
-    [self initTag];
+    [self initSelectedTag:[SGSharedManager.sharedManager getTag]];
     [self initDeviceRotateNotification];
 }
 
@@ -251,6 +251,10 @@
 }
 
 -(IBAction)launchPhotoPickerController{
+    if(!self.selectedTag.tagName){
+        [self showAlertdialog:nil message:@"Please select a tag"];
+        return;
+    }
     if(isShowDirtyArea)
         [self hideDirtyArea];
 //    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -372,20 +376,18 @@
     [alert showEdit:self title:@"Uploading Image?" subTitle:@"Are you sure want to upload image?" closeButtonTitle:@"Cancel" duration:0.0f];
 }
 
--(void)initTag{
-    SGTag *tag = [SGSharedManager.sharedManager getTag];
-    self.tagLabel.text = tag.tagName;
-    [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:tag.tagImageUrl]
-                         placeholderImage:[UIImage imageNamed:@""]
-                                  options:SDWebImageProgressiveDownload];
+- (void)didSelectTag:(SGTag *)tag{
+    [self initSelectedTag:tag];
+    [SGSharedManager.sharedManager saveTag:tag];
 }
 
-- (void)didSelectTag:(SGTag *)tag{
+-(void)initSelectedTag:(SGTag *)tag{
+    self.selectedTag = tag;
     self.tagLabel.text = tag.tagName;
     [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:tag.tagImageUrl]
                          placeholderImage:[UIImage imageNamed:@""]
                                   options:SDWebImageProgressiveDownload];
-    [SGSharedManager.sharedManager saveTag:tag];
+
 }
 
 @end
