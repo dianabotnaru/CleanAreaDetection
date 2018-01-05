@@ -258,15 +258,15 @@
     }
     if(isShowDirtyArea)
         [self hideDirtyArea];
-//    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//    imagePickerController.delegate = self;
-//    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    [self presentViewController:imagePickerController animated:NO completion:nil];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    [self presentViewController:imagePickerController animated:NO completion:nil];
     
-    self.estimateImage = [[EstimateImageModel alloc] init];
-    self.estimateImage.image = [UIImage imageNamed:@"test.png"];
-    isTakenPhoto = true;
-    [self initDataUiWithImage];
+//    self.estimateImage = [[EstimateImageModel alloc] init];
+//    self.estimateImage.image = [UIImage imageNamed:@"test.png"];
+//    isTakenPhoto = true;
+//    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -391,7 +391,11 @@
 
 -(void)initSelectedTag:(SGTag *)tag{
     self.selectedTag = tag;
-    self.tagLabel.text = tag.tagName;
+    if(self.selectedTag.tagName){
+        self.tagLabel.text = tag.tagName;
+    }else{
+        self.tagLabel.text = @"No Tag";
+    }
     [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:tag.tagImageUrl]
                          placeholderImage:[UIImage imageNamed:@""]
                                   options:SDWebImageProgressiveDownload];

@@ -12,6 +12,7 @@
 #import "SGMenuViewController.h"
 #import "SGUserSigninViewController.h"
 #import "SGConstant.h"
+#import "SGSharedManager.h"
 
 @interface AppDelegate () <RESideMenuDelegate>
 
@@ -22,11 +23,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
     [FIRApp configure];
     [self initNavigationbar];
     if ([FIRAuth auth].currentUser) {
-        self.isAreadyLoggedIn = true;
-        [self initMenuViewController];
+        if ([SGSharedManager.sharedManager isAlreadyRunnded]) {
+            self.isAreadyLoggedIn = true;
+            [self initMenuViewController];
+        }else{
+            self.isAreadyLoggedIn = false;
+        }
     }else{
         self.isAreadyLoggedIn = false;
     }
@@ -57,6 +63,7 @@
 
 - (void)initMenuViewController{
     
+    [SGSharedManager.sharedManager setAlreadyRunnded];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     SGHomeViewController *ORfeedviewcontroller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];

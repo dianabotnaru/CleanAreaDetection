@@ -12,9 +12,15 @@
 #define SGTagName @"tagName"
 #define SGTagImageUrl @"tagImageUrl"
 
+#define SGAlreadyRunned @"alreadyRunnded"
+
 @interface SGSharedManager : NSObject
 + (instancetype)sharedManager;
 
 -(void)saveTag:(SGTag *)tag;
 -(SGTag *)getTag;
+
+-(void)setAlreadyRunnded;
+-(bool)isAlreadyRunnded;
+
 @end

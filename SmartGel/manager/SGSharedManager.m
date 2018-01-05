@@ -38,4 +38,16 @@
     return tag;
 }
 
+-(void)setAlreadyRunnded{
+    [[NSUserDefaults standardUserDefaults] setObject:@"isAlreadyRunnded" forKey:SGAlreadyRunned];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(bool)isAlreadyRunnded{
+    NSString *alreadyRunnded = [[NSUserDefaults standardUserDefaults] stringForKey:SGAlreadyRunned];
+    if(alreadyRunnded)
+        return true;
+    else
+        return false;
+}
 @end

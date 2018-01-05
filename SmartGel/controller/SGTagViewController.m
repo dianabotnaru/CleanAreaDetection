@@ -104,7 +104,6 @@
     [alert showEdit:self title:@"Adding tag?" subTitle:@"Are you sure want to add a tag?" closeButtonTitle:@"Cancel" duration:0.0f];
 }
 
-
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(2, 2, 2, 2); // top, left, bottom, right
@@ -240,6 +239,14 @@
 - (IBAction)didTapSelectBarButton{
     if(isSelect){
         [self initBarButtons];
+        for(int i = 0; i<self.tagArray.count;i++){
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            SGTagCollectionViewCell *cell = (SGTagCollectionViewCell*)[self.tagCollectionView cellForItemAtIndexPath:indexPath];
+            if(cell.selectedState){
+                [cell initDeselectedUi];
+            }
+        }
+        [self.selectedTagArray removeAllObjects];
     }else{
         [self selectBarButton];
     }
