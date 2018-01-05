@@ -298,7 +298,7 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch1 = [touches anyObject];
-    CGPoint location = [touch1 locationInView:self.view];
+    CGPoint location = [touch1 locationInView:self.imageareaView];
 
     if(CGRectContainsPoint(self.tagImageView.frame, location)){
         [self imgToFullScreen];
@@ -306,7 +306,7 @@
     }
     
     if(isShowDirtyArea){
-        if(!CGRectContainsPoint(self.gridView.frame, location))
+        if(!CGRectContainsPoint(self.gridContentView.frame, location))
             return ;
         if(self.estimateImage==nil)
             return;

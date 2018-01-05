@@ -45,6 +45,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
 
+@property (strong, nonatomic) IBOutlet UIView *imageareaView;
 
 @property (nonatomic, strong) DirtyExtractor *engine;
 @property (nonatomic, strong) DirtyExtractor *partyEngine;
