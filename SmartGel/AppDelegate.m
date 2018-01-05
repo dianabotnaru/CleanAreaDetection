@@ -23,18 +23,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
+    self.isLoggedIn = false;
     [FIRApp configure];
     [self initNavigationbar];
     if ([FIRAuth auth].currentUser) {
         if ([SGSharedManager.sharedManager isAlreadyRunnded]) {
-            self.isAreadyLoggedIn = true;
             [self initMenuViewController];
-        }else{
-            self.isAreadyLoggedIn = false;
         }
-    }else{
-        self.isAreadyLoggedIn = false;
     }
     return YES;
 }
@@ -64,6 +59,7 @@
 - (void)initMenuViewController{
     
     [SGSharedManager.sharedManager setAlreadyRunnded];
+    self.isLoggedIn = true;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     SGHomeViewController *ORfeedviewcontroller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
@@ -87,6 +83,7 @@
 }
 
 -(void)gotoSignInScreen{
+    self.isLoggedIn = false;
     SGUserSigninViewController *signInViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGUserSigninViewController"];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:signInViewController];
     [self initNavigationbar];
@@ -102,4 +99,13 @@
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setTranslucent:NO];
 }
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if(!self.isLoggedIn)
+        return UIInterfaceOrientationMaskPortrait;
+    else
+        return UIInterfaceOrientationMaskAll;
+}
+
 @end

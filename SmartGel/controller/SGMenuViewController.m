@@ -104,10 +104,9 @@
     NSError *signOutError;
     BOOL status = [[FIRAuth auth] signOut:&signOutError];
     if (!status) {
-        NSLog(@"Error signing out: %@", signOutError);
+        [self showAlertdialog:nil message:signOutError.localizedDescription];
         return;
     }else{
-        self.appDelegate.isAreadyLoggedIn = false;
         [self.appDelegate gotoSignInScreen];
     }
 }

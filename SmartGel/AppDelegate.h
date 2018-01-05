@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (assign, nonatomic) bool isAreadyLoggedIn;
+@property (assign, nonatomic) bool isLoggedIn;
 
 - (void)initMenuViewController;
 -(void)gotoSignInScreen;
