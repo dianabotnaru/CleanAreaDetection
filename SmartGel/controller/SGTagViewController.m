@@ -7,7 +7,6 @@
 //
 
 #import "SGTagViewController.h"
-#import "MBProgressHUD.h"
 #import "SGFirebaseManager.h"
 #import "SCLAlertView.h"
 #import "SGConstant.h"
@@ -250,7 +249,20 @@
 }
 
 - (IBAction)didTapTrashBarButton{
-    
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self removeTags:0];
 }
 
+-(void)removeTags: (int)index{
+    SGTag *tag = [self.selectedTagArray objectAtIndex:index];
+    [SGFirebaseManager.sharedManager removeTag:tag
+                             completionHandler:^(NSError *error) {
+                                 if (index < self.selectedTagArray.count-1){
+                                     [self removeTags:index+1];
+                                 }else{
+                                     [hud hideAnimated:false];
+                                     [self getTags];
+                                 }
+    }];
+}
 @end

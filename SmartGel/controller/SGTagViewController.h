@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SGBaseViewController.h"
 #import "SGTagCollectionViewCell.h"
+#import "MBProgressHUD.h"
 
 @protocol SGTagViewControllerDelegate<NSObject>
 @required
@@ -17,6 +18,7 @@
 
 @interface SGTagViewController : SGBaseViewController <SGTagCollectionViewCellDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
     bool isSelect;
+    MBProgressHUD *hud;
 }
 
 @property (weak, nonatomic) id<SGTagViewControllerDelegate> delegate;

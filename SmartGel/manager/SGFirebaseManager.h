@@ -54,4 +54,7 @@
 
 -(void)getTags:(void (^)(NSError *error,NSMutableArray* array))completionHandler;
 
+-(void)removeTag:(SGTag *)tag
+completionHandler:(void (^)(NSError *error))completionHandler;
+
 @end
