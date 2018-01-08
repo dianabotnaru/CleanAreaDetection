@@ -106,12 +106,12 @@
 
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(2, 2, 2, 2); // top, left, bottom, right
+    return UIEdgeInsetsMake(4, 2, 4, 2); // top, left, bottom, right
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-        return CGSizeMake(self.tagCollectionView.frame.size.width/4-8,self.tagCollectionView.frame.size.width/4-8);
+        return CGSizeMake(self.tagCollectionView.frame.size.width/4-6,self.tagCollectionView.frame.size.width/4-6);
     else
         return CGSizeMake(self.tagCollectionView.frame.size.width/2-4,self.tagCollectionView.frame.size.width/2-4);
 }
