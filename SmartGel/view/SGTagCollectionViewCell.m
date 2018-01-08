@@ -21,7 +21,10 @@
     [self.tagImageView sd_setImageWithURL:[NSURL URLWithString:sgTag.tagImageUrl]
                            placeholderImage:[UIImage imageNamed:@""]
                                     options:SDWebImageProgressiveDownload];
-    [self initDeselectedUi];
+    if(sgTag.isSelected)
+        [self initSelectedUi];
+    else
+        [self initDeselectedUi];
 }
 
 -(IBAction)addPictureButtonTapped:(id)sender{

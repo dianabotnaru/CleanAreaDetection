@@ -17,5 +17,9 @@
 
 @property (strong, nonatomic) UIImage *tagImage;
 
+@property (assign, nonatomic) bool isSelected;
+
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot;
+-(void)updateSelectedState;
+
 @end

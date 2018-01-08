@@ -132,19 +132,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if(isSelect){
-        SGTagCollectionViewCell *cell = (SGTagCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-        if(cell.selectedState){
-            [cell initDeselectedUi];
-        }
-        else{
-            [cell initSelectedUi];
-        }
+        SGTag *tag = [self.tagArray objectAtIndex:indexPath.row];
+        [tag updateSelectedState];
+        [self.tagArray replaceObjectAtIndex:indexPath.row withObject:tag];
         [self getSeletedTagArray];
         if([self hasSeletedTag]){
             self.trashBarButtonItem.enabled = true;
         }else{
             self.trashBarButtonItem.enabled = false;
         }
+
+        [self.tagCollectionView reloadData];
+
     }else{
         if(self.delegate){
             SGTag *tag = [self.tagArray objectAtIndex:indexPath.row];
@@ -223,10 +222,8 @@
 -(void)getSeletedTagArray{
     [self.selectedTagArray removeAllObjects];
     for(int i = 0; i<self.tagArray.count;i++){
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        SGTagCollectionViewCell *cell = (SGTagCollectionViewCell*)[self.tagCollectionView cellForItemAtIndexPath:indexPath];
-        if(cell.selectedState){
-            SGTag *tag = [self.tagArray objectAtIndex:i];
+        SGTag *tag = [self.tagArray objectAtIndex:i];
+        if(tag.isSelected){
             [self.selectedTagArray addObject:tag];
         }
     }

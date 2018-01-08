@@ -20,4 +20,22 @@
     return self;
 }
 
+-(instancetype)init{
+    
+    self = [super init];
+    if(self){
+        self.tagId = 0;
+        self.tagName = @"";
+        self.tagImageUrl = @"";
+        self.isSelected = false;
+    }
+    return self;
+}
+
+-(void)updateSelectedState{
+    if(self.isSelected)
+        self.isSelected = false;
+    else
+        self.isSelected = true;
+}
 @end
