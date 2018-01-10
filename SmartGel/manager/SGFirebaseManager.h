@@ -25,6 +25,9 @@
                        password:(NSString *)password
               completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;
 
+-(void)registerWithFireUser:(FIRUser *)firUser
+          completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;
+
 - (void)signInWithEmail:(NSString *)email
                password:(NSString *)password
        completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler;

@@ -7,6 +7,7 @@
 //
 
 #import "SGUser.h"
+#import "SGUtil.h"
 
 @implementation SGUser
 -(instancetype)initWithSnapshot:(FIRDataSnapshot *) snapshot{
@@ -20,4 +21,5 @@
     }
     return self;
 }
+
 @end

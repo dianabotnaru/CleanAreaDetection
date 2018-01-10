@@ -61,6 +61,25 @@
                              }];
 }
 
+-(void)registerWithFireUser:(FIRUser *)firUser
+          completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler{
+    self.currentUser = [[SGUser alloc] init];
+    self.currentUser.userID = firUser.uid;
+    self.currentUser.companyName = @"";
+    self.currentUser.email = @"";
+    self.currentUser.password = @"";
+    self.currentUser.latestLoginDate = [[SGUtil sharedUtil] getCurrentTimeString];
+    NSDictionary *post = @{
+                           @"userid": self.currentUser.userID,
+                           @"email": self.currentUser.email,
+                           @"password": self.currentUser.password,
+                           @"companyname": self.currentUser.companyName,
+                           @"latestdate":self.currentUser.latestLoginDate
+                           };
+    [[[self.dataBaseRef child:@"users"] child:self.currentUser.userID] setValue:post];
+    completionHandler(nil, self.currentUser);
+}
+
 - (void)signInWithEmail:(NSString *)email
                password:(NSString *)password
        completionHandler:(void (^)(NSError *error, SGUser *sgUser))completionHandler {

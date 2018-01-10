@@ -24,9 +24,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initData];
-    [self initSelectedTag:[SGSharedManager.sharedManager getTag]];
-    [self initDeviceRotateNotification];
+    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
+        [self getCurrentUser];
+    }else{
+        [self anonymouslySignIn];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -40,6 +42,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+-(void)homeScreenInit{
+    [self initData];
+    [self initSelectedTag:[SGSharedManager.sharedManager getTag]];
+    [self initDeviceRotateNotification];
 }
 
 -(void)initDeviceRotateNotification{
@@ -67,7 +75,6 @@
     isTakenPhoto = false;
     self.engine = [[DirtyExtractor alloc] init];
     [self initLocationManager];
-    [self getCurrentUser];
     self.cleanareaViews = [NSMutableArray array];
     [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
 }
@@ -81,12 +88,54 @@
                                                       __strong typeof(wself) sself = wself;
                                                       if(sself){
                                                           [hud hideAnimated:false];
-                                                          if (error!= nil)
+                                                          if (error!= nil){
                                                               [sself showAlertdialog:@"Error" message:error.localizedDescription];
+                                                          }else{
+                                                              [self homeScreenInit];
+                                                          }
                                                       }
                                                   }];
     }
 }
+
+- (void)anonymouslySignIn{
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser *_Nullable user, NSError *_Nullable error) {
+        if(error == nil){
+            [[SGFirebaseManager sharedManager] registerWithFireUser:user
+                                             completionHandler:^(NSError *error, SGUser *sgUser) {
+                                                 [hud hideAnimated:false];
+                                                 if(error != nil){
+                                                     [self showAlertdialog:nil message:error.localizedDescription];
+                                                 }else{
+                                                    if(![SGSharedManager.sharedManager isAlreadyRunnded]){
+                                                         [SGSharedManager.sharedManager setAlreadyRunnded];
+                                                    }
+                                                    [self homeScreenInit];
+                                                 }
+                                             }];
+        }else{
+            [hud hideAnimated:false];
+            [self showAlertdialog:nil message:error.localizedDescription];
+        }
+    }];
+}
+
+-(void)showNoConnectionAlertdialog{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"ATTENTION"
+                                                                   message:@"No connection, Please check your network settings and retry"
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
+            [self getCurrentUser];
+        }else{
+            [self anonymouslySignIn];
+        }
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
 
 -(void)setLabelsWithEstimateData{
     if(!self.notificationLabel.isHidden)

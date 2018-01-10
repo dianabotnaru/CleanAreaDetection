@@ -26,10 +26,12 @@
     self.isLoggedIn = false;
     [FIRApp configure];
     [self initNavigationbar];
+    [self initMenuViewController];
+
     if ([FIRAuth auth].currentUser) {
         if ([SGSharedManager.sharedManager isAlreadyRunnded]) {
-            [self initMenuViewController];
         }
+    }else{
     }
     return YES;
 }
@@ -58,7 +60,7 @@
 
 - (void)initMenuViewController{
     
-    [SGSharedManager.sharedManager setAlreadyRunnded];
+//    [SGSharedManager.sharedManager setAlreadyRunnded];
     self.isLoggedIn = true;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -104,8 +106,12 @@
 {
     if(!self.isLoggedIn)
         return UIInterfaceOrientationMaskPortrait;
-    else
-        return UIInterfaceOrientationMaskAll;
+    else{
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            return UIInterfaceOrientationMaskPortrait;
+        else
+            return UIInterfaceOrientationMaskAll;
+    }
 }
 
 @end
