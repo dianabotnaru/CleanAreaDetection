@@ -220,18 +220,18 @@
 -(void)removeTag:(SGTag *)tag
 completionHandler:(void (^)(NSError *error))completionHandler{
     NSString *userID = [FIRAuth auth].currentUser.uid;
-    if ([tag.tagImageUrl isEqualToString:@""]){
+//    if ([tag.tagImageUrl isEqualToString:@""]){
         [[self.dataBaseRef child:[NSString stringWithFormat:@"/tags/%@/%@",userID, tag.tagId]] removeValue];
         completionHandler(nil);
-    }else{
-        FIRStorageReference *desertRef = [self.storageRef child:tag.tagImageUrl];
-        [desertRef deleteWithCompletion:^(NSError *error){
-            if (error == nil) {
-                [[self.dataBaseRef child:[NSString stringWithFormat:@"/tags/%@/%@",userID, tag.tagId]] removeValue];
-            }
-            completionHandler(error);
-        }];
-    }
+//    }else{
+//        FIRStorageReference *desertRef = [self.storageRef child:tag.tagImageUrl];
+//        [desertRef deleteWithCompletion:^(NSError *error){
+//            if (error == nil) {
+//                [[self.dataBaseRef child:[NSString stringWithFormat:@"/tags/%@/%@",userID, tag.tagId]] removeValue];
+//            }
+//            completionHandler(error);
+//        }];
+//    }
 
 }
 
