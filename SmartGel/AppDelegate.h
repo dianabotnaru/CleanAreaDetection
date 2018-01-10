@@ -13,6 +13,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIStoryboard *storyboard;
 
 @property (assign, nonatomic) bool isLoggedIn;
 

@@ -95,7 +95,9 @@
                                                           }
                                                       }
                                                   }];
-    }
+    }else{
+        [self homeScreenInit];
+   }
 }
 
 - (void)anonymouslySignIn{
@@ -302,8 +304,9 @@
 
 -(IBAction)launchPhotoPickerController{
     if(!self.selectedTag.tagName){
-        [self showAlertdialog:nil message:@"Please select a tag"];
-        return;
+//        [self showAlertdialog:nil message:@"Please select a tag"];
+//        return;
+        self.selectedTag = [[SGTag alloc] init];
     }
     if(isShowDirtyArea)
         [self hideDirtyArea];

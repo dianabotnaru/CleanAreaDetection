@@ -63,10 +63,14 @@
 //    [SGSharedManager.sharedManager setAlreadyRunnded];
     self.isLoggedIn = true;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    SGHomeViewController *ORfeedviewcontroller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:ORfeedviewcontroller];
-    SGMenuViewController *ORmenuviewcontroller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGMenuViewController"];
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        self.storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    else
+        self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    SGHomeViewController *homeviewcontroller = [self.storyboard instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeviewcontroller];
+    SGMenuViewController *ORmenuviewcontroller = [self.storyboard instantiateViewControllerWithIdentifier:@"SGMenuViewController"];
     SGMenuViewController *rightMenuViewController = [[SGMenuViewController alloc] init];
     
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController

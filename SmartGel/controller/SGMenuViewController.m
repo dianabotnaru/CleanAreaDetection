@@ -67,28 +67,28 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-            self.sgHomeViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
+            self.sgHomeViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHomeViewController]
                                                          animated:YES];
             break;
         case 1:
-            self.sgLaboratoryViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGLaboratoryViewController"];
+            self.sgLaboratoryViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGLaboratoryViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgLaboratoryViewController]
                                                          animated:YES];
             break;
 
         case 2:
-            self.sgHistoryViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryViewController"];
+            self.sgHistoryViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHistoryViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHistoryViewController]
                                                          animated:YES];
             break;
         case 3:
-            self.sgSettingViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGSettingViewController"];
+            self.sgSettingViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGSettingViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgSettingViewController]
                                                          animated:YES];
             break;
         case 4:
-            self.sgWebViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGWebViewController"];
+            self.sgWebViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGWebViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgWebViewController]
                                                          animated:YES];
             break;
