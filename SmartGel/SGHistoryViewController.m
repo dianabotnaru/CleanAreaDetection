@@ -156,21 +156,15 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UIStoryboard  *storyboard;
-    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
-    else
-        storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-
     if(!isLaboratory){
         EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
-        SGHistoryDetailViewController *detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
+        SGHistoryDetailViewController *detailViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
         detailViewController.selectedEstimateImageModel = estimateImageModel;
         detailViewController.delegate = self;
         [self.navigationController pushViewController:detailViewController animated:YES];
     }else{
         LaboratoryDataModel *laboratoryDatamodel = [self.laboratoryFilterArray objectAtIndex:indexPath.row];
-        SGLaboratoryItemViewController *detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"SGLaboratoryItemViewController"];
+        SGLaboratoryItemViewController *detailViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGLaboratoryItemViewController"];
         detailViewController.laboratoryDataModel = laboratoryDatamodel;
         detailViewController.delegate = self;
         [self.navigationController pushViewController:detailViewController animated:YES];

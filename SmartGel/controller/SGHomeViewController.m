@@ -47,7 +47,8 @@
 -(void)homeScreenInit{
     [self initData];
     [self initSelectedTag:[SGSharedManager.sharedManager getTag]];
-    [self initDeviceRotateNotification];
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        [self initDeviceRotateNotification];
 }
 
 -(void)initDeviceRotateNotification{
