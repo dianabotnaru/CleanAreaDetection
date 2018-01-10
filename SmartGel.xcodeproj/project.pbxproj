@@ -28,6 +28,7 @@
 		8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625C1FD8247C008DFED2 /* Smiley_.png */; };
 		8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */; };
 		8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5561FED0CB10051EE76 /* SGUtil.m */; };
+		8D63C9D420065AB400C2387A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D63C9D320065AB400C2387A /* Main_iPhone.storyboard */; };
 		8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
@@ -92,6 +93,7 @@
 		8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGFirebaseManager.m; path = manager/SGFirebaseManager.m; sourceTree = "<group>"; };
 		8D56D5551FED0CB10051EE76 /* SGUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUtil.h; path = SGUtil/SGUtil.h; sourceTree = "<group>"; };
 		8D56D5561FED0CB10051EE76 /* SGUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUtil.m; path = SGUtil/SGUtil.m; sourceTree = "<group>"; };
+		8D63C9D320065AB400C2387A /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPhone.storyboard; path = storyboard/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSigninViewController.h; path = controller/Signin/SGUserSigninViewController.h; sourceTree = "<group>"; };
 		8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUserSigninViewController.m; path = controller/Signin/SGUserSigninViewController.m; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		8DB412221FFC84A200ED5550 /* storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				8D63C9D320065AB400C2387A /* Main_iPhone.storyboard */,
 				8DB412231FFC84B100ED5550 /* LaunchScreen.storyboard */,
 				8DB412241FFC84B100ED5550 /* Main.storyboard */,
 			);
@@ -578,6 +581,7 @@
 				8DB412251FFC84B100ED5550 /* LaunchScreen.storyboard in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */,
+				8D63C9D420065AB400C2387A /* Main_iPhone.storyboard in Resources */,
 				8D5662601FD8247C008DFED2 /* Smiley_).png in Resources */,
 				8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */,
 				8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */,
