@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setHidden:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,4 +96,31 @@
         }
     }];
 }
+
+- (void)keyboardWillShow:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.25 animations:^
+     {
+         CGRect newFrame = [self.view frame];
+         newFrame.origin.y -= 100; // tweak here to adjust the moving position
+         [self.view setFrame:newFrame];
+         
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.25 animations:^
+     {
+         CGRect newFrame = [self.view frame];
+         newFrame.origin.y += 100; // tweak here to adjust the moving position
+         [self.view setFrame:newFrame];
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+}
+
+
 @end

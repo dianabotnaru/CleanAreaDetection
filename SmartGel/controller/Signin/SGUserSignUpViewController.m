@@ -21,6 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,4 +86,33 @@
     [self.emailTextField resignFirstResponder];
     [self.pwTextField resignFirstResponder];
 }
+
+- (void)keyboardWillShow:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.25 animations:^
+     {
+         CGRect newFrame = [self.view frame];
+         if (newFrame.origin.y==0){
+             newFrame.origin.y -= 100; // tweak here to adjust the moving position
+             [self.view setFrame:newFrame];
+         }
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    [UIView animateWithDuration:0.25 animations:^
+     {
+         CGRect newFrame = [self.view frame];
+         if (newFrame.origin.y!=0){
+             newFrame.origin.y += 100; // tweak here to adjust the moving position
+             [self.view setFrame:newFrame];
+         }
+     }completion:^(BOOL finished)
+     {
+         
+     }];
+}
+
 @end
