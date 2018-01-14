@@ -74,12 +74,12 @@
 }
 
 - (IBAction)signUpButtonTapped{
-    SGUserSignUpViewController *signUpViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGUserSignUpViewController"];
+    SGUserSignUpViewController *signUpViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGUserSignUpViewController"];
     [self.navigationController pushViewController:signUpViewController animated:YES];
 }
 
 - (IBAction)fogotPasswordButtonTapped{
-    SGForgotPasswordViewController *forgotViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGForgotPasswordViewController"];
+    SGForgotPasswordViewController *forgotViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGForgotPasswordViewController"];
     [self.navigationController pushViewController:forgotViewController animated:YES];
 }
 

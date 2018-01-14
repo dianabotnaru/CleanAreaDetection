@@ -26,8 +26,9 @@
     self.isLoggedIn = false;
     [FIRApp configure];
     [self initNavigationbar];
-    [self initMenuViewController];
-
+    [self initStoryBoard];
+//    [self initMenuViewController];
+    [self gotoSignInScreen];
     if ([FIRAuth auth].currentUser) {
         if ([SGSharedManager.sharedManager isAlreadyRunnded]) {
         }
@@ -58,16 +59,17 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)initMenuViewController{
-    
-//    [SGSharedManager.sharedManager setAlreadyRunnded];
-    self.isLoggedIn = true;
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+-(void)initStoryBoard{
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
         self.storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     else
         self.storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+}
 
+- (void)initMenuViewController{
+//    [SGSharedManager.sharedManager setAlreadyRunnded];
+    self.isLoggedIn = true;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SGHomeViewController *homeviewcontroller = [self.storyboard instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeviewcontroller];
     SGMenuViewController *ORmenuviewcontroller = [self.storyboard instantiateViewControllerWithIdentifier:@"SGMenuViewController"];
@@ -90,7 +92,7 @@
 
 -(void)gotoSignInScreen{
     self.isLoggedIn = false;
-    SGUserSigninViewController *signInViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGUserSigninViewController"];
+    SGUserSigninViewController *signInViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SGUserSigninViewController"];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:signInViewController];
     [self initNavigationbar];
     self.window.rootViewController = navigationController;

@@ -216,7 +216,6 @@
               metadata:nil
             completion:^(FIRStorageMetadata *metadata,NSError *error) {
                 if (error == nil) {
-                
                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/%@/%@/%@/image/",@"tags", userID,tag.tagId]: metadata.downloadURL.absoluteString};
                     [self.dataBaseRef updateChildValues:childUpdates];
                 }
