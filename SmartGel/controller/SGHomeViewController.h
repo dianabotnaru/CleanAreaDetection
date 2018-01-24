@@ -22,6 +22,7 @@
     bool isShowDirtyArea;
     bool isSavedImage;
     bool isTakenPhoto;
+    bool isAddCleanArea;
     MBProgressHUD *hud;
     
     BOOL isFullScreen;
@@ -39,6 +40,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *showCleanAreaButton;
+@property (strong, nonatomic) IBOutlet UIButton *addManualAreaButton;
+@property (strong, nonatomic) IBOutlet UILabel *addManualAreaLabel;
 @property (strong, nonatomic) IBOutlet UILabel *showCleanAreaLabel;
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
 

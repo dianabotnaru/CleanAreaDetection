@@ -22,6 +22,8 @@ alpha:1.0]
 #define SGColorDarkPink UIColorFromRGB(0xC04399)
 #define SGColorDarkYellow UIColorFromRGB(0x323A45)
 
+#define SGColorLigtGray UIColorFromRGB(0xE0E0E0)
+
 #define SGDefaultColorOffset 5
 #define SGGridCount 10
 

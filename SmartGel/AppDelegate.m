@@ -27,8 +27,8 @@
     [FIRApp configure];
     [self initNavigationbar];
     [self initStoryBoard];
-//    [self initMenuViewController];
-    [self gotoSignInScreen];
+    [self initMenuViewController];
+//    [self gotoSignInScreen];
     if ([FIRAuth auth].currentUser) {
         if ([SGSharedManager.sharedManager isAlreadyRunnded]) {
         }

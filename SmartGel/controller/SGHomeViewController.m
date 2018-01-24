@@ -74,6 +74,7 @@
 - (void)initData{
     isSavedImage = false;
     isTakenPhoto = false;
+    isAddCleanArea = false;
     self.engine = [[DirtyExtractor alloc] init];
     [self initLocationManager];
     self.cleanareaViews = [NSMutableArray array];
@@ -328,6 +329,18 @@
 //                                  [self initDataUiWithImage:image];
 //                              }
 //                          }];
+}
+
+-(IBAction)addManualAreaButtonTapped{
+    if(isAddCleanArea){
+        isAddCleanArea = false;
+        [self.addManualAreaLabel setText:@"Add Non-Gel Area"];
+        [self.addManualAreaButton setBackgroundColor:SGColorLigtGray];
+    }else{
+        isAddCleanArea = true;
+        [self.addManualAreaLabel setText:@"Add Clean Area"];
+        [self.addManualAreaButton setBackgroundColor:SGColorDarkPink];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
