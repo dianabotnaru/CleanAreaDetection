@@ -295,14 +295,13 @@
         [self showAlertdialog:nil message:@"Please take a photo."];
         return;
     }
-    [self.estimateImage resetNonGelArea];
-    [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
-    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-    for(int i = 0; i<SGGridCount;i++){
-        for(int j = 0; j<SGGridCount;j++){
-            [self updateNonGelAreaViews:i withPointY:j];
-        }
-    }
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(isShowDirtyArea)
+        [self hideDirtyArea];
+        [self initDataUiWithImage];
+        [hud hideAnimated:false];
+    });
 }
 
 -(IBAction)launchPhotoPickerController{
