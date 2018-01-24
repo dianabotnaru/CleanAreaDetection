@@ -186,6 +186,7 @@
 }
 
 -(void)initCleanareaViews:(NSMutableArray*)dirtyState{
+    [self.cleanareaViews removeAllObjects];
     CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
     float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
@@ -334,12 +335,12 @@
 -(IBAction)addManualAreaButtonTapped{
     if(isAddCleanArea){
         isAddCleanArea = false;
-        [self.addManualAreaLabel setText:@"Add Non-Gel Area"];
-        [self.addManualAreaButton setBackgroundColor:SGColorLigtGray];
-    }else{
-        isAddCleanArea = true;
         [self.addManualAreaLabel setText:@"Add Clean Area"];
         [self.addManualAreaButton setBackgroundColor:SGColorDarkPink];
+    }else{
+        isAddCleanArea = true;
+        [self.addManualAreaLabel setText:@"Add Non-Gel Area"];
+        [self.addManualAreaButton setBackgroundColor:SGColorLigtGray];
     }
 }
 
@@ -379,12 +380,15 @@
         CGPoint touchLocation = [touch1 locationInView:self.gridView];
         int touchPosition = [self.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
         if(touchPosition != -1){
-            [self updateDataAndUIbyTouch:touchPosition];
+            if(isAddCleanArea)
+                [self addManualPinkArea:touchPosition];
+            else
+                [self addManualNonGelArea:touchPosition];
         }
     }
 }
 
--(void)updateDataAndUIbyTouch:(int)touchPosition{
+-(void)addManualNonGelArea:(int)touchPosition{
     [self.estimateImage updateNonGelAreaString:touchPosition];
     [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
@@ -394,6 +398,14 @@
     [self updateNonGelAreaViews:pointX withPointY:pointY];
 }
 
+-(void)addManualPinkArea:(int)touchPosition{
+    [self.engine addCleanArea:touchPosition];
+    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
+    int pointX = touchPosition/SGGridCount;
+    int pointY = touchPosition%SGGridCount;
+    [self addManualPinkAreaViews:pointX withPointY:pointY];
+}
+
 -(void)updateNonGelAreaViews:(int)pointX
                  withPointY:(int)pointY{
     int rate = AREA_DIVIDE_NUMBER/SGGridCount;
@@ -401,13 +413,30 @@
         for(int j = 0; j< rate; j++){
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
             UIView *view = [self.cleanareaViews objectAtIndex:postion];
-            if([[self.engine.areaCleanState objectAtIndex:postion] intValue] == NO_GEL){
-                [view removeFromSuperview];
-            }else{
-                [self.takenImageView addSubview:view];
-            }
+            [view removeFromSuperview];
         }
     }
+    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
+    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
+    self.estimateImage.cleanValue = self.engine.cleanValue;
+}
+
+-(void)addManualPinkAreaViews:(int)pointX
+                   withPointY:(int)pointY{
+    
+    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+    for(int i = 0; i<rate;i++){
+        for(int j = 0; j< rate; j++){
+            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+            UIView *view = [self.cleanareaViews objectAtIndex:postion];
+            [view removeFromSuperview];
+            [view setBackgroundColor:[UIColor redColor]];
+            [view setAlpha:0.3];
+            [self.cleanareaViews replaceObjectAtIndex:postion withObject:view];
+            [self.takenImageView addSubview:view];
+        }
+    }
+
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
     self.estimateImage.cleanValue = self.engine.cleanValue;
