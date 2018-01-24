@@ -67,7 +67,7 @@
         }
         [self.cleanareaViews removeAllObjects];
         [self drawGridView];
-        [self initCleanareaViews: self.engine.originalAreaCleanState];
+        [self initCleanareaViews: self.engine.areaCleanState];
     }
 }
 
