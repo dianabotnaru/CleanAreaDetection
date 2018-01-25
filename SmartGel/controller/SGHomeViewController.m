@@ -298,7 +298,7 @@
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_main_queue(), ^{
         if(isShowDirtyArea)
-        [self hideDirtyArea];
+            [self hideDirtyArea];
         [self initDataUiWithImage];
         [hud hideAnimated:false];
     });
@@ -381,8 +381,9 @@
         if(touchPosition != -1){
             if(isAddCleanArea)
                 [self addManualPinkArea:touchPosition];
-            else
+            else{
                 [self addManualNonGelArea:touchPosition];
+            }
         }
     }
 }
@@ -397,8 +398,16 @@
     [self updateNonGelAreaViews:pointX withPointY:pointY];
 }
 
+-(void)removeManualNonGelArea:(int)touchPosition{
+    [self.estimateImage updateNonGelAreaString:touchPosition];
+    [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
+    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
+
+}
+
 -(void)addManualPinkArea:(int)touchPosition{
     [self.engine addCleanArea:touchPosition];
+    [self.estimateImage addNonGelAreaString:touchPosition];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
     int pointX = touchPosition/SGGridCount;
     int pointY = touchPosition%SGGridCount;
@@ -412,7 +421,11 @@
         for(int j = 0; j< rate; j++){
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
             UIView *view = [self.cleanareaViews objectAtIndex:postion];
-            [view removeFromSuperview];
+            if([[self.engine.areaCleanState objectAtIndex:postion] intValue] == NO_GEL){
+                [view removeFromSuperview];
+            }else{
+                [self.takenImageView addSubview:view];
+            }
         }
     }
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
@@ -422,7 +435,6 @@
 
 -(void)addManualPinkAreaViews:(int)pointX
                    withPointY:(int)pointY{
-    
     int rate = AREA_DIVIDE_NUMBER/SGGridCount;
     for(int i = 0; i<rate;i++){
         for(int j = 0; j< rate; j++){

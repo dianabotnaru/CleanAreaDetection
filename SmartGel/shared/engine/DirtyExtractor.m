@@ -286,10 +286,10 @@
 
 -(void)setNonGelAreaState:(NSMutableArray *)nonGelAreaArray{
     m_nNoGelCount = 0;
-//    [_areaCleanState removeAllObjects];
-//    for(int i =0;i<_originalAreaCleanState.count;i++){
-//        [_areaCleanState addObject:[_originalAreaCleanState objectAtIndex:i]];
-//    }
+    [_areaCleanState removeAllObjects];
+    for(int i =0;i<_originalAreaCleanState.count;i++){
+        [_areaCleanState addObject:[_originalAreaCleanState objectAtIndex:i]];
+    }
     for(int i=0;i<nonGelAreaArray.count;i++){
         bool isNonGel = [[nonGelAreaArray objectAtIndex:i] boolValue];
         if(isNonGel){

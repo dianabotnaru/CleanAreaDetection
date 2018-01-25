@@ -60,6 +60,18 @@
     self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
 }
 
+-(void)addNonGelAreaString:(int)position{
+    NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
+    [nonGelAreaArray replaceObjectAtIndex:position withObject:@(false)];
+    self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
+}
+
+
+-(BOOL)isNonGelArea:(int)position{
+    NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
+    return [[nonGelAreaArray objectAtIndex:position] boolValue];
+}
+
 -(void)setCleanAreaWithArray:(NSMutableArray*)array{
     self.cleanArea = [self getStringFromArray:array];
 }
