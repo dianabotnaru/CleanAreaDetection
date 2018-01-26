@@ -65,7 +65,6 @@
         if(isShowDirtyArea){
            [self hideDirtyArea];
         }
-        [self.cleanareaViews removeAllObjects];
         [self drawGridView];
         [self initCleanareaViews: self.engine.areaCleanState];
     }
@@ -78,6 +77,7 @@
     self.engine = [[DirtyExtractor alloc] init];
     [self initLocationManager];
     self.cleanareaViews = [NSMutableArray array];
+    self.orignialcleanareaViews = [NSMutableArray array];
     [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
 }
 
@@ -187,6 +187,7 @@
 
 -(void)initCleanareaViews:(NSMutableArray*)dirtyState{
     [self.cleanareaViews removeAllObjects];
+    [self.orignialcleanareaViews removeAllObjects];
     CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
     float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
     float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
@@ -214,6 +215,7 @@
             [paintView setAlpha:0.2];
         }
         [self.cleanareaViews addObject:paintView];
+        [self.orignialcleanareaViews addObject:paintView];
     }
 }
 
@@ -352,7 +354,6 @@
 }
 
 -(void)initDataUiWithImage{
-    [self.cleanareaViews removeAllObjects];
     isSavedImage = false;
     self.engine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
     [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
@@ -379,8 +380,13 @@
         CGPoint touchLocation = [touch1 locationInView:self.gridView];
         int touchPosition = [self.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
         if(touchPosition != -1){
-            if(isAddCleanArea)
-                [self addManualPinkArea:touchPosition];
+            if(isAddCleanArea){
+                if([self.estimateImage isManualCleanlArea:touchPosition]){
+                    [self removeMaunalCleanArea:touchPosition];
+                }else{
+                    [self addManualCleanArea:touchPosition];
+                }
+            }
             else{
                 [self addManualNonGelArea:touchPosition];
             }
@@ -398,20 +404,25 @@
     [self updateNonGelAreaViews:pointX withPointY:pointY];
 }
 
--(void)removeManualNonGelArea:(int)touchPosition{
-    [self.estimateImage updateNonGelAreaString:touchPosition];
-    [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
-    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-
-}
-
--(void)addManualPinkArea:(int)touchPosition{
+-(void)addManualCleanArea:(int)touchPosition{
     [self.engine addCleanArea:touchPosition];
-    [self.estimateImage addNonGelAreaString:touchPosition];
+
+    [self.estimateImage addNonGelAreaString:touchPosition withState:false];
+    [self.estimateImage updateManualCleanAreaString:touchPosition];
+
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
     int pointX = touchPosition/SGGridCount;
     int pointY = touchPosition%SGGridCount;
     [self addManualPinkAreaViews:pointX withPointY:pointY];
+}
+
+-(void)removeMaunalCleanArea:(int)touchPosition{
+    [self.engine removeManualCleanArea:touchPosition];
+    [self.estimateImage updateManualCleanAreaString:touchPosition];
+    [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
+    int pointX = touchPosition/SGGridCount;
+    int pointY = touchPosition%SGGridCount;
+    [self removeManualPinkAreaViews:pointX withPointY:pointY];
 }
 
 -(void)updateNonGelAreaViews:(int)pointX
@@ -441,10 +452,11 @@
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
             UIView *view = [self.cleanareaViews objectAtIndex:postion];
             [view removeFromSuperview];
-            [view setBackgroundColor:[UIColor redColor]];
-            [view setAlpha:0.3];
-            [self.cleanareaViews replaceObjectAtIndex:postion withObject:view];
-            [self.takenImageView addSubview:view];
+            UIView *manualPinkView = [[UIView alloc] initWithFrame:view.frame];
+            [manualPinkView setBackgroundColor:[UIColor redColor]];
+            [manualPinkView setAlpha:0.3];
+            [self.cleanareaViews replaceObjectAtIndex:postion withObject:manualPinkView];
+            [self.takenImageView addSubview:[self.cleanareaViews objectAtIndex:postion]];
         }
     }
 
@@ -452,6 +464,26 @@
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
+
+-(void)removeManualPinkAreaViews:(int)pointX
+                   withPointY:(int)pointY{
+    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+    for(int i = 0; i<rate;i++){
+        for(int j = 0; j< rate; j++){
+            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+            UIView *view = [self.cleanareaViews objectAtIndex:postion];
+            [view removeFromSuperview];
+            UIView *originalview = [self.orignialcleanareaViews objectAtIndex:postion];
+            [self.cleanareaViews replaceObjectAtIndex:postion withObject:originalview];
+            [self.takenImageView addSubview:originalview];
+        }
+    }
+    
+    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
+    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
+    self.estimateImage.cleanValue = self.engine.cleanValue;
+}
+
 
 -(IBAction)btnTagIndicatorTapped:(id)sender{
     SGTagViewController *tagVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGTagViewController"];

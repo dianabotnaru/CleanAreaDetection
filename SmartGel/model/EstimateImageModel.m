@@ -38,6 +38,7 @@
     self.location = currentLocation;
     self.cleanArea = [self getStringFromArray:cleanArray];
     self.nonGelArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
+    self.manualCleanlArea = [self getStringFromArray:[self nonGelAreaArrayInit]];
 }
 
 -(void)resetNonGelArea{
@@ -60,7 +61,16 @@
     self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
 }
 
--(void)addNonGelAreaString:(int)position{
+-(void)updateManualCleanAreaString:(int)position{
+    NSMutableArray *manualCleanAreaArray = [self getArrayFromString : self.manualCleanlArea];
+    bool isManualCleanArea = [[manualCleanAreaArray objectAtIndex:position] boolValue];
+    [manualCleanAreaArray replaceObjectAtIndex:position withObject:@(!isManualCleanArea)];
+    self.manualCleanlArea = [self getStringFromArray:manualCleanAreaArray];
+}
+
+
+-(void)addNonGelAreaString:(int)position
+                withState :(BOOL)isNonGelArea{
     NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
     [nonGelAreaArray replaceObjectAtIndex:position withObject:@(false)];
     self.nonGelArea = [self getStringFromArray:nonGelAreaArray];
@@ -71,6 +81,12 @@
     NSMutableArray *nonGelAreaArray = [self getArrayFromString : self.nonGelArea];
     return [[nonGelAreaArray objectAtIndex:position] boolValue];
 }
+
+-(BOOL)isManualCleanlArea:(int)position{
+    NSMutableArray *manualCleanAreaArray = [self getArrayFromString : self.manualCleanlArea];
+    return [[manualCleanAreaArray objectAtIndex:position] boolValue];
+}
+
 
 -(void)setCleanAreaWithArray:(NSMutableArray*)array{
     self.cleanArea = [self getStringFromArray:array];

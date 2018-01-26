@@ -20,6 +20,9 @@
 @property (strong, nonatomic) NSString *cleanArea;
 @property (strong, nonatomic) NSString *dirtyArea;
 @property (strong, nonatomic) NSString *nonGelArea;
+
+@property (strong, nonatomic) NSString *manualCleanlArea;
+
 @property (strong, nonatomic) NSString *tag;
 @property (strong, nonatomic) NSString *tagImageUrl;
 
@@ -39,6 +42,10 @@
 -(void)setCleanAreaWithArray:(NSMutableArray*)array;
 -(void)resetNonGelArea;
 -(BOOL)isNonGelArea:(int)position;
--(void)addNonGelAreaString:(int)position;
+-(void)addNonGelAreaString:(int)position
+                withState :(BOOL)isNonGelArea;
+
+-(BOOL)isManualCleanlArea:(int)position;
+-(void)updateManualCleanAreaString:(int)position;
 
 @end

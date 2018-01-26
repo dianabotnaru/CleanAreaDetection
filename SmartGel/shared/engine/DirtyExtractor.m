@@ -321,6 +321,20 @@
     [self calculateDirtyValue];
 }
 
+-(void)removeManualCleanArea:(int)touchPosition{
+    int pointX = touchPosition/SGGridCount;
+    int pointY = touchPosition%SGGridCount;
+    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
+    for(int i = 0; i<rate;i++){
+        for(int j = 0; j< rate; j++){
+            NSUInteger position = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
+            int areaState = [[_originalAreaCleanState objectAtIndex:position] intValue];
+            [_areaCleanState replaceObjectAtIndex:position withObject:@(areaState)];
+        }
+    }
+    [self calculateDirtyValue];
+}
+
 - (XYZ)getXYZfromRGB : (RGBA *)rgbColor{
     
     float red = (float)rgbColor->r/255;
