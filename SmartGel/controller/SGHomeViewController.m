@@ -314,10 +314,7 @@
     }
     if(isShowDirtyArea)
         [self hideDirtyArea];
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:imagePickerController animated:NO completion:nil];
+    [self showPhotoChooseActionSheet];
     
 //    self.estimateImage = [[EstimateImageModel alloc] init];
 //    self.estimateImage.image = [UIImage imageNamed:@"test.png"];
@@ -333,7 +330,50 @@
 //                          }];
 }
 
+-(void)showPhotoChooseActionSheet{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet]; // 1
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Camera"
+                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                              [self launchCameraScreen:true];
+                                                          }];
+    UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Gallery"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               [self launchCameraScreen:false];
+                                                           }];
+    [alert addAction:firstAction];
+    [alert addAction:secondAction];
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        UIPopoverPresentationController *popPresenter = [alert
+                                                         popoverPresentationController];
+        popPresenter.sourceView = self.view;
+        popPresenter.sourceRect = CGRectMake(self.view.frame.size.width-60, self.view.frame.size.height/2, 30, 0);
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+
+}
+
+-(void)launchCameraScreen:(BOOL)isCamera{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    if(isCamera){
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else{
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    [self presentViewController:imagePickerController animated:NO completion:nil];
+}
+
 -(IBAction)addManualAreaButtonTapped{
+    if(self.estimateImage.image == nil){
+        [self showAlertdialog:nil message:@"Please take a photo."];
+        return;
+    }
     if(isAddCleanArea){
         isAddCleanArea = false;
         [self.addManualAreaLabel setText:@"Add Clean Area"];

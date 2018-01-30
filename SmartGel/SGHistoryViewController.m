@@ -304,7 +304,7 @@
         UIPopoverPresentationController *popPresenter = [alert
                                                          popoverPresentationController];
         popPresenter.sourceView = self.view;
-        popPresenter.sourceRect = CGRectMake(self.view.frame.size.width-30, 0, 30, 0);
+        popPresenter.sourceRect = CGRectMake(self.view.frame.size.width-70, 0, 30, 0);
         [self presentViewController:alert animated:YES completion:nil];
     }else{
         [self presentViewController:alert animated:YES completion:nil];
