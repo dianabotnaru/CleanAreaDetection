@@ -72,6 +72,7 @@
 
 - (void)initData{
     isSavedImage = false;
+    isSavedToGallery = false;
     isTakenPhoto = false;
     isAddCleanArea = false;
     self.engine = [[DirtyExtractor alloc] init];
@@ -342,8 +343,14 @@
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                [self launchCameraScreen:false];
                                                            }];
+    
+    UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                           }];
+
     [alert addAction:firstAction];
     [alert addAction:secondAction];
+    [alert addAction:thirdAction];
     
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
@@ -388,6 +395,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
     self.estimateImage = [[EstimateImageModel alloc] init];
     self.estimateImage.image = image;
+    UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
     isTakenPhoto = true;
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
