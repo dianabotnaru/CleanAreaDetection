@@ -366,7 +366,7 @@
                                             <action selector="launchPhotoPickerController" destination="BYZ-38-t0r" eventType="touchUpInside" id="ACh-Rg-l5V"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDd-A5-Ob0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a photo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDd-A5-Ob0">
                                         <rect key="frame" x="5" y="322" width="55" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="55" id="YXB-RW-xrc"/>
