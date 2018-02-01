@@ -72,7 +72,7 @@
 
 - (void)initData{
     isSavedImage = false;
-    isSavedToGallery = false;
+    isSelectedFromCamera = false;
     isTakenPhoto = false;
     isAddCleanArea = false;
     self.engine = [[DirtyExtractor alloc] init];
@@ -366,6 +366,7 @@
 }
 
 -(void)launchCameraScreen:(BOOL)isCamera{
+    isSelectedFromCamera = isCamera;
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = self;
     if(isCamera){
@@ -395,7 +396,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
     self.estimateImage = [[EstimateImageModel alloc] init];
     self.estimateImage.image = image;
-    UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
+    if(isSelectedFromCamera){
+        UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
+    }
     isTakenPhoto = true;
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];

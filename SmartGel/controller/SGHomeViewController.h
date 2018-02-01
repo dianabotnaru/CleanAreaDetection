@@ -21,7 +21,7 @@
 @interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGTagViewControllerDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
-    bool isSavedToGallery;
+    bool isSelectedFromCamera;
     bool isTakenPhoto;
     bool isAddCleanArea;
     MBProgressHUD *hud;
