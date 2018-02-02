@@ -17,6 +17,7 @@
 #import "SGGridView.h"
 #import "UIImageView+WebCache.h"
 #import "SGTagViewController.h"
+#import "SGCleanEditView.h"
 
 @interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGTagViewControllerDelegate>{
     bool isShowDirtyArea;
@@ -49,7 +50,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tagImageView;
 
-@property (strong, nonatomic) IBOutlet UIView *imageareaView;
+@property (strong, nonatomic) IBOutlet SGCleanEditView *cleanEditView;
+//@property (strong, nonatomic) SGCleanEditView *cleanEditView;
 
 @property (nonatomic, strong) DirtyExtractor *engine;
 @property (nonatomic, strong) DirtyExtractor *partyEngine;

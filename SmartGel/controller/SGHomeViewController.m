@@ -24,20 +24,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
-        [self getCurrentUser];
-    }else{
-        [self anonymouslySignIn];
-    }
+
+//    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
+//        [self getCurrentUser];
+//    }else{
+//        [self anonymouslySignIn];
+//    }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(isTakenPhoto){
-        [self initDataUiWithImage];
-        isTakenPhoto = false;
-        [hud hideAnimated:false];
-    }
+    [self.cleanEditView initViews];
+
+//    if(isTakenPhoto){
+//        [self initDataUiWithImage];
+//        isTakenPhoto = false;
+//        [hud hideAnimated:false];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -317,10 +324,10 @@
         [self hideDirtyArea];
     [self showPhotoChooseActionSheet];
     
-//    self.estimateImage = [[EstimateImageModel alloc] init];
-//    self.estimateImage.image = [UIImage imageNamed:@"test.png"];
-//    isTakenPhoto = true;
-//    [self initDataUiWithImage];
+    self.estimateImage = [[EstimateImageModel alloc] init];
+    self.estimateImage.image = [UIImage imageNamed:@"image001.png"];
+    isTakenPhoto = true;
+    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -416,7 +423,7 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch1 = [touches anyObject];
-    CGPoint location = [touch1 locationInView:self.imageareaView];
+    CGPoint location = [touch1 locationInView:self.cleanEditView];
 
     if(CGRectContainsPoint(self.tagImageView.frame, location)){
         [self imgToFullScreen];

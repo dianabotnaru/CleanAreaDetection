@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageZoomViewer.h"
+#import "SGGridView.h"
 
-@interface SGCleanEditView : UIView
+@interface SGCleanEditView : UIView<UIScrollViewDelegate>
 
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgview;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (strong, nonatomic) IBOutlet UIView *gridContentView;
+
+@property (strong, nonatomic) SGGridView *gridView;
+
+@property (nonatomic) BOOL zoomed;
+-(void)initViews;
 
 @end

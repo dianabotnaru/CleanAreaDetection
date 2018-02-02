@@ -58,7 +58,6 @@
 		8DD3119420246DD20054DBF2 /* image002.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119120246DD20054DBF2 /* image002.png */; };
 		8DD3119520246DD20054DBF2 /* image003.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119220246DD20054DBF2 /* image003.png */; };
 		8DD3119E2024A7CC0054DBF2 /* SGCleanEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3119B2024A7CB0054DBF2 /* SGCleanEditView.m */; };
-		8DD3119F2024A7CC0054DBF2 /* SGCleanEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119D2024A7CC0054DBF2 /* SGCleanEditView.xib */; };
 		8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */; };
 		8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */; };
 		8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */; };
@@ -149,7 +148,6 @@
 		8DD3119220246DD20054DBF2 /* image003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image003.png; path = test_image/image003.png; sourceTree = SOURCE_ROOT; };
 		8DD3119B2024A7CB0054DBF2 /* SGCleanEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGCleanEditView.m; path = view/SGCleanEditView/SGCleanEditView.m; sourceTree = "<group>"; };
 		8DD3119C2024A7CB0054DBF2 /* SGCleanEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGCleanEditView.h; path = view/SGCleanEditView/SGCleanEditView.h; sourceTree = "<group>"; };
-		8DD3119D2024A7CC0054DBF2 /* SGCleanEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGCleanEditView.xib; path = view/SGCleanEditView/SGCleanEditView.xib; sourceTree = "<group>"; };
 		8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGWebViewController.h; path = controller/SGWebViewController.h; sourceTree = "<group>"; };
 		8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGWebViewController.m; path = controller/SGWebViewController.m; sourceTree = "<group>"; };
 		8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPdfViewController.h; path = controller/SGPdfViewController.h; sourceTree = "<group>"; };
@@ -524,7 +522,6 @@
 			children = (
 				8DD3119C2024A7CB0054DBF2 /* SGCleanEditView.h */,
 				8DD3119B2024A7CB0054DBF2 /* SGCleanEditView.m */,
-				8DD3119D2024A7CC0054DBF2 /* SGCleanEditView.xib */,
 			);
 			name = SGCleanEditView;
 			sourceTree = "<group>";
@@ -614,7 +611,6 @@
 				8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
 				8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */,
-				8DD3119F2024A7CC0054DBF2 /* SGCleanEditView.xib in Resources */,
 				8DB412261FFC84B100ED5550 /* Main.storyboard in Resources */,
 				8DD3119320246DD20054DBF2 /* image001.png in Resources */,
 				8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */,
@@ -656,6 +652,9 @@
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
+				"${PODS_ROOT}/ImageZoomViewer/ImageZoomViewer/Classes/ImageZoomViewer.xib",
+				"${PODS_ROOT}/ImageZoomViewer/ImageZoomViewer/Classes/IZVMainCollectionViewCell.xib",
+				"${PODS_ROOT}/ImageZoomViewer/ImageZoomViewer/Classes/IZVSubCollectionViewCell.xib",
 				"${PODS_ROOT}/PFNavigationDropdownMenu/Classes/PFNavigationDropdownMenu.bundle",
 			);
 			name = "[CP] Copy Pods Resources";

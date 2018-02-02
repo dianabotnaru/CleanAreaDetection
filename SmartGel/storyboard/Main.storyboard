@@ -492,17 +492,25 @@
                                     <constraint firstItem="sFX-kU-3nE" firstAttribute="top" secondItem="QKj-h6-ZWW" secondAttribute="bottom" constant="8" id="xlm-Bt-8OJ"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2m-nP-ZNq">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2m-nP-ZNq" customClass="SGCleanEditView">
                                 <rect key="frame" x="20" y="60" width="648" height="880"/>
                                 <subviews>
-                                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0ne-iK-goy">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wta-Wy-47G">
                                         <rect key="frame" x="0.0" y="0.0" width="648" height="880"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="RpD-T1-dX4">
-                                        <rect key="frame" x="0.0" y="0.0" width="648" height="880"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ugK-uS-kWi">
+                                                <rect key="frame" x="0.0" y="0.0" width="648" height="880"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ugK-uS-kWi" firstAttribute="centerX" secondItem="wta-Wy-47G" secondAttribute="centerX" id="C5I-Z1-7dL"/>
+                                            <constraint firstItem="ugK-uS-kWi" firstAttribute="top" secondItem="wta-Wy-47G" secondAttribute="top" id="VSP-vI-1Y8"/>
+                                            <constraint firstItem="ugK-uS-kWi" firstAttribute="centerY" secondItem="wta-Wy-47G" secondAttribute="centerY" id="ccd-Dw-k5H"/>
+                                            <constraint firstItem="ugK-uS-kWi" firstAttribute="leading" secondItem="wta-Wy-47G" secondAttribute="leading" id="eXF-Nb-ZcP"/>
+                                            <constraint firstAttribute="bottom" secondItem="ugK-uS-kWi" secondAttribute="bottom" id="hjP-cf-NNw"/>
+                                            <constraint firstAttribute="trailing" secondItem="ugK-uS-kWi" secondAttribute="trailing" id="hsk-Ij-i97"/>
+                                        </constraints>
+                                    </scrollView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please take a photo to estimate clean state" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3Q-ZR-bNC">
                                         <rect key="frame" x="170.5" y="429" width="307" height="22"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
@@ -512,17 +520,17 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="0ne-iK-goy" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="3sv-e0-t7a"/>
+                                    <constraint firstItem="wta-Wy-47G" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="2Tj-pv-CPU"/>
+                                    <constraint firstAttribute="bottom" secondItem="wta-Wy-47G" secondAttribute="bottom" id="4Jk-hg-ZHc"/>
                                     <constraint firstItem="f3Q-ZR-bNC" firstAttribute="centerX" secondItem="b2m-nP-ZNq" secondAttribute="centerX" id="AQF-8W-Psb"/>
-                                    <constraint firstItem="RpD-T1-dX4" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="Bdk-gO-hTA"/>
-                                    <constraint firstItem="0ne-iK-goy" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="H3h-fx-nSM"/>
-                                    <constraint firstAttribute="trailing" secondItem="0ne-iK-goy" secondAttribute="trailing" id="HPp-GR-XdA"/>
-                                    <constraint firstItem="RpD-T1-dX4" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="M5y-FD-YZf"/>
                                     <constraint firstItem="f3Q-ZR-bNC" firstAttribute="centerY" secondItem="b2m-nP-ZNq" secondAttribute="centerY" id="SS2-Nh-jg5"/>
-                                    <constraint firstAttribute="bottom" secondItem="RpD-T1-dX4" secondAttribute="bottom" id="UiK-Db-6HT"/>
-                                    <constraint firstAttribute="bottom" secondItem="0ne-iK-goy" secondAttribute="bottom" id="lxB-Bl-qWi"/>
-                                    <constraint firstAttribute="trailing" secondItem="RpD-T1-dX4" secondAttribute="trailing" id="yhF-lV-4Ew"/>
+                                    <constraint firstItem="wta-Wy-47G" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="Wui-MX-XXp"/>
+                                    <constraint firstAttribute="trailing" secondItem="wta-Wy-47G" secondAttribute="trailing" id="r5n-1d-4Rg"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="imgview" destination="ugK-uS-kWi" id="ckb-ui-GVy"/>
+                                    <outlet property="scrollView" destination="wta-Wy-47G" id="xdX-cf-uW2"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8I-5h-BTo">
                                 <rect key="frame" x="20" y="15" width="300" height="34"/>
@@ -594,10 +602,9 @@
                     <connections>
                         <outlet property="addManualAreaButton" destination="QKj-h6-ZWW" id="cPu-It-Wgh"/>
                         <outlet property="addManualAreaLabel" destination="sFX-kU-3nE" id="5Hk-2j-eP0"/>
+                        <outlet property="cleanEditView" destination="b2m-nP-ZNq" id="F1z-3U-q9O"/>
                         <outlet property="dateLabel" destination="7wL-2c-Txc" id="k1G-Q3-0rM"/>
                         <outlet property="dirtyvalueLabel" destination="854-Yh-x7d" id="aeP-2f-e6J"/>
-                        <outlet property="gridContentView" destination="RpD-T1-dX4" id="PRa-Ol-GqV"/>
-                        <outlet property="imageareaView" destination="b2m-nP-ZNq" id="x5c-Hx-J9V"/>
                         <outlet property="locationLabel" destination="A8I-5h-BTo" id="HbW-vt-Zur"/>
                         <outlet property="notificationLabel" destination="f3Q-ZR-bNC" id="2E4-RF-hLG"/>
                         <outlet property="showCleanAreaButton" destination="MGE-Nh-JIh" id="4M0-eF-22p"/>
@@ -605,7 +612,6 @@
                         <outlet property="tagImageView" destination="bhD-7U-EzC" id="7A5-Dj-U8L"/>
                         <outlet property="tagLabel" destination="jnk-gN-FLo" id="Ucw-3U-QWQ"/>
                         <outlet property="takePhotoButton" destination="M1e-FX-kfH" id="vSb-kn-hAj"/>
-                        <outlet property="takenImageView" destination="0ne-iK-goy" id="c2M-wW-8I1"/>
                         <outlet property="valueLabel" destination="XlK-fN-2iW" id="ziB-1A-6fv"/>
                     </connections>
                 </viewController>
