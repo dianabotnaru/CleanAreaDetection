@@ -500,10 +500,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2m-nP-ZNq" customClass="SGCleanEditView">
                                 <rect key="frame" x="10" y="40" width="300" height="553"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLq-hc-5xh">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orh-Kl-AX1">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="553"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="PLq-hc-5xh">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="553"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image001.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Ye-bv-LBC">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Ye-bv-LBC">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="553"/>
                                             </imageView>
                                         </subviews>
@@ -515,11 +519,10 @@
                                             <constraint firstItem="6Ye-bv-LBC" firstAttribute="centerX" secondItem="PLq-hc-5xh" secondAttribute="centerX" id="cR9-ld-2zr"/>
                                             <constraint firstItem="6Ye-bv-LBC" firstAttribute="leading" secondItem="PLq-hc-5xh" secondAttribute="leading" id="e6b-dl-it5"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="b2m-nP-ZNq" id="Ucv-xb-yUh"/>
+                                        </connections>
                                     </scrollView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="orh-Kl-AX1">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="553"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -2085,7 +2088,6 @@
         <image name="ic_menu" width="19" height="20"/>
         <image name="ic_sort" width="25" height="25"/>
         <image name="ic_take_photo" width="35" height="30"/>
-        <image name="image001.png" width="1632" height="1224"/>
         <image name="logo" width="150" height="150"/>
         <image name="tm_smart_gel.png" width="310" height="233"/>
     </resources>

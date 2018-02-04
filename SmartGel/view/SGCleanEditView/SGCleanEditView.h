@@ -21,7 +21,12 @@
 
 @property (strong, nonatomic) SGGridView *gridView;
 
+@property (strong, nonatomic) NSMutableArray *cleanareaViews;
+@property (strong, nonatomic) NSMutableArray *orignialcleanareaViews;
+@property (strong, nonatomic) UIImage *takenImage;
+
 @property (nonatomic) BOOL zoomed;
--(void)initViews;
+-(void)setImage:(UIImage *)image
+ withCleanArray: (NSMutableArray *)cleanArray;
 
 @end

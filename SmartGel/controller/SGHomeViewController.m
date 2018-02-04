@@ -38,7 +38,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.cleanEditView initViews];
 
 //    if(isTakenPhoto){
 //        [self initDataUiWithImage];
@@ -72,8 +71,8 @@
         if(isShowDirtyArea){
            [self hideDirtyArea];
         }
-        [self drawGridView];
-        [self initCleanareaViews: self.engine.areaCleanState];
+//        [self drawGridView];
+//        [self initCleanareaViews: self.engine.areaCleanState];
     }
 }
 
@@ -158,13 +157,13 @@
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
 }
 
--(void)drawGridView{
-    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
-    self.gridView = [[SGGridView alloc] initWithFrame:rect];
-    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
-    [self.gridContentView addSubview:self.gridView];
-}
+//-(void)drawGridView{
+//    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+//    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
+//    self.gridView = [[SGGridView alloc] initWithFrame:rect];
+//    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
+//    [self.gridContentView addSubview:self.gridView];
+//}
 
 -(void)showCleanAndDirtyArea{
     isShowDirtyArea = true;
@@ -193,39 +192,39 @@
     }
 }
 
--(void)initCleanareaViews:(NSMutableArray*)dirtyState{
-    [self.cleanareaViews removeAllObjects];
-    [self.orignialcleanareaViews removeAllObjects];
-    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
-    float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
-    float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
-    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-        int x,y;
-        if(self.estimateImage.image.imageOrientation == UIImageOrientationLeft){
-            y = (AREA_DIVIDE_NUMBER-1) - i/AREA_DIVIDE_NUMBER;
-            x = i%AREA_DIVIDE_NUMBER;
-        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationRight){
-            y = i/AREA_DIVIDE_NUMBER;
-            x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationUp){
-            x = i/AREA_DIVIDE_NUMBER;
-            y = i%AREA_DIVIDE_NUMBER;
-        }else{
-            x = (AREA_DIVIDE_NUMBER-1)-i/AREA_DIVIDE_NUMBER;
-            y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
-        }
-        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
-        if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
-            [paintView setBackgroundColor:[UIColor redColor]];
-            [paintView setAlpha:0.3];
-        }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
-            [paintView setBackgroundColor:[UIColor blueColor]];
-            [paintView setAlpha:0.2];
-        }
-        [self.cleanareaViews addObject:paintView];
-        [self.orignialcleanareaViews addObject:paintView];
-    }
-}
+//-(void)initCleanareaViews:(NSMutableArray*)dirtyState{
+//    [self.cleanareaViews removeAllObjects];
+//    [self.orignialcleanareaViews removeAllObjects];
+//    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
+//    float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
+//    float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
+//    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
+//        int x,y;
+//        if(self.estimateImage.image.imageOrientation == UIImageOrientationLeft){
+//            y = (AREA_DIVIDE_NUMBER-1) - i/AREA_DIVIDE_NUMBER;
+//            x = i%AREA_DIVIDE_NUMBER;
+//        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationRight){
+//            y = i/AREA_DIVIDE_NUMBER;
+//            x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
+//        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationUp){
+//            x = i/AREA_DIVIDE_NUMBER;
+//            y = i%AREA_DIVIDE_NUMBER;
+//        }else{
+//            x = (AREA_DIVIDE_NUMBER-1)-i/AREA_DIVIDE_NUMBER;
+//            y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
+//        }
+//        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
+//        if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
+//            [paintView setBackgroundColor:[UIColor redColor]];
+//            [paintView setAlpha:0.3];
+//        }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
+//            [paintView setBackgroundColor:[UIColor blueColor]];
+//            [paintView setAlpha:0.2];
+//        }
+//        [self.cleanareaViews addObject:paintView];
+//        [self.orignialcleanareaViews addObject:paintView];
+//    }
+//}
 
 -(void)initLocationManager{
     self.locationManager = [[CLLocationManager alloc] init];
@@ -322,11 +321,12 @@
     }
     if(isShowDirtyArea)
         [self hideDirtyArea];
-    [self showPhotoChooseActionSheet];
+//    [self showPhotoChooseActionSheet];
     
     self.estimateImage = [[EstimateImageModel alloc] init];
     self.estimateImage.image = [UIImage imageNamed:@"image001.png"];
     isTakenPhoto = true;
+
     [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
@@ -416,41 +416,42 @@
     self.engine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
     [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
     [self setLabelsWithEstimateData];
-    [self drawGridView];
-    [self initCleanareaViews: self.engine.areaCleanState];
+    [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
+//    [self drawGridView];
+//    [self initCleanareaViews: self.engine.areaCleanState];
 }
 
-- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *touch1 = [touches anyObject];
-    CGPoint location = [touch1 locationInView:self.cleanEditView];
-
-    if(CGRectContainsPoint(self.tagImageView.frame, location)){
-        [self imgToFullScreen];
-        return ;
-    }
-    
-    if(isShowDirtyArea){
-        if(!CGRectContainsPoint(self.gridContentView.frame, location))
-            return ;
-        if(self.estimateImage==nil)
-            return;
-        CGPoint touchLocation = [touch1 locationInView:self.gridView];
-        int touchPosition = [self.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
-        if(touchPosition != -1){
-            if(isAddCleanArea){
-                if([self.estimateImage isManualCleanlArea:touchPosition]){
-                    [self removeMaunalCleanArea:touchPosition];
-                }else{
-                    [self addManualCleanArea:touchPosition];
-                }
-            }
-            else{
-                [self addManualNonGelArea:touchPosition];
-            }
-        }
-    }
-}
+//- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//
+//    UITouch *touch1 = [touches anyObject];
+//    CGPoint location = [touch1 locationInView:self.cleanEditView];
+//
+//    if(CGRectContainsPoint(self.tagImageView.frame, location)){
+//        [self imgToFullScreen];
+//        return ;
+//    }
+//
+//    if(isShowDirtyArea){
+//        if(!CGRectContainsPoint(self.gridContentView.frame, location))
+//            return ;
+//        if(self.estimateImage==nil)
+//            return;
+//        CGPoint touchLocation = [touch1 locationInView:self.gridView];
+//        int touchPosition = [self.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
+//        if(touchPosition != -1){
+//            if(isAddCleanArea){
+//                if([self.estimateImage isManualCleanlArea:touchPosition]){
+//                    [self removeMaunalCleanArea:touchPosition];
+//                }else{
+//                    [self addManualCleanArea:touchPosition];
+//                }
+//            }
+//            else{
+//                [self addManualNonGelArea:touchPosition];
+//            }
+//        }
+//    }
+//}
 
 -(void)addManualNonGelArea:(int)touchPosition{
     [self.estimateImage updateNonGelAreaString:touchPosition];
@@ -542,7 +543,6 @@
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
 
-
 -(IBAction)btnTagIndicatorTapped:(id)sender{
     SGTagViewController *tagVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGTagViewController"];
     tagVC.delegate = self;
@@ -618,6 +618,4 @@
         return;
     }
 }
-
-
 @end
