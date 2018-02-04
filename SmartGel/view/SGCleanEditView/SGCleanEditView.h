@@ -27,5 +27,7 @@
 @property (nonatomic) BOOL zoomed;
 -(void)setImage:(UIImage *)image
  withCleanArray: (NSMutableArray *)cleanArray;
+-(void)showCleanArea:(void (^)(NSString *result))completionHandler;
+-(void)hideCleanArea;
 
 @end

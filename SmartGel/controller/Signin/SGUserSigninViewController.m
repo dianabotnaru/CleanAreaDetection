@@ -111,13 +111,11 @@
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
-    [UIView animateWithDuration:0.25 animations:^
-     {
+    [UIView animateWithDuration:0.25 animations:^{
          CGRect newFrame = [self.view frame];
          newFrame.origin.y += 100; // tweak here to adjust the moving position
          [self.view setFrame:newFrame];
-     }completion:^(BOOL finished)
-     {
+     }completion:^(BOOL finished){
          
      }];
 }

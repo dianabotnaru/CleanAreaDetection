@@ -88,6 +88,49 @@
     [self.dateLabel setText:[[SGUtil sharedUtil] getCurrentTimeString]];
 }
 
+/************************************************************************************************************************************
+ * init location manager
+ * get current location
+ *************************************************************************************************************************************/
+
+-(void)initLocationManager{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
+        [self.locationManager requestWhenInUseAuthorization];
+        [self.locationManager requestAlwaysAuthorization];
+    }
+    [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
+    [self.locationManager stopUpdatingLocation];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if(placemarks && placemarks.count > 0)
+         {
+             CLPlacemark *placemark= [placemarks objectAtIndex:0];
+             NSString *address = [NSString stringWithFormat:@"%@ %@,%@ %@", [placemark subThoroughfare],[placemark thoroughfare],[placemark locality], [placemark administrativeArea]];
+             self.locationLabel.text = address;
+         }
+     }];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error {
+    [self showAlertdialog:@"Error" message:@"Failed to Get Your Location"];
+}
+
+/************************************************************************************************************************************
+ * get current user from firebase
+ *************************************************************************************************************************************/
+
 -(void)getCurrentUser{
     if([SGFirebaseManager sharedManager].currentUser == nil){
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -146,7 +189,9 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-
+/************************************************************************************************************************************
+ * Set labels from estimage data
+ *************************************************************************************************************************************/
 
 -(void)setLabelsWithEstimateData{
     if(!self.notificationLabel.isHidden)
@@ -157,13 +202,20 @@
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.estimateImage.cleanValue]];
 }
 
-//-(void)drawGridView{
-//    [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-//    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
-//    self.gridView = [[SGGridView alloc] initWithFrame:rect];
-//    [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
-//    [self.gridContentView addSubview:self.gridView];
-//}
+/************************************************************************************************************************************
+ * show/hide clean area
+ *************************************************************************************************************************************/
+
+-(IBAction)showHideCleanArea{
+    if(self.estimateImage.image == nil){
+        [self showAlertdialog:nil message:@"Please take a photo."];
+        return;
+    }
+    if(isShowDirtyArea)
+        [self hideDirtyArea];
+    else
+        [self showCleanAndDirtyArea];
+}
 
 -(void)showCleanAndDirtyArea{
     isShowDirtyArea = true;
@@ -171,14 +223,9 @@
     [self.showCleanAreaLabel setText:@"Hide clean area"];
     [self.showCleanAreaButton setBackgroundColor:SGColorDarkGreen];
     hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for (int i = 0; i<self.cleanareaViews.count; i++) {
-            UIView *view = [self.cleanareaViews objectAtIndex:i];
-            if([[self.engine.areaCleanState objectAtIndex:i] intValue] != NO_GEL)
-                [self.takenImageView addSubview:view];
-        }
+    [self.cleanEditView showCleanArea:^(NSString *result) {
         [hud hideAnimated:false];
-    });
+    }];
 }
 
 -(void)hideDirtyArea{
@@ -186,79 +233,13 @@
     [self.notificationLabel setHidden:NO];
     [self.showCleanAreaLabel setText:@"Show clean area"];
     [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
-    for (int i = 0; i<self.cleanareaViews.count; i++) {
-        UIView *view = [self.cleanareaViews objectAtIndex:i];
-        [view removeFromSuperview];
-    }
+    [self.cleanEditView hideCleanArea];
 }
 
-//-(void)initCleanareaViews:(NSMutableArray*)dirtyState{
-//    [self.cleanareaViews removeAllObjects];
-//    [self.orignialcleanareaViews removeAllObjects];
-//    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.takenImageView takenImage:self.estimateImage.image];
-//    float areaWidth = rect.size.width/AREA_DIVIDE_NUMBER;
-//    float areaHeight = rect.size.height/AREA_DIVIDE_NUMBER;
-//    for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++){
-//        int x,y;
-//        if(self.estimateImage.image.imageOrientation == UIImageOrientationLeft){
-//            y = (AREA_DIVIDE_NUMBER-1) - i/AREA_DIVIDE_NUMBER;
-//            x = i%AREA_DIVIDE_NUMBER;
-//        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationRight){
-//            y = i/AREA_DIVIDE_NUMBER;
-//            x = (AREA_DIVIDE_NUMBER-1) - i%AREA_DIVIDE_NUMBER;
-//        }else if(self.estimateImage.image.imageOrientation == UIImageOrientationUp){
-//            x = i/AREA_DIVIDE_NUMBER;
-//            y = i%AREA_DIVIDE_NUMBER;
-//        }else{
-//            x = (AREA_DIVIDE_NUMBER-1)-i/AREA_DIVIDE_NUMBER;
-//            y = (AREA_DIVIDE_NUMBER-1)-i%AREA_DIVIDE_NUMBER;
-//        }
-//        UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth+rect.origin.x, y*areaHeight+rect.origin.y, areaWidth, areaHeight)];
-//        if([[dirtyState objectAtIndex:i] intValue] == IS_CLEAN){
-//            [paintView setBackgroundColor:[UIColor redColor]];
-//            [paintView setAlpha:0.3];
-//        }else if([[dirtyState objectAtIndex:i] intValue] == IS_DIRTY){
-//            [paintView setBackgroundColor:[UIColor blueColor]];
-//            [paintView setAlpha:0.2];
-//        }
-//        [self.cleanareaViews addObject:paintView];
-//        [self.orignialcleanareaViews addObject:paintView];
-//    }
-//}
+/************************************************************************************************************************************
+ * save photo
+ *************************************************************************************************************************************/
 
--(void)initLocationManager{
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = kCLDistanceFilterNone;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    if ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0) {
-        [self.locationManager requestWhenInUseAuthorization];
-        [self.locationManager requestAlwaysAuthorization];
-    }
-    [self.locationManager startMonitoringSignificantLocationChanges];
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
-    [self.locationManager stopUpdatingLocation];
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error)
-    {
-         if(placemarks && placemarks.count > 0)
-         {
-             CLPlacemark *placemark= [placemarks objectAtIndex:0];
-             NSString *address = [NSString stringWithFormat:@"%@ %@,%@ %@", [placemark subThoroughfare],[placemark thoroughfare],[placemark locality], [placemark administrativeArea]];
-             self.locationLabel.text = address;
-         }
-     }];
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error {
-    [self showAlertdialog:@"Error" message:@"Failed to Get Your Location"];
-}
 
 -(IBAction)savePhoto{
     if(self.estimateImage.image == nil){
@@ -288,16 +269,9 @@
                                      }];
 }
 
--(IBAction)showHideCleanArea{
-    if(self.estimateImage.image == nil){
-        [self showAlertdialog:nil message:@"Please take a photo."];
-        return;
-    }
-    if(isShowDirtyArea)
-        [self hideDirtyArea];
-    else
-        [self showCleanAndDirtyArea];
-}
+/************************************************************************************************************************************
+ * reset non-gel area
+ *************************************************************************************************************************************/
 
 -(IBAction)resetNonGelAreaTapped:(id)sender{
     if(self.estimateImage.image == nil){
@@ -312,6 +286,11 @@
         [hud hideAnimated:false];
     });
 }
+
+/************************************************************************************************************************************
+ * launch photo picker controller
+ * choose image from camera or gallery
+ *************************************************************************************************************************************/
 
 -(IBAction)launchPhotoPickerController{
     if(!self.selectedTag.tagName){
@@ -384,6 +363,34 @@
     [self presentViewController:imagePickerController animated:NO completion:nil];
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    self.estimateImage = [[EstimateImageModel alloc] init];
+    self.estimateImage.image = image;
+    if(isSelectedFromCamera){
+        UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
+    }
+    isTakenPhoto = true;
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/************************************************************************************************************************************
+ * init data and UI from choose image
+ *************************************************************************************************************************************/
+
+-(void)initDataUiWithImage{
+    isSavedImage = false;
+    self.engine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
+    [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
+    [self setLabelsWithEstimateData];
+    [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
+}
+
+/************************************************************************************************************************************
+ * launch photo picker controller
+ * choose image from camera or gallery
+ *************************************************************************************************************************************/
+
 -(IBAction)addManualAreaButtonTapped{
     if(self.estimateImage.image == nil){
         [self showAlertdialog:nil message:@"Please take a photo."];
@@ -400,44 +407,22 @@
     }
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
-    self.estimateImage = [[EstimateImageModel alloc] init];
-    self.estimateImage.image = image;
-    if(isSelectedFromCamera){
-        UIImageWriteToSavedPhotosAlbum(image,nil,nil,nil);
+/************************************************************************************************************************************
+ * touch action
+ *************************************************************************************************************************************/
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch1 = [touches anyObject];
+    CGPoint location = [touch1 locationInView:self.cleanEditView];
+    if(CGRectContainsPoint(self.tagImageView.frame, location)){
+        [self imgToFullScreen];
+        return ;
     }
-    isTakenPhoto = true;
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+//    if(self.estimateImage==nil)
+//        return;
 
--(void)initDataUiWithImage{
-    isSavedImage = false;
-    self.engine = [[DirtyExtractor alloc] initWithImage:self.estimateImage.image];
-    [self.estimateImage setImageDataModel:self.engine.cleanValue withDate:self.dateLabel.text withTag:self.tagLabel.text withLocation:self.locationLabel.text  withCleanArray:self.engine.areaCleanState];
-    [self setLabelsWithEstimateData];
-    [self.cleanEditView setImage:self.estimateImage.image withCleanArray:self.engine.areaCleanState];
-//    [self drawGridView];
-//    [self initCleanareaViews: self.engine.areaCleanState];
-}
-
-//- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//
-//    UITouch *touch1 = [touches anyObject];
-//    CGPoint location = [touch1 locationInView:self.cleanEditView];
-//
-//    if(CGRectContainsPoint(self.tagImageView.frame, location)){
-//        [self imgToFullScreen];
-//        return ;
-//    }
-//
-//    if(isShowDirtyArea){
-//        if(!CGRectContainsPoint(self.gridContentView.frame, location))
-//            return ;
-//        if(self.estimateImage==nil)
-//            return;
-//        CGPoint touchLocation = [touch1 locationInView:self.gridView];
-//        int touchPosition = [self.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
+//        CGPoint touchLocation = [touch1 locationInView:self.cleanEditView.gridView];
+//        int touchPosition = [self.cleanEditView.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
 //        if(touchPosition != -1){
 //            if(isAddCleanArea){
 //                if([self.estimateImage isManualCleanlArea:touchPosition]){
@@ -450,8 +435,7 @@
 //                [self addManualNonGelArea:touchPosition];
 //            }
 //        }
-//    }
-//}
+}
 
 -(void)addManualNonGelArea:(int)touchPosition{
     [self.estimateImage updateNonGelAreaString:touchPosition];
