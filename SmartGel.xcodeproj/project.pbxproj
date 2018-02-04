@@ -652,9 +652,6 @@
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
-				"${PODS_ROOT}/ImageZoomViewer/ImageZoomViewer/Classes/ImageZoomViewer.xib",
-				"${PODS_ROOT}/ImageZoomViewer/ImageZoomViewer/Classes/IZVMainCollectionViewCell.xib",
-				"${PODS_ROOT}/ImageZoomViewer/ImageZoomViewer/Classes/IZVSubCollectionViewCell.xib",
 				"${PODS_ROOT}/PFNavigationDropdownMenu/Classes/PFNavigationDropdownMenu.bundle",
 			);
 			name = "[CP] Copy Pods Resources";

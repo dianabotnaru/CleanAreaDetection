@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ImageZoomViewer.h"
 #import "SGGridView.h"
 
 @interface SGCleanEditView : UIView<UIScrollViewDelegate>

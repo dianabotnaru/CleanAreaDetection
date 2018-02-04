@@ -18,7 +18,6 @@ pod 'SDWebImage', '~> 4.0'
 pod 'SCLAlertView-Objective-C'
 pod "PFNavigationDropdownMenu"
 pod 'GLCalendarView', '~> 1.0.0'
-pod 'ImageZoomViewer'
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|

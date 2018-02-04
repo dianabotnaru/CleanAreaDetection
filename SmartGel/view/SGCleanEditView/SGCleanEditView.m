@@ -26,7 +26,7 @@
     [self initViewWithImage:image];
     [self initDatas];
 
-//    [self drawGridView];
+    [self drawGridView];
     //    [self initCleanareaViews: cleanArray];
 }
 
@@ -80,7 +80,7 @@
 
 -(void)drawGridView{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    self.gridView = [[SGGridView alloc] initWithFrame:self.imgview.frame];
+    self.gridView = [[SGGridView alloc] initWithFrame:CGRectMake(0, 0, self.imgview.frame.size.width, self.imgview.frame.size.height)];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.imgview addSubview:self.gridView];
 }
