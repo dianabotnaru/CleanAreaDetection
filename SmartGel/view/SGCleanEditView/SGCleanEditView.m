@@ -16,25 +16,33 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder{
     self = [super initWithCoder:aDecoder];
     if(self){
+        self.imgview = [[UIImageView alloc] init];
     }
     return self;
 }
 
 -(void)setImage:(UIImage *)image
  withCleanArray: (NSMutableArray *)cleanArray{
+    [self initViewWithImage:image];
     [self initDatas];
-    self.imgview.image = image;
-    self.imgview.frame = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.imgview takenImage:self.imgview.image];
-    self.takenImage = image;
-    
-    [self drawGridView];
+
+//    [self drawGridView];
     //    [self initCleanareaViews: cleanArray];
 }
 
+-(void)initViewWithImage:(UIImage *)image{
+    [self.scrollView setZoomScale:1];
+    [self.imgview removeFromSuperview];
+    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.scrollView takenImage:image];
+    self.imgview =  [[UIImageView alloc] initWithFrame:rect];
+    self.imgview.image = image;
+    self.takenImage = image;
+    [self.scrollView addSubview:self.imgview];
+}
 
 /************************************************************************************************************************************
   * image zooming function
- *************************************************************************************************************************************/
+*************************************************************************************************************************************/
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imgview;
@@ -72,8 +80,7 @@
 
 -(void)drawGridView{
     [self.gridContentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    CGRect rect = [[SGUtil sharedUtil] calculateClientRectOfImageInUIImageView:self.imgview takenImage:self.imgview.image];
-    self.gridView = [[SGGridView alloc] initWithFrame:rect];
+    self.gridView = [[SGGridView alloc] initWithFrame:self.imgview.frame];
     [self.gridView addGridViews:SGGridCount withColCount:SGGridCount];
     [self.imgview addSubview:self.gridView];
 }

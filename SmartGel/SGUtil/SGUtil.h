@@ -14,7 +14,7 @@
 
 -(NSString *)getCurrentTimeString;
 - (BOOL)isValidEmailAddress:(NSString *)emailAddress;
--(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView*)imageView
+-(CGRect)calculateClientRectOfImageInUIImageView:(UIView*)imageView
                                       takenImage:(UIImage*)takenImage;
 -(NSMutableArray *)sortbyKey:(NSMutableArray *)mutableArray
                      withKey:(NSString *)sortKey;

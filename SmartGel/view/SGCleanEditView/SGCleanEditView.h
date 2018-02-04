@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *imgview;
+@property (strong, nonatomic) UIImageView *imgview;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) IBOutlet UIView *gridContentView;

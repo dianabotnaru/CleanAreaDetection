@@ -506,19 +506,6 @@
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="PLq-hc-5xh">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="553"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Ye-bv-LBC">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="553"/>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="6Ye-bv-LBC" firstAttribute="top" secondItem="PLq-hc-5xh" secondAttribute="top" id="0ep-kP-8Sq"/>
-                                            <constraint firstItem="6Ye-bv-LBC" firstAttribute="centerY" secondItem="PLq-hc-5xh" secondAttribute="centerY" id="7nW-QW-8TE"/>
-                                            <constraint firstAttribute="trailing" secondItem="6Ye-bv-LBC" secondAttribute="trailing" id="aAS-hJ-m8m"/>
-                                            <constraint firstAttribute="bottom" secondItem="6Ye-bv-LBC" secondAttribute="bottom" id="bNc-lU-naH"/>
-                                            <constraint firstItem="6Ye-bv-LBC" firstAttribute="centerX" secondItem="PLq-hc-5xh" secondAttribute="centerX" id="cR9-ld-2zr"/>
-                                            <constraint firstItem="6Ye-bv-LBC" firstAttribute="leading" secondItem="PLq-hc-5xh" secondAttribute="leading" id="e6b-dl-it5"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="b2m-nP-ZNq" id="Ucv-xb-yUh"/>
                                         </connections>
@@ -526,18 +513,17 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.14901960784313725" green="0.1764705882352941" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="PLq-hc-5xh" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="5Dh-lp-kTa"/>
+                                    <constraint firstAttribute="trailing" secondItem="PLq-hc-5xh" secondAttribute="trailing" id="CbE-Iw-KSB"/>
                                     <constraint firstItem="orh-Kl-AX1" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="Hdj-SC-nmg"/>
-                                    <constraint firstItem="PLq-hc-5xh" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="S1q-LJ-eAg"/>
-                                    <constraint firstAttribute="trailing" secondItem="PLq-hc-5xh" secondAttribute="trailing" id="TPK-jB-wL4"/>
+                                    <constraint firstItem="PLq-hc-5xh" firstAttribute="top" secondItem="b2m-nP-ZNq" secondAttribute="top" id="fhg-cP-GpN"/>
                                     <constraint firstAttribute="bottom" secondItem="orh-Kl-AX1" secondAttribute="bottom" id="iEW-Fq-XEG"/>
                                     <constraint firstItem="orh-Kl-AX1" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="rsA-KL-m2x"/>
+                                    <constraint firstAttribute="bottom" secondItem="PLq-hc-5xh" secondAttribute="bottom" id="uKz-3s-mXI"/>
                                     <constraint firstAttribute="trailing" secondItem="orh-Kl-AX1" secondAttribute="trailing" id="vE6-wT-Jk1"/>
-                                    <constraint firstAttribute="bottom" secondItem="PLq-hc-5xh" secondAttribute="bottom" id="zXg-xb-DFH"/>
+                                    <constraint firstItem="PLq-hc-5xh" firstAttribute="leading" secondItem="b2m-nP-ZNq" secondAttribute="leading" id="yyT-NL-Ism"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="gridContentView" destination="orh-Kl-AX1" id="GTs-jd-C2H"/>
-                                    <outlet property="imgview" destination="6Ye-bv-LBC" id="0ka-NH-Akp"/>
                                     <outlet property="scrollView" destination="PLq-hc-5xh" id="wmE-Kc-ZdM"/>
                                 </connections>
                             </view>

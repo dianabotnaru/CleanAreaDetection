@@ -69,7 +69,7 @@
     return (regExMatches == 0) ? NO : YES ;
 }
 
--(CGRect)calculateClientRectOfImageInUIImageView:(UIImageView*)imageView
+-(CGRect)calculateClientRectOfImageInUIImageView:(UIView*)imageView
                                       takenImage:(UIImage*)takenImage
 {
     CGSize imgViewSize=imageView.frame.size;                  // Size of UIImageView
