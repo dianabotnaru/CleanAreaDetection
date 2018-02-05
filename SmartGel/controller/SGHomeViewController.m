@@ -24,12 +24,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-//    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
-//        [self getCurrentUser];
-//    }else{
-//        [self anonymouslySignIn];
-//    }
+    if (([FIRAuth auth].currentUser)&&(([SGSharedManager.sharedManager isAlreadyRunnded])) ) {
+        [self getCurrentUser];
+    }else{
+        [self anonymouslySignIn];
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -38,12 +37,11 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-
-//    if(isTakenPhoto){
-//        [self initDataUiWithImage];
-//        isTakenPhoto = false;
-//        [hud hideAnimated:false];
-//    }
+    if(isTakenPhoto){
+        [self initDataUiWithImage];
+        isTakenPhoto = false;
+        [hud hideAnimated:false];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,6 +79,8 @@
     isSelectedFromCamera = false;
     isTakenPhoto = false;
     isAddCleanArea = false;
+    isShowDirtyArea = false;
+    self.cleanEditView.delegate = self;
     self.engine = [[DirtyExtractor alloc] init];
     [self initLocationManager];
     self.cleanareaViews = [NSMutableArray array];
@@ -233,7 +233,7 @@
     [self.notificationLabel setHidden:NO];
     [self.showCleanAreaLabel setText:@"Show clean area"];
     [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
-    [self.cleanEditView hideCleanArea];
+    [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
 }
 
 /************************************************************************************************************************************
@@ -294,19 +294,17 @@
 
 -(IBAction)launchPhotoPickerController{
     if(!self.selectedTag.tagName){
-//        [self showAlertdialog:nil message:@"Please select a tag"];
-//        return;
         self.selectedTag = [[SGTag alloc] init];
     }
     if(isShowDirtyArea)
         [self hideDirtyArea];
-//    [self showPhotoChooseActionSheet];
+    [self showPhotoChooseActionSheet];
     
-    self.estimateImage = [[EstimateImageModel alloc] init];
-    self.estimateImage.image = [UIImage imageNamed:@"image001.png"];
-    isTakenPhoto = true;
-
-    [self initDataUiWithImage];
+//    self.estimateImage = [[EstimateImageModel alloc] init];
+//    self.estimateImage.image = [UIImage imageNamed:@"image001.png"];
+//    isTakenPhoto = true;
+//
+//    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
 //    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:imageURL]
@@ -329,15 +327,12 @@
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                                [self launchCameraScreen:false];
                                                            }];
-    
     UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Cancel"
                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                            }];
-
     [alert addAction:firstAction];
     [alert addAction:secondAction];
     [alert addAction:thirdAction];
-    
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         UIPopoverPresentationController *popPresenter = [alert
@@ -348,7 +343,6 @@
     }else{
         [self presentViewController:alert animated:YES completion:nil];
     }
-
 }
 
 -(void)launchCameraScreen:(BOOL)isCamera{
@@ -418,114 +412,63 @@
         [self imgToFullScreen];
         return ;
     }
-//    if(self.estimateImage==nil)
-//        return;
-
-//        CGPoint touchLocation = [touch1 locationInView:self.cleanEditView.gridView];
-//        int touchPosition = [self.cleanEditView.gridView getContainsFrame:self.estimateImage.image withPoint:touchLocation withRowCount:SGGridCount withColCount:SGGridCount];
-//        if(touchPosition != -1){
-//            if(isAddCleanArea){
-//                if([self.estimateImage isManualCleanlArea:touchPosition]){
-//                    [self removeMaunalCleanArea:touchPosition];
-//                }else{
-//                    [self addManualCleanArea:touchPosition];
-//                }
-//            }
-//            else{
-//                [self addManualNonGelArea:touchPosition];
-//            }
-//        }
 }
+
+- (void)onTappedGridView:(int)touchLocation{
+    if(isShowDirtyArea){
+        if([self.estimateImage isManualCleanlArea:touchLocation]){
+            [self removeMaunalCleanArea:touchLocation];
+        }else{
+            [self addManualCleanArea:touchLocation];
+        }
+    }else{
+        [self addManualNonGelArea:touchLocation];
+    }
+}
+
+/************************************************************************************************************************************
+ * add non-gel area
+ *************************************************************************************************************************************/
 
 -(void)addManualNonGelArea:(int)touchPosition{
     [self.estimateImage updateNonGelAreaString:touchPosition];
     [self.engine setNonGelAreaState:[self.estimateImage getNonGelAreaArray]];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-    
-    int pointX = touchPosition/SGGridCount;
-    int pointY = touchPosition%SGGridCount;
-    [self updateNonGelAreaViews:pointX withPointY:pointY];
+    [self.cleanEditView addManualNonGelArea:touchPosition withCleanArray:self.engine.areaCleanState];
+    [self updateValueLabels];
 }
+
+/************************************************************************************************************************************
+ * add manual clean area
+ *************************************************************************************************************************************/
 
 -(void)addManualCleanArea:(int)touchPosition{
     [self.engine addCleanArea:touchPosition];
-
     [self.estimateImage addNonGelAreaString:touchPosition withState:false];
     [self.estimateImage updateManualCleanAreaString:touchPosition];
-
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-    int pointX = touchPosition/SGGridCount;
-    int pointY = touchPosition%SGGridCount;
-    [self addManualPinkAreaViews:pointX withPointY:pointY];
+    [self.cleanEditView addManualCleanArea:touchPosition];
+    [self updateValueLabels];
 }
 
 -(void)removeMaunalCleanArea:(int)touchPosition{
     [self.engine removeManualCleanArea:touchPosition];
     [self.estimateImage updateManualCleanAreaString:touchPosition];
     [self.estimateImage setCleanAreaWithArray:self.engine.areaCleanState];
-    int pointX = touchPosition/SGGridCount;
-    int pointY = touchPosition%SGGridCount;
-    [self removeManualPinkAreaViews:pointX withPointY:pointY];
+    [self.cleanEditView removeMaunalCleanArea:touchPosition];
+    [self updateValueLabels];
 }
 
--(void)updateNonGelAreaViews:(int)pointX
-                 withPointY:(int)pointY{
-    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
-    for(int i = 0; i<rate;i++){
-        for(int j = 0; j< rate; j++){
-            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
-            UIView *view = [self.cleanareaViews objectAtIndex:postion];
-            if([[self.engine.areaCleanState objectAtIndex:postion] intValue] == NO_GEL){
-                [view removeFromSuperview];
-            }else{
-                [self.takenImageView addSubview:view];
-            }
-        }
-    }
+-(void)updateValueLabels{
     [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
     [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
     self.estimateImage.cleanValue = self.engine.cleanValue;
 }
 
--(void)addManualPinkAreaViews:(int)pointX
-                   withPointY:(int)pointY{
-    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
-    for(int i = 0; i<rate;i++){
-        for(int j = 0; j< rate; j++){
-            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
-            UIView *view = [self.cleanareaViews objectAtIndex:postion];
-            [view removeFromSuperview];
-            UIView *manualPinkView = [[UIView alloc] initWithFrame:view.frame];
-            [manualPinkView setBackgroundColor:[UIColor redColor]];
-            [manualPinkView setAlpha:0.3];
-            [self.cleanareaViews replaceObjectAtIndex:postion withObject:manualPinkView];
-            [self.takenImageView addSubview:[self.cleanareaViews objectAtIndex:postion]];
-        }
-    }
-
-    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
-    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
-    self.estimateImage.cleanValue = self.engine.cleanValue;
-}
-
--(void)removeManualPinkAreaViews:(int)pointX
-                   withPointY:(int)pointY{
-    int rate = AREA_DIVIDE_NUMBER/SGGridCount;
-    for(int i = 0; i<rate;i++){
-        for(int j = 0; j< rate; j++){
-            NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
-            UIView *view = [self.cleanareaViews objectAtIndex:postion];
-            [view removeFromSuperview];
-            UIView *originalview = [self.orignialcleanareaViews objectAtIndex:postion];
-            [self.cleanareaViews replaceObjectAtIndex:postion withObject:originalview];
-            [self.takenImageView addSubview:originalview];
-        }
-    }
-    
-    [self.valueLabel setText:[NSString stringWithFormat:@"%.2f", self.engine.cleanValue]];
-    [self.dirtyvalueLabel setText:[NSString stringWithFormat:@"%.2f", CLEAN_MAX_VALUE - self.engine.cleanValue]];
-    self.estimateImage.cleanValue = self.engine.cleanValue;
-}
+/************************************************************************************************************************************
+ * select tag
+ * upload image
+ *************************************************************************************************************************************/
 
 -(IBAction)btnTagIndicatorTapped:(id)sender{
     SGTagViewController *tagVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGTagViewController"];
@@ -584,7 +527,6 @@
 
 -(void)imgToFullScreen{
     if (!isFullScreen) {
-
         [UIView animateWithDuration:0.5 delay:0 options:0 animations:^{
             //save previous frame
             prevFrame = self.tagImageView.frame;

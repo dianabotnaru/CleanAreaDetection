@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "SGGridView.h"
 
+@protocol SGCleanEditViewDelegate <NSObject>
+@required
+- (void)onTappedGridView:(int)touchLocation;
+@end
+
+
 @interface SGCleanEditView : UIView<UIScrollViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) id<SGCleanEditViewDelegate> delegate;
 
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) UIImageView *imgview;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -28,6 +35,11 @@
 -(void)setImage:(UIImage *)image
  withCleanArray: (NSMutableArray *)cleanArray;
 -(void)showCleanArea:(void (^)(NSString *result))completionHandler;
--(void)hideCleanArea;
+-(void)hideCleanArea:(NSMutableArray *)areaCleanState;
+
+-(void)addManualCleanArea:(int)touchPosition;
+-(void)removeMaunalCleanArea:(int)touchPosition;
+
+-(void)addManualNonGelArea:(int)touchPosition withCleanArray:(NSMutableArray *)cleanArray;
 
 @end

@@ -19,7 +19,7 @@
 #import "SGTagViewController.h"
 #import "SGCleanEditView.h"
 
-@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGTagViewControllerDelegate>{
+@interface SGHomeViewController : SGBaseViewController<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate,SGTagViewControllerDelegate,SGCleanEditViewDelegate>{
     bool isShowDirtyArea;
     bool isSavedImage;
     bool isSelectedFromCamera;

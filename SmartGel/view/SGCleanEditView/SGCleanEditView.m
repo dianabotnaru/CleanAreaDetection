@@ -134,8 +134,10 @@
     if(self.takenImage==nil)
         return;
     int touchPosition = [self.gridView getContainsFrame:self.takenImage withPoint:touchPoint withRowCount:SGGridCount withColCount:SGGridCount];
-    if(touchPosition != -1)
-       [self addManualCleanArea:touchPosition];
+    if(touchPosition != -1){
+        if(self.delegate != nil)
+          [self.delegate onTappedGridView:touchPosition];
+    }
 }
 
 /************************************************************************************************************************************
@@ -152,10 +154,12 @@
     });
 }
 
--(void)hideCleanArea{
+-(void)hideCleanArea:(NSMutableArray *)areaCleanState{
     for (int i = 0; i<self.cleanareaViews.count; i++) {
-        UIView *view = [self.cleanareaViews objectAtIndex:i];
-        [view removeFromSuperview];
+        if([[areaCleanState objectAtIndex:i] intValue] != NO_GEL){
+            UIView *view = [self.cleanareaViews objectAtIndex:i];
+            [view removeFromSuperview];
+        }
     }
 }
 
@@ -203,24 +207,21 @@
 -(void)addManualNonGelArea:(int)touchPosition withCleanArray:(NSMutableArray *)cleanArray{
     int pointX = touchPosition/SGGridCount;
     int pointY = touchPosition%SGGridCount;
-    [self updateNonGelAreaViews:pointX withPointY:pointY withCleanArray:cleanArray];
-}
-
--(void)updateNonGelAreaViews:(int)pointX
-                  withPointY:(int)pointY
-              withCleanArray:(NSMutableArray *)cleanArray{
     int rate = AREA_DIVIDE_NUMBER/SGGridCount;
     for(int i = 0; i<rate;i++){
         for(int j = 0; j< rate; j++){
             NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);
             UIView *view = [self.cleanareaViews objectAtIndex:postion];
+            [view removeFromSuperview];
             if([[cleanArray objectAtIndex:postion] intValue] == NO_GEL){
-                [view removeFromSuperview];
-            }else{
+                [view setBackgroundColor:[UIColor yellowColor]];
+                [view setAlpha:0.3];
+                [self.cleanareaViews replaceObjectAtIndex:postion withObject:view];
                 [self.imgview addSubview:view];
             }
         }
     }
 }
+
 
 @end
