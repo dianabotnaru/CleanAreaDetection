@@ -41,6 +41,7 @@
         [self initDataUiWithImage];
         isTakenPhoto = false;
         [hud hideAnimated:false];
+        [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
     }
 }
 
@@ -226,6 +227,7 @@
     [self.cleanEditView showCleanArea:^(NSString *result) {
         [hud hideAnimated:false];
     }];
+    [self showAlertdialog:@"" message:@"Please add manually clean areas by touching cells if you see any undetected clean area."];
 }
 
 -(void)hideDirtyArea{
@@ -234,6 +236,7 @@
     [self.showCleanAreaLabel setText:@"Show clean area"];
     [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
     [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
+    [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
 }
 
 /************************************************************************************************************************************
