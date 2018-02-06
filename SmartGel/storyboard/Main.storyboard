@@ -468,8 +468,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="648" height="880"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wta-Wy-47G">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="3" translatesAutoresizingMaskIntoConstraints="NO" id="wta-Wy-47G">
                                         <rect key="frame" x="0.0" y="0.0" width="648" height="880"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="b2m-nP-ZNq" id="dQk-bC-ScG"/>
+                                        </connections>
                                     </scrollView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please take a photo to estimate clean state" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3Q-ZR-bNC">
                                         <rect key="frame" x="170.5" y="429" width="307" height="22"/>
