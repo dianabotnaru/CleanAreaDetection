@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *valueLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tagLabel;
 
 -(void)setEstimateData:(EstimateImageModel *)estimateImageData;
 

@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "Firebase.h"
+#import "SGUser.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRStorageReference *storageRef;
+@property (strong, nonatomic) UIStoryboard *storyboard;
 
--(void)setFireDataBaseRef:(FIRDatabaseReference*)ref;
--(FIRDatabaseReference*)getFireDataBaseRef;
--(void)setFireStorageRef:(FIRStorageReference*)storageRef;
--(FIRStorageReference*)getFireStorageRef;
+@property (assign, nonatomic) bool isLoggedIn;
+
+- (void)initMenuViewController;
+-(void)gotoSignInScreen;
 
 @end
 

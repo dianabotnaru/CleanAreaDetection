@@ -21,12 +21,10 @@
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:urlRequest];
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -43,25 +41,14 @@
 {
     [self.hud hideAnimated:YES];
     [self showAlertdialog:@"Load Failed!" message:@"Please check internet connection!"];
-    
 }
 
 -(void)showAlertdialog:(NSString*)title message:(NSString*)message{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
+                                                            preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

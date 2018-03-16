@@ -11,11 +11,16 @@
 #import "SGHomeViewController.h"
 #import "SGHistoryViewController.h"
 #import "SGWebViewController.h"
+#import "SGSettingViewController.h"
+#import "SGLaboratoryViewController.h"
+#import "Firebase.h"
 
 @interface SGMenuViewController ()
 @property (strong, nonatomic) SGHomeViewController *sgHomeViewController;
 @property (strong, nonatomic) SGHistoryViewController *sgHistoryViewController;
 @property (strong, nonatomic) SGWebViewController *sgWebViewController;
+@property (strong, nonatomic) SGSettingViewController *sgSettingViewController;
+@property (strong, nonatomic) SGLaboratoryViewController *sgLaboratoryViewController;
 
 @end
 
@@ -24,32 +29,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.menuTableView registerNib:[UINib nibWithNibName:@"SGMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"SGMenuTableViewCell"];
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellID=@"SGMenuTableViewCell";
     SGMenuTableViewCell *cell=(SGMenuTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     if(indexPath.row == 0){
-        [cell setLabels:@"Estimate Clean Area"];
+        [cell setLabels:@"Home"];
     }else if(indexPath.row ==1){
+        [cell setLabels:@"Laboratory"];
+    }else if(indexPath.row ==2){
         [cell setLabels:@"History"];
-    }else if(indexPath.row == 2){
-        [cell setLabels:@"Settings"];
     }else if(indexPath.row == 3){
-        [cell setLabels:@"About SmartGel"];
+        [cell setLabels:@"Settings"];
+    }else if(indexPath.row == 4){
+        [cell setLabels:@"About"];
+    }else if(indexPath.row == 5){
+        [cell setLabels:@"Log Out"];
     }
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,39 +67,47 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-            self.sgHomeViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
+            self.sgHomeViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHomeViewController]
                                                          animated:YES];
             break;
         case 1:
-            self.sgHistoryViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHistoryViewController"];
+            self.sgLaboratoryViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGLaboratoryViewController"];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgLaboratoryViewController]
+                                                         animated:YES];
+            break;
+
+        case 2:
+            self.sgHistoryViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHistoryViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHistoryViewController]
                                                          animated:YES];
             break;
-        case 2:
-            self.sgHomeViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGHomeViewController"];
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgHomeViewController]
+        case 3:
+            self.sgSettingViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGSettingViewController"];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgSettingViewController]
                                                          animated:YES];
             break;
-        case 3:
-            self.sgWebViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SGWebViewController"];
+        case 4:
+            self.sgWebViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGWebViewController"];
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:self.sgWebViewController]
                                                          animated:YES];
             break;
+        case 5:
+            [self logOut];
         default:
             break;
     }
     [self.sideMenuViewController hideMenuViewController];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)logOut{
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        [self showAlertdialog:nil message:signOutError.localizedDescription];
+        return;
+    }else{
+        [self.appDelegate gotoSignInScreen];
+    }
 }
-*/
-
 @end

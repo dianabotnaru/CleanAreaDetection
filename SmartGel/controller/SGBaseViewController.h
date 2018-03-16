@@ -12,4 +12,5 @@
 @interface SGBaseViewController : UIViewController
 @property (strong, nonatomic) AppDelegate *appDelegate;
 
+-(void)showAlertdialog:(NSString*)title message:(NSString*)message;
 @end

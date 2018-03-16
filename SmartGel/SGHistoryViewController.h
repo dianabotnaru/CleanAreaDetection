@@ -10,42 +10,30 @@
 #import "Firebase.h"
 #import "MBProgressHUD.h"
 #import "EstimateImageModel.h"
-#import "DirtyExtractor.h"
-#import "SGDateTimePickerView.h"
+#import "LaboratoryDataModel.h"
 #import "SGBaseViewController.h"
+#import <GLCalendarView.h>
 
 @interface SGHistoryViewController : SGBaseViewController{
-    bool isShowDirtyArea;
-    bool isShowDetailView;
     bool isFromButtonTapped;
-    SGDateTimePickerView *sgDateTimePickerView;
     NSDate *fromDate;
     NSDate *toDate;
-    NSArray *dirtyStateArray;
+    int dateSelectState;
+    bool isLaboratory;
 }
 
 @property (strong, nonatomic) IBOutlet UICollectionView *smartGelHistoryCollectionView;
+@property (strong, nonatomic) IBOutlet GLCalendarView *calendarView;
+@property (strong, nonatomic) IBOutlet UIView *historyView;
+@property (strong, nonatomic) IBOutlet UIView *calendarContainerView;
+
+@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
+
 @property (strong, nonatomic) NSMutableArray *historyArray;
 @property (strong, nonatomic) NSMutableArray *historyFilterArray;
 
-@property (strong, nonatomic) MBProgressHUD *hud;
+@property (strong, nonatomic) NSMutableArray *laboratoryArray;
+@property (strong, nonatomic) NSMutableArray *laboratoryFilterArray;
 
-@property (strong, nonatomic) IBOutlet UIView *historyView;
-
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *trashButton;
-
-@property (strong, nonatomic) IBOutlet UIView *detailView;
-@property (strong, nonatomic) IBOutlet UIImageView *takenImageView;
-@property (strong, nonatomic) IBOutlet UILabel *valueLabel;
-@property (strong, nonatomic) IBOutlet UILabel *dateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *locationLabel;
-@property (strong, nonatomic) IBOutlet UIButton *showDirtyAreaButton;
-
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *collectionViewTopMargin;
-
-@property (strong, nonatomic) IBOutlet UILabel *fromLabel;
-@property (strong, nonatomic) IBOutlet UILabel *toLabel;
-
-@property (strong, nonatomic) EstimateImageModel *selectedImageModel;
-
+@property (nonatomic, weak) GLCalendarDateRange *rangeUnderEdit;
 @end

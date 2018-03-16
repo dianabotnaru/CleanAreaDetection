@@ -9,8 +9,18 @@
 #import "SGHistoryViewController.h"
 #import "UIImageView+WebCache.h"
 #import "SmartGelHistoryCollectionViewCell.h"
+#import "SGLaboratoryCollectionViewCell.h"
+#import "SGLaboratoryItemViewController.h"
+#import "SGFirebaseManager.h"
 
-@interface SGHistoryViewController () <SGDateTimePickerViewDelegate>
+#import "SGHistoryDetailViewController.h"
+#import <PFNavigationDropdownMenu.h>
+#import <GLDateUtils.h>
+#import <GLCalendarDateRange.h>
+#import <GLCalendarDayCell.h>
+#import "SGUtil.h"
+
+@interface SGHistoryViewController () <SGHistoryDetailViewControllerDelegate,GLCalendarViewDelegate,SGLaboratoryItemViewControllerDelegate>
 
 @end
 
@@ -18,53 +28,101 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    isShowDetailView = false;
-    self.trashButton.tintColor = [UIColor clearColor];
-    self.trashButton.enabled = NO;
     [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
-    self.selectedImageModel = [[EstimateImageModel alloc] init];
-    [self getHistoryArray];
-    [self hideDirtyArea];
-    [self initDateTimePickerView];
     fromDate = [self setMinDate];
-    [self.fromLabel setText:[self getDateString:fromDate]];
-    toDate = [self getLocalTime:[NSDate date]];
-    [self.toLabel setText:[self getDateString:toDate]];
-    dirtyStateArray = [NSArray array];
-    // Do any additional setup after loading the view.
+    toDate = [SGUtil.sharedUtil getLocalTime:[NSDate date]];
+    isLaboratory = false;
+    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[SGUtil.sharedUtil getDateString:fromDate],[SGUtil.sharedUtil getDateString: toDate]]];
+    [self initNavigationBar];
+    [self initGlcalendarView];
+    [self getHistoryArray];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.calendarView reload];
+}
+
+-(void)initNavigationBar{
+    NSArray *items = @[@"SmartGel", @"Laboratory"];
+    PFNavigationDropdownMenu *menuView = [[PFNavigationDropdownMenu alloc]initWithFrame:CGRectMake(0, 0, 300, 44)title:[items objectAtIndex:0] items:items containerView:self.view];
+    [menuView setCellBackgroundColor:SGColorBlack];
+    menuView.cellTextLabelColor = [UIColor whiteColor];
+    menuView.didSelectItemAtIndexHandler = ^(NSUInteger indexPath){
+        if(indexPath == 0){
+            [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SmartGelHistoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SmartGelHistoryCollectionViewCell"];
+            isLaboratory = false;
+            [self getHistoryArray];
+        }else{
+            [self.smartGelHistoryCollectionView registerNib:[UINib nibWithNibName:@"SGLaboratoryCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"SGLaboratoryCollectionViewCell"];
+            isLaboratory = true;
+            [self getLabortories];
+        }
+    };
+    self.navigationItem.titleView = menuView;
+}
+
+- (void)onDeletedImage{
+    [self getHistoryArray];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
+
+-(void)initArrays{
+    self.historyArray = [[NSMutableArray alloc] init];
+    self.historyFilterArray = [[NSMutableArray alloc] init];
 }
 
 -(void)getHistoryArray{
-    self.historyArray = [NSMutableArray array];
-    self.historyFilterArray = [NSMutableArray array];
-    NSString *userID = [FIRAuth auth].currentUser.uid;
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[self.appDelegate.ref child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        [self.hud hideAnimated:YES];
-        for(snapshot in snapshot.children){
-            EstimateImageModel *estimageImageModel =  [[EstimateImageModel alloc] init];
-            estimageImageModel.dirtyValue = [snapshot.value[@"value"] floatValue];
-            estimageImageModel.date = snapshot.value[@"date"];
-            estimageImageModel.location = snapshot.value[@"location"];
-            estimageImageModel.imageUrl = snapshot.value[@"image"];
-            estimageImageModel.dirtyArea = snapshot.value[@"dirtyarea"];
-            [self.historyArray addObject:estimageImageModel];
+    [self initArrays];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) wself = self;
+    [[SGFirebaseManager sharedManager] getSmartGelHistorys:^(NSError *error,NSMutableArray* array) {
+        __strong typeof(wself) sself = wself;
+        [hud hideAnimated:false];
+        if (sself) {
+            if(error==nil){
+                sself.historyArray = array;
+                sself.historyFilterArray = array;
+                [sself.smartGelHistoryCollectionView reloadData];
+            }else{
+                [sself showAlertdialog:@"Error!" message:error.localizedDescription];
+            }
         }
-        self.historyFilterArray = self.historyArray;
-        [self.smartGelHistoryCollectionView reloadData];
-    } withCancelBlock:^(NSError * _Nonnull error) {
-        [self.hud hideAnimated:YES];
-        [self showAlertdialog:@"Error" message:error.localizedDescription];
+    }];
+}
+
+-(void)getLabortories{
+    self.laboratoryArray = [[NSMutableArray alloc] init];
+    self.laboratoryFilterArray = [[NSMutableArray alloc] init];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak typeof(self) wself = self;
+    [[SGFirebaseManager sharedManager] getLaboratoryHistorys:^(NSError *error,NSMutableArray* array) {
+        __strong typeof(wself) sself = wself;
+        [hud hideAnimated:false];
+        if (sself) {
+            if(error==nil){
+                sself.laboratoryArray = array;
+                sself.laboratoryFilterArray = array;
+                [sself.smartGelHistoryCollectionView reloadData];
+            }else{
+                [sself showAlertdialog:@"Error!" message:error.localizedDescription];
+            }
+        }
     }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.historyFilterArray.count;
+    if(isLaboratory)
+        return self.laboratoryFilterArray.count;
+    else
+        return self.historyFilterArray.count;
 }
 
 #pragma mark collection view cell paddings
@@ -73,210 +131,53 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/2-4,220);
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/4-8,240);
+    else
+        return CGSizeMake(self.smartGelHistoryCollectionView.frame.size.width/2-4,240);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"SmartGelHistoryCollectionViewCell";
-    SmartGelHistoryCollectionViewCell *cell = (SmartGelHistoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
-    [cell setEstimateData:estimateImageModel];
-    cell.layer.shouldRasterize = YES;
-    cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    return cell;
+    if(!isLaboratory){
+        NSString *cellIdentifier = @"SmartGelHistoryCollectionViewCell";
+        SmartGelHistoryCollectionViewCell *cell = (SmartGelHistoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
+        [cell setEstimateData:estimateImageModel];
+        cell.layer.shouldRasterize = YES;
+        cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        return cell;
+    }else{
+        NSString *cellIdentifier = @"SGLaboratoryCollectionViewCell";
+        SGLaboratoryCollectionViewCell *cell = (SGLaboratoryCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        LaboratoryDataModel *laboratoryDataModel = [self.laboratoryFilterArray objectAtIndex:indexPath.row];
+        [cell setLaboratoryData:laboratoryDataModel];
+        return cell;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
-    [self showDetailView:self.selectedImageModel];
-}
-
--(IBAction)backButtonPressed{
-    if(isShowDetailView)
-        [self hideDetailView];
-    else
-        [self dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)showDetailView :(EstimateImageModel *)estimateImageData{
-    isShowDetailView = true;
-    [UIView transitionWithView:self.detailView
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        self.detailView.hidden = NO;
-                        self.trashButton.tintColor = [UIColor whiteColor];
-                        self.trashButton.enabled = YES;
-                    }
-                    completion:NULL];
-    
-    self.locationLabel.text = estimateImageData.location;
-    self.dateLabel.text = estimateImageData.date;
-    self.valueLabel.text = [NSString stringWithFormat:@"Estimated Value: %.2f", estimateImageData.dirtyValue];
-    [self.takenImageView sd_setImageWithURL:[NSURL URLWithString:estimateImageData.imageUrl]
-                           placeholderImage:[UIImage imageNamed:@"puriSCOPE_114.png"]];
-}
-
--(void)hideDetailView{
-    isShowDetailView = false;
-    [UIView transitionWithView:self.detailView
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        self.detailView.hidden = YES;
-                        self.trashButton.tintColor = [UIColor clearColor];
-                        self.trashButton.enabled = NO;
-                    }
-                    completion:NULL];
-    [self hideDirtyArea];
-}
-
--(IBAction)rightButtonAction{
-    if(isShowDetailView)
-        [self removeImage];
-}
-
--(IBAction)detailImageTapped{
-    [self hideDetailView];
-}
-
-- (void)removeImage{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:@"Are you sure to delete this image?"
-                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSString *userID = [FIRAuth auth].currentUser.uid;
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        FIRStorageReference *desertRef = [self.appDelegate.storageRef child:[NSString stringWithFormat:@"%@/%@.png",userID,self.selectedImageModel.date]];
-        [desertRef deleteWithCompletion:^(NSError *error){
-            [self.hud hideAnimated:false];
-            if (error == nil) {
-                [[[self.appDelegate.ref child:userID] child:self.selectedImageModel.date] removeValue];
-                [self getHistoryArray];
-                [self hideDetailView];
-            } else {
-                [self showAlertdialog:@"Image Delete Failed!" message:error.localizedDescription];
-            }
-        }];
-        
-    }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }]];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
--(void)showAlertdialog:(NSString*)title message:(NSString*)message{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
-                                                                   message:message
-                                                            preferredStyle:UIAlertControllerStyleAlert]; // 1
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (NSArray *)getDirtyAreaArray{
-    NSData* data = [self.selectedImageModel.dirtyArea dataUsingEncoding:NSUTF8StringEncoding];
-    NSArray *values = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];  // if you are expecting  the JSON string to
-    return values;
-}
-
--(void)drawView:(int)index{
-    int y = index/AREA_DIVIDE_NUMBER;
-    int x = (AREA_DIVIDE_NUMBER-1) - index%AREA_DIVIDE_NUMBER;
-    float areaWidth = self.takenImageView.frame.size.width/AREA_DIVIDE_NUMBER;
-    float areaHeight = self.takenImageView.frame.size.height/AREA_DIVIDE_NUMBER;
-    UIView *paintView=[[UIView alloc]initWithFrame:CGRectMake(x*areaWidth, y*areaHeight, areaWidth, areaHeight)];
-    if([[dirtyStateArray objectAtIndex:index] boolValue]){
-        [paintView setBackgroundColor:[UIColor redColor]];
-        [paintView setAlpha:0.7];
-        [self.takenImageView addSubview:paintView];
+    if(!isLaboratory){
+        EstimateImageModel *estimateImageModel = [self.historyFilterArray objectAtIndex:indexPath.row];
+        SGHistoryDetailViewController *detailViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGHistoryDetailViewController"];
+        detailViewController.selectedEstimateImageModel = estimateImageModel;
+        detailViewController.delegate = self;
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }else{
+        LaboratoryDataModel *laboratoryDatamodel = [self.laboratoryFilterArray objectAtIndex:indexPath.row];
+        SGLaboratoryItemViewController *detailViewController = [self.appDelegate.storyboard instantiateViewControllerWithIdentifier:@"SGLaboratoryItemViewController"];
+        detailViewController.laboratoryDataModel = laboratoryDatamodel;
+        detailViewController.delegate = self;
+        [self.navigationController pushViewController:detailViewController animated:YES];
     }
-}
-
--(IBAction)showHideDirtyArea{
-    if(isShowDirtyArea)
-        [self hideDirtyArea];
-    else
-        [self showDirtyArea];
-}
-
--(void)showDirtyArea{
-    isShowDirtyArea = true;
-    [self.showDirtyAreaButton setBackgroundColor:[UIColor colorWithRed:0.0f/255.0f green:128.0f/255.0f blue:210.0f/255.0f alpha:1.0]];
-    [self.showDirtyAreaButton setTitle:@"H" forState:UIControlStateNormal];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        dirtyStateArray = [NSArray array];
-        dirtyStateArray = [self getDirtyAreaArray];
-        for(int i = 0; i<(AREA_DIVIDE_NUMBER*AREA_DIVIDE_NUMBER);i++)
-            [self drawView:i];
-        [self.hud hideAnimated:false];
-    });
-}
-
--(void)hideDirtyArea{
-    isShowDirtyArea = false;
-    [self.takenImageView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    [self.showDirtyAreaButton setBackgroundColor:[UIColor colorWithRed:185.0f/255.0f green:74.0f/255.0f blue:72.0f/255.0f alpha:1.0]];
-    [self.showDirtyAreaButton setTitle:@"S" forState:UIControlStateNormal];
-}
-
--(IBAction)fromButtonTapped{
-    isFromButtonTapped = true;
-    sgDateTimePickerView.datePicker.minimumDate = [self setMinDate];
-    sgDateTimePickerView.datePicker.maximumDate = [NSDate date];
-    [sgDateTimePickerView setHidden:NO];
-}
-
--(IBAction)toButtonTapped{
-    isFromButtonTapped = false;
-    sgDateTimePickerView.datePicker.minimumDate = fromDate;
-    sgDateTimePickerView.datePicker.maximumDate = [NSDate date];
-    [sgDateTimePickerView setHidden:NO];
-}
-
-/////////////////////////// Add DateTimePicker View/////////////////////////////////////////////////////////////
-
-- (void)initDateTimePickerView{
-    sgDateTimePickerView = [[[NSBundle mainBundle] loadNibNamed:@"SGDateTimePickerView" owner:nil options:nil] lastObject];
-    sgDateTimePickerView.frame = CGRectMake(5, [[[UIApplication sharedApplication] delegate] window].frame.size.height-305, [[[UIApplication sharedApplication] delegate] window].frame.size.width-10,300);
-    sgDateTimePickerView.delegate = self;
-    [self.view addSubview:sgDateTimePickerView];
-    [sgDateTimePickerView setHidden:YES];
-}
-
--(void)doneButtonTapped:(NSDate *)date{
-    [sgDateTimePickerView setHidden:YES];
-    if(isFromButtonTapped){
-        fromDate = [self getLocalTime:date];
-        [self.fromLabel setText:[self getDateString:date]];
-        [self getFilterArray];
-    }
-    else{
-        toDate = [self getLocalTime:date];
-        [self.toLabel setText:[self getDateString:date]];
-        [self getFilterArray];
-    }
-}
-
--(void)cancelButtonTapped{
-    [sgDateTimePickerView setHidden:YES];
 }
 
 - (NSDate *)setMinDate{
-    NSDate *date = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components: NSUIntegerMax fromDate: date];
-    [components setYear:2017];
-    [components setMonth:1];
-    [components setDay:1];
-    [components setHour: 0];
-    [components setMinute: 0];
-    [components setSecond: 0];
-    NSDate *newDate = [gregorian dateFromComponents: components];
-    return newDate;
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setDay:1];
+    [comps setMonth:1];
+    [comps setYear:2017];
+    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+    return date;
 }
 
 -(void)getFilterArray{
@@ -284,7 +185,7 @@
     for(int i = 0; i<self.historyArray.count;i++){
         EstimateImageModel *estimateImageModel = [[EstimateImageModel alloc] init];
         estimateImageModel = [self.historyArray objectAtIndex:i];
-        NSDate *takenDate = [self getDateFromString:estimateImageModel.date];
+        NSDate *takenDate = [SGUtil.sharedUtil getDateFromString:estimateImageModel.date];
         
         double fromDateLongValue = fromDate.timeIntervalSince1970;
         double toDateLongValue = toDate.timeIntervalSince1970;
@@ -297,35 +198,125 @@
     [self.smartGelHistoryCollectionView reloadData];
 }
 
-- (NSString *)getDateString:(NSDate*)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    NSString *dateString = [formatter stringFromDate:date];
-    return dateString;
+-(void)initGlcalendarView{
+    NSDate *today = [NSDate date];
+    GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:today endDate:today];
+    range.backgroundColor = UIColorFromRGB(0x80ae99);
+    range.editable = YES;
+    self.calendarView.ranges = [@[range] mutableCopy];
+    self.calendarView.delegate = self;
+    self.calendarView.firstDate = fromDate;
+    self.rangeUnderEdit = range;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.calendarView scrollToDate:today animated:NO];
+    });
+    [self initCalendarViewUi];
 }
 
-- (NSDate *)getDateFromString:(NSString*)dateString{
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"dd-MM-yyyy HH:mm:ss"];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];
-    NSDate *date = [formatter dateFromString:dateString];
-    return [self getLocalTime:date];
+-(void)initCalendarViewUi{
+    [GLCalendarDayCell appearance].dayLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16], NSForegroundColorAttributeName:UIColorFromRGB(0x555555)};
+    [GLCalendarDayCell appearance].monthLabelAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:8]};
 }
 
-- (NSDate *)getLocalTime:(NSDate *)date{
-    NSTimeInterval timeZoneSeconds = [[NSTimeZone localTimeZone] secondsFromGMT];
-    NSDate *dateInLocalTimezone = [date dateByAddingTimeInterval:timeZoneSeconds];
-    return dateInLocalTimezone;
+- (BOOL)calenderView:(GLCalendarView *)calendarView canAddRangeWithBeginDate:(NSDate *)beginDate
+{
+    return YES;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (GLCalendarDateRange *)calenderView:(GLCalendarView *)calendarView rangeToAddWithBeginDate:(NSDate *)beginDate
+{
+    [self.calendarView removeRange:self.rangeUnderEdit];
+    if(dateSelectState == 0){
+        dateSelectState =1;
+        fromDate = beginDate;
+        GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:beginDate endDate:beginDate];
+        range.backgroundColor = UIColorFromRGB(0x80ae99);
+        range.editable = YES;
+        self.rangeUnderEdit = range;
+        return range;
+    }else{
+        dateSelectState =0;
+        toDate = beginDate;
+        GLCalendarDateRange *range = [GLCalendarDateRange rangeWithBeginDate:fromDate endDate:beginDate];
+        range.backgroundColor = UIColorFromRGB(0x80ae99);
+        range.editable = YES;
+        self.rangeUnderEdit = range;
+        return range;
+    }
 }
-*/
+
+- (void)calenderView:(GLCalendarView *)calendarView beginToEditRange:(GLCalendarDateRange *)range
+{
+}
+
+- (void)calenderView:(GLCalendarView *)calendarView finishEditRange:(GLCalendarDateRange *)range continueEditing:(BOOL)continueEditing
+{
+}
+
+- (BOOL)calenderView:(GLCalendarView *)calendarView canUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
+{
+    return YES;
+}
+
+- (void)calenderView:(GLCalendarView *)calendarView didUpdateRange:(GLCalendarDateRange *)range toBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
+{
+}
+
+- (IBAction)showCalendar{
+    [self.calendarContainerView setHidden:NO];
+}
+
+-(IBAction)didSelectDateRange{
+    [self.calendarContainerView setHidden:YES];
+    [self.calendarView removeRange:self.rangeUnderEdit];
+    [self.dateLabel setText:[NSString stringWithFormat:@"%@ - %@",[SGUtil.sharedUtil getDateString:fromDate],[SGUtil.sharedUtil getDateString: toDate]]];
+    [self getFilterArray];
+}
+
+-(IBAction)didCancelDateRange{
+    [self.calendarView removeRange:self.rangeUnderEdit];
+    [self.calendarContainerView setHidden:YES];
+}
+
+-(IBAction)didSortButtonTapped{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sort"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet]; // 1
+    UIAlertAction *firstAction = [UIAlertAction actionWithTitle:@"Date"
+                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                              [self sortHistoryFilterArrar:@"date"];
+                                                          }];
+    UIAlertAction *secondAction = [UIAlertAction actionWithTitle:@"Value"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               [self sortHistoryFilterArrar:@"cleanValue"];
+                                                           }];
+    
+    UIAlertAction *thirdAction = [UIAlertAction actionWithTitle:@"Tag"
+                                                           style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                               [self sortHistoryFilterArrar:@"tag"];
+                                                           }];
+    [alert addAction:firstAction];
+    [alert addAction:secondAction];
+    [alert addAction:thirdAction];
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        UIPopoverPresentationController *popPresenter = [alert
+                                                         popoverPresentationController];
+        popPresenter.sourceView = self.view;
+        popPresenter.sourceRect = CGRectMake(self.view.frame.size.width-70, 0, 30, 0);
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+-(void)sortHistoryFilterArrar:(NSString *)sortKey{
+    if(isLaboratory)
+        self.laboratoryFilterArray = [SGUtil.sharedUtil sortbyKey:self.laboratoryFilterArray withKey:sortKey];
+    else
+        self.historyFilterArray = [SGUtil.sharedUtil sortbyKey:self.historyFilterArray withKey:sortKey];
+    [self.smartGelHistoryCollectionView reloadData];
+}
 
 @end

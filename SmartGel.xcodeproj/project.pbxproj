@@ -8,59 +8,115 @@
 
 /* Begin PBXBuildFile section */
 		4D9EC0022FB45DA54B97CB5C /* libPods-SmartGel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */; };
+		8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */; };
+		8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */; };
+		8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5071FC510B200D6C070 /* smartgel-tests.json */; };
+		8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D24C5101FC5AC0F00D6C070 /* SGGridView.m */; };
+		8D24C5131FC5E3D600D6C070 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D24C5121FC5E3D600D6C070 /* test.png */; };
+		8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */; };
+		8D26D14A1FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */; };
+		8D26D14D1FFCC146002BFAB8 /* SGTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D14C1FFCC146002BFAB8 /* SGTag.m */; };
+		8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */; };
 		8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */; };
+		8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */; };
+		8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662561FD8247A008DFED2 /* Smiley_yellow.png */; };
+		8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662571FD8247A008DFED2 /* Smiley_pink.png */; };
+		8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662581FD8247B008DFED2 /* Smiley_green.png */; };
+		8D5662601FD8247C008DFED2 /* Smiley_).png in Resources */ = {isa = PBXBuildFile; fileRef = 8D5662591FD8247B008DFED2 /* Smiley_).png */; };
+		8D5662611FD8247C008DFED2 /* puriSCOPE_logo_color_190x30px.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625A1FD8247B008DFED2 /* puriSCOPE_logo_color_190x30px.png */; };
+		8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625B1FD8247B008DFED2 /* Smiley_(.png */; };
+		8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D56625C1FD8247C008DFED2 /* Smiley_.png */; };
+		8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */; };
+		8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D56D5561FED0CB10051EE76 /* SGUtil.m */; };
+		8D63C9D420065AB400C2387A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D63C9D320065AB400C2387A /* Main_iPhone.storyboard */; };
+		8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */; };
 		8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */; };
 		8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C21F7CA4700025B804 /* AVFoundation.framework */; };
 		8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C41F7CA4790025B804 /* QuartzCore.framework */; };
 		8D80B2C71F7CA5A70025B804 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D80B2C61F7CA5A70025B804 /* Foundation.framework */; };
-		8D80B2CB1F7CF3890025B804 /* test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2CA1F7CF3890025B804 /* test.jpg */; };
 		8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */; };
-		8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2D01F7CFE810025B804 /* SGDateTimePickerView.m */; };
-		8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D11F7CFE810025B804 /* SGDateTimePickerView.xib */; };
-		8D80B2D81F7CFE810025B804 /* SGFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D21F7CFE810025B804 /* SGFilterView.xib */; };
 		8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */; };
 		8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */; };
+		8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D84CBB41FE813F2006B2F74 /* SGUser.m */; };
 		8DA331F31F7C8F3C0066148E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F21F7C8F3C0066148E /* main.m */; };
 		8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA331F51F7C8F3C0066148E /* AppDelegate.m */; };
-		8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FA1F7C8F3C0066148E /* Main.storyboard */; };
 		8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FD1F7C8F3C0066148E /* Assets.xcassets */; };
-		8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */; };
 		8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3320C1F7C90430066148E /* SGHomeViewController.m */; };
 		8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA332111F7C92880066148E /* DirtyExtractor.m */; };
 		8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */; };
 		8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */; };
 		8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB097901F933A380053C203 /* SGMenuViewController.m */; };
+		8DB4121A1FFC786C00ED5550 /* SGTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB412191FFC786C00ED5550 /* SGTagViewController.m */; };
+		8DB412251FFC84B100ED5550 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DB412231FFC84B100ED5550 /* LaunchScreen.storyboard */; };
+		8DB412261FFC84B100ED5550 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DB412241FFC84B100ED5550 /* Main.storyboard */; };
+		8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */; };
+		8DB669ED1FDA8FA800BB3966 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */; };
+		8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */; };
+		8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */; };
+		8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */; };
+		8DD3119320246DD20054DBF2 /* image001.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119020246DD20054DBF2 /* image001.png */; };
+		8DD3119420246DD20054DBF2 /* image002.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119120246DD20054DBF2 /* image002.png */; };
+		8DD3119520246DD20054DBF2 /* image003.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DD3119220246DD20054DBF2 /* image003.png */; };
+		8DD3119E2024A7CC0054DBF2 /* SGCleanEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD3119B2024A7CB0054DBF2 /* SGCleanEditView.m */; };
 		8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */; };
 		8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */; };
 		8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */; };
 		8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */; };
+		8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCFD781FE665FD0074663B /* SGUserSignUpViewController.m */; };
+		8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCFD7E1FE6764C0074663B /* SGForgotPasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.release.xcconfig"; sourceTree = "<group>"; };
+		8D199ED41FCC4AB300704CE2 /* SGSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGSettingViewController.h; path = controller/SGSettingViewController.h; sourceTree = "<group>"; };
+		8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSettingViewController.m; path = controller/SGSettingViewController.m; sourceTree = "<group>"; };
+		8D199ED71FCD56E200704CE2 /* SGHistoryDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGHistoryDetailViewController.h; path = controller/SGHistoryDetailViewController.h; sourceTree = "<group>"; };
+		8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGHistoryDetailViewController.m; path = controller/SGHistoryDetailViewController.m; sourceTree = "<group>"; };
+		8D24C5071FC510B200D6C070 /* smartgel-tests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "smartgel-tests.json"; path = "resource/smartgel-tests.json"; sourceTree = "<group>"; };
+		8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGGridView.h; sourceTree = "<group>"; };
+		8D24C5101FC5AC0F00D6C070 /* SGGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGGridView.m; sourceTree = "<group>"; };
+		8D24C5121FC5E3D600D6C070 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
+		8D26D1461FFCBC05002BFAB8 /* SGTagCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGTagCollectionViewCell.h; path = view/SGTagCollectionViewCell.h; sourceTree = "<group>"; };
+		8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGTagCollectionViewCell.m; path = view/SGTagCollectionViewCell.m; sourceTree = "<group>"; };
+		8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SGTagCollectionViewCell.xib; path = view/SGTagCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D26D14B1FFCC146002BFAB8 /* SGTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGTag.h; sourceTree = "<group>"; };
+		8D26D14C1FFCC146002BFAB8 /* SGTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGTag.m; sourceTree = "<group>"; };
+		8D26D14E1FFDC197002BFAB8 /* SGSharedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGSharedManager.h; path = manager/SGSharedManager.h; sourceTree = "<group>"; };
+		8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGSharedManager.m; path = manager/SGSharedManager.m; sourceTree = "<group>"; };
 		8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryViewController.h; path = controller/SGLaboratoryViewController.h; sourceTree = "<group>"; };
+		8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryViewController.m; path = controller/SGLaboratoryViewController.m; sourceTree = "<group>"; };
+		8D5662561FD8247A008DFED2 /* Smiley_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_yellow.png; path = resource/Smiley_yellow.png; sourceTree = "<group>"; };
+		8D5662571FD8247A008DFED2 /* Smiley_pink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_pink.png; path = resource/Smiley_pink.png; sourceTree = "<group>"; };
+		8D5662581FD8247B008DFED2 /* Smiley_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_green.png; path = resource/Smiley_green.png; sourceTree = "<group>"; };
+		8D5662591FD8247B008DFED2 /* Smiley_).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Smiley_).png"; path = "resource/Smiley_).png"; sourceTree = "<group>"; };
+		8D56625A1FD8247B008DFED2 /* puriSCOPE_logo_color_190x30px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = puriSCOPE_logo_color_190x30px.png; path = resource/puriSCOPE_logo_color_190x30px.png; sourceTree = "<group>"; };
+		8D56625B1FD8247B008DFED2 /* Smiley_(.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Smiley_(.png"; path = "resource/Smiley_(.png"; sourceTree = "<group>"; };
+		8D56625C1FD8247C008DFED2 /* Smiley_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Smiley_.png; path = resource/Smiley_.png; sourceTree = "<group>"; };
+		8D56D5511FED090A0051EE76 /* SGFirebaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGFirebaseManager.h; path = manager/SGFirebaseManager.h; sourceTree = "<group>"; };
+		8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGFirebaseManager.m; path = manager/SGFirebaseManager.m; sourceTree = "<group>"; };
+		8D56D5551FED0CB10051EE76 /* SGUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUtil.h; path = SGUtil/SGUtil.h; sourceTree = "<group>"; };
+		8D56D5561FED0CB10051EE76 /* SGUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUtil.m; path = SGUtil/SGUtil.m; sourceTree = "<group>"; };
+		8D63C9D320065AB400C2387A /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPhone.storyboard; path = storyboard/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSigninViewController.h; path = controller/Signin/SGUserSigninViewController.h; sourceTree = "<group>"; };
+		8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUserSigninViewController.m; path = controller/Signin/SGUserSigninViewController.m; sourceTree = "<group>"; };
 		8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EstimateImageModel.h; path = model/EstimateImageModel.h; sourceTree = "<group>"; };
 		8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EstimateImageModel.m; path = model/EstimateImageModel.m; sourceTree = "<group>"; };
 		8D80B2C21F7CA4700025B804 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8D80B2C41F7CA4790025B804 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D80B2C61F7CA5A70025B804 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		8D80B2CA1F7CF3890025B804 /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHistoryViewController.h; sourceTree = "<group>"; };
 		8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHistoryViewController.m; sourceTree = "<group>"; };
-		8D80B2CF1F7CFE810025B804 /* SGDateTimePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGDateTimePickerView.h; path = view/SGDateTimePickerView.h; sourceTree = "<group>"; };
-		8D80B2D01F7CFE810025B804 /* SGDateTimePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGDateTimePickerView.m; path = view/SGDateTimePickerView.m; sourceTree = "<group>"; };
-		8D80B2D11F7CFE810025B804 /* SGDateTimePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGDateTimePickerView.xib; path = view/SGDateTimePickerView.xib; sourceTree = "<group>"; };
-		8D80B2D21F7CFE810025B804 /* SGFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SGFilterView.xib; path = view/SGFilterView.xib; sourceTree = "<group>"; };
 		8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmartGelHistoryCollectionViewCell.h; path = view/SmartGelHistoryCollectionViewCell.h; sourceTree = "<group>"; };
 		8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmartGelHistoryCollectionViewCell.m; path = view/SmartGelHistoryCollectionViewCell.m; sourceTree = "<group>"; };
 		8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SmartGelHistoryCollectionViewCell.xib; path = view/SmartGelHistoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		8D84CBB31FE813F2006B2F74 /* SGUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUser.h; path = model/SGUser.h; sourceTree = "<group>"; };
+		8D84CBB41FE813F2006B2F74 /* SGUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUser.m; path = model/SGUser.m; sourceTree = "<group>"; };
 		8DA331EE1F7C8F3C0066148E /* SmartGel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartGel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DA331F21F7C8F3C0066148E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8DA331F41F7C8F3C0066148E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8DA331F51F7C8F3C0066148E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8DA331FB1F7C8F3C0066148E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8DA331FD1F7C8F3C0066148E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8DA332001F7C8F3C0066148E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DA332021F7C8F3C0066148E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DA3320B1F7C90430066148E /* SGHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGHomeViewController.h; path = controller/SGHomeViewController.h; sourceTree = "<group>"; };
 		8DA3320C1F7C90430066148E /* SGHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGHomeViewController.m; path = controller/SGHomeViewController.m; sourceTree = "<group>"; };
@@ -72,6 +128,26 @@
 		8DB0978F1F933A380053C203 /* SGMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGMenuViewController.h; path = controller/SGMenuViewController.h; sourceTree = "<group>"; };
 		8DB097901F933A380053C203 /* SGMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGMenuViewController.m; path = controller/SGMenuViewController.m; sourceTree = "<group>"; };
 		8DB097931F93456A0053C203 /* SGConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGConstant.h; sourceTree = "<group>"; };
+		8DB412181FFC786C00ED5550 /* SGTagViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGTagViewController.h; path = controller/SGTagViewController.h; sourceTree = "<group>"; };
+		8DB412191FFC786C00ED5550 /* SGTagViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGTagViewController.m; path = controller/SGTagViewController.m; sourceTree = "<group>"; };
+		8DB412231FFC84B100ED5550 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = storyboard/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8DB412241FFC84B100ED5550 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = storyboard/Main.storyboard; sourceTree = "<group>"; };
+		8DB669E91FDA236100BB3966 /* LaboratoryDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LaboratoryDataModel.h; path = model/LaboratoryDataModel.h; sourceTree = "<group>"; };
+		8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LaboratoryDataModel.m; path = model/LaboratoryDataModel.m; sourceTree = "<group>"; };
+		8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		8DB669EE1FDA8FB400BB3966 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		8DB669EF1FDB05F800BB3966 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		8DB669F01FDB060000BB3966 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+		8DB669F11FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryCollectionViewCell.h; path = view/SGLaboratoryCollectionViewCell.h; sourceTree = "<group>"; };
+		8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryCollectionViewCell.m; path = view/SGLaboratoryCollectionViewCell.m; sourceTree = "<group>"; };
+		8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SGLaboratoryCollectionViewCell.xib; path = view/SGLaboratoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		8DB669F71FDE8B6100BB3966 /* SGLaboratoryItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGLaboratoryItemViewController.h; path = laboratory/SGLaboratoryItemViewController.h; sourceTree = "<group>"; };
+		8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGLaboratoryItemViewController.m; path = laboratory/SGLaboratoryItemViewController.m; sourceTree = "<group>"; };
+		8DD3119020246DD20054DBF2 /* image001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image001.png; path = test_image/image001.png; sourceTree = SOURCE_ROOT; };
+		8DD3119120246DD20054DBF2 /* image002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image002.png; path = test_image/image002.png; sourceTree = SOURCE_ROOT; };
+		8DD3119220246DD20054DBF2 /* image003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image003.png; path = test_image/image003.png; sourceTree = SOURCE_ROOT; };
+		8DD3119B2024A7CB0054DBF2 /* SGCleanEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SGCleanEditView.m; path = view/SGCleanEditView/SGCleanEditView.m; sourceTree = "<group>"; };
+		8DD3119C2024A7CB0054DBF2 /* SGCleanEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SGCleanEditView.h; path = view/SGCleanEditView/SGCleanEditView.h; sourceTree = "<group>"; };
 		8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGWebViewController.h; path = controller/SGWebViewController.h; sourceTree = "<group>"; };
 		8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGWebViewController.m; path = controller/SGWebViewController.m; sourceTree = "<group>"; };
 		8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGPdfViewController.h; path = controller/SGPdfViewController.h; sourceTree = "<group>"; };
@@ -79,6 +155,10 @@
 		8DDC4FD61F9445A400C92EEB /* SGBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGBaseViewController.h; path = controller/SGBaseViewController.h; sourceTree = "<group>"; };
 		8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGBaseViewController.m; path = controller/SGBaseViewController.m; sourceTree = "<group>"; };
 		8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tm_smart_gel.png; path = resource/tm_smart_gel.png; sourceTree = "<group>"; };
+		8DFCFD771FE665FD0074663B /* SGUserSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGUserSignUpViewController.h; path = controller/Signin/SGUserSignUpViewController.h; sourceTree = "<group>"; };
+		8DFCFD781FE665FD0074663B /* SGUserSignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGUserSignUpViewController.m; path = controller/Signin/SGUserSignUpViewController.m; sourceTree = "<group>"; };
+		8DFCFD7D1FE6764C0074663B /* SGForgotPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SGForgotPasswordViewController.h; path = controller/Signin/SGForgotPasswordViewController.h; sourceTree = "<group>"; };
+		8DFCFD7E1FE6764C0074663B /* SGForgotPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SGForgotPasswordViewController.m; path = controller/Signin/SGForgotPasswordViewController.m; sourceTree = "<group>"; };
 		C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartGel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel.debug.xcconfig"; sourceTree = "<group>"; };
 		D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartGel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -88,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB669ED1FDA8FA800BB3966 /* AddressBook.framework in Frameworks */,
 				8D80B2C71F7CA5A70025B804 /* Foundation.framework in Frameworks */,
 				8D80B2C51F7CA4790025B804 /* QuartzCore.framework in Frameworks */,
 				8D80B2C31F7CA4700025B804 /* AVFoundation.framework in Frameworks */,
@@ -110,12 +191,77 @@
 		502FE1017807AF3D1749DA47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8DB669F01FDB060000BB3966 /* ContactsUI.framework */,
+				8DB669EF1FDB05F800BB3966 /* Contacts.framework */,
+				8DB669EE1FDA8FB400BB3966 /* AddressBookUI.framework */,
+				8DB669EC1FDA8FA000BB3966 /* AddressBook.framework */,
 				8D80B2C61F7CA5A70025B804 /* Foundation.framework */,
 				8D80B2C41F7CA4790025B804 /* QuartzCore.framework */,
 				8D80B2C21F7CA4700025B804 /* AVFoundation.framework */,
 				D7E78BA3CDC73ED1A175E361 /* libPods-SmartGel.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D26D1451FFCB992002BFAB8 /* SGTagCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8D26D1461FFCBC05002BFAB8 /* SGTagCollectionViewCell.h */,
+				8D26D1471FFCBC05002BFAB8 /* SGTagCollectionViewCell.m */,
+				8D26D1481FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib */,
+			);
+			name = SGTagCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		8D26D1511FFDC19F002BFAB8 /* SGSharedManager */ = {
+			isa = PBXGroup;
+			children = (
+				8D26D14E1FFDC197002BFAB8 /* SGSharedManager.h */,
+				8D26D14F1FFDC197002BFAB8 /* SGSharedManager.m */,
+			);
+			name = SGSharedManager;
+			sourceTree = "<group>";
+		};
+		8D56D54F1FECFBF30051EE76 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				8D26D1511FFDC19F002BFAB8 /* SGSharedManager */,
+				8D56D5541FED0C8C0051EE76 /* SGUtil */,
+				8D56D5501FECFC1A0051EE76 /* SGFirebaseManager */,
+				8DA3320F1F7C92590066148E /* engine */,
+			);
+			name = manager;
+			sourceTree = "<group>";
+		};
+		8D56D5501FECFC1A0051EE76 /* SGFirebaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				8D56D5511FED090A0051EE76 /* SGFirebaseManager.h */,
+				8D56D5521FED090A0051EE76 /* SGFirebaseManager.m */,
+			);
+			name = SGFirebaseManager;
+			sourceTree = "<group>";
+		};
+		8D56D5541FED0C8C0051EE76 /* SGUtil */ = {
+			isa = PBXGroup;
+			children = (
+				8D56D5551FED0CB10051EE76 /* SGUtil.h */,
+				8D56D5561FED0CB10051EE76 /* SGUtil.m */,
+			);
+			name = SGUtil;
+			sourceTree = "<group>";
+		};
+		8D72F2391FE5B90D0047CB66 /* signin */ = {
+			isa = PBXGroup;
+			children = (
+				8D72F23B1FE5B97D0047CB66 /* SGUserSigninViewController.h */,
+				8D72F23C1FE5B97D0047CB66 /* SGUserSigninViewController.m */,
+				8DFCFD771FE665FD0074663B /* SGUserSignUpViewController.h */,
+				8DFCFD781FE665FD0074663B /* SGUserSignUpViewController.m */,
+				8DFCFD7D1FE6764C0074663B /* SGForgotPasswordViewController.h */,
+				8DFCFD7E1FE6764C0074663B /* SGForgotPasswordViewController.m */,
+			);
+			name = signin;
 			sourceTree = "<group>";
 		};
 		8DA331E51F7C8F3C0066148E = {
@@ -139,19 +285,19 @@
 		8DA331F01F7C8F3C0066148E /* SmartGel */ = {
 			isa = PBXGroup;
 			children = (
+				8DD3119620249CA20054DBF2 /* vendor */,
+				8DD3118F20246D950054DBF2 /* test_image */,
 				8DDC4FD91F944E9D00C92EEB /* resource */,
-				8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */,
-				8D80B2CA1F7CF3890025B804 /* test.jpg */,
-				8DB097921F9345210053C203 /* Constant */,
-				8DA3320E1F7C92440066148E /* shared */,
+				8DB097921F9345210053C203 /* constant */,
+				8D56D54F1FECFBF30051EE76 /* manager */,
 				8DA3320A1F7C8FD30066148E /* view */,
 				8DA332091F7C8FC90066148E /* model */,
 				8DA332081F7C8FC00066148E /* controller */,
+				8DB412221FFC84A200ED5550 /* storyboard */,
 				8DA331F41F7C8F3C0066148E /* AppDelegate.h */,
 				8DA331F51F7C8F3C0066148E /* AppDelegate.m */,
-				8DA331FA1F7C8F3C0066148E /* Main.storyboard */,
 				8DA331FD1F7C8F3C0066148E /* Assets.xcassets */,
-				8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */,
+				8D486CE71F87D67100CE0D4B /* GoogleService-Info.plist */,
 				8DA332021F7C8F3C0066148E /* Info.plist */,
 				8DA331F11F7C8F3C0066148E /* Supporting Files */,
 			);
@@ -169,18 +315,13 @@
 		8DA332081F7C8FC00066148E /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				8DA3320B1F7C90430066148E /* SGHomeViewController.h */,
-				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
-				8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */,
-				8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */,
-				8DB0978F1F933A380053C203 /* SGMenuViewController.h */,
-				8DB097901F933A380053C203 /* SGMenuViewController.m */,
-				8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */,
-				8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */,
-				8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */,
-				8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */,
-				8DDC4FD61F9445A400C92EEB /* SGBaseViewController.h */,
-				8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */,
+				8DB412171FFC607000ED5550 /* base */,
+				8DB412161FFC604C00ED5550 /* about */,
+				8DB412151FFC602B00ED5550 /* setting */,
+				8DB412141FFC600F00ED5550 /* history */,
+				8DB412131FFC5FED00ED5550 /* home */,
+				8D72F2391FE5B90D0047CB66 /* signin */,
+				8DB669F61FDE8B0F00BB3966 /* laboratory */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -190,6 +331,12 @@
 			children = (
 				8D80B2BF1F7CA2C70025B804 /* EstimateImageModel.h */,
 				8D80B2C01F7CA2C70025B804 /* EstimateImageModel.m */,
+				8DB669E91FDA236100BB3966 /* LaboratoryDataModel.h */,
+				8DB669EA1FDA236100BB3966 /* LaboratoryDataModel.m */,
+				8D84CBB31FE813F2006B2F74 /* SGUser.h */,
+				8D84CBB41FE813F2006B2F74 /* SGUser.m */,
+				8D26D14B1FFCC146002BFAB8 /* SGTag.h */,
+				8D26D14C1FFCC146002BFAB8 /* SGTag.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -197,26 +344,10 @@
 		8DA3320A1F7C8FD30066148E /* view */ = {
 			isa = PBXGroup;
 			children = (
-				8D80B2CF1F7CFE810025B804 /* SGDateTimePickerView.h */,
-				8D80B2D01F7CFE810025B804 /* SGDateTimePickerView.m */,
-				8D80B2D11F7CFE810025B804 /* SGDateTimePickerView.xib */,
-				8D80B2D21F7CFE810025B804 /* SGFilterView.xib */,
-				8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */,
-				8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */,
-				8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */,
-				8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */,
-				8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */,
-				8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */,
+				8DB4121C1FFC833700ED5550 /* customview */,
+				8DB4121B1FFC831100ED5550 /* cell */,
 			);
 			name = view;
-			sourceTree = "<group>";
-		};
-		8DA3320E1F7C92440066148E /* shared */ = {
-			isa = PBXGroup;
-			children = (
-				8DA3320F1F7C92590066148E /* engine */,
-			);
-			name = shared;
 			sourceTree = "<group>";
 		};
 		8DA3320F1F7C92590066148E /* engine */ = {
@@ -228,17 +359,185 @@
 			name = engine;
 			sourceTree = "<group>";
 		};
-		8DB097921F9345210053C203 /* Constant */ = {
+		8DB097921F9345210053C203 /* constant */ = {
 			isa = PBXGroup;
 			children = (
 				8DB097931F93456A0053C203 /* SGConstant.h */,
 			);
-			name = Constant;
+			name = constant;
+			sourceTree = "<group>";
+		};
+		8DB412131FFC5FED00ED5550 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				8DA3320B1F7C90430066148E /* SGHomeViewController.h */,
+				8DA3320C1F7C90430066148E /* SGHomeViewController.m */,
+				8DB0978F1F933A380053C203 /* SGMenuViewController.h */,
+				8DB097901F933A380053C203 /* SGMenuViewController.m */,
+				8DB412181FFC786C00ED5550 /* SGTagViewController.h */,
+				8DB412191FFC786C00ED5550 /* SGTagViewController.m */,
+			);
+			name = home;
+			sourceTree = "<group>";
+		};
+		8DB412141FFC600F00ED5550 /* history */ = {
+			isa = PBXGroup;
+			children = (
+				8D80B2CC1F7CF4BA0025B804 /* SGHistoryViewController.h */,
+				8D80B2CD1F7CF4BA0025B804 /* SGHistoryViewController.m */,
+				8D199ED71FCD56E200704CE2 /* SGHistoryDetailViewController.h */,
+				8D199ED81FCD56E200704CE2 /* SGHistoryDetailViewController.m */,
+			);
+			name = history;
+			sourceTree = "<group>";
+		};
+		8DB412151FFC602B00ED5550 /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				8D199ED41FCC4AB300704CE2 /* SGSettingViewController.h */,
+				8D199ED51FCC4AB300704CE2 /* SGSettingViewController.m */,
+			);
+			name = setting;
+			sourceTree = "<group>";
+		};
+		8DB412161FFC604C00ED5550 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				8DDC4FD01F93C8EE00C92EEB /* SGWebViewController.h */,
+				8DDC4FD11F93C8EE00C92EEB /* SGWebViewController.m */,
+				8DDC4FD31F93E41600C92EEB /* SGPdfViewController.h */,
+				8DDC4FD41F93E41600C92EEB /* SGPdfViewController.m */,
+			);
+			name = about;
+			sourceTree = "<group>";
+		};
+		8DB412171FFC607000ED5550 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				8DDC4FD61F9445A400C92EEB /* SGBaseViewController.h */,
+				8DDC4FD71F9445A400C92EEB /* SGBaseViewController.m */,
+			);
+			name = base;
+			sourceTree = "<group>";
+		};
+		8DB4121B1FFC831100ED5550 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				8D26D1451FFCB992002BFAB8 /* SGTagCollectionViewCell */,
+				8DB412211FFC83A400ED5550 /* SGLaboratoryCollectionViewCell */,
+				8DB412201FFC839300ED5550 /* SGMenuTableViewCell */,
+				8DB4121F1FFC838100ED5550 /* SmartGelHistoryCollectionViewCell */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
+		8DB4121C1FFC833700ED5550 /* customview */ = {
+			isa = PBXGroup;
+			children = (
+				8DD311972024A4090054DBF2 /* SGCleanEditView */,
+				8DB4121E1FFC836600ED5550 /* SGGridView */,
+			);
+			name = customview;
+			sourceTree = "<group>";
+		};
+		8DB4121E1FFC836600ED5550 /* SGGridView */ = {
+			isa = PBXGroup;
+			children = (
+				8D24C50F1FC5AC0F00D6C070 /* SGGridView.h */,
+				8D24C5101FC5AC0F00D6C070 /* SGGridView.m */,
+			);
+			name = SGGridView;
+			sourceTree = "<group>";
+		};
+		8DB4121F1FFC838100ED5550 /* SmartGelHistoryCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8D80B2D31F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.h */,
+				8D80B2D41F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m */,
+				8D80B2D51F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib */,
+			);
+			name = SmartGelHistoryCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		8DB412201FFC839300ED5550 /* SGMenuTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8DB0978A1F9338880053C203 /* SGMenuTableViewCell.h */,
+				8DB0978B1F9338880053C203 /* SGMenuTableViewCell.m */,
+				8DB0978D1F9338E20053C203 /* SGMenuTableViewCell.xib */,
+			);
+			name = SGMenuTableViewCell;
+			sourceTree = "<group>";
+		};
+		8DB412211FFC83A400ED5550 /* SGLaboratoryCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8DB669F11FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.h */,
+				8DB669F21FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m */,
+				8DB669F31FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib */,
+			);
+			name = SGLaboratoryCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		8DB412221FFC84A200ED5550 /* storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				8D63C9D320065AB400C2387A /* Main_iPhone.storyboard */,
+				8DB412231FFC84B100ED5550 /* LaunchScreen.storyboard */,
+				8DB412241FFC84B100ED5550 /* Main.storyboard */,
+			);
+			name = storyboard;
+			sourceTree = "<group>";
+		};
+		8DB669F61FDE8B0F00BB3966 /* laboratory */ = {
+			isa = PBXGroup;
+			children = (
+				8D5662511FD719D1008DFED2 /* SGLaboratoryViewController.h */,
+				8D5662521FD719D1008DFED2 /* SGLaboratoryViewController.m */,
+				8DB669F71FDE8B6100BB3966 /* SGLaboratoryItemViewController.h */,
+				8DB669F81FDE8B6100BB3966 /* SGLaboratoryItemViewController.m */,
+			);
+			name = laboratory;
+			sourceTree = "<group>";
+		};
+		8DD3118F20246D950054DBF2 /* test_image */ = {
+			isa = PBXGroup;
+			children = (
+				8DD3119020246DD20054DBF2 /* image001.png */,
+				8DD3119120246DD20054DBF2 /* image002.png */,
+				8DD3119220246DD20054DBF2 /* image003.png */,
+			);
+			name = test_image;
+			sourceTree = "<group>";
+		};
+		8DD3119620249CA20054DBF2 /* vendor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = vendor;
+			sourceTree = "<group>";
+		};
+		8DD311972024A4090054DBF2 /* SGCleanEditView */ = {
+			isa = PBXGroup;
+			children = (
+				8DD3119C2024A7CB0054DBF2 /* SGCleanEditView.h */,
+				8DD3119B2024A7CB0054DBF2 /* SGCleanEditView.m */,
+			);
+			name = SGCleanEditView;
 			sourceTree = "<group>";
 		};
 		8DDC4FD91F944E9D00C92EEB /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				8D56625A1FD8247B008DFED2 /* puriSCOPE_logo_color_190x30px.png */,
+				8D56625C1FD8247C008DFED2 /* Smiley_.png */,
+				8D56625B1FD8247B008DFED2 /* Smiley_(.png */,
+				8D5662591FD8247B008DFED2 /* Smiley_).png */,
+				8D5662581FD8247B008DFED2 /* Smiley_green.png */,
+				8D5662571FD8247A008DFED2 /* Smiley_pink.png */,
+				8D5662561FD8247A008DFED2 /* Smiley_yellow.png */,
+				8D24C5121FC5E3D600D6C070 /* test.png */,
+				8D24C5071FC510B200D6C070 /* smartgel-tests.json */,
 				8DDC4FDA1F944ED200C92EEB /* tm_smart_gel.png */,
 			);
 			name = resource;
@@ -306,16 +605,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DA332011F7C8F3C0066148E /* LaunchScreen.storyboard in Resources */,
+				8D24C5081FC510B300D6C070 /* smartgel-tests.json in Resources */,
+				8D56625E1FD8247C008DFED2 /* Smiley_pink.png in Resources */,
 				8D486CE81F87D67100CE0D4B /* GoogleService-Info.plist in Resources */,
-				8D80B2D71F7CFE810025B804 /* SGDateTimePickerView.xib in Resources */,
+				8D5662621FD8247C008DFED2 /* Smiley_(.png in Resources */,
 				8DDC4FDB1F944ED400C92EEB /* tm_smart_gel.png in Resources */,
-				8D80B2D81F7CFE810025B804 /* SGFilterView.xib in Resources */,
-				8D80B2CB1F7CF3890025B804 /* test.jpg in Resources */,
+				8D56625F1FD8247C008DFED2 /* Smiley_green.png in Resources */,
+				8DB412261FFC84B100ED5550 /* Main.storyboard in Resources */,
+				8DD3119320246DD20054DBF2 /* image001.png in Resources */,
+				8D5662631FD8247C008DFED2 /* Smiley_.png in Resources */,
+				8DD3119520246DD20054DBF2 /* image003.png in Resources */,
+				8DD3119420246DD20054DBF2 /* image002.png in Resources */,
+				8D5662611FD8247C008DFED2 /* puriSCOPE_logo_color_190x30px.png in Resources */,
+				8D26D14A1FFCBC05002BFAB8 /* SGTagCollectionViewCell.xib in Resources */,
+				8D56625D1FD8247C008DFED2 /* Smiley_yellow.png in Resources */,
+				8DB412251FFC84B100ED5550 /* LaunchScreen.storyboard in Resources */,
 				8DA331FE1F7C8F3C0066148E /* Assets.xcassets in Resources */,
 				8D80B2DA1F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.xib in Resources */,
+				8D63C9D420065AB400C2387A /* Main_iPhone.storyboard in Resources */,
+				8D5662601FD8247C008DFED2 /* Smiley_).png in Resources */,
+				8DB669F51FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.xib in Resources */,
 				8DB0978E1F9338E20053C203 /* SGMenuTableViewCell.xib in Resources */,
-				8DA331FC1F7C8F3C0066148E /* Main.storyboard in Resources */,
+				8D24C5131FC5E3D600D6C070 /* test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,11 +640,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SmartGel/Pods-SmartGel-resources.sh",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-magnify-glass.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-magnify-glass@2x.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-shadow.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-shadow@2x.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/Images/gl-calendar-shadow@3x.png",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/GLCalendarDayCell/GLCalendarDayCell.xib",
+				"${PODS_ROOT}/GLCalendarView/GLCalendarView/Sources/GLCalendarView.xib",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
 				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
+				"${PODS_ROOT}/PFNavigationDropdownMenu/Classes/PFNavigationDropdownMenu.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -384,42 +703,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D80B2D61F7CFE810025B804 /* SGDateTimePickerView.m in Sources */,
 				8DB097911F933A380053C203 /* SGMenuViewController.m in Sources */,
+				8D26D1491FFCBC05002BFAB8 /* SGTagCollectionViewCell.m in Sources */,
+				8D24C5111FC5AC0F00D6C070 /* SGGridView.m in Sources */,
 				8DDC4FD21F93C8EE00C92EEB /* SGWebViewController.m in Sources */,
 				8DDC4FD51F93E41600C92EEB /* SGPdfViewController.m in Sources */,
+				8D199ED61FCC4AB300704CE2 /* SGSettingViewController.m in Sources */,
+				8DB669F41FDE318E00BB3966 /* SGLaboratoryCollectionViewCell.m in Sources */,
 				8DB0978C1F9338880053C203 /* SGMenuTableViewCell.m in Sources */,
+				8D26D14D1FFCC146002BFAB8 /* SGTag.m in Sources */,
 				8DA331F61F7C8F3C0066148E /* AppDelegate.m in Sources */,
+				8D84CBB51FE813F2006B2F74 /* SGUser.m in Sources */,
+				8D199ED91FCD56E200704CE2 /* SGHistoryDetailViewController.m in Sources */,
+				8D5662531FD719D1008DFED2 /* SGLaboratoryViewController.m in Sources */,
+				8D26D1501FFDC197002BFAB8 /* SGSharedManager.m in Sources */,
 				8D80B2C11F7CA2C70025B804 /* EstimateImageModel.m in Sources */,
+				8DB669F91FDE8B6100BB3966 /* SGLaboratoryItemViewController.m in Sources */,
 				8DA331F31F7C8F3C0066148E /* main.m in Sources */,
+				8DB669EB1FDA236100BB3966 /* LaboratoryDataModel.m in Sources */,
+				8DB4121A1FFC786C00ED5550 /* SGTagViewController.m in Sources */,
 				8D80B2CE1F7CF4BA0025B804 /* SGHistoryViewController.m in Sources */,
+				8DD3119E2024A7CC0054DBF2 /* SGCleanEditView.m in Sources */,
+				8DFCFD7F1FE6764C0074663B /* SGForgotPasswordViewController.m in Sources */,
+				8D56D5531FED090A0051EE76 /* SGFirebaseManager.m in Sources */,
+				8DFCFD791FE665FD0074663B /* SGUserSignUpViewController.m in Sources */,
 				8DA3320D1F7C90430066148E /* SGHomeViewController.m in Sources */,
+				8D56D5571FED0CB10051EE76 /* SGUtil.m in Sources */,
 				8D80B2D91F7CFE810025B804 /* SmartGelHistoryCollectionViewCell.m in Sources */,
+				8D72F23D1FE5B97D0047CB66 /* SGUserSigninViewController.m in Sources */,
 				8DDC4FD81F9445A400C92EEB /* SGBaseViewController.m in Sources */,
 				8DA332121F7C92880066148E /* DirtyExtractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		8DA331FA1F7C8F3C0066148E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8DA331FB1F7C8F3C0066148E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		8DA331FF1F7C8F3C0066148E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8DA332001F7C8F3C0066148E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8DA332031F7C8F3C0066148E /* Debug */ = {
@@ -531,11 +848,12 @@
 			baseConfigurationReference = C4114DE74D7369953965130B /* Pods-SmartGel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -550,11 +868,12 @@
 			baseConfigurationReference = 6058976D360D4762C162A03D /* Pods-SmartGel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L34GFT5E8L;
 				INFOPLIST_FILE = SmartGel/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.afco.sg.smartgel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
