@@ -25,6 +25,7 @@
     bool isSelectedFromCamera;
     bool isTakenPhoto;
     bool isAddCleanArea;
+    bool isShowedAddingCleanAlert;
     MBProgressHUD *hud;
     
     BOOL isFullScreen;
@@ -60,6 +61,5 @@
 @property (strong, nonatomic) SGTag *selectedTag;
 @property (strong, nonatomic) NSMutableArray *cleanareaViews;
 @property (strong, nonatomic) NSMutableArray *orignialcleanareaViews;
-
 
 @end

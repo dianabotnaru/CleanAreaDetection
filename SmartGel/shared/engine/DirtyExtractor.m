@@ -285,18 +285,12 @@
 
 
 -(void)setNonGelAreaState:(NSMutableArray *)nonGelAreaArray{
-    m_nNoGelCount = 0;
-    [_areaCleanState removeAllObjects];
-    for(int i =0;i<_originalAreaCleanState.count;i++){
-        [_areaCleanState addObject:[_originalAreaCleanState objectAtIndex:i]];
-    }
     for(int i=0;i<nonGelAreaArray.count;i++){
         bool isNonGel = [[nonGelAreaArray objectAtIndex:i] boolValue];
         if(isNonGel){
             int pointX = i/SGGridCount;
             int pointY = i%SGGridCount;
             int rate = AREA_DIVIDE_NUMBER/SGGridCount;
-            m_nNoGelCount+= rate*rate;
             for(int i = 0; i<rate;i++){
                 for(int j = 0; j< rate; j++){
                     NSUInteger postion = AREA_DIVIDE_NUMBER*rate*pointX+(i*AREA_DIVIDE_NUMBER)+(rate*pointY+j);

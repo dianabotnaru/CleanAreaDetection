@@ -42,6 +42,7 @@
         isTakenPhoto = false;
         [hud hideAnimated:false];
         [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
+        isShowedAddingCleanAlert = false;
     }
 }
 
@@ -227,7 +228,10 @@
     [self.cleanEditView showCleanArea:^(NSString *result) {
         [hud hideAnimated:false];
     }];
-    [self showAlertdialog:@"" message:@"Please add manually clean areas by touching cells if you see any undetected clean area."];
+    if (isShowedAddingCleanAlert == false){
+        [self showAlertdialog:@"" message:@"Please add manually clean areas by touching cells if you see any undetected clean area."];
+        isShowedAddingCleanAlert = true;
+    }
 }
 
 -(void)hideDirtyArea{
@@ -236,7 +240,7 @@
     [self.showCleanAreaLabel setText:@"Show clean area"];
     [self.showCleanAreaButton setBackgroundColor:SGColorDarkPink];
     [self.cleanEditView hideCleanArea:self.engine.areaCleanState];
-    [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
+//    [self showAlertdialog:@"" message:@"Please touch any grid cell to choose non-gel areas"];
 }
 
 /************************************************************************************************************************************
@@ -302,11 +306,9 @@
     if(isShowDirtyArea)
         [self hideDirtyArea];
     [self showPhotoChooseActionSheet];
-    
 //    self.estimateImage = [[EstimateImageModel alloc] init];
 //    self.estimateImage.image = [UIImage imageNamed:@"image001.png"];
 //    isTakenPhoto = true;
-//
 //    [self initDataUiWithImage];
 
 //    NSString* imageURL = [self getImageUrl:3];
